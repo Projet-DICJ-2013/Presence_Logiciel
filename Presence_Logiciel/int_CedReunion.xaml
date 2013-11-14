@@ -1,0 +1,78 @@
+﻿<Window x:Name="frmCedReu" x:Class="int_CedReunion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="int_CedReunion" Height="717.6" Width="1200">
+    <Grid x:Name="frmCedReunion">
+        <Label x:Name="lblTitre" Content="Ordre du jour :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <GroupBox Header="Invitations " HorizontalAlignment="Left" Height="351" Margin="143,272,0,0" VerticalAlignment="Top" Width="1035" AllowDrop="True" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="grdAnnee" HorizontalAlignment="Left" Width="1025" Margin="0,20,-3.4,-12.2" RenderTransformOrigin="0.496,0.574">
+                <Label x:Name="lblRecherche" Content="Recherche : " HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="29" Width="78" FontSize="14"/>
+                <ComboBox x:Name="cmbType" HorizontalAlignment="Left" Margin="102,47,0,0" VerticalAlignment="Top" Width="269">
+                    <ListBoxItem Content="Étudiant"/>
+                    <ListBoxItem Content="Enseignant"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbAnnée" HorizontalAlignment="Left" Margin="102,112,0,0" VerticalAlignment="Top" Width="269">
+                    <ListBoxItem Content="1er "/>
+                    <ListBoxItem Content="2e"/>
+                    <ListBoxItem Content="3e"/>
+                </ComboBox>
+                <ListView x:Name="lstInvite" HorizontalAlignment="Left" Height="111" Margin="556,186,0,0" VerticalAlignment="Top" Width="269">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Path=PrenomMembre}"/>
+                                <Label Content="{Binding Path=NomMembre}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
+                <Label x:Name="lblChoix" Content="Choix d'invité :" HorizontalAlignment="Left" Margin="102,165,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblInvité" Content="Invité(s) :" HorizontalAlignment="Left" Margin="556,155,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAnnée" Content="Année :" HorizontalAlignment="Left" Margin="38,90,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnRechercher" Content="Rechercher" HorizontalAlignment="Left" Margin="420,47,0,0" VerticalAlignment="Top" Width="75"/>
+                <ListView x:Name="lstChoix" HorizontalAlignment="Left" Height="111" Margin="102,186,0,0" VerticalAlignment="Top" Width="269">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Path=PrenomMembre}"/>
+                                <Label Content="{Binding Path=NomMembre}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
+                <Button x:Name="tblAjouter" Content="Ajouter" HorizontalAlignment="Left" Margin="420,187,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="btnRetirer" Content="Retirer" HorizontalAlignment="Left" Margin="858,186,0,0" VerticalAlignment="Top" Width="75"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btnCeduler" Content="Planifier" HorizontalAlignment="Left" Margin="949,646,0,0" VerticalAlignment="Top" Width="102" Height="34"/>
+        <Label x:Name="lblType" Content="Type :" HorizontalAlignment="Left" Margin="152,351,0,0" VerticalAlignment="Top"/>
+        <GroupBox x:Name="grpInfoReu" Header="Info Réunion " HorizontalAlignment="Left" Margin="143,84,0,0" VerticalAlignment="Top" Height="171" Width="646">
+            <Grid HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="636" Margin="0,0,-2.4,-12.2">
+                <Label x:Name="lblLocal" Content="Num. Local :" HorizontalAlignment="Left" Margin="22,125,0,0" VerticalAlignment="Top"/>
+
+                <Label x:Name="lblDate" Content="Date : " HorizontalAlignment="Left" Margin="352,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.415,0.605"/>
+                <DatePicker x:Name="dtpDateRenc" HorizontalAlignment="Left" Margin="411,37,0,0" VerticalAlignment="Top" Width="205"/>
+                <Label x:Name="lblEndroit" Content="Endroit :" HorizontalAlignment="Left" Margin="17,40,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtEndroit" HorizontalAlignment="Left" Height="23" Margin="76,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178"/>
+                <CheckBox x:Name="chkLocal" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Height="18" Width="67" Content="Local" Checked="CheckBox_Checked"/>
+                <ComboBox x:Name="cmbLocal" HorizontalAlignment="Left" Margin="102,129,0,0" VerticalAlignment="Top" Width="178" IsEnabled="False">
+                    <ComboBoxItem Content="331.1"/>
+                    <ComboBoxItem Content="337.1"/>
+                    <ComboBoxItem Content="318.1"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <Label x:Name="lblRedac" Content="Rédacteur :" HorizontalAlignment="Left" Margin="143,42,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbRedac" HorizontalAlignment="Left" Margin="228,45,0,0" VerticalAlignment="Top" Width="214">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Path=PrenomMembre}"/>
+                        <Label Content="{Binding Path=NomMembre}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ComboBox>
+
+    </Grid>
+</Window>

@@ -1,0 +1,68 @@
+﻿<Window x:Class="LierCoursProgramme"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="LierCoursProgramme" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" WindowStyle="None" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Loaded="Window_Loaded"  >
+    <Window.Resources>
+        <!--button ordre-->
+        <Style TargetType="{x:Type Button}" x:Key="btnOrdre" >
+
+            <Setter Property="Foreground" Value="#FFFCFCFC"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5479BB" Offset="0.015"/>
+                        <GradientStop Color="#FF2558B3" Offset="0.869"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="189"/>
+            <Setter Property="Height" Value="55"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFE5E5E5">
+
+        <Grid HorizontalAlignment="Left" Height="433" Margin="30,39,0,0" VerticalAlignment="Top" Width="430">
+            <Grid HorizontalAlignment="Left" Height="460" VerticalAlignment="Top" Width="410" Margin="10,0,0,-47">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="38*"/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="lvTousCours" HorizontalAlignment="Left" Height="314" Margin="10,72,0,0" VerticalAlignment="Top" Width="177" Grid.ColumnSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding NomCours}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView x:Name="lvCoursActuels" HorizontalAlignment="Left" Height="314" Margin="193.4,72,0,0" VerticalAlignment="Top" Width="177" AllowDrop="True" Grid.Column="1"  >
+      
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding NomCours}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="btnConfirmer" Content="Sauvegarder" HorizontalAlignment="Left" Margin="132.8,393,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="33" Margin="10,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" Grid.ColumnSpan="2"/>
+                <Label Content="Code Cours:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontWeight="Bold" FontFamily="Calibri"/>
+                <Label x:Name="lblCodeCours" Content="{Binding CodeCours}" HorizontalAlignment="Left" Margin="73.4,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Rectangle Grid.ColumnSpan="2" Fill="#FF2556B3" HorizontalAlignment="Left" Height="34" Margin="10,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="177"/>
+                <Rectangle Fill="#FF2558B3" HorizontalAlignment="Left" Height="34" Margin="193.4,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" Grid.Column="1"/>
+                <Label Content="Liste des cours disponibles" Grid.Column="1" HorizontalAlignment="Left" Margin="0.4,41,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri"/>
+                <Label Content="Cours attribués à ce programme" Grid.Column="1" HorizontalAlignment="Left" Margin="203.4,41,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" RenderTransformOrigin="0.59,0.592"/>
+            </Grid>
+        </Grid>
+        <Button x:Name="btnX" Margin="453,0,6,0" VerticalAlignment="Top" Content="x"/>
+        <Button Margin="401,39,0,422" HorizontalAlignment="Left">
+            <Image x:Name="btnSupprimer1" Source="images/Icons/Trash.png"/>
+        </Button>
+
+
+
+
+    </Grid>
+</Window>

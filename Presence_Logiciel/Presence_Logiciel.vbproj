@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{23C0C73F-85F3-4A00-A2C7-B5B86C5E7E40}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Presence_Logiciel</RootNamespace>
+    <AssemblyName>Presence_Logiciel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <IncrementalBuild>true</IncrementalBuild>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Presence_Logiciel.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <IncrementalBuild>false</IncrementalBuild>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Presence_Logiciel.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Word, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime.v9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="mod_smtp">
+      <HintPath>S:\Projet 2013\Module\mod_smtp\mod_smtp.dll</HintPath>
+    </Reference>
+    <Reference Include="P2013_CreateDoc">
+      <HintPath>..\..\Projet de session\Logiciel\Prototype3\Prototype3\P2013_CreateDoc.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="Application.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ajoutCour.xaml.vb" />
+    <Compile Include="AjouterGroupe.xaml.vb" />
+    <Compile Include="ajoutMembre.xaml.vb" />
+    <Compile Include="ajoutProgramme.xaml.vb" />
+    <Compile Include="Application.xaml.vb">
+      <DependentUpon>Application.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Composante.xaml.vb" />
+    <Compile Include="creerGroupe.xaml.vb" />
+    <Compile Include="EnvoieMail.xaml.vb" />
+    <Compile Include="Exemplaire.xaml.vb" />
+    <Compile Include="FctConnexion.vb" />
+    <Compile Include="frmConnexion.xaml.vb" />
+    <Compile Include="GenereRapport.xaml.vb" />
+    <Compile Include="GenereReport.vb" />
+    <Compile Include="GestActualite.xaml.vb" />
+    <Compile Include="gestCours.xaml.vb" />
+    <Compile Include="gestEtudiant.xaml.vb" />
+    <Compile Include="gestGroupe.xaml.vb" />
+    <Compile Include="Gestion d%27un ordre du jour.xaml.vb" />
+    <Compile Include="GestionPDF.xaml.vb" />
+    <Compile Include="gestProgrammes.xaml.vb">
+      <DependentUpon>gestProgrammes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gestRendezVous.xaml.vb" />
+    <Compile Include="GetCompoModele_Result.vb" />
+    <Compile Include="GetStyle.vb" />
+    <Compile Include="int_CedReunion.xaml.vb" />
+    <Compile Include="LierCoursProgramme.xaml.vb" />
+    <Compile Include="ListeExemplaire.xaml.vb" />
+    <Compile Include="ListeExemplaireCompacte.xaml.vb" />
+    <Compile Include="listeMembre.xaml.vb" />
+    <Compile Include="ListeModele.xaml.vb" />
+    <Compile Include="ListePret.xaml.vb" />
+    <Compile Include="MainWindow.xaml.vb" />
+    <Compile Include="membreEtudiant.xaml.vb" />
+    <Compile Include="MembreProf.xaml.vb" />
+    <Compile Include="Modele.xaml.vb" />
+    <Compile Include="objReunion.vb" />
+    <Compile Include="Presence_Model.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presence_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pret.xaml.vb" />
+    <Compile Include="Simple3Des.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="System.Threading.Tasks" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows" />
+    <Import Include="System.Windows.Controls" />
+    <Import Include="System.Windows.Data" />
+    <Import Include="System.Windows.Documents" />
+    <Import Include="System.Windows.Input" />
+    <Import Include="System.Windows.Shapes" />
+    <Import Include="System.Windows.Media" />
+    <Import Include="System.Windows.Media.Imaging" />
+    <Import Include="System.Windows.Navigation" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWpfExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.WPF.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="My Project\" />
+    <EntityDeploy Include="Presence_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Presence_Model.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ajoutCour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AjouterGroupe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ajoutMembre.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ajoutProgramme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Composante.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="creerGroupe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EnvoieMail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Exemplaire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmConnexion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenereRapport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GestActualite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="gestCours.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="gestEtudiant.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="gestGroupe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gestion d%27un ordre du jour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GestionPDF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="gestProgrammes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="gestRendezVous.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="int_CedReunion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LierCoursProgramme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListeExemplaire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListeExemplaireCompacte.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="listeMembre.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListeModele.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListePret.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="membreEtudiant.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MembreProf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modele.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pret.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\AGEECJ_sans.jpg" />
+    <Resource Include="images\choipeau.png" />
+    <Resource Include="images\CNC.Laptop.png" />
+    <Resource Include="images\Crystal_Clear_action_1downarrow.png" />
+    <Resource Include="images\Crystal_Clear_action_1uparrow.png" />
+    <Resource Include="images\Crystal_Clear_action_button_cancel.png" />
+    <Resource Include="images\Crystal_Clear_app_kedit.png" />
+    <Resource Include="images\Crystal_Clear_device_floppy_unmount.png" />
+    <Resource Include="images\Crystal_Clear_mimetype_mime_txt.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\desk.png" />
+    <Resource Include="images\group-icon.png" />
+    <Resource Include="images\Icons\Add.png" />
+    <Resource Include="images\Icons\Add_Symbol.png" />
+    <Resource Include="images\Icons\Application_Blueprint.png" />
+    <Resource Include="images\Icons\Application_Design.png" />
+    <Resource Include="images\Icons\Apps.png" />
+    <Resource Include="images\Icons\Archive.png" />
+    <Resource Include="images\Icons\Blackboard.png" />
+    <Resource Include="images\Icons\Blackboard_2.png" />
+    <Resource Include="images\Icons\Blocknotes.png" />
+    <Resource Include="images\Icons\Blocknotes_2.png" />
+    <Resource Include="images\Icons\Blocknotes_Blue.png" />
+    <Resource Include="images\Icons\Blueprint.png" />
+    <Resource Include="images\Icons\Blueprint_Blog.png" />
+    <Resource Include="images\Icons\Blueprint_Website.png" />
+    <Resource Include="images\Icons\Book.png" />
+    <Resource Include="images\Icons\Bookmark.png" />
+    <Resource Include="images\Icons\Box.png" />
+    <Resource Include="images\Icons\Button_Back.png" />
+    <Resource Include="images\Icons\Button_Down.png" />
+    <Resource Include="images\Icons\Button_FastForward.png" />
+    <Resource Include="images\Icons\Button_First.png" />
+    <Resource Include="images\Icons\Button_Last.png" />
+    <Resource Include="images\Icons\Button_Next.png" />
+    <Resource Include="images\Icons\Button_Play_Pause.png" />
+    <Resource Include="images\Icons\Button_Rec.png" />
+    <Resource Include="images\Icons\Button_Rewind.png" />
+    <Resource Include="images\Icons\Button_Shuffle.png" />
+    <Resource Include="images\Icons\Button_Stop.png" />
+    <Resource Include="images\Icons\Button_Sync.png" />
+    <Resource Include="images\Icons\Button_Up.png" />
+    <Resource Include="images\Icons\Calendar.png" />
+    <Resource Include="images\Icons\Calendar_2.png" />
+    <Resource Include="images\Icons\Chart_Bar.png" />
+    <Resource Include="images\Icons\Chart_Bar_3D_Ascending.png" />
+    <Resource Include="images\Icons\Chart_Bar_3D_Descending.png" />
+    <Resource Include="images\Icons\Chart_Bar_Big.png" />
+    <Resource Include="images\Icons\Chart_Bar_Document.png" />
+    <Resource Include="images\Icons\Chart_Bar_Files.png" />
+    <Resource Include="images\Icons\Chart_Bar_Files_Wide.png" />
+    <Resource Include="images\Icons\Chart_Bar_Table.png" />
+    <Resource Include="images\Icons\Chart_Graph.png" />
+    <Resource Include="images\Icons\Chart_Graph_Ascending.png" />
+    <Resource Include="images\Icons\Chart_Graph_Descending.png" />
+    <Resource Include="images\Icons\Chart_Pie.png" />
+    <Resource Include="images\Icons\Chart_Vertical_Bar_Poll.png" />
+    <Resource Include="images\Icons\Checkmark.png" />
+    <Resource Include="images\Icons\ClapBoard.png" />
+    <Resource Include="images\Icons\Clipboard.png" />
+    <Resource Include="images\Icons\Clipboard_Empty.png" />
+    <Resource Include="images\Icons\Clipboard_Full.png" />
+    <Resource Include="images\Icons\Clipboard_Full_2.png" />
+    <Resource Include="images\Icons\Clock.png" />
+    <Resource Include="images\Icons\Colors.png" />
+    <Resource Include="images\Icons\Comment.png" />
+    <Resource Include="images\Icons\Comment_Add.png" />
+    <Resource Include="images\Icons\Comment_Bubble.png" />
+    <Resource Include="images\Icons\Comment_Delete.png" />
+    <Resource Include="images\Icons\Comment_Reply.png" />
+    <Resource Include="images\Icons\Conversation.png" />
+    <Resource Include="images\Icons\Dashboard.png" />
+    <Resource Include="images\Icons\Denided.png" />
+    <Resource Include="images\Icons\Error.png" />
+    <Resource Include="images\Icons\Error_Symbol.png" />
+    <Resource Include="images\Icons\Fav.png" />
+    <Resource Include="images\Icons\Fav_Empty.png" />
+    <Resource Include="images\Icons\File.png" />
+    <Resource Include="images\Icons\Files.png" />
+    <Resource Include="images\Icons\Files_Copy.png" />
+    <Resource Include="images\Icons\File_Add.png" />
+    <Resource Include="images\Icons\File_AI_Illustrator.png" />
+    <Resource Include="images\Icons\File_BMP_Image.png" />
+    <Resource Include="images\Icons\File_Checked.png" />
+    <Resource Include="images\Icons\File_Content.png" />
+    <Resource Include="images\Icons\File_CSS_Stylesheet.png" />
+    <Resource Include="images\Icons\File_Delete.png" />
+    <Resource Include="images\Icons\File_Doc_Text_Word.png" />
+    <Resource Include="images\Icons\File_Edit.png" />
+    <Resource Include="images\Icons\File_HTML.png" />
+    <Resource Include="images\Icons\File_JPG_Image.png" />
+    <Resource Include="images\Icons\File_List.png" />
+    <Resource Include="images\Icons\File_MPMusic.png" />
+    <Resource Include="images\Icons\File_PDF_Acrobat.png" />
+    <Resource Include="images\Icons\File_PHP.png" />
+    <Resource Include="images\Icons\File_PNG_Image.png" />
+    <Resource Include="images\Icons\File_PSD_Photoshop.png" />
+    <Resource Include="images\Icons\File_Table.png" />
+    <Resource Include="images\Icons\File_Text.png" />
+    <Resource Include="images\Icons\File_Warning.png" />
+    <Resource Include="images\Icons\File_XLS_Excel.png" />
+    <Resource Include="images\Icons\File_ZIP_Archive.png" />
+    <Resource Include="images\Icons\Folder.png" />
+    <Resource Include="images\Icons\Folder_Add.png" />
+    <Resource Include="images\Icons\Folder_Chart.png" />
+    <Resource Include="images\Icons\Folder_Checked.png" />
+    <Resource Include="images\Icons\Folder_Edit.png" />
+    <Resource Include="images\Icons\Folder_Empty.png" />
+    <Resource Include="images\Icons\Folder_Favorites.png" />
+    <Resource Include="images\Icons\Folder_Info.png" />
+    <Resource Include="images\Icons\Folder_Network.png" />
+    <Resource Include="images\Icons\Folder_Remove.png" />
+    <Resource Include="images\Icons\Folder_Sync.png" />
+    <Resource Include="images\Icons\Folder_Upload.png" />
+    <Resource Include="images\Icons\Folder_Warning.png" />
+    <Resource Include="images\Icons\Gear.png" />
+    <Resource Include="images\Icons\Help.png" />
+    <Resource Include="images\Icons\Home.png" />
+    <Resource Include="images\Icons\Home2.png" />
+    <Resource Include="images\Icons\iMac.png" />
+    <Resource Include="images\Icons\Info.png" />
+    <Resource Include="images\Icons\Info_Light.png" />
+    <Resource Include="images\Icons\Location.png" />
+    <Resource Include="images\Icons\MacBook.png" />
+    <Resource Include="images\Icons\MacBookAir.png" />
+    <Resource Include="images\Icons\MacBookPro.png" />
+    <Resource Include="images\Icons\Mail.png" />
+    <Resource Include="images\Icons\MailBox.png" />
+    <Resource Include="images\Icons\Mails.png" />
+    <Resource Include="images\Icons\Mail_Add.png" />
+    <Resource Include="images\Icons\Mail_Compose.png" />
+    <Resource Include="images\Icons\Mail_Delete.png" />
+    <Resource Include="images\Icons\Mail_Gmail.png" />
+    <Resource Include="images\Icons\Mail_Info.png" />
+    <Resource Include="images\Icons\Mail_Old.png" />
+    <Resource Include="images\Icons\Mail_Open.png" />
+    <Resource Include="images\Icons\Mail_Reply.png" />
+    <Resource Include="images\Icons\Mail_Verified.png" />
+    <Resource Include="images\Icons\Mail_Warning.png" />
+    <Resource Include="images\Icons\News.png" />
+    <Resource Include="images\Icons\Pen.png" />
+    <Resource Include="images\Icons\Pencil_2.png" />
+    <Resource Include="images\Icons\Pin.png" />
+    <Resource Include="images\Icons\Project.png" />
+    <Resource Include="images\Icons\Project_2.png" />
+    <Resource Include="images\Icons\Rating.png" />
+    <Resource Include="images\Icons\save.png" />
+    <Resource Include="images\Icons\Search.png" />
+    <Resource Include="images\Icons\Sticky.png" />
+    <Resource Include="images\Icons\Target.png" />
+    <Resource Include="images\Icons\Trash.png" />
+    <Resource Include="images\Icons\Trash_Delete.png" />
+    <Resource Include="images\Icons\Trash_Full.png" />
+    <Resource Include="images\Icons\Trash_Warning.png" />
+    <Resource Include="images\Icons\User.png" />
+    <Resource Include="images\Icons\User2.png" />
+    <Resource Include="images\Icons\Valid.png" />
+    <Resource Include="images\Icons\Warning.png" />
+    <Resource Include="images\Icons\Warning_2.png" />
+    <Resource Include="images\Icons\Windows.png" />
+    <Resource Include="images\Icons\Windows8.png" />
+    <Resource Include="images\Icons\Window_App.png" />
+    <Resource Include="images\Icons\Window_App_3Cols.png" />
+    <Resource Include="images\Icons\Window_App_Header.png" />
+    <Resource Include="images\Icons\Window_App_List.png" />
+    <Resource Include="images\Icons\Window_App_ListView.png" />
+    <Resource Include="images\Icons\Window_App_Results.png" />
+    <Resource Include="images\Icons\Window_App_Sidebar.png" />
+    <Resource Include="images\Icons\Window_App_SplitScreen.png" />
+    <Resource Include="images\Icons\Window_App_Splitscreen_3Columns.png" />
+    <Resource Include="images\Icons\Window_App_View.png" />
+    <Resource Include="images\Icons\Window_Config.png" />
+    <Resource Include="images\Icons\Window_Generic.png" />
+    <Resource Include="images\Icons\Window_Sidebar.png" />
+    <Resource Include="images\Icons\Wooden_Box.png" />
+    <Resource Include="images\Icons\Wooden_Box2.png" />
+    <Resource Include="images\Icons\Zoom_In.png" />
+    <Resource Include="images\Icons\Zoom_Out.png" />
+    <Resource Include="images\Icons\_koloria-free-icon-set.jpg" />
+    <Resource Include="images\link01-20110830225248-00019.png" />
+    <Resource Include="images\logo.png" />
+    <Resource Include="images\Microphone_icon.png" />
+    <Resource Include="images\pngtest.png" />
+    <Resource Include="images\print.png" />
+    <Resource Include="images\QrExample.jpg" />
+    <Resource Include="images\unlink.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

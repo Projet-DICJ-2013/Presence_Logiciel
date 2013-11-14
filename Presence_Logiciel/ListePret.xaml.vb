@@ -1,0 +1,79 @@
+﻿Imports System
+Imports System.IO
+Imports System.Linq
+
+
+
+
+Class ListePret
+    Public Class PretExemplaireMembre
+        Property Exemplaire As tblExemplaire
+        Property Pret As tblPret
+        Property Membre As tblMembre
+        Property PretExemplaire As tblPretExemplaire
+    End Class
+
+    Private BD As PresenceEntities
+    Private req As IQueryable(Of PretExemplaireMembre)
+    Private reqFiltre As IQueryable(Of PretExemplaireMembre)
+
+
+    Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
+        Dim fnModele As New frmModele
+        fnModele.ShowDialog()
+    End Sub
+
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        BD = New PresenceEntities
+        Charger_Liste()
+    End Sub
+
+
+    Private Sub Charger_Liste()
+        req = (From p In BD.tblPret
+                Join m In BD.tblMembre
+                On p.IdMembre Equals m.IdMembre
+                Join pe In BD.tblPretExemplaire
+                On pe.IdPret Equals p.IdPret
+                Join e In BD.tblExemplaire
+                On e.CodeBarre Equals pe.CodeBarre
+                Where p.TypeEtat <> "Supprimé"
+                Select New PretExemplaireMembre With {.Exemplaire = e, .Membre = m, .Pret = p, .PretExemplaire = pe})
+        grdListePret.ItemsSource = req
+    End Sub
+
+    Private Sub btnFiltre_Click(sender As Object, e As RoutedEventArgs) Handles btnTous.Click, btnActif.Click, btnInnactif.Click
+        Dim boutton As Button = sender
+        Select Case (boutton.Content)
+            Case "Tous"
+                reqFiltre = req.Where(Function(r) CType(r.Pret.TypeEtat, String).Contains(""))
+            Case Else
+                reqFiltre = req.Where(Function(r) CType(r.Pret.TypeEtat, String).Contains(boutton.Content))
+        End Select
+
+        grdListePret.ItemsSource = reqFiltre
+    End Sub
+
+    Private Sub btnRecherche_Click(sender As Object, e As RoutedEventArgs) Handles btnRecherche.Click
+        reqFiltre = req.Where(Function(r) CType(r.Pret.IdPret, String).Contains(txtRecherche.Text) _
+                                  Or CType(r.Membre.NomMembre, String).Contains(txtRecherche.Text) _
+                                  Or CType(r.Membre.PrenomMembre, String).Contains(txtRecherche.Text) _
+                                  Or CType(r.PretExemplaire.DateDebutPretEx, String).Contains(txtRecherche.Text) _
+                                  Or CType(r.PretExemplaire.DateFinPretEx, String).Contains(txtRecherche.Text) _
+                                  Or CType(r.Pret.TypeEtat, String).Contains(txtRecherche.Text))
+        grdListePret.ItemsSource = reqFiltre
+    End Sub
+
+
+    Private Sub btnSupression_Click(sender As Object, e As RoutedEventArgs) Handles btnSupression.Click
+
+        Dim confirmation = MessageBox.Show("Êtes-vous sûre de vouloir supprimé ce prêt?", "Suppression d'un prêt", MessageBoxButton.YesNo)
+        If confirmation = MessageBoxResult.Yes Then
+            MessageBox.Show("Suppression réussie", "Résultat")
+            Dim _req = From p In BD.tblPret
+           Where p.IdPret = CType(grdListePret.SelectedItem, PretExemplaireMembre).Pret.IdPret
+            _req.FirstOrDefault.TypeEtat = "Supprimé"
+            BD.SaveChanges()
+        End If
+    End Sub
+End Class

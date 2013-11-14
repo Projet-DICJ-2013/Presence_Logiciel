@@ -1,0 +1,97 @@
+﻿<Window x:Class="frmExemplaire"
+        
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Ajout d'exemplaire" Height="450" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="86.651"/>
+            <ColumnDefinition Width="406.949"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="170"/>
+        </Grid.RowDefinitions>
+
+        <Separator VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,2,-0.4,0"/>
+        <Separator VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="0,0,-0.4,1.8"/>
+        <StackPanel HorizontalAlignment="Stretch" Height="60" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource ParcInfo_BoutonMenuHorizontal}" TargetType="Button" />
+            </StackPanel.Resources>
+
+            <Button Name="btnFirst" Margin="100 0 20 0">
+                <Image Source="images/icons/Button_First.png"/>
+            </Button>
+            <Button Name="btnPrevious"  Margin="0 0 10 0">
+                <Image Source="images/icons/Button_Back.png"/>
+            </Button>
+            <Button Name="btnNext"  Margin="0 0 20 0">
+                <Image Source="images/icons/Button_Next.png"/>
+            </Button>
+            <Button Margin="0 0 130 0" Click="Button_Click_1">
+                <Image Source="images/icons/Button_Last.png"/>
+            </Button>
+            <Button Name="btnLast" Click="Button_Click">
+                <Image Source="images/icons/Save.png"/>
+            </Button>
+        </StackPanel>
+
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="0,0.2,0.6,170" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="329*"/>
+                <ColumnDefinition Width="165*"/>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="225" Margin="49,15,54.8,15.8">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource ParcInfo_LabelFormulaire}" TargetType="Label" />
+                    <Style BasedOn="{StaticResource ParcInfo_TextBoxFormulaire}" TargetType="TextBox" />
+                    <Style BasedOn="{StaticResource ParcInfo_DatePickerFormulaire}" TargetType="DatePicker" />
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="75"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions >
+                <Label Content="Code Barre" Width="69" Grid.Row="0"/>
+                <Label Content="Nom Réseau" Width="69" Grid.Row="1"/>
+                <Label Content="No Série" Width="66" Grid.Row="2"/>
+                <Label Content="Modèle" Width="56" Grid.Row="3"/>
+                <Label Content="Date d'achat" Width="77" Grid.Row="4"/>
+                <TextBox x:Name="txtCodeBarre" Text="{Binding CodeBarre}" Grid.Column="1" Grid.Row="0"/>
+                <TextBox x:Name="txtNomReseau"  Grid.Column="1" Grid.Row="1"/>
+                <TextBox x:Name="txtNoSerie" Text="{Binding NoSerie}" Grid.Column="1" Grid.Row="2"/>
+                <TextBox x:Name="txtModele" Text="{Binding tblModele.NoModele}" Grid.Column="1" Grid.Row="3"/>
+                <DatePicker x:Name="dtpDateAchat" Text="{Binding DateAchat}"  Width="150" Grid.Row="4" Grid.Column="1" />
+            </Grid>
+            <Image HorizontalAlignment="left" Width="100" Source="images/QrExample.jpg" Grid.Column="1"/>
+        </Grid>
+        <Label Style="{StaticResource ResourceKey=ParcInfo_LabelFormulaire}" Content="Note" Grid.Row="2" Margin="50,8.4,0,0" Grid.ColumnSpan="2"/>
+        <TextBox Name="txtNote" Text="{Binding NoteExemplaire}" HorizontalAlignment="Center" Height="100" TextWrapping="Wrap" Width="400" Grid.Row="2" Grid.ColumnSpan="2" Margin="47,35.4,46.6,35"/>
+    </Grid>
+</Window>

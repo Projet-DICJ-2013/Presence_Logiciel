@@ -1,0 +1,124 @@
+﻿<Window x:Class="frmModele"
+        
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        
+    Title="frmModele" Height="515.6" Width="604">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.486,0.546" Margin="0,0,3.6,-2.8" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="390"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="240.8"/>
+            <RowDefinition Height="188"/>
+        </Grid.RowDefinitions>
+
+        <Separator VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,2,-0.2,0" Height="2"/>
+        <Separator VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="0,0,-0.2,1.8" Height="1"/>
+        <StackPanel HorizontalAlignment="Stretch" Width="600" Height="60" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,0">
+
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource ParcInfo_BoutonMenuHorizontal}" TargetType="{x:Type Button}" />
+            </StackPanel.Resources>
+            <Button Name="btnReset" Margin="30,12,15,12">
+                <Image Source="Images/Icons/Button_Sync.png"/>
+            </Button>
+            <TextBox x:Name="TxtRech"  Margin="0,12,20,13" Width="195" />
+            <Button x:Name="btnRech" RenderTransformOrigin="-1.006,0.657" Margin="0,12,15,0" VerticalAlignment="Top">
+                <Image Source="images/Icons/Search.png"/>
+            </Button>
+            <Button x:Name="btnFirst" Margin="0 0 15 0">
+                <Image Source="/Images/icons/Button_First.png"/>
+            </Button>
+            <Button x:Name="btnPrevious" Margin="0 0 15 0">
+                <Image Source="/Images/icons/Button_Back.png"/>
+            </Button>
+            <Button x:Name="btnNext" Margin="0 0 15 0">
+                <Image Source="/Images/icons/Button_Next.png"/>
+            </Button>
+            <Button x:Name="btnLast" Margin="0 0 15 0">
+                <Image Source="/Images/icons/Button_Last.png"/>
+            </Button>
+            <Button x:Name="btnAddNewItem" RenderTransformOrigin="-1.006,0.657" Margin="0,12,0,0" VerticalAlignment="Top">
+                <Image Source="/Images/icons/Save.png"/>
+            </Button>
+        </StackPanel>
+
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="24.2,20.2,-46.2,73.6" Name="GridExemp" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="329*"/>
+                <ColumnDefinition Width="165*"/>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Center" Height="133" VerticalAlignment="Center" Width="253" Margin="97,14,64.4,0">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource ParcInfo_LabelFormulaire}" TargetType="{x:Type Label}" />
+                    <Style BasedOn="{StaticResource ParcInfo_TextBoxFormulaire}" TargetType="{x:Type TextBox}" />
+                    <Style BasedOn="{StaticResource ParcInfo_DatePickerFormulaire}" TargetType="{x:Type DatePicker}" />
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="28*"/>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="33*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="66.4"/>
+                    <ColumnDefinition Width="9.6"/>
+                    <ColumnDefinition Width="149.6"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Marque" Width="69" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Label Content="Modele" Width="66" Grid.Row="2" Margin="0,0.4,0,0"/>
+                <Label Content="Type" Width="56" Grid.Row="3"/>
+                <Label Content="Garantie" Width="77" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,7.2,0,-2.8"/>
+
+                <TextBox Name="TxtMarque" Text="{Binding Path=Marque}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="1.4,0,0,0" Width="149"/>
+                <TextBox Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="1.4,0.2,0,6.4" VerticalAlignment="Stretch" Height="Auto" Grid.Column="2" Width="149"/>
+                <TextBox   Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="0.4,3.6,0,0" Width="150" Grid.Column="2" />
+                <TextBox Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="2" Grid.Row="4" Margin="1,7.2,0,0"/>
+            </Grid>
+            <Image HorizontalAlignment="left" Width="154"  Margin="366,14,0,-9" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Button Name="btnAddCompo"  Style="{StaticResource ResourceKey=ParcInfo_BoutonMenuHorizontal}"   Margin="453,35.4,90,96.6" Grid.Row="2" Grid.Column="1" Width="57" RenderTransformOrigin="2.513,1.577" Height="Auto">
+            <Image Source="/Images/icons/Add.png" Height="29" Width="20"/>
+        </Button>
+        <ListView Name="ViewComposante" Grid.Column="1" HorizontalAlignment="Left" Height="118" Margin="76,2.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="298">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns >
+                        <GridViewColumn Header="Composante" Width="230">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Path=TypeCompo, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </Grid>
+</Window>
