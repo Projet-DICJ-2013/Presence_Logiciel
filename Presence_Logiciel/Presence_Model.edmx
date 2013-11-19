@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="PresenceModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="PresenceModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblConstant" EntityType="PresenceModel.Store.tblConstant" store:Type="Tables" Schema="S_Coeur" />
@@ -192,17 +192,25 @@
             <End Role="tblModele" EntitySet="tblModele" />
             <End Role="tblModeleCompoModele" EntitySet="tblModeleCompoModele" />
           </AssociationSet>
-          <AssociationSet Name="fk_OrdreDuJour_ListePoint" Association="PresenceModel.Store.fk_OrdreDuJour_ListePoint">
+          <AssociationSet Name="fk_OrdreDuJour_ProcesVerbaux" Association="PresenceModel.Store.fk_OrdreDuJour_ProcesVerbaux">
             <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
-            <End Role="tblListePoint" EntitySet="tblListePoint" />
+            <End Role="tblProcesVerbaux" EntitySet="tblProcesVerbaux" />
           </AssociationSet>
           <AssociationSet Name="fk_Participant_MembreParticipantReunion" Association="PresenceModel.Store.fk_Participant_MembreParticipantReunion">
             <End Role="tblParticipant" EntitySet="tblParticipant" />
             <End Role="tblMembreParticipantReunion" EntitySet="tblMembreParticipantReunion" />
           </AssociationSet>
+          <AssociationSet Name="fk_PieceJointe_PieceJointePoints" Association="PresenceModel.Store.fk_PieceJointe_PieceJointePoints">
+            <End Role="tblPieceJointe" EntitySet="tblPieceJointe" />
+            <End Role="tblPieceJointePoints" EntitySet="tblPieceJointePoints" />
+          </AssociationSet>
           <AssociationSet Name="fk_Points_ListesPoints" Association="PresenceModel.Store.fk_Points_ListesPoints">
             <End Role="tblListePoint" EntitySet="tblListePoint" />
             <End Role="tblPoints" EntitySet="tblPoints" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Points_PieceJointePoints" Association="PresenceModel.Store.fk_Points_PieceJointePoints">
+            <End Role="tblPoints" EntitySet="tblPoints" />
+            <End Role="tblPieceJointePoints" EntitySet="tblPieceJointePoints" />
           </AssociationSet>
           <AssociationSet Name="fk_PointsListePoints_ListesPoint" Association="PresenceModel.Store.fk_PointsListePoints_ListesPoint">
             <End Role="tblListePoint" EntitySet="tblListePoint" />
@@ -215,6 +223,10 @@
           <AssociationSet Name="fk_Pret_PretExemplaire" Association="PresenceModel.Store.fk_Pret_PretExemplaire">
             <End Role="tblPret" EntitySet="tblPret" />
             <End Role="tblPretExemplaire" EntitySet="tblPretExemplaire" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProcesVerbaux_ProcesVerbaux" Association="PresenceModel.Store.fk_ProcesVerbaux_ProcesVerbaux">
+            <End Role="tblProcesVerbaux" EntitySet="tblProcesVerbaux" />
+            <End Role="tblProcesVerbaux1" EntitySet="tblProcesVerbaux" />
           </AssociationSet>
           <AssociationSet Name="fk_Professeur_GroupeProfesseur" Association="PresenceModel.Store.fk_Professeur_GroupeProfesseur">
             <End Role="tblProfesseur" EntitySet="tblProfesseur" />
@@ -244,6 +256,10 @@
             <End Role="tblSession" EntitySet="tblSession" />
             <End Role="tblCoursSessionGroupe" EntitySet="tblCoursSessionGroupe" />
           </AssociationSet>
+          <AssociationSet Name="fk_Statut_OrdreDuJour" Association="PresenceModel.Store.fk_Statut_OrdreDuJour">
+            <End Role="tblStatut" EntitySet="tblStatut" />
+            <End Role="tblOrdreDuJourStatut" EntitySet="tblOrdreDuJourStatut" />
+          </AssociationSet>
           <AssociationSet Name="fk_StatutCours_StatutCoursCours" Association="PresenceModel.Store.fk_StatutCours_StatutCoursCours">
             <End Role="tblStatutCours" EntitySet="tblStatutCours" />
             <End Role="tblStatutCoursCours" EntitySet="tblStatutCoursCours" />
@@ -259,6 +275,18 @@
           <AssociationSet Name="fk_SystemeExemplaire" Association="PresenceModel.Store.fk_SystemeExemplaire">
             <End Role="tblExemplaire" EntitySet="tblExemplaire" />
             <End Role="tblSysteme" EntitySet="tblSysteme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblListePoint_tblOrdreDuJour" Association="PresenceModel.Store.FK_tblListePoint_tblOrdreDuJour">
+            <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
+            <End Role="tblListePoint" EntitySet="tblListePoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReunion_tblOrdreDuJour" Association="PresenceModel.Store.FK_tblReunion_tblOrdreDuJour">
+            <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
+            <End Role="tblReunion" EntitySet="tblReunion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TypePoint_Points" Association="PresenceModel.Store.fk_TypePoint_Points">
+            <End Role="tblTypePoint" EntitySet="tblTypePoint" />
+            <End Role="tblPoints" EntitySet="tblPoints" />
           </AssociationSet>
           <AssociationSet Name="fk_TypeRapport_Element" Association="PresenceModel.Store.fk_TypeRapport_Element">
             <End Role="tblTypeRapport" EntitySet="tblTypeRapport" />
@@ -598,7 +626,7 @@
           <Property Name="DateReunion" Type="smalldatetime" Nullable="false" />
           <Property Name="EndroitReunion" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="NoOrdreDuJour" Type="int" Nullable="false" />
-          <Property Name="NoLocal" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="NoLocal" Type="varchar" MaxLength="6" />
         </EntityType>
         <EntityType Name="tblStatut">
           <Key>
@@ -1158,14 +1186,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_OrdreDuJour_ListePoint">
-          <End Role="tblOrdreDuJour" Type="PresenceModel.Store.tblOrdreDuJour" Multiplicity="0..1" />
-          <End Role="tblListePoint" Type="PresenceModel.Store.tblListePoint" Multiplicity="*" />
+        <Association Name="fk_OrdreDuJour_ProcesVerbaux">
+          <End Role="tblOrdreDuJour" Type="PresenceModel.Store.tblOrdreDuJour" Multiplicity="1" />
+          <End Role="tblProcesVerbaux" Type="PresenceModel.Store.tblProcesVerbaux" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblOrdreDuJour">
               <PropertyRef Name="NoOrdreDuJour" />
             </Principal>
-            <Dependent Role="tblListePoint">
+            <Dependent Role="tblProcesVerbaux">
               <PropertyRef Name="NoOrdreDuJour" />
             </Dependent>
           </ReferentialConstraint>
@@ -1182,6 +1210,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_PieceJointe_PieceJointePoints">
+          <End Role="tblPieceJointe" Type="PresenceModel.Store.tblPieceJointe" Multiplicity="1" />
+          <End Role="tblPieceJointePoints" Type="PresenceModel.Store.tblPieceJointePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPieceJointe">
+              <PropertyRef Name="IdPieceJointe" />
+            </Principal>
+            <Dependent Role="tblPieceJointePoints">
+              <PropertyRef Name="IdPieceJointe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Points_ListesPoints">
           <End Role="tblListePoint" Type="PresenceModel.Store.tblListePoint" Multiplicity="0..1" />
           <End Role="tblPoints" Type="PresenceModel.Store.tblPoints" Multiplicity="*" />
@@ -1191,6 +1231,18 @@
             </Principal>
             <Dependent Role="tblPoints">
               <PropertyRef Name="ListeEnfants" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Points_PieceJointePoints">
+          <End Role="tblPoints" Type="PresenceModel.Store.tblPoints" Multiplicity="1" />
+          <End Role="tblPieceJointePoints" Type="PresenceModel.Store.tblPieceJointePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPoints">
+              <PropertyRef Name="IDPoint" />
+            </Principal>
+            <Dependent Role="tblPieceJointePoints">
+              <PropertyRef Name="IDPoint" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1227,6 +1279,18 @@
             </Principal>
             <Dependent Role="tblPretExemplaire">
               <PropertyRef Name="IdPret" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProcesVerbaux_ProcesVerbaux">
+          <End Role="tblProcesVerbaux" Type="PresenceModel.Store.tblProcesVerbaux" Multiplicity="1" />
+          <End Role="tblProcesVerbaux1" Type="PresenceModel.Store.tblProcesVerbaux" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblProcesVerbaux">
+              <PropertyRef Name="NoProcesVerbaux" />
+            </Principal>
+            <Dependent Role="tblProcesVerbaux1">
+              <PropertyRef Name="NoProcesVerbaux" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1314,6 +1378,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Statut_OrdreDuJour">
+          <End Role="tblStatut" Type="PresenceModel.Store.tblStatut" Multiplicity="1" />
+          <End Role="tblOrdreDuJourStatut" Type="PresenceModel.Store.tblOrdreDuJourStatut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatut">
+              <PropertyRef Name="CodeStatut" />
+            </Principal>
+            <Dependent Role="tblOrdreDuJourStatut">
+              <PropertyRef Name="CodeStatut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_StatutCours_StatutCoursCours">
           <End Role="tblStatutCours" Type="PresenceModel.Store.tblStatutCours" Multiplicity="1" />
           <End Role="tblStatutCoursCours" Type="PresenceModel.Store.tblStatutCoursCours" Multiplicity="*" />
@@ -1362,6 +1438,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblListePoint_tblOrdreDuJour">
+          <End Role="tblOrdreDuJour" Type="PresenceModel.Store.tblOrdreDuJour" Multiplicity="0..1" />
+          <End Role="tblListePoint" Type="PresenceModel.Store.tblListePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrdreDuJour">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Principal>
+            <Dependent Role="tblListePoint">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReunion_tblOrdreDuJour">
+          <End Role="tblOrdreDuJour" Type="PresenceModel.Store.tblOrdreDuJour" Multiplicity="1" />
+          <End Role="tblReunion" Type="PresenceModel.Store.tblReunion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrdreDuJour">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Principal>
+            <Dependent Role="tblReunion">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TypePoint_Points">
+          <End Role="tblTypePoint" Type="PresenceModel.Store.tblTypePoint" Multiplicity="0..1" />
+          <End Role="tblPoints" Type="PresenceModel.Store.tblPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTypePoint">
+              <PropertyRef Name="NomPoint" />
+            </Principal>
+            <Dependent Role="tblPoints">
+              <PropertyRef Name="NomPoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_TypeRapport_Element">
           <End Role="tblTypeRapport" Type="PresenceModel.Store.tblTypeRapport" Multiplicity="1" />
           <End Role="tblElement" Type="PresenceModel.Store.tblElement" Multiplicity="*" />
@@ -1377,6 +1489,9 @@
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCompoModele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MonMod" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelPointById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoPoint" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -1408,8 +1523,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PresenceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1628,7 +1742,7 @@
             <End Role="tblModele" EntitySet="tblModele" />
           </AssociationSet>
           <FunctionImport Name="GetCompoModele" ReturnType="Collection(PresenceModel.GetCompoModele_Result)">
-            <Parameter Name="MonMod" Mode="In" Type="String" />
+          <Parameter Name="MonMod" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -1661,7 +1775,37 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="GetLstCompo" EntitySet="tblCompoModele" ReturnType="Collection(PresenceModel.tblCompoModele)">
-            <Parameter Name="MonMod" Mode="In" Type="String" />
+          <Parameter Name="MonMod" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="fk_OrdreDuJour_ProcesVerbaux" Association="PresenceModel.fk_OrdreDuJour_ProcesVerbaux">
+            <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
+            <End Role="tblProcesVerbaux" EntitySet="tblProcesVerbaux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReunion_tblOrdreDuJour" Association="PresenceModel.FK_tblReunion_tblOrdreDuJour">
+            <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
+            <End Role="tblReunion" EntitySet="tblReunion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Statut_OrdreDuJour" Association="PresenceModel.fk_Statut_OrdreDuJour">
+            <End Role="tblStatut" EntitySet="tblStatut" />
+            <End Role="tblOrdreDuJourStatut" EntitySet="tblOrdreDuJourStatut" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TypePoint_Points" Association="PresenceModel.fk_TypePoint_Points">
+            <End Role="tblTypePoint" EntitySet="tblTypePoint" />
+            <End Role="tblPoints" EntitySet="tblPoints" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ProcesVerbaux_ProcesVerbaux" Association="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux">
+            <End Role="tblProcesVerbaux" EntitySet="tblProcesVerbaux" />
+            <End Role="tblProcesVerbaux1" EntitySet="tblProcesVerbaux" />
+          </AssociationSet>
+          <AssociationSet Name="tblPieceJointePoints1" Association="PresenceModel.tblPieceJointePoints1">
+            <End Role="tblPieceJointe" EntitySet="tblPieceJointe" />
+            <End Role="tblPoints" EntitySet="tblPoints" />
+          </AssociationSet>
+          <FunctionImport Name="SelPointById" ReturnType="Collection(PresenceModel.SelPointById_Result)">
+            <Parameter Name="NoPoint" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RetournerEnfants" EntitySet="tblPoints" ReturnType="Collection(PresenceModel.tblPoints)">
+            <Parameter Name="NoPoint" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagrams">
@@ -1944,6 +2088,8 @@
           <Property Name="TitreOrdreJour" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tblListePoint" Relationship="PresenceModel.fk_OrdreDuJour_ListePoint" FromRole="tblOrdreDuJour" ToRole="tblListePoint" />
+          <NavigationProperty Name="tblProcesVerbaux" Relationship="PresenceModel.fk_OrdreDuJour_ProcesVerbaux" FromRole="tblOrdreDuJour" ToRole="tblProcesVerbaux" />
+          <NavigationProperty Name="tblReunion" Relationship="PresenceModel.FK_tblReunion_tblOrdreDuJour" FromRole="tblOrdreDuJour" ToRole="tblReunion" />
         </EntityType>
         <EntityType Name="tblOrdreDuJourStatut">
           <Key>
@@ -1954,6 +2100,7 @@
           <Property Name="CodeStatut" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="DateStatut" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CommStatut" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblStatut" Relationship="PresenceModel.fk_Statut_OrdreDuJour" FromRole="tblOrdreDuJourStatut" ToRole="tblStatut" />
         </EntityType>
         <EntityType Name="tblPieceJointe">
           <Key>
@@ -1964,6 +2111,7 @@
           <Property Name="NomFichier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ExtentionFichier" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblPoints" Relationship="PresenceModel.tblPieceJointePoints1" FromRole="tblPieceJointe" ToRole="tblPoints" />
         </EntityType>
         <EntityType Name="tblPieceJointePoints">
           <Key>
@@ -1986,6 +2134,8 @@
           <Property Name="NomPoint" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="tblListePoint" Relationship="PresenceModel.fk_Points_ListesPoints" FromRole="tblPoints" ToRole="tblListePoint" />
           <NavigationProperty Name="tblListePoint1" Relationship="PresenceModel.tblPointsListePoints" FromRole="tblPoints" ToRole="tblListePoint" />
+          <NavigationProperty Name="tblTypePoint" Relationship="PresenceModel.fk_TypePoint_Points" FromRole="tblPoints" ToRole="tblTypePoint" />
+          <NavigationProperty Name="tblPieceJointe" Relationship="PresenceModel.tblPieceJointePoints1" FromRole="tblPoints" ToRole="tblPieceJointe" />
         </EntityType>
         <EntityType Name="tblProcesVerbaux">
           <Key>
@@ -1994,6 +2144,9 @@
           <Property Name="NoProcesVerbaux" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="NotesProcesVerbaux" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="NoOrdreDuJour" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblOrdreDuJour" Relationship="PresenceModel.fk_OrdreDuJour_ProcesVerbaux" FromRole="tblProcesVerbaux" ToRole="tblOrdreDuJour" />
+          <NavigationProperty Name="tblProcesVerbaux1" Relationship="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux" FromRole="tblProcesVerbaux" ToRole="tblProcesVerbaux1" />
+          <NavigationProperty Name="tblProcesVerbaux2" Relationship="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux" FromRole="tblProcesVerbaux1" ToRole="tblProcesVerbaux" />
         </EntityType>
         <EntityType Name="tblReunion">
           <Key>
@@ -2003,8 +2156,9 @@
           <Property Name="DateReunion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndroitReunion" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NoOrdreDuJour" Type="Int32" Nullable="false" />
-          <Property Name="NoLocal" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="NoLocal" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="tblMembreParticipantReunion" Relationship="PresenceModel.fk_Reunion_MembreParticipantReunion" FromRole="tblReunion" ToRole="tblMembreParticipantReunion" />
+          <NavigationProperty Name="tblOrdreDuJour" Relationship="PresenceModel.FK_tblReunion_tblOrdreDuJour" FromRole="tblReunion" ToRole="tblOrdreDuJour" />
         </EntityType>
         <EntityType Name="tblStatut">
           <Key>
@@ -2013,6 +2167,7 @@
           <Property Name="CodeStatut" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="NomStatut" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
           <Property Name="DescriptionStatut" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tblOrdreDuJourStatut" Relationship="PresenceModel.fk_Statut_OrdreDuJour" FromRole="tblStatut" ToRole="tblOrdreDuJourStatut" />
         </EntityType>
         <EntityType Name="tblTypePoint">
           <Key>
@@ -2020,6 +2175,7 @@
           </Key>
           <Property Name="NomPoint" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="DescriptionPoint" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tblPoints" Relationship="PresenceModel.fk_TypePoint_Points" FromRole="tblTypePoint" ToRole="tblPoints" />
         </EntityType>
         <EntityType Name="tblBesoin">
           <Key>
@@ -2618,6 +2774,79 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="fk_OrdreDuJour_ProcesVerbaux">
+          <End Type="PresenceModel.tblOrdreDuJour" Role="tblOrdreDuJour" Multiplicity="1" />
+          <End Type="PresenceModel.tblProcesVerbaux" Role="tblProcesVerbaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrdreDuJour">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Principal>
+            <Dependent Role="tblProcesVerbaux">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReunion_tblOrdreDuJour">
+          <End Type="PresenceModel.tblOrdreDuJour" Role="tblOrdreDuJour" Multiplicity="1" />
+          <End Type="PresenceModel.tblReunion" Role="tblReunion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrdreDuJour">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Principal>
+            <Dependent Role="tblReunion">
+              <PropertyRef Name="NoOrdreDuJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Statut_OrdreDuJour">
+          <End Type="PresenceModel.tblStatut" Role="tblStatut" Multiplicity="1" />
+          <End Type="PresenceModel.tblOrdreDuJourStatut" Role="tblOrdreDuJourStatut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatut">
+              <PropertyRef Name="CodeStatut" />
+            </Principal>
+            <Dependent Role="tblOrdreDuJourStatut">
+              <PropertyRef Name="CodeStatut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TypePoint_Points">
+          <End Type="PresenceModel.tblTypePoint" Role="tblTypePoint" Multiplicity="0..1" />
+          <End Type="PresenceModel.tblPoints" Role="tblPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTypePoint">
+              <PropertyRef Name="NomPoint" />
+            </Principal>
+            <Dependent Role="tblPoints">
+              <PropertyRef Name="NomPoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ProcesVerbaux_ProcesVerbaux">
+          <End Type="PresenceModel.tblProcesVerbaux" Role="tblProcesVerbaux" Multiplicity="1" />
+          <End Type="PresenceModel.tblProcesVerbaux" Role="tblProcesVerbaux1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblProcesVerbaux">
+              <PropertyRef Name="NoProcesVerbaux" />
+            </Principal>
+            <Dependent Role="tblProcesVerbaux1">
+              <PropertyRef Name="NoProcesVerbaux" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblPieceJointePoints1">
+          <End Type="PresenceModel.tblPieceJointe" Role="tblPieceJointe" Multiplicity="*" />
+          <End Type="PresenceModel.tblPoints" Role="tblPoints" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="SelPointById_Result">
+          <Property Type="Int32" Name="IDPoint" Nullable="false" />
+          <Property Type="String" Name="InformationPoint" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ListeEnfants" Nullable="true" />
+          <Property Type="String" Name="NomPoint" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="NumeroPoint" Nullable="true" />
+          <Property Type="Int32" Name="PieceJointeOrdre" Nullable="true" />
+          <Property Type="String" Name="TitrePoint" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3202,6 +3431,28 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PresenceModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PresenceModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="GetLstCompo" FunctionName="PresenceModel.Store.GetCompoModele" />
+          <AssociationSetMapping Name="tblPieceJointePoints1" TypeName="PresenceModel.tblPieceJointePoints1" StoreEntitySet="tblPieceJointePoints">
+            <EndProperty Name="tblPoints">
+              <ScalarProperty Name="IDPoint" ColumnName="IDPoint" />
+            </EndProperty>
+            <EndProperty Name="tblPieceJointe">
+              <ScalarProperty Name="IdPieceJointe" ColumnName="IdPieceJointe" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SelPointById" FunctionName="PresenceModel.Store.SelPointById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PresenceModel.SelPointById_Result">
+                <ScalarProperty Name="IDPoint" ColumnName="IDPoint" />
+                <ScalarProperty Name="InformationPoint" ColumnName="InformationPoint" />
+                <ScalarProperty Name="ListeEnfants" ColumnName="ListeEnfants" />
+                <ScalarProperty Name="NomPoint" ColumnName="NomPoint" />
+                <ScalarProperty Name="NumeroPoint" ColumnName="NumeroPoint" />
+                <ScalarProperty Name="PieceJointeOrdre" ColumnName="PieceJointeOrdre" />
+                <ScalarProperty Name="TitrePoint" ColumnName="TitrePoint" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetournerEnfants" FunctionName="PresenceModel.Store.SelPointById" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3314,6 +3565,12 @@
         <AssociationConnector Association="PresenceModel.tblBesoinExemplaire" ManuallyRouted="false" />
         <AssociationConnector Association="PresenceModel.tblDemandeExemplaire" ManuallyRouted="false" />
         <AssociationConnector Association="PresenceModel.tblModeleCompoModele" ManuallyRouted="false" />
+        <AssociationConnector Association="PresenceModel.fk_OrdreDuJour_ProcesVerbaux" />
+        <AssociationConnector Association="PresenceModel.FK_tblReunion_tblOrdreDuJour" />
+        <AssociationConnector Association="PresenceModel.fk_Statut_OrdreDuJour" />
+        <AssociationConnector Association="PresenceModel.fk_TypePoint_Points" />
+        <AssociationConnector Association="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux" />
+        <AssociationConnector Association="PresenceModel.tblPieceJointePoints1" />
       </Diagram>
     </Diagrams>
   </Designer>
