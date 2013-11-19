@@ -289,5 +289,21 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
-    
+    <!--GEST DES COURS-->
+        <!--Rectangle cours-->
+    <Style x:Key="coursRec" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="Black"></Setter>
+        <Setter Property="Fill" Value="#FFF4F4F5"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="Width" Value="252"></Setter>
+        <Setter Property="Height" Value="52"></Setter>
+        <Setter Property="Visibility" Value="Hidden"></Setter>
+    </Style>
+        <!--Label cours-->
+    <Style x:Key="lblCours" TargetType="Label">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="Visibility" Value="Hidden"></Setter>
+    </Style>
 </ResourceDictionary>

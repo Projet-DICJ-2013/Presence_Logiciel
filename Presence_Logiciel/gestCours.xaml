@@ -75,12 +75,12 @@
             <Rectangle x:Name="recStatutCours" Fill="#FF5F5FFF" HorizontalAlignment="Left" Height="62" Margin="1103,176,0,0" Stroke="Black" VerticalAlignment="Top" Width="252"/>
             <Label x:Name="lblStatutCours" Content="{Binding NomStatutCours}" HorizontalAlignment="Left" Margin="1163,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.245,-0.069" Foreground="White"/>
             <Button x:Name="btnO" Content="O" HorizontalAlignment="Left" Margin="1373,187,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="3.79,-3.999" Visibility="Hidden"/>
-            <Rectangle x:Name="recActif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,280,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Rectangle x:Name="recInactif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,337,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Rectangle x:Name="recAnnulé" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,394,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Label x:Name="lblActif" Content="Actif" HorizontalAlignment="Left" Margin="1195,280,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.433,-0.275" Visibility="Hidden"/>
-            <Label x:Name="lblInactif" Content="Inactif" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Visibility="Hidden"/>
-            <Label x:Name="lblAnnule" Content="Annulé" HorizontalAlignment="Left" Margin="1195,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.137,6.569" Visibility="Hidden"/>
+            <Rectangle x:Name="recActif" Style="{StaticResource ResourceKey=coursRec}" Margin="1103,280,0,0"/>
+            <Rectangle x:Name="recInactif" Style="{StaticResource ResourceKey=coursRec}" Margin="1103,337,0,0"/>
+            <Rectangle x:Name="recAnnulé" Margin="1103,394,0,0" Style="{StaticResource ResourceKey=coursRec}"/>
+            <Label x:Name="lblActif" Content="Actif" Style="{StaticResource ResourceKey=lblCours}" Margin="1195,280,0,0" RenderTransformOrigin="0.433,-0.275"/>
+            <Label x:Name="lblInactif" Content="Inactif" Style="{StaticResource ResourceKey=lblCours}" Margin="1195,337,0,0" RenderTransformOrigin="0.298,0.034"/>
+            <Label x:Name="lblAnnule" Content="Annulé" Style="{StaticResource ResourceKey=lblCours}" Margin="1195,394,0,0" RenderTransformOrigin="10.137,6.569"/>
             <Label x:Name="lblDateAcquisition" Content="{Binding DataAcquisitionStatut}" HorizontalAlignment="Left" Margin="1163,243,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnX" Content="X" HorizontalAlignment="Left" Margin="1451,0,-0.4,0" VerticalAlignment="Top" Width="39"/>
         </Grid>
