@@ -63,10 +63,10 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime.v9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="mod_smtp">
-      <HintPath>S:\Projet 2013\Module\mod_smtp\mod_smtp.dll</HintPath>
+      <HintPath>.\mod_smtp.dll</HintPath>
     </Reference>
     <Reference Include="P2013_CreateDoc">
-      <HintPath>..\..\Projet de session\Logiciel\Prototype3\Prototype3\P2013_CreateDoc.dll</HintPath>
+      <HintPath>.\P2013_CreateDoc.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
