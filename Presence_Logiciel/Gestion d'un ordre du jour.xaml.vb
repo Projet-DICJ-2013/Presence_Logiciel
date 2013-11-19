@@ -437,18 +437,7 @@ Public Class GestionOdj
         Return MesPoints.ToList()
     End Function
 
-    Public Function RetourEnfantsPoints(ByVal Point As tblPoints)
-
-
-
-        Dim MesPoints = (From MaListe In BD.tblListePoint
-                        Where MaListe.NoListePoint = Point.ListeEnfants
-                        Join MesPoint In BD.tblPoints
-                        On MesPoint.tblListePoint1.FirstOrDefault Equals MaListe
-                        Select MesPoint).ToList()
-
-        Return MesPoints
-    End Function
+    
     Public Function DeleteOrdreDuJour(ByVal OrdreDuJour As tblOrdreDuJour)
         Dim ListePoint As List(Of tblPoints)
         ListePoint = New List(Of tblPoints)
@@ -465,13 +454,17 @@ Public Class GestionOdj
 
         If Point.ListeEnfants.HasValue Then
             Dim LesEnfants As List(Of tblPoints)
-            LesEnfants = RetourEnfantsPoints(Point)
+
+            LesEnfants = BD.RetournerEnfants(Point.IDPoint).ToList()
 
             For Each ElementEnfants In LesEnfants
+
+
                 DeletePoints(ElementEnfants)
-                ElementEnfants.ListeEnfants = Nothing
-                BD.tblPoints.DeleteObject(ElementEnfants)
+
             Next
+            SupprimerLiaison(Point)
+            BD.tblPoints.DeleteObject(Point)
         Else
             SupprimerLiaison(Point)
             BD.tblPoints.DeleteObject(Point)
