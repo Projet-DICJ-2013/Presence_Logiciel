@@ -61,7 +61,7 @@
     End Sub
 
     Private Sub btnDernier_Click(sender As Object, e As RoutedEventArgs) Handles btnDernier.Click
-                vu.MoveCurrentToLast()
+        vu.MoveCurrentToLast()
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As RoutedEventArgs) Handles btnEdit.Click

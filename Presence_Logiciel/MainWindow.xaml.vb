@@ -1,5 +1,6 @@
-﻿
+﻿Imports System.Threading
 Class MainWindow
+
 
     Private Sub fermer(sender As Object, e As RoutedEventArgs)
         Me.Close()
@@ -59,6 +60,8 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecCours.Effect = objDropShadow
         Dim gestCours As New gestCours
+
+        gestCours.statut = lblStatut
         gestCours.ShowDialog()
     End Sub
 
@@ -119,8 +122,7 @@ Class MainWindow
         gestPrets.ShowDialog()
     End Sub
 
-    Private Sub reposition(sender As Object, e As EventArgs) Handles frmMain.LocationChanged
-    End Sub
+
 
     Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
         Me.Close()
@@ -149,8 +151,7 @@ Class MainWindow
         fnExemp.ShowDialog()
     End Sub
 
-    Private Sub GestMembre()
-        Dim fnGestMembre As New gestEtudiant
-        fnGestMembre.ShowDialog()
-    End Sub
+
+
+
 End Class
