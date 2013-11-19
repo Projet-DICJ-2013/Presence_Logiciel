@@ -4,12 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="MainWindow" Height="1200" Width="1080" >
     <Window.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--Non du fichier de styles-->
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Storyboard  x:Key="AnimLabel">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:3:0"/>
+            </Storyboard>
         </ResourceDictionary>
+
     </Window.Resources>
     <Grid>
         <Rectangle Style="{StaticResource ResourceKey=recMain}" Height="834" Margin="0,21,0,0"/>
@@ -20,7 +25,7 @@
                     <MenuItem Header="_1" Style="{StaticResource ResourceKey=sousitemMain}"  Foreground="White"/>
                     <MenuItem Header="_2" Style="{StaticResource ResourceKey=sousitemMain}" />
                     <MenuItem Header="_fermer" Style="{StaticResource ResourceKey=sousitemMain}"  Click="fermer" />
-                    
+
                 </MenuItem>
 
                 <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Connexion" >
@@ -28,7 +33,7 @@
                     <MenuItem Header="_Se Déconnecter" Style="{StaticResource ResourceKey=sousitemMain}"/>
                 </MenuItem>
                 <MenuItem Header="_Quitter" Style="{StaticResource ResourceKey=itemMain}" Click="fermer">
- 
+
                 </MenuItem>
                 <MenuItem Header="_" Style="{StaticResource ResourceKey=itemMain}"  HorizontalAlignment="Right" Click="minimiser" />
                 <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Parc Informatique" >
@@ -36,12 +41,16 @@
                     <MenuItem Click="CreerPret" Header="_Créer un pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                    <MenuItem Click="GestMembre" Header="Gérer des membres" Style="{StaticResource ResourceKey=sousitemMain}"/>
                 </MenuItem>
-                
+
 
             </Menu>
-            <StackPanel/>
+            <StackPanel>
+                <Rectangle Fill="#FFF4F4F5" Height="25" Stroke="Black" Width="1400" HorizontalAlignment="left" Margin="138,0,0,0"/>
+                <Label x:Name="lblBarreStatut" Content="Barre de statut :" HorizontalAlignment="left" Margin="140,-20,0,0"/>
+                <Label x:Name="lblStatut" Content="-" HorizontalAlignment="Center" Margin="0,-25,0,0" Opacity="0" />
+
+            </StackPanel>
         </DockPanel>
 
         <Rectangle Style="{StaticResource ResourceKey=bigrecMain}" Height="37" Margin="0,858,-840,0">

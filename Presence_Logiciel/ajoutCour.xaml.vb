@@ -1,6 +1,8 @@
-﻿Public Class ajoutCour
+﻿Imports System.Windows.Media.Animation
+Public Class ajoutCour
     Public DM As PresenceEntities
     Dim newCours As tblCours
+    Public statut As Label
 
     Private Sub Fer(sender As Object, e As RoutedEventArgs)
 
@@ -35,5 +37,18 @@
 
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
 
+    End Sub
+
+    Private Sub txtCodeCours_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtCodeCours.PreviewLostKeyboardFocus, txtNomCours.PreviewLostKeyboardFocus, txtAnneeCours.PreviewLostKeyboardFocus, txtPonderation.PreviewLostKeyboardFocus
+        Dim objTextBox As TextBox = CType(sender, TextBox)
+        Dim texte As String = objTextBox.Text
+        If (texte = "") Then
+            e.Handled = True
+            statut.Content = "le champ : " + objTextBox.Name + " est vide"
+
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+        End If
     End Sub
 End Class
