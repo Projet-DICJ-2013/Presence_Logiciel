@@ -49,7 +49,9 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecProgramme.Effect = objDropShadow
         Dim gestProgramme As New gestProgrammes
+        gestProgramme.statut = lblStatut
         gestProgramme.ShowDialog()
+
     End Sub
 
     Private Sub AffCours(sender As Object, e As RoutedEventArgs) Handles btnCours.Click
@@ -73,6 +75,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecGroupe.Effect = objDropShadow
         Dim gestMembre As New gestEtudiant
+        gestMembre.statut = lblStatut
         gestMembre.ShowDialog()
     End Sub
 

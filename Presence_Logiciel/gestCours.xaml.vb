@@ -25,6 +25,7 @@ Class gestCours
         Dim uncours As New ajoutCour
 
         uncours.DM = DM
+        uncours.statut = statut
         uncours.ShowDialog()
         LesCours = (From cours In DM.tblCours Select cours)
         vu = New ListCollectionView(LesCours.ToList())

@@ -1,8 +1,12 @@
-﻿Public Class gestProgrammes
+﻿Imports System.Windows.Media.Animation
+
+Public Class gestProgrammes
     Dim DM As PresenceEntities
     Dim LesProgrammes As IQueryable(Of tblProgramme)
     Dim vu As ListCollectionView
     Dim codeprog As String
+    Public statut As Label
+
 
 
 
@@ -106,6 +110,7 @@
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
         Dim ajProg As New ajoutProgramme
         ajProg.DM = DM
+        ajProg.statut = statut
         ajProg.ShowDialog()
         LesProgrammes = (From prog In DM.tblProgramme Select prog)
         vu = New ListCollectionView(LesProgrammes.ToList())
@@ -145,5 +150,18 @@
             MessageBox.Show(ex.ToString)
             'Dit l 'erreur
         End Try
+    End Sub
+
+    Private Sub txtNomProgramme_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtNomProgramme.PreviewLostKeyboardFocus
+        Dim objTextBox As TextBox = CType(sender, TextBox)
+        Dim texte As String = objTextBox.Text
+        If (texte = "") Then
+            e.Handled = True
+            statut.Content = "le champ : " + objTextBox.Name + " est vide"
+
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+        End If
     End Sub
 End Class
