@@ -39,7 +39,7 @@
 
     End Function
     'Ajout les données de la réunion a la bd
-    Public Function ajoutReunionBd(dateReunion As Date, Endroit As String, nolocal As String)
+    Public Function ajoutReunionBd(dateReunion As Date, Endroit As String, nolocal As String, nooredredujour As Int32)
 
         _reunion.DateReunion = dateReunion
         _reunion.EndroitReunion = Endroit
@@ -48,7 +48,7 @@
             _reunion.NoLocal = nolocal
         End If
 
-        _reunion.NoOrdreDuJour = 1003
+        _reunion.NoOrdreDuJour = nooredredujour
 
         _entitiesReunion.tblReunion.AddObject(_reunion)
         _entitiesReunion.SaveChanges()

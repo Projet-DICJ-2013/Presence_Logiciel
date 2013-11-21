@@ -13,11 +13,12 @@ Public Class frmGestOrdJour
     Private _intReu As int_CedReunion
     Private Rapport As GenereRapport
 
+
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
         OrdreDuJour = New GestionOdj
         Modification = False
         lstOrdreJour.ItemsSource = OrdreDuJour.Collection
-        Dim _intReu As int_CedReunion()
+
     End Sub
 
     Private Sub btnNouveauPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnNouveauPoint.Click

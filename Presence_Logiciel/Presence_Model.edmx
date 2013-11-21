@@ -3503,7 +3503,7 @@
         <EntityTypeShape EntityType="PresenceModel.tblOrdreDuJour" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblOrdreDuJourStatut" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblPieceJointe" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PresenceModel.tblPieceJointePoints" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PresenceModel.tblPieceJointePoints" Width="2.25" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblPoints" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblProcesVerbaux" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblReunion" Width="1.5" PointX="0.75" PointY="26.875" IsExpanded="true" />

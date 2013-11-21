@@ -57,7 +57,7 @@
         </Button>
 
         <Button x:Name="btnPlanifReun" Margin="664,498,0,6.6" HorizontalAlignment="Left" Height="70" Width="99">
-            <Image x:Name="image" Source="images/icons/Calendar.png" Height="67" Width="89"/>
+            <Image x:Name="image" Source="images/icons/Calendar.png" Height="67" Width="89" RenderTransformOrigin="0.636,0.5"/>
         </Button>
         <ListView x:Name="lstOrdreJour" HorizontalAlignment="Left" Height="105" Margin="177,68,0,0" VerticalAlignment="Top" Width="492">
             <ItemsControl.ItemTemplate>
