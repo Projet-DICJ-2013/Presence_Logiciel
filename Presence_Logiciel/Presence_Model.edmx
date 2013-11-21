@@ -1556,7 +1556,6 @@
           <EntitySet Name="tblOrdreDuJour" EntityType="PresenceModel.tblOrdreDuJour" />
           <EntitySet Name="tblOrdreDuJourStatut" EntityType="PresenceModel.tblOrdreDuJourStatut" />
           <EntitySet Name="tblPieceJointe" EntityType="PresenceModel.tblPieceJointe" />
-          <EntitySet Name="tblPieceJointePoints" EntityType="PresenceModel.tblPieceJointePoints" />
           <EntitySet Name="tblPoints" EntityType="PresenceModel.tblPoints" />
           <EntitySet Name="tblProcesVerbaux" EntityType="PresenceModel.tblProcesVerbaux" />
           <EntitySet Name="tblReunion" EntityType="PresenceModel.tblReunion" />
@@ -2112,14 +2111,6 @@
           <Property Name="ExtentionFichier" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="tblPoints" Relationship="PresenceModel.tblPieceJointePoints1" FromRole="tblPieceJointe" ToRole="tblPoints" />
-        </EntityType>
-        <EntityType Name="tblPieceJointePoints">
-          <Key>
-            <PropertyRef Name="IdPieceJointe" />
-            <PropertyRef Name="IDPoint" />
-          </Key>
-          <Property Name="IdPieceJointe" Type="Int32" Nullable="false" />
-          <Property Name="IDPoint" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPoints">
           <Key>
@@ -3119,14 +3110,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblPieceJointePoints">
-            <EntityTypeMapping TypeName="PresenceModel.tblPieceJointePoints">
-              <MappingFragment StoreEntitySet="tblPieceJointePoints">
-                <ScalarProperty Name="IdPieceJointe" ColumnName="IdPieceJointe" />
-                <ScalarProperty Name="IDPoint" ColumnName="IDPoint" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblPoints">
             <EntityTypeMapping TypeName="PresenceModel.tblPoints">
               <MappingFragment StoreEntitySet="tblPoints">
@@ -3503,7 +3486,6 @@
         <EntityTypeShape EntityType="PresenceModel.tblOrdreDuJour" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblOrdreDuJourStatut" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblPieceJointe" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PresenceModel.tblPieceJointePoints" Width="2.25" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblPoints" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblProcesVerbaux" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblReunion" Width="1.5" PointX="0.75" PointY="26.875" IsExpanded="true" />

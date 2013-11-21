@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("6f6389a1-3251-47c8-a3cb-4ebb986c5e39")>
+<Assembly: EdmSchemaAttribute("5fef7f30-95f4-4dbf-b871-493b02bd3f2d")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -512,20 +512,6 @@ Public Partial Class PresenceEntities
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    Public ReadOnly Property tblPieceJointePoints() As ObjectSet(Of tblPieceJointePoints)
-        Get
-            If (_tblPieceJointePoints Is Nothing) Then
-                _tblPieceJointePoints = MyBase.CreateObjectSet(Of tblPieceJointePoints)("tblPieceJointePoints")
-            End If
-            Return _tblPieceJointePoints
-        End Get
-    End Property
-
-    Private _tblPieceJointePoints As ObjectSet(Of tblPieceJointePoints)
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
     Public ReadOnly Property tblPoints() As ObjectSet(Of tblPoints)
         Get
             If (_tblPoints Is Nothing) Then
@@ -1001,13 +987,6 @@ Public Partial Class PresenceEntities
     ''' </summary>
     Public Sub AddTotblPieceJointe(ByVal tblPieceJointe As tblPieceJointe)
         MyBase.AddObject("tblPieceJointe", tblPieceJointe)
-    End Sub
-
-    ''' <summary>
-    ''' Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet tblPieceJointePoints. Utilisez la méthode .Add de la propriété ObjectSet(Of T) associée à la place.
-    ''' </summary>
-    Public Sub AddTotblPieceJointePoints(ByVal tblPieceJointePoints As tblPieceJointePoints)
-        MyBase.AddObject("tblPieceJointePoints", tblPieceJointePoints)
     End Sub
 
     ''' <summary>
@@ -6699,90 +6678,6 @@ Public Partial Class tblPieceJointe
             End If
         End Set
     End Property
-
-    #End Region
-
-End Class
-
-''' <summary>
-''' Aucune documentation sur les métadonnées n'est disponible.
-''' </summary>
-<EdmEntityTypeAttribute(NamespaceName:="PresenceModel", Name:="tblPieceJointePoints")>
-<Serializable()>
-<DataContractAttribute(IsReference:=True)>
-Public Partial Class tblPieceJointePoints
-    Inherits EntityObject
-    #Region "Méthode de fabrique"
-
-    ''' <summary>
-    ''' Créez un nouvel objet tblPieceJointePoints.
-    ''' </summary>
-    ''' <param name="idPieceJointe">Valeur initiale de la propriété IdPieceJointe.</param>
-    ''' <param name="iDPoint">Valeur initiale de la propriété IDPoint.</param>
-    Public Shared Function CreatetblPieceJointePoints(idPieceJointe As Global.System.Int32, iDPoint As Global.System.Int32) As tblPieceJointePoints
-        Dim tblPieceJointePoints as tblPieceJointePoints = New tblPieceJointePoints
-        tblPieceJointePoints.IdPieceJointe = idPieceJointe
-        tblPieceJointePoints.IDPoint = iDPoint
-        Return tblPieceJointePoints
-    End Function
-
-    #End Region
-
-    #Region "Propriétés simples"
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
-    <DataMemberAttribute()>
-    Public Property IdPieceJointe() As Global.System.Int32
-        Get
-            Return _IdPieceJointe
-        End Get
-        Set
-            If (_IdPieceJointe <> Value) Then
-                OnIdPieceJointeChanging(value)
-                ReportPropertyChanging("IdPieceJointe")
-                _IdPieceJointe = StructuralObject.SetValidValue(value, "IdPieceJointe")
-                ReportPropertyChanged("IdPieceJointe")
-                OnIdPieceJointeChanged()
-            End If
-        End Set
-    End Property
-
-    Private _IdPieceJointe As Global.System.Int32
-    Private Partial Sub OnIdPieceJointeChanging(value As Global.System.Int32)
-    End Sub
-
-    Private Partial Sub OnIdPieceJointeChanged()
-    End Sub
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
-    <DataMemberAttribute()>
-    Public Property IDPoint() As Global.System.Int32
-        Get
-            Return _IDPoint
-        End Get
-        Set
-            If (_IDPoint <> Value) Then
-                OnIDPointChanging(value)
-                ReportPropertyChanging("IDPoint")
-                _IDPoint = StructuralObject.SetValidValue(value, "IDPoint")
-                ReportPropertyChanged("IDPoint")
-                OnIDPointChanged()
-            End If
-        End Set
-    End Property
-
-    Private _IDPoint As Global.System.Int32
-    Private Partial Sub OnIDPointChanging(value As Global.System.Int32)
-    End Sub
-
-    Private Partial Sub OnIDPointChanged()
-    End Sub
 
     #End Region
 
