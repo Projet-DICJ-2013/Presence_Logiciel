@@ -62,8 +62,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime.v9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="mod_smtp">
-      <HintPath>..\..\Presence_Logiciel\Presence_Logiciel\mod_smtp.dll</HintPath>
+    <Reference Include="mod_smtp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Projet 2013\Module\mod_smtp\mod_smtp.dll</HintPath>
     </Reference>
     <Reference Include="P2013_CreateDoc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -514,7 +515,6 @@
     <Resource Include="images\unlink.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mod_smtp.dll" />
     <Content Include="P2013_CreateDoc.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
