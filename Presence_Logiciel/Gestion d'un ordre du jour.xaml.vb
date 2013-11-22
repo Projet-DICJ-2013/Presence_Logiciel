@@ -8,7 +8,7 @@ Imports System.Data.Objects
 
 Public Class frmGestOrdJour
     Dim startPoint As New Point
-    Dim Modification As Boolean
+
     Private OrdreDuJour As GestionOdj
     Private _intReu As int_CedReunion
     Private Rapport As GenereRapport
@@ -16,9 +16,11 @@ Public Class frmGestOrdJour
 
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
         OrdreDuJour = New GestionOdj
-        Modification = False
-        lstOrdreJour.ItemsSource = OrdreDuJour.Collection
 
+        lstOrdreJour.ItemsSource = OrdreDuJour.Collection
+        btnPlanifReun.IsEnabled = False
+        btnProdRapport.IsEnabled = False
+        btnEnregistrer.IsEnabled = False
     End Sub
 
     Private Sub btnNouveauPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnNouveauPoint.Click
@@ -29,7 +31,9 @@ Public Class frmGestOrdJour
             MessageBox.Show("Le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
         NumeroterArbre()
-        Modification = True
+        btnProdRapport.IsEnabled = False
+        btnPlanifReun.IsEnabled = False
+        btnEnregistrer.IsEnabled = True
     End Sub
 
     Private Sub btnAttacher_Click(sender As Object, e As RoutedEventArgs) Handles btnAttacher.Click
@@ -42,7 +46,9 @@ Public Class frmGestOrdJour
             MessageBox.Show("Aucun point est séléctionné ou le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
         NumeroterArbre()
-        Modification = True
+        btnProdRapport.IsEnabled = False
+        btnPlanifReun.IsEnabled = False
+        btnEnregistrer.IsEnabled = True
     End Sub
 
     Private Sub btnSupprimerPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnSupprimerPoint.Click
@@ -56,7 +62,9 @@ Public Class frmGestOrdJour
         Else
             Me.lstOdj.Items.Remove(ElementTemporaire)
         End If
-        Modification = True
+        btnProdRapport.IsEnabled = False
+        btnPlanifReun.IsEnabled = False
+        btnEnregistrer.IsEnabled = True
     End Sub
 
 
@@ -124,7 +132,9 @@ Public Class frmGestOrdJour
                 End If
                 NumeroterArbre()
             End If
-            Modification = True
+            btnProdRapport.IsEnabled = False
+            btnPlanifReun.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
         End If
     End Sub
 
@@ -139,7 +149,7 @@ Public Class frmGestOrdJour
                     Else
                         Me.lstOdj.Items.Remove(lstOdj.SelectedItem)
                     End If
-                    Modification = True
+                    btnEnregistrer.IsEnabled = True
                 Case Key.Down
                     Dim i = 0
                     i = lstOdj.Items.IndexOf(lstOdj.SelectedItem)
@@ -241,6 +251,15 @@ Public Class frmGestOrdJour
 
     Private Sub lstOrdreJour_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstOrdreJour.SelectionChanged
         ReloadList()
+        If lstOrdreJour.SelectedIndex > -1 Then
+            btnPlanifReun.IsEnabled = True
+            btnProdRapport.IsEnabled = True
+            btnEnregistrer.IsEnabled = False
+        Else
+            btnPlanifReun.IsEnabled = False
+            btnProdRapport.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
+        End If
     End Sub
     
     Private Function AjouterEnfant(ByVal MonPoint As tblPoints, ByVal MonObject As TreeViewItem) As Boolean
@@ -259,12 +278,14 @@ Public Class frmGestOrdJour
     End Function
 
     Private Sub btnEnregistrer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnregistrer.Click
-        If Modification Then
-            OrdreDuJour.DeleteOrdreDuJour(lstOrdreJour.SelectedItem)
-            NettoyerArbre()
-            OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
-            ReloadList()
-        End If
+
+        OrdreDuJour.DeleteOrdreDuJour(lstOrdreJour.SelectedItem)
+        NettoyerArbre()
+        OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
+        ReloadList()
+        btnProdRapport.IsEnabled = True
+        btnPlanifReun.IsEnabled = True
+        btnEnregistrer.IsEnabled = False
     End Sub
     Private Sub ReloadList()
 
@@ -283,7 +304,6 @@ Public Class frmGestOrdJour
 
         Next
         NumeroterArbre()
-        Modification = False
     End Sub
 
     Private Sub btnPlanifReun_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanifReun.Click
@@ -292,11 +312,8 @@ Public Class frmGestOrdJour
     End Sub
 
     Private Sub btnProdRapport_Click(sender As Object, e As RoutedEventArgs) Handles btnProdRapport.Click
-
-        If (Modification = 0) Then
             Rapport = New GenereRapport
             Rapport.CreerRapportOrd(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour)
-        End If
     End Sub
 
     Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
