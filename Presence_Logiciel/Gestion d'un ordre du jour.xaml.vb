@@ -512,7 +512,7 @@ Public Class GestionOdj
             Dim j As Int32
             j = 1
             For Each Element As TreeViewItem In MonPoint.Items
-                AjouterPoints(Element, NouvelleListe, j, NomPoint + "." + Convert.ToString(j))
+                AjouterPoints(Element, NouvelleListe, j, NomPoint + Convert.ToString(j) + ".")
                 j = j + 1
             Next
         End If
