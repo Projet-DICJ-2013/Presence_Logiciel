@@ -33,7 +33,7 @@ Public Class EnvoieMail
 
         _texteSujet = New TextRange(rctMessage.Document.ContentStart, rctMessage.Document.ContentEnd)
         _tblConstante = (From constant In _entitiesReunion.tblConstant Select constant).ToList()
-        _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, _texteSujet, _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse)
+        _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
 
         For Each invites In _listeAdresse
             _envoieMail.AddDestinataire(invites.CourrielMembre)
