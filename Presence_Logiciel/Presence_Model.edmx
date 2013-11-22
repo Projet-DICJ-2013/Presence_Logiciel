@@ -601,6 +601,7 @@
           <Property Name="InformationPoint" Type="ntext" />
           <Property Name="PieceJointeOrdre" Type="int" />
           <Property Name="NomPoint" Type="varchar" MaxLength="100" />
+          <Property Name="ChiffrePoint" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tblPointsListePoints">
           <Key>
@@ -1801,10 +1802,10 @@
             <End Role="tblPoints" EntitySet="tblPoints" />
           </AssociationSet>
           <FunctionImport Name="SelPointById" ReturnType="Collection(PresenceModel.SelPointById_Result)">
-            <Parameter Name="NoPoint" Mode="In" Type="Int32" />
+          <Parameter Name="NoPoint" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetournerEnfants" EntitySet="tblPoints" ReturnType="Collection(PresenceModel.tblPoints)">
-            <Parameter Name="NoPoint" Mode="In" Type="Int32" />
+          <Parameter Name="NoPoint" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagrams">
@@ -2127,6 +2128,7 @@
           <NavigationProperty Name="tblListePoint1" Relationship="PresenceModel.tblPointsListePoints" FromRole="tblPoints" ToRole="tblListePoint" />
           <NavigationProperty Name="tblTypePoint" Relationship="PresenceModel.fk_TypePoint_Points" FromRole="tblPoints" ToRole="tblTypePoint" />
           <NavigationProperty Name="tblPieceJointe" Relationship="PresenceModel.tblPieceJointePoints1" FromRole="tblPoints" ToRole="tblPieceJointe" />
+          <Property Type="String" Name="ChiffrePoint" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblProcesVerbaux">
           <Key>
@@ -3113,6 +3115,7 @@
           <EntitySetMapping Name="tblPoints">
             <EntityTypeMapping TypeName="PresenceModel.tblPoints">
               <MappingFragment StoreEntitySet="tblPoints">
+                <ScalarProperty Name="ChiffrePoint" ColumnName="ChiffrePoint" />
                 <ScalarProperty Name="IDPoint" ColumnName="IDPoint" />
                 <ScalarProperty Name="ListeEnfants" ColumnName="ListeEnfants" />
                 <ScalarProperty Name="NumeroPoint" ColumnName="NumeroPoint" />
