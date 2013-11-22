@@ -47,8 +47,8 @@
             </Menu>
             <StackPanel>
                 <Rectangle Fill="#FFF4F4F5" Height="25" Stroke="Black" Width="1400" HorizontalAlignment="left" Margin="138,0,0,0"/>
-                <Label x:Name="lblBarreStatut" Content="Barre de statut :" HorizontalAlignment="left" Margin="140,-20,0,0"/>
-                <Label x:Name="lblStatut" Content="-" HorizontalAlignment="Center" Margin="0,-25,0,0" Opacity="0" />
+                <Label x:Name="lblBarreStatut" Content="Barre de statut :" HorizontalAlignment="left" Margin="140,-30,0,0"/>
+                <Label x:Name="lblStatut" Content="-" HorizontalAlignment="Center" Margin="0,-30,0,0" Opacity="0"  />
 
             </StackPanel>
         </DockPanel>

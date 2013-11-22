@@ -9,10 +9,46 @@
     <Window.Resources>
         <ResourceDictionary>
             <Storyboard  x:Key="AnimLabel">
-                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
-                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
+                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-30,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" />
+                <DoubleAnimation Storyboard.TargetProperty="(Label.FontSize)" From="12" To="20" Duration="0:0:1" BeginTime="0:0:2"/>
+                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-100,0,0"  Duration="0:0:5" BeginTime="0:0:9"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:4"/>
+               <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" BeginTime="0:0:5"/>
+                <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Red" Duration="0:0:0" BeginTime="0:0:5"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:6"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" BeginTime="0:0:7"/>
+                <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:0" BeginTime="0:0:7"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.FontSize)" From="20" To="12" Duration="0:0:1" BeginTime="0:0:7"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+                
             </Storyboard>
+            <Storyboard  x:Key="AnimRect1">
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" />
+
+                <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,280,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+            
+            </Storyboard>
+            <Storyboard  x:Key="AnimRect2">
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
+
+                <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,337,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" />
+            </Storyboard>
+            <Storyboard  x:Key="AnimRect3">
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
+         
+                <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,394,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" />
+
+            </Storyboard>
+            <Storyboard  x:Key="AnimRectFin">
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:0"/>
+                <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,176,0,0"  Duration="0:0:1" BeginTime="0:0:0"/>
+
+            </Storyboard>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -69,7 +105,6 @@
             </Grid>
             <Label x:Name="lvlPonderation" Style="{StaticResource ResourceKey=labelProg}" Content="Pondération" Margin="23,243,0,0" RenderTransformOrigin="0.251,0.147"/>
             <TextBox x:Name="txtPonderation" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,249,0,0" Text="{Binding Path=PonderationCours}" IsEnabled="False"/>
-            <Label x:Name="lvlPonderation_Copy" Style="{StaticResource ResourceKey=labelProg}" Content="Pondération" Margin="23,243,0,0" RenderTransformOrigin="0.251,0.147"/>
             <Label x:Name="lblAnneeCours" Style="{StaticResource ResourceKey=labelProg}" Content="Année" Margin="23,296,0,0" RenderTransformOrigin="0.251,0.147"/>
             <TextBox x:Name="txtAnneeCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,300,0,0" Text="{Binding Path=AnneeCours}" IsEnabled="False"/>
             <TextBox x:Name="txtDescription" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,373,0,0" Text="{Binding Path=DescriptionCours}" Height="232" Width="572" IsEnabled="False">
@@ -80,12 +115,12 @@
             <Rectangle x:Name="recStatutCours" Fill="#FF5F5FFF" HorizontalAlignment="Left" Height="62" Margin="1103,176,0,0" Stroke="Black" VerticalAlignment="Top" Width="252"/>
             <Label x:Name="lblStatutCours" Content="{Binding NomStatutCours}" HorizontalAlignment="Left" Margin="1163,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.245,-0.069" Foreground="White"/>
             <Button x:Name="btnO" Content="O" HorizontalAlignment="Left" Margin="1373,187,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="3.79,-3.999" Visibility="Hidden"/>
-            <Rectangle x:Name="recActif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,280,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Rectangle x:Name="recInactif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,337,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Rectangle x:Name="recAnnulé" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,394,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
-            <Label x:Name="lblActif" Content="Actif" HorizontalAlignment="Left" Margin="1195,280,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.433,-0.275" Visibility="Hidden"/>
-            <Label x:Name="lblInactif" Content="En attente" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Visibility="Hidden"/>
-            <Label x:Name="lblAnnule" Content="Annulé" HorizontalAlignment="Left" Margin="1195,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.137,6.569" Visibility="Hidden"/>
+            <Rectangle x:Name="recActif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,280,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Opacity="0"/>
+            <Rectangle x:Name="recInactif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,337,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Opacity="0"/>
+            <Rectangle x:Name="recAnnulé" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,394,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Opacity="0"/>
+            <Label x:Name="lblActif" Content="Actif" HorizontalAlignment="Left" Margin="1195,280,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.433,-0.275" Opacity="0"/>
+            <Label x:Name="lblInactif" Content="En attente" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Opacity="0"/>
+            <Label x:Name="lblAnnule" Content="Annulé" HorizontalAlignment="Left" Margin="1195,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.137,6.569" Opacity="0"/>
             <Label x:Name="lblDateAcquisition" Content="{Binding DataAcquisitionStatut}" HorizontalAlignment="Left" Margin="1163,243,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnX" Content="X" HorizontalAlignment="Left" Margin="1451,0,-0.4,0" VerticalAlignment="Top" Width="39"/>
         </Grid>

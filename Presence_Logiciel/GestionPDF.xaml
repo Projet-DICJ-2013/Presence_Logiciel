@@ -1,7 +1,7 @@
 ﻿<Window x:Class="GestionPDF"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="GestionPDF" Height="795.631" Width="1099.46">
+    Title="GestionPDF" Height="720.631" Width="1099.46">
 
     <Grid Margin="0,0,-0.2,85.4">
         <DocumentViewer HorizontalAlignment="Left" Margin="10,56,0,-38.4"

@@ -11,6 +11,7 @@ Class gestCours
     Dim NomStatutCours As String
     Dim CodeStatutCours As String
     Public statut As Label
+    Dim StatutVisible As Boolean
 
 
 
@@ -136,6 +137,9 @@ Class gestCours
         btnDernier.IsEnabled = True
 
 
+
+
+
         newStatut = New tblStatutCoursCours With _
        {
            .CodeCours = txtNumCours.Text, _
@@ -158,7 +162,16 @@ Class gestCours
             End If
 
             DM.SaveChanges()
+            If (StatutVisible = True) Then
+                Dim anim As Storyboard = FindResource("AnimRectFin")
 
+                anim.Begin(recActif)
+                anim.Begin(recAnnulé)
+                anim.Begin(recInactif)
+                anim.Begin(lblActif)
+                anim.Begin(lblAnnule)
+                anim.Begin(lblInactif)
+            End If
 
         Catch ex2 As System.Data.SqlClient.SqlException
             MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
@@ -169,8 +182,6 @@ Class gestCours
 
         Page_Loaded(sender, e)
         afficherStatut()
-
-
 
 
 
@@ -192,6 +203,7 @@ Class gestCours
         txtDescription.IsEnabled = True
         txtNomCours.IsEnabled = True
         txtPonderation.IsEnabled = True
+        StatutVisible = False
 
 
     End Sub
@@ -215,38 +227,56 @@ Class gestCours
     End Sub
 
     Private Sub btnO_Click(sender As Object, e As RoutedEventArgs) Handles btnO.Click
-        recActif.Visibility = Windows.Visibility.Visible
-        recAnnulé.Visibility = Windows.Visibility.Visible
-        recInactif.Visibility = Windows.Visibility.Visible
-        lblActif.Visibility = Windows.Visibility.Visible
-        lblAnnule.Visibility = Windows.Visibility.Visible
-        lblInactif.Visibility = Windows.Visibility.Visible
+
+
+        If (recActif.Opacity = 0) Then
+            Dim anim1 As Storyboard = FindResource("AnimRect1")
+            Dim anim2 As Storyboard = FindResource("AnimRect2")
+            Dim anim3 As Storyboard = FindResource("AnimRect3")
+
+            anim1.Begin(recActif)
+            anim1.Begin(lblActif)
+            anim2.Begin(recAnnulé)
+            anim2.Begin(lblAnnule)
+            anim3.Begin(lblInactif)
+            anim3.Begin(recInactif)
+            StatutVisible = True
+
+        Else
+            Dim anim As Storyboard = FindResource("AnimRectFin")
+
+            anim.Begin(recActif)
+            anim.Begin(recAnnulé)
+            anim.Begin(recInactif)
+            anim.Begin(lblActif)
+            anim.Begin(lblAnnule)
+            anim.Begin(lblInactif)
+            StatutVisible = False
+        End If
     End Sub
 
-    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown
+    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown, recAnnulé.MouseDown, recInactif.MouseDown
         lblStatutCours.Content = lblActif.Content
-        cacherControlesStatut()
+
+        Dim anim As Storyboard = FindResource("AnimRectFin")
+
+        anim.Begin(recActif)
+        anim.Begin(recAnnulé)
+        anim.Begin(recInactif)
+        anim.Begin(lblActif)
+        anim.Begin(lblAnnule)
+        anim.Begin(lblInactif)
     End Sub
 
     Private Sub recInactif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recInactif.MouseDown
         lblStatutCours.Content = lblInactif.Content
 
-        cacherControlesStatut()
     End Sub
 
     Private Sub recAnnulé_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recAnnulé.MouseDown
         lblStatutCours.Content = lblAnnule.Content
-        cacherControlesStatut()
     End Sub
 
-    Private Sub cacherControlesStatut()
-        recActif.Visibility = Windows.Visibility.Hidden
-        recAnnulé.Visibility = Windows.Visibility.Hidden
-        recInactif.Visibility = Windows.Visibility.Hidden
-        lblActif.Visibility = Windows.Visibility.Hidden
-        lblAnnule.Visibility = Windows.Visibility.Hidden
-        lblInactif.Visibility = Windows.Visibility.Hidden
-    End Sub
 
 
     Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click

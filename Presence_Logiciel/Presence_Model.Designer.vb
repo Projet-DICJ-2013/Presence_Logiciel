@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("5fef7f30-95f4-4dbf-b871-493b02bd3f2d")>
+<Assembly: EdmSchemaAttribute("d9c1a660-bfed-4318-b03c-e679ec054393")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -6884,6 +6884,31 @@ Public Partial Class tblPoints
     End Sub
 
     Private Partial Sub OnNomPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property ChiffrePoint() As Global.System.String
+        Get
+            Return _ChiffrePoint
+        End Get
+        Set
+            OnChiffrePointChanging(value)
+            ReportPropertyChanging("ChiffrePoint")
+            _ChiffrePoint = StructuralObject.SetValidValue(value, true, "ChiffrePoint")
+            ReportPropertyChanged("ChiffrePoint")
+            OnChiffrePointChanged()
+        End Set
+    End Property
+
+    Private _ChiffrePoint As Global.System.String
+    Private Partial Sub OnChiffrePointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnChiffrePointChanged()
     End Sub
 
     #End Region
