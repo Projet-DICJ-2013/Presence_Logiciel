@@ -420,7 +420,7 @@ Public Class GestionOdj
 
     Public Function AddPoint(ByVal NumPoint As Int32, TitrePoint As String, ByVal ListePoint As tblListePoint, ByVal _nomPoint As String) As Boolean
         Dim MonPoint As tblPoints
-        MonPoint = New tblPoints With {.NumeroPoint = NumPoint, .TitrePoint = TitrePoint, .NomPoint = _nomPoint}
+        MonPoint = New tblPoints With {.NumeroPoint = NumPoint, .TitrePoint = TitrePoint, .ChiffrePoint = _nomPoint}
         MonPoint.tblListePoint1.Add(ListePoint)
 
         If (MonPoint IsNot Nothing) Then
