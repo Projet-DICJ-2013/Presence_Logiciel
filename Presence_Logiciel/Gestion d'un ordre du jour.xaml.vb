@@ -238,11 +238,11 @@ Public Class frmGestOrdJour
             OrdreDuJour.AddListe(tblListePoint)
         End If
 
-        OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "Pascal")
-        OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "Pascal")
-        OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "Pascal")
-        OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "Pascal")
-        OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "Pascal")
+        OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "1.")
+        OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "2.")
+        OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "3.")
+        OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "4.")
+        OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "5.")
 
 
         txtTitreOdj.Text = ""
@@ -426,7 +426,7 @@ Public Class GestionOdj
         If (MonPoint IsNot Nothing) Then
 
 
-            Dim Points As tblPoints
+
             Try
                 BD.AddTotblPoints(MonPoint)
                 BD.SaveChanges()
@@ -493,15 +493,15 @@ Public Class GestionOdj
         Dim j As Int32
         j = 1
         For Each TreeViewItem As TreeViewItem In Arbre.Items
-            AjouterPoints(TreeViewItem, ListePoint.First(), j)
+            AjouterPoints(TreeViewItem, ListePoint.First(), j, Convert.ToString(j) + ".")
             j = 1 + j
         Next
         Return True
     End Function
 
-    Public Function AjouterPoints(ByVal MonPoint As TreeViewItem, ByVal MaListe As tblListePoint, ByVal Numero As Int32)
+    Public Function AjouterPoints(ByVal MonPoint As TreeViewItem, ByVal MaListe As tblListePoint, ByVal Numero As Int32, ByVal NomPoint As String)
 
-        Dim PointTemporaire As New tblPoints With {.TitrePoint = MonPoint.Header, .NumeroPoint = Numero}
+        Dim PointTemporaire As New tblPoints With {.TitrePoint = MonPoint.Header, .NumeroPoint = Numero, .ChiffrePoint = NomPoint}
         PointTemporaire.tblListePoint1.Add(MaListe)
         BD.AddTotblPoints(PointTemporaire)
 
