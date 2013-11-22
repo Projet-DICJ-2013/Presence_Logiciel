@@ -1,4 +1,5 @@
-﻿Imports System.Data
+﻿Imports System.Windows.Media.Animation
+Imports System.Data
 Imports System.Data.SqlClient
 
 
@@ -54,4 +55,17 @@ Public Class frmConnexion
     End Sub
 
 
+    Private Sub imglogo_IsMouseDirectlyOverChanged(sender As Object, e As DependencyPropertyChangedEventArgs)
+
+    End Sub
+
+    Private Sub imglogo_MouseEnter(sender As Object, e As MouseEventArgs) Handles imglogo.MouseEnter
+        Dim anim As Storyboard = FindResource("AnimTextBox")
+        anim.Begin(txtActualite)
+    End Sub
+
+    Private Sub imglogo_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles imglogo.MouseLeftButtonDown
+        Dim anim As Storyboard = FindResource("AnimTextBox2")
+        anim.Begin(txtActualite)
+    End Sub
 End Class
