@@ -1,4 +1,5 @@
-﻿Public Class gestEtudiant
+﻿Imports System.Windows.Media.Animation
+Public Class gestEtudiant
 
     Dim DM As PresenceEntities
     Dim LesMembres As IQueryable(Of tblMembre)
@@ -6,6 +7,7 @@
     Dim lemembre As tblMembre
     Dim tProf As IQueryable(Of tblMembre)
     Dim leprof As tblMembre
+    Public statut As Label
 
 
 
@@ -31,7 +33,7 @@
 
     End Sub
     Private Sub afficherTypeMembre()
- 
+
         tProf = (From pro In DM.tblMembre Where pro.IdMembre = CType(vu.CurrentItem, tblMembre).IdMembre Select pro)
         txtCourrielProfesseur.DataContext = Nothing
         txtNoBureau.DataContext = Nothing
@@ -71,7 +73,7 @@
         If (vu.CurrentPosition > 0) Then
             vu.MoveCurrentToPrevious()
             afficherTypeMembre()
-  
+
         End If
     End Sub
 
@@ -82,7 +84,7 @@
 
     Private Sub btnPremier_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnPremier.MouseDown
         vu.MoveCurrentToFirst()
-         afficherTypeMembre()
+        afficherTypeMembre()
     End Sub
 
     Private Sub btnAdd_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnAdd.MouseDown
@@ -91,7 +93,7 @@
         unmembre.DM = DM
         unmembre.ShowDialog()
         LesMembres = (From m In DM.tblMembre Select m)
-   
+
         txtAdresse.DataContext = vu
         txtCourriel.DataContext = vu
         txtIdMembre.DataContext = vu
@@ -209,5 +211,18 @@
     Private Sub btnGestGroupe_Click(sender As Object, e As RoutedEventArgs) Handles btnGestGroupe.Click
         Dim gestgroupe As New frmGestGroupe
         gestgroupe.ShowDialog()
+    End Sub
+
+    Private Sub txtNomMembre_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtNomMembre.PreviewLostKeyboardFocus, txtAdresse.PreviewLostKeyboardFocus, txtCourriel.PreviewLostKeyboardFocus, txtNoCivique.PreviewLostKeyboardFocus, txtPrenomMembre.PreviewLostKeyboardFocus, txtTelephoneMembre.PreviewLostKeyboardFocus, txtVille.PreviewLostKeyboardFocus
+        Dim objTextBox As TextBox = CType(sender, TextBox)
+        Dim texte As String = objTextBox.Text
+        If (texte = "") Then
+            e.Handled = True
+            statut.Content = "le champ : " + objTextBox.Name + " est vide"
+
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+        End If
     End Sub
 End Class

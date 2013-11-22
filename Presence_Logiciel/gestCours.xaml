@@ -8,6 +8,11 @@
       Title="gestCours" Loaded="Page_Loaded">
     <Window.Resources>
         <ResourceDictionary>
+            <Storyboard  x:Key="AnimLabel">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+            </Storyboard>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -79,7 +84,7 @@
             <Rectangle x:Name="recInactif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,337,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
             <Rectangle x:Name="recAnnulé" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,394,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
             <Label x:Name="lblActif" Content="Actif" HorizontalAlignment="Left" Margin="1195,280,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.433,-0.275" Visibility="Hidden"/>
-            <Label x:Name="lblInactif" Content="Inactif" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Visibility="Hidden"/>
+            <Label x:Name="lblInactif" Content="En attente" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Visibility="Hidden"/>
             <Label x:Name="lblAnnule" Content="Annulé" HorizontalAlignment="Left" Margin="1195,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.137,6.569" Visibility="Hidden"/>
             <Label x:Name="lblDateAcquisition" Content="{Binding DataAcquisitionStatut}" HorizontalAlignment="Left" Margin="1163,243,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnX" Content="X" HorizontalAlignment="Left" Margin="1451,0,-0.4,0" VerticalAlignment="Top" Width="39"/>

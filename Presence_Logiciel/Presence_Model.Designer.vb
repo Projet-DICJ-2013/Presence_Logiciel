@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("c54d3c39-6eef-4c1b-aff6-b31a1de3c18d")>
+<Assembly: EdmSchemaAttribute("5fef7f30-95f4-4dbf-b871-493b02bd3f2d")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -60,6 +60,12 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("PresenceModel", "tblBesoinExemplaire", "tblBesoin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblBesoin), "tblExemplaire", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblExemplaire))>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "tblDemandeExemplaire", "tblDemande", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblDemande), "tblExemplaire", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblExemplaire))>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "tblModeleCompoModele", "tblCompoModele", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCompoModele), "tblModele", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblModele))>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblOrdreDuJour), "tblProcesVerbaux", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblProcesVerbaux), True)>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblOrdreDuJour), "tblReunion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblReunion), True)>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Statut_OrdreDuJour", "tblStatut", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblStatut), "tblOrdreDuJourStatut", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblOrdreDuJourStatut), True)>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "fk_TypePoint_Points", "tblTypePoint", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(tblTypePoint), "tblPoints", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPoints), True)>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblProcesVerbaux), "tblProcesVerbaux1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(tblProcesVerbaux), True)>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "tblPieceJointePoints1", "tblPieceJointe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPieceJointe), "tblPoints", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPoints))>
 
 #End Region
 
@@ -502,20 +508,6 @@ Public Partial Class PresenceEntities
     End Property
 
     Private _tblPieceJointe As ObjectSet(Of tblPieceJointe)
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    Public ReadOnly Property tblPieceJointePoints() As ObjectSet(Of tblPieceJointePoints)
-        Get
-            If (_tblPieceJointePoints Is Nothing) Then
-                _tblPieceJointePoints = MyBase.CreateObjectSet(Of tblPieceJointePoints)("tblPieceJointePoints")
-            End If
-            Return _tblPieceJointePoints
-        End Get
-    End Property
-
-    Private _tblPieceJointePoints As ObjectSet(Of tblPieceJointePoints)
 
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
@@ -998,13 +990,6 @@ Public Partial Class PresenceEntities
     End Sub
 
     ''' <summary>
-    ''' Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet tblPieceJointePoints. Utilisez la méthode .Add de la propriété ObjectSet(Of T) associée à la place.
-    ''' </summary>
-    Public Sub AddTotblPieceJointePoints(ByVal tblPieceJointePoints As tblPieceJointePoints)
-        MyBase.AddObject("tblPieceJointePoints", tblPieceJointePoints)
-    End Sub
-
-    ''' <summary>
     ''' Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet tblPoints. Utilisez la méthode .Add de la propriété ObjectSet(Of T) associée à la place.
     ''' </summary>
     Public Sub AddTotblPoints(ByVal tblPoints As tblPoints)
@@ -1385,6 +1370,54 @@ Public Partial Class PresenceEntities
         End If
 
         Return MyBase.ExecuteFunction(Of tblCompoModele)("GetLstCompo", mergeOption, monModParameter)
+
+    End Function
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    ''' <param name="noPoint">Aucune documentation sur les métadonnées n'est disponible.</param>
+    Public Function SelPointById(noPoint As Nullable(Of Global.System.Int32)) As ObjectResult(Of SelPointById_Result)
+        Dim noPointParameter As ObjectParameter
+        If (noPoint.HasValue)
+            noPointParameter = New ObjectParameter("NoPoint", noPoint)
+        Else
+            noPointParameter = New ObjectParameter("NoPoint", GetType(Global.System.Int32))
+        End If
+
+        Return MyBase.ExecuteFunction(Of SelPointById_Result)("SelPointById", noPointParameter)
+
+    End Function
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    ''' <param name="noPoint">Aucune documentation sur les métadonnées n'est disponible.</param>
+    Public Function RetournerEnfants(noPoint As Nullable(Of Global.System.Int32)) As ObjectResult(Of tblPoints)
+        Dim noPointParameter As ObjectParameter
+        If (noPoint.HasValue)
+            noPointParameter = New ObjectParameter("NoPoint", noPoint)
+        Else
+            noPointParameter = New ObjectParameter("NoPoint", GetType(Global.System.Int32))
+        End If
+
+        Return MyBase.ExecuteFunction(Of tblPoints)("RetournerEnfants", noPointParameter)
+
+    End Function
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    ''' <param name="mergeOption"></param>
+    ''' <param name="noPoint">Aucune documentation sur les métadonnées n'est disponible.</param>
+    Public Function RetournerEnfants(noPoint As Nullable(Of Global.System.Int32), mergeOption As MergeOption) As ObjectResult(Of tblPoints)
+        Dim noPointParameter As ObjectParameter
+        If (noPoint.HasValue)
+            noPointParameter = New ObjectParameter("NoPoint", noPoint)
+        Else
+            noPointParameter = New ObjectParameter("NoPoint", GetType(Global.System.Int32))
+        End If
+
+        Return MyBase.ExecuteFunction(Of tblPoints)("RetournerEnfants", mergeOption, noPointParameter)
 
     End Function
 
@@ -6152,6 +6185,42 @@ Public Partial Class tblOrdreDuJour
         End Set
     End Property
 
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_OrdreDuJour_ProcesVerbaux", "tblProcesVerbaux")>
+     Public Property tblProcesVerbaux() As EntityCollection(Of tblProcesVerbaux)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblProcesVerbaux)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblProcesVerbaux")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblProcesVerbaux)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblProcesVerbaux", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "FK_tblReunion_tblOrdreDuJour", "tblReunion")>
+     Public Property tblReunion() As EntityCollection(Of tblReunion)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblReunion)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblReunion")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblReunion)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblReunion", value)
+            End If
+        End Set
+    End Property
+
     #End Region
 
 End Class
@@ -6287,6 +6356,41 @@ Public Partial Class tblOrdreDuJourStatut
 
     Private Partial Sub OnCommStatutChanged()
     End Sub
+
+    #End Region
+
+    #Region "Propriétés de navigation"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_Statut_OrdreDuJour", "tblStatut")>
+    Public Property tblStatut() As tblStatut
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblStatut").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblStatut").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblStatutReference() As EntityReference(Of tblStatut)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblStatut")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblStatut", value)
+            End If
+        End Set
+    End Property
 
     #End Region
 
@@ -6555,87 +6659,25 @@ Public Partial Class tblPieceJointe
 
     #End Region
 
-End Class
-
-''' <summary>
-''' Aucune documentation sur les métadonnées n'est disponible.
-''' </summary>
-<EdmEntityTypeAttribute(NamespaceName:="PresenceModel", Name:="tblPieceJointePoints")>
-<Serializable()>
-<DataContractAttribute(IsReference:=True)>
-Public Partial Class tblPieceJointePoints
-    Inherits EntityObject
-    #Region "Méthode de fabrique"
-
-    ''' <summary>
-    ''' Créez un nouvel objet tblPieceJointePoints.
-    ''' </summary>
-    ''' <param name="idPieceJointe">Valeur initiale de la propriété IdPieceJointe.</param>
-    ''' <param name="iDPoint">Valeur initiale de la propriété IDPoint.</param>
-    Public Shared Function CreatetblPieceJointePoints(idPieceJointe As Global.System.Int32, iDPoint As Global.System.Int32) As tblPieceJointePoints
-        Dim tblPieceJointePoints as tblPieceJointePoints = New tblPieceJointePoints
-        tblPieceJointePoints.IdPieceJointe = idPieceJointe
-        tblPieceJointePoints.IDPoint = iDPoint
-        Return tblPieceJointePoints
-    End Function
-
-    #End Region
-
-    #Region "Propriétés simples"
+    #Region "Propriétés de navigation"
 
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
     <DataMemberAttribute()>
-    Public Property IdPieceJointe() As Global.System.Int32
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "tblPieceJointePoints1", "tblPoints")>
+     Public Property tblPoints() As EntityCollection(Of tblPoints)
         Get
-            Return _IdPieceJointe
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblPoints)("PresenceModel.tblPieceJointePoints1", "tblPoints")
         End Get
         Set
-            If (_IdPieceJointe <> Value) Then
-                OnIdPieceJointeChanging(value)
-                ReportPropertyChanging("IdPieceJointe")
-                _IdPieceJointe = StructuralObject.SetValidValue(value, "IdPieceJointe")
-                ReportPropertyChanged("IdPieceJointe")
-                OnIdPieceJointeChanged()
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblPoints)("PresenceModel.tblPieceJointePoints1", "tblPoints", value)
             End If
         End Set
     End Property
-
-    Private _IdPieceJointe As Global.System.Int32
-    Private Partial Sub OnIdPieceJointeChanging(value As Global.System.Int32)
-    End Sub
-
-    Private Partial Sub OnIdPieceJointeChanged()
-    End Sub
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
-    <DataMemberAttribute()>
-    Public Property IDPoint() As Global.System.Int32
-        Get
-            Return _IDPoint
-        End Get
-        Set
-            If (_IDPoint <> Value) Then
-                OnIDPointChanging(value)
-                ReportPropertyChanging("IDPoint")
-                _IDPoint = StructuralObject.SetValidValue(value, "IDPoint")
-                ReportPropertyChanged("IDPoint")
-                OnIDPointChanged()
-            End If
-        End Set
-    End Property
-
-    Private _IDPoint As Global.System.Int32
-    Private Partial Sub OnIDPointChanging(value As Global.System.Int32)
-    End Sub
-
-    Private Partial Sub OnIDPointChanged()
-    End Sub
 
     #End Region
 
@@ -6893,6 +6935,55 @@ Public Partial Class tblPoints
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblListePoint)("PresenceModel.tblPointsListePoints", "tblListePoint", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_TypePoint_Points", "tblTypePoint")>
+    Public Property tblTypePoint() As tblTypePoint
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblTypePoint)("PresenceModel.fk_TypePoint_Points", "tblTypePoint").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblTypePoint)("PresenceModel.fk_TypePoint_Points", "tblTypePoint").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblTypePointReference() As EntityReference(Of tblTypePoint)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblTypePoint)("PresenceModel.fk_TypePoint_Points", "tblTypePoint")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblTypePoint)("PresenceModel.fk_TypePoint_Points", "tblTypePoint", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "tblPieceJointePoints1", "tblPieceJointe")>
+     Public Property tblPieceJointe() As EntityCollection(Of tblPieceJointe)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblPieceJointe)("PresenceModel.tblPieceJointePoints1", "tblPieceJointe")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblPieceJointe)("PresenceModel.tblPieceJointePoints1", "tblPieceJointe", value)
             End If
         End Set
     End Property
@@ -7421,6 +7512,103 @@ Public Partial Class tblProcesVerbaux
 
     Private Partial Sub OnNoOrdreDuJourChanged()
     End Sub
+
+    #End Region
+
+    #Region "Propriétés de navigation"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour")>
+    Public Property tblOrdreDuJour() As tblOrdreDuJour
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblOrdreDuJourReference() As EntityReference(Of tblOrdreDuJour)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblOrdreDuJour)("PresenceModel.fk_OrdreDuJour_ProcesVerbaux", "tblOrdreDuJour", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux1")>
+    Public Property tblProcesVerbaux1() As tblProcesVerbaux
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux1").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux1").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblProcesVerbaux1Reference() As EntityReference(Of tblProcesVerbaux)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux1")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux1", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux")>
+    Public Property tblProcesVerbaux2() As tblProcesVerbaux
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblProcesVerbaux2Reference() As EntityReference(Of tblProcesVerbaux)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblProcesVerbaux)("PresenceModel.fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux", value)
+            End If
+        End Set
+    End Property
 
     #End Region
 
@@ -8330,14 +8518,12 @@ Public Partial Class tblReunion
     ''' <param name="dateReunion">Valeur initiale de la propriété DateReunion.</param>
     ''' <param name="endroitReunion">Valeur initiale de la propriété EndroitReunion.</param>
     ''' <param name="noOrdreDuJour">Valeur initiale de la propriété NoOrdreDuJour.</param>
-    ''' <param name="noLocal">Valeur initiale de la propriété NoLocal.</param>
-    Public Shared Function CreatetblReunion(noReunion As Global.System.Int32, dateReunion As Global.System.DateTime, endroitReunion As Global.System.String, noOrdreDuJour As Global.System.Int32, noLocal As Global.System.String) As tblReunion
+    Public Shared Function CreatetblReunion(noReunion As Global.System.Int32, dateReunion As Global.System.DateTime, endroitReunion As Global.System.String, noOrdreDuJour As Global.System.Int32) As tblReunion
         Dim tblReunion as tblReunion = New tblReunion
         tblReunion.NoReunion = noReunion
         tblReunion.DateReunion = dateReunion
         tblReunion.EndroitReunion = endroitReunion
         tblReunion.NoOrdreDuJour = noOrdreDuJour
-        tblReunion.NoLocal = noLocal
         Return tblReunion
     End Function
 
@@ -8450,7 +8636,7 @@ Public Partial Class tblReunion
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
     Public Property NoLocal() As Global.System.String
         Get
@@ -8459,7 +8645,7 @@ Public Partial Class tblReunion
         Set
             OnNoLocalChanging(value)
             ReportPropertyChanging("NoLocal")
-            _NoLocal = StructuralObject.SetValidValue(value, false, "NoLocal")
+            _NoLocal = StructuralObject.SetValidValue(value, true, "NoLocal")
             ReportPropertyChanged("NoLocal")
             OnNoLocalChanged()
         End Set
@@ -8490,6 +8676,37 @@ Public Partial Class tblReunion
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblMembreParticipantReunion)("PresenceModel.fk_Reunion_MembreParticipantReunion", "tblMembreParticipantReunion", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour")>
+    Public Property tblOrdreDuJour() As tblOrdreDuJour
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblOrdreDuJourReference() As EntityReference(Of tblOrdreDuJour)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblOrdreDuJour)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblOrdreDuJour)("PresenceModel.FK_tblReunion_tblOrdreDuJour", "tblOrdreDuJour", value)
             End If
         End Set
     End Property
@@ -8706,6 +8923,28 @@ Public Partial Class tblStatut
 
     Private Partial Sub OnDescriptionStatutChanged()
     End Sub
+
+    #End Region
+
+    #Region "Propriétés de navigation"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_Statut_OrdreDuJour", "tblOrdreDuJourStatut")>
+     Public Property tblOrdreDuJourStatut() As EntityCollection(Of tblOrdreDuJourStatut)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblOrdreDuJourStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblOrdreDuJourStatut")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblOrdreDuJourStatut)("PresenceModel.fk_Statut_OrdreDuJour", "tblOrdreDuJourStatut", value)
+            End If
+        End Set
+    End Property
 
     #End Region
 
@@ -9478,6 +9717,28 @@ Public Partial Class tblTypePoint
 
     #End Region
 
+    #Region "Propriétés de navigation"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "fk_TypePoint_Points", "tblPoints")>
+     Public Property tblPoints() As EntityCollection(Of tblPoints)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblPoints)("PresenceModel.fk_TypePoint_Points", "tblPoints")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblPoints)("PresenceModel.fk_TypePoint_Points", "tblPoints", value)
+            End If
+        End Set
+    End Property
+
+    #End Region
+
 End Class
 
 ''' <summary>
@@ -9689,6 +9950,211 @@ Public Partial Class GetCompoModele_Result
     End Sub
 
     Private Partial Sub OnTypeCompoChanged()
+    End Sub
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' Aucune documentation sur les métadonnées n'est disponible.
+''' </summary>
+<EdmComplexTypeAttribute(NamespaceName:="PresenceModel", Name:="SelPointById_Result")>
+<DataContractAttribute(IsReference:=True)>
+<Serializable()>
+Public Partial Class SelPointById_Result
+    Inherits ComplexObject
+    #Region "Méthode de fabrique"
+
+    ''' <summary>
+    ''' Créez un nouvel objet SelPointById_Result.
+    ''' </summary>
+    ''' <param name="iDPoint">Valeur initiale de la propriété IDPoint.</param>
+    ''' <param name="titrePoint">Valeur initiale de la propriété TitrePoint.</param>
+    Public Shared Function CreateSelPointById_Result(iDPoint As Global.System.Int32, titrePoint As Global.System.String) As SelPointById_Result
+        Dim selPointById_Result as SelPointById_Result = New SelPointById_Result
+        selPointById_Result.IDPoint = iDPoint
+        selPointById_Result.TitrePoint = titrePoint
+        Return selPointById_Result
+    End Function
+
+    #End Region
+
+    #Region "Propriétés simples"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDPoint() As Global.System.Int32
+        Get
+            Return _IDPoint
+        End Get
+        Set
+            OnIDPointChanging(value)
+            ReportPropertyChanging("IDPoint")
+            _IDPoint = StructuralObject.SetValidValue(value, "IDPoint")
+            ReportPropertyChanged("IDPoint")
+            OnIDPointChanged()
+        End Set
+    End Property
+
+    Private _IDPoint As Global.System.Int32
+    Private Partial Sub OnIDPointChanging(value As Global.System.Int32)
+    End Sub
+
+    Private Partial Sub OnIDPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property InformationPoint() As Global.System.String
+        Get
+            Return _InformationPoint
+        End Get
+        Set
+            OnInformationPointChanging(value)
+            ReportPropertyChanging("InformationPoint")
+            _InformationPoint = StructuralObject.SetValidValue(value, true, "InformationPoint")
+            ReportPropertyChanged("InformationPoint")
+            OnInformationPointChanged()
+        End Set
+    End Property
+
+    Private _InformationPoint As Global.System.String
+    Private Partial Sub OnInformationPointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnInformationPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property ListeEnfants() As Nullable(Of Global.System.Int32)
+        Get
+            Return _ListeEnfants
+        End Get
+        Set
+            OnListeEnfantsChanging(value)
+            ReportPropertyChanging("ListeEnfants")
+            _ListeEnfants = StructuralObject.SetValidValue(value, "ListeEnfants")
+            ReportPropertyChanged("ListeEnfants")
+            OnListeEnfantsChanged()
+        End Set
+    End Property
+
+    Private _ListeEnfants As Nullable(Of Global.System.Int32)
+    Private Partial Sub OnListeEnfantsChanging(value As Nullable(Of Global.System.Int32))
+    End Sub
+
+    Private Partial Sub OnListeEnfantsChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property NomPoint() As Global.System.String
+        Get
+            Return _NomPoint
+        End Get
+        Set
+            OnNomPointChanging(value)
+            ReportPropertyChanging("NomPoint")
+            _NomPoint = StructuralObject.SetValidValue(value, true, "NomPoint")
+            ReportPropertyChanged("NomPoint")
+            OnNomPointChanged()
+        End Set
+    End Property
+
+    Private _NomPoint As Global.System.String
+    Private Partial Sub OnNomPointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnNomPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property NumeroPoint() As Nullable(Of Global.System.Double)
+        Get
+            Return _NumeroPoint
+        End Get
+        Set
+            OnNumeroPointChanging(value)
+            ReportPropertyChanging("NumeroPoint")
+            _NumeroPoint = StructuralObject.SetValidValue(value, "NumeroPoint")
+            ReportPropertyChanged("NumeroPoint")
+            OnNumeroPointChanged()
+        End Set
+    End Property
+
+    Private _NumeroPoint As Nullable(Of Global.System.Double)
+    Private Partial Sub OnNumeroPointChanging(value As Nullable(Of Global.System.Double))
+    End Sub
+
+    Private Partial Sub OnNumeroPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property PieceJointeOrdre() As Nullable(Of Global.System.Int32)
+        Get
+            Return _PieceJointeOrdre
+        End Get
+        Set
+            OnPieceJointeOrdreChanging(value)
+            ReportPropertyChanging("PieceJointeOrdre")
+            _PieceJointeOrdre = StructuralObject.SetValidValue(value, "PieceJointeOrdre")
+            ReportPropertyChanged("PieceJointeOrdre")
+            OnPieceJointeOrdreChanged()
+        End Set
+    End Property
+
+    Private _PieceJointeOrdre As Nullable(Of Global.System.Int32)
+    Private Partial Sub OnPieceJointeOrdreChanging(value As Nullable(Of Global.System.Int32))
+    End Sub
+
+    Private Partial Sub OnPieceJointeOrdreChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property TitrePoint() As Global.System.String
+        Get
+            Return _TitrePoint
+        End Get
+        Set
+            OnTitrePointChanging(value)
+            ReportPropertyChanging("TitrePoint")
+            _TitrePoint = StructuralObject.SetValidValue(value, false, "TitrePoint")
+            ReportPropertyChanged("TitrePoint")
+            OnTitrePointChanged()
+        End Set
+    End Property
+
+    Private _TitrePoint As Global.System.String
+    Private Partial Sub OnTitrePointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnTitrePointChanged()
     End Sub
 
     #End Region

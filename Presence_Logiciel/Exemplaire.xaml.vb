@@ -10,7 +10,7 @@ Class frmExemplaire
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
-        BindControl()
+        ' BindControl()
 
     End Sub
 

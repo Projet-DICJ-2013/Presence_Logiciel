@@ -1,10 +1,20 @@
-﻿Class gestCours
+﻿Imports System.Threading
+Imports System.Windows.Media.Animation
+
+Class gestCours
 
     Dim DM As PresenceEntities
     Dim LesCours As IQueryable(Of tblCours)
     Dim vu As ListCollectionView
     Dim lecours As tblCours
     Dim tCours As IQueryable(Of tblCours)
+    Dim NomStatutCours As String
+    Dim CodeStatutCours As String
+    Public statut As Label
+
+
+
+
 
 
 
@@ -15,6 +25,7 @@
         Dim uncours As New ajoutCour
 
         uncours.DM = DM
+        uncours.statut = statut
         uncours.ShowDialog()
         LesCours = (From cours In DM.tblCours Select cours)
         vu = New ListCollectionView(LesCours.ToList())
@@ -23,6 +34,8 @@
         txtDescription.DataContext = vu
         txtNumCours.DataContext = vu
         txtPonderation.DataContext = vu
+
+
 
 
 
@@ -42,6 +55,7 @@
         txtDescription.DataContext = vu
         txtNumCours.DataContext = vu
         txtPonderation.DataContext = vu
+
 
 
         afficherStatut()
@@ -108,6 +122,7 @@
     End Sub
 
     Private Sub Enregistrer(sender As Object, e As MouseButtonEventArgs) Handles btnEnregistrer.MouseDown
+        Dim newStatut As tblStatutCoursCours
         txtAnneeCours.IsEnabled = False
         txtDescription.IsEnabled = False
         txtNomCours.IsEnabled = False
@@ -115,19 +130,32 @@
         btnfontEnregistrer.Visibility = Windows.Visibility.Hidden
         btnEnregistrer.Visibility = Windows.Visibility.Hidden
         btnO.Visibility = Windows.Visibility.Hidden
+        btnSuivant.IsEnabled = True
+        btnPrecedent.IsEnabled = True
+        btnPremier.IsEnabled = True
+        btnDernier.IsEnabled = True
+
+
+        newStatut = New tblStatutCoursCours With _
+       {
+           .CodeCours = txtNumCours.Text, _
+           .DateAcquisitionStatut = DateTime.Now().ToString, _
+           .NomStatutCours = lblStatutCours.Content
+       }
+
 
         Try
-            Dim modStatut As IQueryable(Of tblStatutCoursCours) = (From s In DM.tblStatutCoursCours Where s.CodeCours = txtNumCours.Text Select s)
             Dim modTest As IQueryable(Of tblCours) = (From c In DM.tblCours Where c.CodeCours = txtNumCours.Text Select c)
             Dim CoursAmodifier As tblCours = modTest.First()
-            Dim StatutAmodifier As tblStatutCoursCours = modStatut.First()
 
-            CoursAmodifier.tblStatutCoursCours.Add(StatutAmodifier)
-            StatutAmodifier.NomStatutCours = lblStatutCours.Content
             CoursAmodifier.AnneeCours = txtAnneeCours.Text
             CoursAmodifier.DescriptionCours = txtDescription.Text
             CoursAmodifier.NomCours = txtNomCours.Text
             CoursAmodifier.PonderationCours = txtPonderation.Text
+
+            If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
+                DM.tblStatutCoursCours.AddObject(newStatut)
+            End If
 
             DM.SaveChanges()
 
@@ -139,6 +167,11 @@
             'Dit l 'erreur
         End Try
 
+        Page_Loaded(sender, e)
+        afficherStatut()
+
+
+
 
 
     End Sub
@@ -146,6 +179,13 @@
     Private Sub ModifierCours(sender As Object, e As MouseButtonEventArgs) Handles btnEdit.MouseDown
         btnfontEnregistrer.Visibility = Windows.Visibility.Visible
         btnEnregistrer.Visibility = Windows.Visibility.Visible
+        btnSuivant.IsEnabled = False
+        btnPrecedent.IsEnabled = False
+        btnPremier.IsEnabled = False
+        btnDernier.IsEnabled = False
+
+        NomStatutCours = lblStatutCours.Content
+        CodeStatutCours = txtNumCours.Text
 
         btnO.Visibility = Windows.Visibility.Visible
         txtAnneeCours.IsEnabled = True
@@ -159,12 +199,14 @@
     Private Sub afficherStatut()
         Try
 
-            tCours = (From cours In DM.tblCours Where cours.CodeCours = CType(vu.CurrentItem, tblCours).CodeCours Select cours)
+
             lblStatutCours.DataContext = Nothing
             lblDateAcquisition.DataContext = Nothing
-            lecours = tCours.First()
-            lblStatutCours.DataContext = CType(lecours, tblCours).tblStatutCoursCours
-            lblDateAcquisition.DataContext = CType(lecours, tblCours).tblStatutCoursCours
+            Dim eCours = (From l In DM.tblStatutCoursCours Where l.CodeCours = CType(vu.CurrentItem, tblCours).CodeCours Order By l.DateAcquisitionStatut Descending Select l)
+            Dim leecour As tblStatutCoursCours
+            leecour = eCours.FirstOrDefault
+            lblStatutCours.DataContext = CType(leecour, tblStatutCoursCours)
+            lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
         Catch ex As Exception
 
             MessageBox.Show(ex.ToString)
@@ -211,5 +253,20 @@
         Me.Close()
         Me.Finalize()
 
+    End Sub
+
+
+
+    Private Sub txtNomCours_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtNomCours.PreviewLostKeyboardFocus, txtAnneeCours.PreviewLostKeyboardFocus, txtPonderation.PreviewLostKeyboardFocus
+        Dim objTextBox As TextBox = CType(sender, TextBox)
+        Dim texte As String = objTextBox.Text
+        If (texte = "") Then
+            e.Handled = True
+            statut.Content = "le champ : " + objTextBox.Name + " est vide"
+
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+        End If
     End Sub
 End Class

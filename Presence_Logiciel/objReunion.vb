@@ -1,5 +1,5 @@
 ﻿Public Class objReunion
-
+    'Déclaration des variables privés
     Private _entitiesReunion As PresenceEntities
     Private _lstmembres As List(Of tblMembre)
     Private _reunion As tblReunion
@@ -7,21 +7,19 @@
     Private _lstProf As List(Of tblMembre)
     Private _intMail As EnvoieMail
     Private _invites As List(Of tblMembre)
-
+    'Déclaration de l'interface d'envoie de courriels 
     Public Sub New()
+
         _entitiesReunion = New PresenceEntities
         _reunion = New tblReunion
-
         _membreParticipant = New tblMembreParticipantReunion
 
     End Sub
-
+    'Fonction permetant de charger la liste de membres selon le choix fait.
     Public Function Chargerliste(Type As Int16, Optional Année As Int16 = 50)
 
         If (Type = 0) Then
-            'Étudiant
-
-            'Selon année
+            'Étudiant selon année
             Select Case Année
                 Case 0
                     Année = 1
@@ -38,28 +36,35 @@
         End If
 
         Return _lstmembres
+
     End Function
-    Public Function ajoutReunionBd(dateReunion As Date, Endroit As String, nolocal As String, noordredujour As Integer)
+    'Ajout les données de la réunion a la bd
+    Public Function ajoutReunionBd(dateReunion As Date, Endroit As String, nolocal As String, nooredredujour As Int32)
+
         _reunion.DateReunion = dateReunion
         _reunion.EndroitReunion = Endroit
-        _reunion.NoLocal = nolocal
-        _reunion.NoOrdreDuJour = noordredujour
 
-        _entitiesReunion.AddTotblReunion(_reunion)
-        Try
-            _entitiesReunion.SaveChanges()
-        Catch ex As Exception
+        If (nolocal IsNot Nothing) Then
+            _reunion.NoLocal = nolocal
+        End If
 
-        End Try
+        _reunion.NoOrdreDuJour = nooredredujour
+
+        _entitiesReunion.tblReunion.AddObject(_reunion)
+        _entitiesReunion.SaveChanges()
+
+
 
         Return 0
+
     End Function
+    'Ajout les membres invités à la réunion.
     Public Function ajoutMembreParticipantBd(invites As List(Of tblMembre), redacteur As tblMembre)
         Dim numDerReu As List(Of tblReunion)
         Dim nombre As Int16
         numDerReu = (From reu In _entitiesReunion.tblReunion Select reu).ToList()
         nombre = numDerReu.Last.NoReunion
-      
+
 
 
         For Each membreinvite In invites
@@ -68,7 +73,8 @@
             _membreParticipant.NoReunion = nombre
             _membreParticipant.IdTypeMembre = "Participant"
 
-            _entitiesReunion.AddTotblMembreParticipantReunion(_membreParticipant)
+            _entitiesReunion.tblMembreParticipantReunion.AddObject(_membreParticipant)
+
             _entitiesReunion.SaveChanges()
         Next
         _membreParticipant = New tblMembreParticipantReunion
@@ -76,19 +82,24 @@
         _membreParticipant.NoReunion = nombre
         _membreParticipant.IdTypeMembre = "Rédacteur"
 
-        _entitiesReunion.AddTotblMembreParticipantReunion(_membreParticipant)
+        _entitiesReunion.tblMembreParticipantReunion.AddObject(_membreParticipant)
         _entitiesReunion.SaveChanges()
         _invites = invites
         Return 0
     End Function
+    'Permet d'ouvrir ceux qui pouront être rédacteur.
     Public Function loadListRedac()
+
         _lstProf = (From membre In _entitiesReunion.tblMembre Join prof In _entitiesReunion.tblProfesseur On prof.IdMembre Equals membre.IdMembre Select membre).ToList()
 
         Return _lstProf
+
     End Function
+    'Ouvre l'interface d'envoie de courriers 
     Public Sub OuvrirMail()
+
         _intMail = New EnvoieMail(_invites)
-        _intMail.Show()
+        _intMail.ShowDialog()
 
     End Sub
 End Class
