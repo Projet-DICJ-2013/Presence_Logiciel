@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("d9c1a660-bfed-4318-b03c-e679ec054393")>
+<Assembly: EdmSchemaAttribute("bb98e93f-a953-424e-a7fb-bf18be68298f")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -66,6 +66,7 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_TypePoint_Points", "tblTypePoint", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(tblTypePoint), "tblPoints", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPoints), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_ProcesVerbaux_ProcesVerbaux", "tblProcesVerbaux", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblProcesVerbaux), "tblProcesVerbaux1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(tblProcesVerbaux), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "tblPieceJointePoints1", "tblPieceJointe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPieceJointe), "tblPoints", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblPoints))>
+<Assembly: EdmRelationshipAttribute("PresenceModel", "FK_tblLogin_tblMembre", "tblMembre", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(tblMembre), "tblLogin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblLogin), True)>
 
 #End Region
 
@@ -1377,7 +1378,7 @@ Public Partial Class PresenceEntities
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
     ''' <param name="noPoint">Aucune documentation sur les métadonnées n'est disponible.</param>
-    Public Function SelPointById(noPoint As Nullable(Of Global.System.Int32)) As ObjectResult(Of SelPointById_Result)
+    Public Function SelPointById(noPoint As Nullable(Of Global.System.Int32)) As ObjectResult(Of tblPoints)
         Dim noPointParameter As ObjectParameter
         If (noPoint.HasValue)
             noPointParameter = New ObjectParameter("NoPoint", noPoint)
@@ -1385,7 +1386,23 @@ Public Partial Class PresenceEntities
             noPointParameter = New ObjectParameter("NoPoint", GetType(Global.System.Int32))
         End If
 
-        Return MyBase.ExecuteFunction(Of SelPointById_Result)("SelPointById", noPointParameter)
+        Return MyBase.ExecuteFunction(Of tblPoints)("SelPointById", noPointParameter)
+
+    End Function
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    ''' <param name="mergeOption"></param>
+    ''' <param name="noPoint">Aucune documentation sur les métadonnées n'est disponible.</param>
+    Public Function SelPointById(noPoint As Nullable(Of Global.System.Int32), mergeOption As MergeOption) As ObjectResult(Of tblPoints)
+        Dim noPointParameter As ObjectParameter
+        If (noPoint.HasValue)
+            noPointParameter = New ObjectParameter("NoPoint", noPoint)
+        Else
+            noPointParameter = New ObjectParameter("NoPoint", GetType(Global.System.Int32))
+        End If
+
+        Return MyBase.ExecuteFunction(Of tblPoints)("SelPointById", mergeOption, noPointParameter)
 
     End Function
 
@@ -4462,13 +4479,9 @@ Public Partial Class tblLogin
     ''' Créez un nouvel objet tblLogin.
     ''' </summary>
     ''' <param name="idLogin">Valeur initiale de la propriété IdLogin.</param>
-    ''' <param name="motDePasseLogin">Valeur initiale de la propriété MotDePasseLogin.</param>
-    ''' <param name="estAutorise">Valeur initiale de la propriété EstAutorise.</param>
-    Public Shared Function CreatetblLogin(idLogin As Global.System.String, motDePasseLogin As Global.System.String, estAutorise As Global.System.Boolean) As tblLogin
+    Public Shared Function CreatetblLogin(idLogin As Global.System.String) As tblLogin
         Dim tblLogin as tblLogin = New tblLogin
         tblLogin.IdLogin = idLogin
-        tblLogin.MotDePasseLogin = motDePasseLogin
-        tblLogin.EstAutorise = estAutorise
         Return tblLogin
     End Function
 
@@ -4506,7 +4519,7 @@ Public Partial Class tblLogin
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
     Public Property MotDePasseLogin() As Global.System.String
         Get
@@ -4515,7 +4528,7 @@ Public Partial Class tblLogin
         Set
             OnMotDePasseLoginChanging(value)
             ReportPropertyChanging("MotDePasseLogin")
-            _MotDePasseLogin = StructuralObject.SetValidValue(value, false, "MotDePasseLogin")
+            _MotDePasseLogin = StructuralObject.SetValidValue(value, true, "MotDePasseLogin")
             ReportPropertyChanged("MotDePasseLogin")
             OnMotDePasseLoginChanged()
         End Set
@@ -4531,9 +4544,9 @@ Public Partial Class tblLogin
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    Public Property EstAutorise() As Global.System.Boolean
+    Public Property EstAutorise() As Nullable(Of Global.System.Boolean)
         Get
             Return _EstAutorise
         End Get
@@ -4546,12 +4559,72 @@ Public Partial Class tblLogin
         End Set
     End Property
 
-    Private _EstAutorise As Global.System.Boolean
-    Private Partial Sub OnEstAutoriseChanging(value As Global.System.Boolean)
+    Private _EstAutorise As Nullable(Of Global.System.Boolean)
+    Private Partial Sub OnEstAutoriseChanging(value As Nullable(Of Global.System.Boolean))
     End Sub
 
     Private Partial Sub OnEstAutoriseChanged()
     End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property IdMembre() As Nullable(Of Global.System.Int16)
+        Get
+            Return _IdMembre
+        End Get
+        Set
+            OnIdMembreChanging(value)
+            ReportPropertyChanging("IdMembre")
+            _IdMembre = StructuralObject.SetValidValue(value, "IdMembre")
+            ReportPropertyChanged("IdMembre")
+            OnIdMembreChanged()
+        End Set
+    End Property
+
+    Private _IdMembre As Nullable(Of Global.System.Int16)
+    Private Partial Sub OnIdMembreChanging(value As Nullable(Of Global.System.Int16))
+    End Sub
+
+    Private Partial Sub OnIdMembreChanged()
+    End Sub
+
+    #End Region
+
+    #Region "Propriétés de navigation"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "FK_tblLogin_tblMembre", "tblMembre")>
+    Public Property tblMembre() As tblMembre
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblMembre)("PresenceModel.FK_tblLogin_tblMembre", "tblMembre").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblMembre)("PresenceModel.FK_tblLogin_tblMembre", "tblMembre").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property tblMembreReference() As EntityReference(Of tblMembre)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of tblMembre)("PresenceModel.FK_tblLogin_tblMembre", "tblMembre")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of tblMembre)("PresenceModel.FK_tblLogin_tblMembre", "tblMembre", value)
+            End If
+        End Set
+    End Property
 
     #End Region
 
@@ -4923,6 +4996,24 @@ Public Partial Class tblMembre
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblMessage)("PresenceModel.tblMessageMembre", "tblMessage", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("PresenceModel", "FK_tblLogin_tblMembre", "tblLogin")>
+     Public Property tblLogin() As EntityCollection(Of tblLogin)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of tblLogin)("PresenceModel.FK_tblLogin_tblMembre", "tblLogin")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of tblLogin)("PresenceModel.FK_tblLogin_tblMembre", "tblLogin", value)
             End If
         End Set
     End Property
@@ -6014,6 +6105,31 @@ Public Partial Class tblModele
     End Sub
 
     Private Partial Sub OnPhotoModeleChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property PrixModele() As Nullable(Of Global.System.Decimal)
+        Get
+            Return _PrixModele
+        End Get
+        Set
+            OnPrixModeleChanging(value)
+            ReportPropertyChanging("PrixModele")
+            _PrixModele = StructuralObject.SetValidValue(value, "PrixModele")
+            ReportPropertyChanged("PrixModele")
+            OnPrixModeleChanged()
+        End Set
+    End Property
+
+    Private _PrixModele As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnPrixModeleChanging(value As Nullable(Of Global.System.Decimal))
+    End Sub
+
+    Private Partial Sub OnPrixModeleChanged()
     End Sub
 
     #End Region

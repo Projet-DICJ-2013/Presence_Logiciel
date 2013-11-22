@@ -280,6 +280,10 @@
             <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
             <End Role="tblListePoint" EntitySet="tblListePoint" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblLogin_tblMembre" Association="PresenceModel.Store.FK_tblLogin_tblMembre">
+            <End Role="tblMembre" EntitySet="tblMembre" />
+            <End Role="tblLogin" EntitySet="tblLogin" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblReunion_tblOrdreDuJour" Association="PresenceModel.Store.FK_tblReunion_tblOrdreDuJour">
             <End Role="tblOrdreDuJour" EntitySet="tblOrdreDuJour" />
             <End Role="tblReunion" EntitySet="tblReunion" />
@@ -384,8 +388,9 @@
             <PropertyRef Name="IdLogin" />
           </Key>
           <Property Name="IdLogin" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="MotDePasseLogin" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="EstAutorise" Type="bit" Nullable="false" />
+          <Property Name="MotDePasseLogin" Type="varchar" MaxLength="50" />
+          <Property Name="EstAutorise" Type="bit" />
+          <Property Name="IdMembre" Type="smallint" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -736,6 +741,7 @@
           <Property Name="TypeMachine" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="NoteModele" Type="varchar" MaxLength="200" />
           <Property Name="PhotoModele" Type="image" />
+          <Property Name="PrixModele" Type="smallmoney" />
         </EntityType>
         <EntityType Name="tblModeleCompoModele">
           <Key>
@@ -1451,6 +1457,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblLogin_tblMembre">
+          <End Role="tblMembre" Type="PresenceModel.Store.tblMembre" Multiplicity="0..1" />
+          <End Role="tblLogin" Type="PresenceModel.Store.tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMembre">
+              <PropertyRef Name="IdMembre" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="IdMembre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblReunion_tblOrdreDuJour">
           <End Role="tblOrdreDuJour" Type="PresenceModel.Store.tblOrdreDuJour" Multiplicity="1" />
           <End Role="tblReunion" Type="PresenceModel.Store.tblReunion" Multiplicity="*" />
@@ -1801,12 +1819,16 @@
             <End Role="tblPieceJointe" EntitySet="tblPieceJointe" />
             <End Role="tblPoints" EntitySet="tblPoints" />
           </AssociationSet>
-          <FunctionImport Name="SelPointById" ReturnType="Collection(PresenceModel.SelPointById_Result)">
+          <FunctionImport Name="SelPointById" EntitySet="tblPoints" ReturnType="Collection(PresenceModel.tblPoints)">
           <Parameter Name="NoPoint" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetournerEnfants" EntitySet="tblPoints" ReturnType="Collection(PresenceModel.tblPoints)">
           <Parameter Name="NoPoint" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_tblLogin_tblMembre" Association="PresenceModel.FK_tblLogin_tblMembre">
+            <End Role="tblMembre" EntitySet="tblMembre" />
+            <End Role="tblLogin" EntitySet="tblLogin" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1901,8 +1923,10 @@
             <PropertyRef Name="IdLogin" />
           </Key>
           <Property Name="IdLogin" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="MotDePasseLogin" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="EstAutorise" Type="Boolean" Nullable="false" />
+          <Property Name="MotDePasseLogin" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="EstAutorise" Type="Boolean" />
+          <Property Type="Int16" Name="IdMembre" />
+          <NavigationProperty Name="tblMembre" Relationship="PresenceModel.FK_tblLogin_tblMembre" FromRole="tblLogin" ToRole="tblMembre" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -1923,6 +1947,7 @@
           <NavigationProperty Name="tblPret" Relationship="PresenceModel.fk_Membre_Pret" FromRole="tblMembre" ToRole="tblPret" />
           <NavigationProperty Name="tblProfesseur" Relationship="PresenceModel.fk_Membre_Professeur" FromRole="tblMembre" ToRole="tblProfesseur" />
           <NavigationProperty Name="tblMessage" Relationship="PresenceModel.tblMessageMembre" FromRole="tblMembre" ToRole="tblMessage" />
+          <NavigationProperty Name="tblLogin" Relationship="PresenceModel.FK_tblLogin_tblMembre" FromRole="tblMembre" ToRole="tblLogin" />
         </EntityType>
         <EntityType Name="tblMembreAssociation">
           <Key>
@@ -2264,6 +2289,7 @@
           <Property Name="PhotoModele" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="tblExemplaire" Relationship="PresenceModel.fk_ExemplaireModele" FromRole="tblModele" ToRole="tblExemplaire" />
           <NavigationProperty Name="tblCompoModele" Relationship="PresenceModel.tblModeleCompoModele" FromRole="tblModele" ToRole="tblCompoModele" />
+          <Property Type="Decimal" Name="PrixModele" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="tblPret">
           <Key>
@@ -2840,6 +2866,18 @@
           <Property Type="Int32" Name="PieceJointeOrdre" Nullable="true" />
           <Property Type="String" Name="TitrePoint" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <Association Name="FK_tblLogin_tblMembre">
+          <End Type="PresenceModel.tblMembre" Role="tblMembre" Multiplicity="0..1" />
+          <End Type="PresenceModel.tblLogin" Role="tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMembre">
+              <PropertyRef Name="IdMembre" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="IdMembre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2924,6 +2962,7 @@
           <EntitySetMapping Name="tblLogin">
             <EntityTypeMapping TypeName="PresenceModel.tblLogin">
               <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="IdMembre" ColumnName="IdMembre" />
                 <ScalarProperty Name="IdLogin" ColumnName="IdLogin" />
                 <ScalarProperty Name="MotDePasseLogin" ColumnName="MotDePasseLogin" />
                 <ScalarProperty Name="EstAutorise" ColumnName="EstAutorise" />
@@ -3240,6 +3279,7 @@
           <EntitySetMapping Name="tblModele">
             <EntityTypeMapping TypeName="PresenceModel.tblModele">
               <MappingFragment StoreEntitySet="tblModele">
+                <ScalarProperty Name="PrixModele" ColumnName="PrixModele" />
                 <ScalarProperty Name="NoModele" ColumnName="NoModele" />
                 <ScalarProperty Name="Marque" ColumnName="Marque" />
                 <ScalarProperty Name="NbAnneeGarantie" ColumnName="NbAnneeGarantie" />
@@ -3426,17 +3466,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="SelPointById" FunctionName="PresenceModel.Store.SelPointById">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PresenceModel.SelPointById_Result">
-                <ScalarProperty Name="IDPoint" ColumnName="IDPoint" />
-                <ScalarProperty Name="InformationPoint" ColumnName="InformationPoint" />
-                <ScalarProperty Name="ListeEnfants" ColumnName="ListeEnfants" />
-                <ScalarProperty Name="NomPoint" ColumnName="NomPoint" />
-                <ScalarProperty Name="NumeroPoint" ColumnName="NumeroPoint" />
-                <ScalarProperty Name="PieceJointeOrdre" ColumnName="PieceJointeOrdre" />
-                <ScalarProperty Name="TitrePoint" ColumnName="TitrePoint" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RetournerEnfants" FunctionName="PresenceModel.Store.SelPointById" />
         </EntityContainerMapping>
@@ -3460,7 +3489,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram DiagramId="056de796b8bf4b92baf5b5d7c1ff41a8" Name="Diagramme1">
+      <Diagram DiagramId="056de796b8bf4b92baf5b5d7c1ff41a8" Name="Diagramme1" ZoomLevel="86">
         <EntityTypeShape EntityType="PresenceModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblConstant" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblCours" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
@@ -3556,6 +3585,7 @@
         <AssociationConnector Association="PresenceModel.fk_TypePoint_Points" />
         <AssociationConnector Association="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux" />
         <AssociationConnector Association="PresenceModel.tblPieceJointePoints1" />
+        <AssociationConnector Association="PresenceModel.FK_tblLogin_tblMembre" />
       </Diagram>
     </Diagrams>
   </Designer>
