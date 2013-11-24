@@ -5,6 +5,15 @@
     Title="frmConnexion" Height="1920" Width="1080" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="AfficherHeure">
     <Window.Resources>
         <ResourceDictionary>
+
+            <Storyboard  x:Key="AnimTextBox">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" BeginTime="0:0:1" />
+
+            </Storyboard>
+            <Storyboard  x:Key="AnimTextBox2">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:0" BeginTime="0:0:0" />
+
+            </Storyboard>
             <ResourceDictionary.MergedDictionaries>
                 <!--Non du fichier de styles-->
                 <ResourceDictionary Source="Style.xaml" />
@@ -21,36 +30,6 @@
     <Viewbox Stretch="Fill">
         <Grid Margin="0,0,3.6,-4">
 
-            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="20" Margin="532,70,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <TextBox x:Name="txtPassword" HorizontalAlignment="Right" Height="20" Margin="527,100,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="428,66,0,0" VerticalAlignment="Top">
-                <Label.Effect>
-                    <DropShadowEffect Direction="320" Opacity="0.705" ShadowDepth="6"/>
-                </Label.Effect>
-            </Label>
-            <Label Content="Mot de passe" HorizontalAlignment="Left" Margin="428,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.038,0.49" >
-                <Label.Effect>
-                    <DropShadowEffect Direction="320" Opacity="0.7" ShadowDepth="6"/>
-                </Label.Effect>
-            </Label>
-            <Image x:Name="imglogo" HorizontalAlignment="Left" Height="80" Margin="10,66,0,0" VerticalAlignment="Top" Width="334" Source="images\logo.png" Stretch="fill">
-                <Image.Effect>
-                    <DropShadowEffect Direction="320" ShadowDepth="10" Opacity="0.7"/>
-                </Image.Effect>
-            </Image>
-
-            <Button x:Name="btnconnexion" Content="Connexion" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="154" Foreground="#FFFCFCFC" Height="25" FontSize="18" FontFamily="Calibri" Margin="0,0,30,50.6">
-                <Button.Effect>
-                    <DropShadowEffect Opacity="0.7" Direction="320" ShadowDepth="8"/>
-                </Button.Effect>
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF5479BB" Offset="0.015"/>
-                        <GradientStop Color="#FF2558B3" Offset="0.869"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Label x:Name="lblHeure" Content="Label" Height="199.2" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             <DockPanel Margin="0,-9,-2.4,19.6"  HorizontalAlignment="Stretch">
                 <Menu DockPanel.Dock="Top" Height="10" Margin="0,-165,-0.4,0" >
                     <Menu.Background>
@@ -79,7 +58,81 @@
                 </Menu>
 
 
+
+
+
+
+
             </DockPanel>
+
+            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="20" Margin="532,70,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+            <TextBox x:Name="txtPassword" HorizontalAlignment="Right" Height="20" Margin="527,100,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+            <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="428,66,0,0" VerticalAlignment="Top">
+                <Label.Effect>
+                    <DropShadowEffect Direction="320" Opacity="0.705" ShadowDepth="6"/>
+                </Label.Effect>
+            </Label>
+            <Label Content="Mot de passe"  x:Name="bob" HorizontalAlignment="Left" Margin="428,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.038,0.49" >
+                <Label.Effect>
+                    <DropShadowEffect Direction="320" Opacity="0.7" ShadowDepth="6"/>
+                </Label.Effect>
+            </Label>
+
+
+            <Button x:Name="btnconnexion" Content="Connexion" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="154" Foreground="#FFFCFCFC" Height="25" FontSize="18" FontFamily="Calibri" Margin="0,0,30,50.6">
+                <Button.Effect>
+                    <DropShadowEffect Opacity="0.7" Direction="320" ShadowDepth="8"/>
+                </Button.Effect>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5479BB" Offset="0.015"/>
+                        <GradientStop Color="#FF2558B3" Offset="0.869"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label x:Name="lblHeure" Content="Label" Height="199.2" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtActualite" Height="109" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="10,40,324.6,0" FontSize="8" Opacity="0"/>
+            <Image x:Name="imglogo" HorizontalAlignment="Left" Height="80" Margin="10,66,0,0" VerticalAlignment="Top" Width="334" Source="images\logo.png" Stretch="fill">
+                <Image.Effect>
+                    <DropShadowEffect Direction="320" ShadowDepth="10" Opacity="0.7"/>
+                </Image.Effect>
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <ThicknessAnimation Storyboard.TargetProperty="(FrameworkElement.Margin)"  To="10,-50,0,0"   Duration="0:0:1" BeginTime="0:0:0"/>
+
+                                        <!--<ObjectAnimationUsingKeyFrames   Storyboard.TargetProperty="(Image.Source)"  >
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:02">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <BitmapImage UriSource="/images/logo2.png" />
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                                
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeftButtonDown">
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <ThicknessAnimation Storyboard.TargetProperty="(FrameworkElement.Margin)"  To="10,66,0,0"   Duration="0:0:1" BeginTime="0:0:0"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Rectangle x:Name="rec2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="110,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
+            <Rectangle x:Name="rec1" Fill="#FF5959F8" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
+            <Rectangle x:Name="rec4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="210,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
+            <Rectangle x:Name="rec3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="160,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
         </Grid>
     </Viewbox>
 </Window>
