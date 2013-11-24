@@ -4,7 +4,7 @@
     Private _lstmembres As List(Of tblMembre)
     Private _reunion As tblReunion
     Private _membreParticipant As tblMembreParticipantReunion
-    Private _lstProf As List(Of tblMembre)
+    Private _lstRedac As List(Of tblMembre)
     Private _intMail As EnvoieMail
     Private _invites As List(Of tblMembre)
     'Déclaration de l'interface d'envoie de courriels 
@@ -66,7 +66,6 @@
         nombre = numDerReu.Last.NoReunion
 
 
-
         For Each membreinvite In invites
             _membreParticipant = New tblMembreParticipantReunion
             _membreParticipant.IdMembre = membreinvite.IdMembre
@@ -88,11 +87,16 @@
         Return 0
     End Function
     'Permet d'ouvrir ceux qui pouront être rédacteur.
-    Public Function loadListRedac()
+    Public Function loadListRedac(typemembre As Int16)
+        If (typemembre = 0) Then
+            _lstRedac = (From membre In _entitiesReunion.tblMembre Join prof In _entitiesReunion.tblProfesseur On prof.IdMembre Equals membre.IdMembre Select membre).ToList()
+        Else
+            _lstRedac = (From membre In _entitiesReunion.tblMembre Join etu In _entitiesReunion.tblEtudiant On etu.IdMembre Equals membre.IdMembre Select membre).ToList()
 
-        _lstProf = (From membre In _entitiesReunion.tblMembre Join prof In _entitiesReunion.tblProfesseur On prof.IdMembre Equals membre.IdMembre Select membre).ToList()
+        End If
 
-        Return _lstProf
+
+        Return _lstRedac
 
     End Function
     'Ouvre l'interface d'envoie de courriers 

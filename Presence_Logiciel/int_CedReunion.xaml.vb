@@ -44,7 +44,7 @@ Public Class int_CedReunion
 
         _objReunion = New objReunion
         _lesInvitee = New List(Of tblMembre)
-        cmbRedac.ItemsSource = _objReunion.loadListRedac
+
         lstInvite.ItemsSource = _lesInvitee
 
     End Sub
@@ -109,5 +109,9 @@ Public Class int_CedReunion
             dtpDateRenc.SelectedDate = Nothing
         End If
 
+    End Sub
+    'Load liste selon le type de redacteur
+    Private Sub cmbTypeRedac_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbTypeRedac.SelectionChanged
+        cmbRedac.ItemsSource = _objReunion.loadListRedac(cmbTypeRedac.SelectedIndex)
     End Sub
 End Class
