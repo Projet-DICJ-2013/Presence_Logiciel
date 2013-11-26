@@ -1846,7 +1846,7 @@
           </AssociationSet>
           <EntitySet Name="tblActualite" EntityType="PresenceModel.tblActualite" />
           <FunctionImport Name="SelOrdJour" ReturnType="Collection(PresenceModel.SelOrdJour_Result)">
-            <Parameter Name="NoOrdre" Mode="In" Type="Int32" />
+          <Parameter Name="NoOrdre" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagrams">

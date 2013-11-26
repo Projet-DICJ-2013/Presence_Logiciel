@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Application"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    StartupUri="Gestion d&apos;un ordre du jour.xaml">
+    StartupUri="frmConnexion.xaml">
     <Application.Resources>
 
     </Application.Resources>
