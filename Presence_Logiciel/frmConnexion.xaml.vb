@@ -12,8 +12,9 @@ Public Class frmConnexion
     Dim DM As PresenceEntities
     Dim LesActualites As IQueryable(Of tblActualite)
     Dim vu As ListCollectionView
+    Dim vu2 As ListCollectionView
     Dim tim As System.Windows.Threading.DispatcherTimer
-    Dim nouvelUser As tblLogin
+
 
 
 #Region "functions"
@@ -32,65 +33,48 @@ Public Class frmConnexion
 
 #End Region
 
-    Private Function createUser(ByVal user As String, ByVal password As String) As String
-        If File.Exists(user & ".txt") = False Then    'check to see if the MD5 has value of pUser exsists as a text file
-            Try
-                My.Computer.FileSystem.WriteAllText(user & ".txt", StringToMd5(password), False)    ' write MD5 hash values of pUser and pass to a file names <pUser>.txt
-                File.SetAttributes(user & ".txt", FileAttributes.Hidden)
-
-                MsgBox("It worked", MsgBoxStyle.Information)  ' If it works 
-            Catch ex As Exception
-                MsgBox("Something had went wrong" & ex.Message, MsgBoxStyle.Information, "Error") ' if it fails to write
-            End Try
-        Else
-            MsgBox("pUsername has already been taken")
-        End If
-
-        Return user
-        Return password
-    End Function
-
-    Private Function createUser2(ByVal user As String, ByVal password As String) As String
-
-        Dim LesUser As IQueryable(Of tblLogin) = (From us In DM.tblLogin Where us.IdLogin = user Select us)
-        If (LesUser.Count = 0) Then
-            MsgBox("rien")
 
 
+
+
+    Private Function verifierLogin(ByVal user As String, ByVal password As String) As String
+        Try
+            Dim LesUser As IQueryable(Of tblLogin) = (From us In DM.tblLogin Where us.IdLogin = user Select us)
+
+
+
+            If (LesUser.Count = 0) Then
+                MsgBox("Cet utilisateur n'existe pas")
+
+                Return user
+                Return password
+
+            End If
+            Dim TempUser As tblLogin = LesUser.First()
             Dim HPW As String = StringToMd5(password)
+            If (TempUser.Hash = HPW) Then
 
+            End If
 
-            nouvelUser = New tblLogin With _
-{
- .IdLogin = txtLogin.Text, _
- .EstAutorise = "True", _
- .Hash = HPW.ToString
-}
-            Try
+        Catch ex As Exception
+            MsgBox(ex.ToString)
 
-                DM.AddTotblLogin(nouvelUser)
-                DM.SaveChanges()
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString)
-            End Try
+        End Try
 
-        Else
-            Dim userTest As tblLogin = LesUser.First()
-            MsgBox("existe deja")
-        End If
-
+        Dim main As New MainWindow
+        main.Show()
+        Me.Close()
+        Me.Finalize()
         Return user
         Return password
     End Function
 
 
 
-    Private Sub enregistrerconnexion(sender As Object, e As RoutedEventArgs)
-
-    End Sub
 
     Private Sub Connexion(sender As Object, e As RoutedEventArgs) Handles btnconnexion.Click
-        createUser2(txtLogin.Text, txtPassword.Text)
+        verifierLogin(txtLogin.Text, txtPassword.Text)
+
 
 
     End Sub

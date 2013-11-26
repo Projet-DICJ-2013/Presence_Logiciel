@@ -389,10 +389,9 @@
             <PropertyRef Name="IdLogin" />
           </Key>
           <Property Name="IdLogin" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="MotDePasseLogin" Type="varchar" MaxLength="50" />
-          <Property Name="EstAutorise" Type="bit" />
+          <Property Name="Administrateur" Type="bit" Nullable="false" />
           <Property Name="IdMembre" Type="smallint" />
-          <Property Name="Hash" Type="char" Nullable="false" MaxLength="32" />
+          <Property Name="Hash" Type="char" MaxLength="32" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -1942,11 +1941,10 @@
             <PropertyRef Name="IdLogin" />
           </Key>
           <Property Name="IdLogin" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="MotDePasseLogin" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="EstAutorise" Type="Boolean" />
           <Property Type="Int16" Name="IdMembre" />
           <NavigationProperty Name="tblMembre" Relationship="PresenceModel.FK_tblLogin_tblMembre" FromRole="tblLogin" ToRole="tblMembre" />
-          <Property Type="String" Name="Hash" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Hash" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Type="Boolean" Name="Administrateur" Nullable="false" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -3000,12 +2998,11 @@
           <EntitySetMapping Name="tblLogin">
             <EntityTypeMapping TypeName="PresenceModel.tblLogin">
               <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="Administrateur" ColumnName="Administrateur" />
                 <ScalarProperty Name="Hash" ColumnName="Hash" />
                 <ScalarProperty Name="IdMembre" ColumnName="IdMembre" />
                 <ScalarProperty Name="IdLogin" ColumnName="IdLogin" />
-                <ScalarProperty Name="MotDePasseLogin" ColumnName="MotDePasseLogin" />
-                <ScalarProperty Name="EstAutorise" ColumnName="EstAutorise" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblMembre">
