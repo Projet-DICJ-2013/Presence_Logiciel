@@ -39,7 +39,7 @@ Public Class EnvoieMail
             _envoieMail.AddDestinataire(invites.CourrielMembre)
             _nbrMail += _nbrMail
             If (_nbrMail = 10) Then
-                _envoieMail.Envoie_Reset()
+                'envoieMail.Envoie_Reset()
             End If
         Next
 
