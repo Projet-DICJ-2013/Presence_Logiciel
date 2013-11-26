@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("a631e3e8-d2cf-4b35-8213-7d0db3a33946")>
+<Assembly: EdmSchemaAttribute("07a9b6a8-edce-4b9b-b107-22493813f993")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -1456,6 +1456,22 @@ Public Partial Class PresenceEntities
         End If
 
         Return MyBase.ExecuteFunction(Of tblPoints)("RetournerEnfants", mergeOption, noPointParameter)
+
+    End Function
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    ''' <param name="noOrdre">Aucune documentation sur les métadonnées n'est disponible.</param>
+    Public Function SelOrdJour(noOrdre As Nullable(Of Global.System.Int32)) As ObjectResult(Of SelOrdJour_Result)
+        Dim noOrdreParameter As ObjectParameter
+        If (noOrdre.HasValue)
+            noOrdreParameter = New ObjectParameter("NoOrdre", noOrdre)
+        Else
+            noOrdreParameter = New ObjectParameter("NoOrdre", GetType(Global.System.Int32))
+        End If
+
+        Return MyBase.ExecuteFunction(Of SelOrdJour_Result)("SelOrdJour", noOrdreParameter)
 
     End Function
 
@@ -4661,9 +4677,11 @@ Public Partial Class tblLogin
     ''' Créez un nouvel objet tblLogin.
     ''' </summary>
     ''' <param name="idLogin">Valeur initiale de la propriété IdLogin.</param>
-    Public Shared Function CreatetblLogin(idLogin As Global.System.String) As tblLogin
+    ''' <param name="hash">Valeur initiale de la propriété Hash.</param>
+    Public Shared Function CreatetblLogin(idLogin As Global.System.String, hash As Global.System.String) As tblLogin
         Dim tblLogin as tblLogin = New tblLogin
         tblLogin.IdLogin = idLogin
+        tblLogin.Hash = hash
         Return tblLogin
     End Function
 
@@ -4771,6 +4789,31 @@ Public Partial Class tblLogin
     End Sub
 
     Private Partial Sub OnIdMembreChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property Hash() As Global.System.String
+        Get
+            Return _Hash
+        End Get
+        Set
+            OnHashChanging(value)
+            ReportPropertyChanging("Hash")
+            _Hash = StructuralObject.SetValidValue(value, false, "Hash")
+            ReportPropertyChanged("Hash")
+            OnHashChanged()
+        End Set
+    End Property
+
+    Private _Hash As Global.System.String
+    Private Partial Sub OnHashChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnHashChanged()
     End Sub
 
     #End Region
@@ -10273,6 +10316,170 @@ Public Partial Class GetCompoModele_Result
     End Sub
 
     Private Partial Sub OnTypeCompoChanged()
+    End Sub
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' Aucune documentation sur les métadonnées n'est disponible.
+''' </summary>
+<EdmComplexTypeAttribute(NamespaceName:="PresenceModel", Name:="SelOrdJour_Result")>
+<DataContractAttribute(IsReference:=True)>
+<Serializable()>
+Public Partial Class SelOrdJour_Result
+    Inherits ComplexObject
+    #Region "Propriétés simples"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property NumeroPoint() As Nullable(Of Global.System.Double)
+        Get
+            Return _NumeroPoint
+        End Get
+        Set
+            OnNumeroPointChanging(value)
+            ReportPropertyChanging("NumeroPoint")
+            _NumeroPoint = StructuralObject.SetValidValue(value, "NumeroPoint")
+            ReportPropertyChanged("NumeroPoint")
+            OnNumeroPointChanged()
+        End Set
+    End Property
+
+    Private _NumeroPoint As Nullable(Of Global.System.Double)
+    Private Partial Sub OnNumeroPointChanging(value As Nullable(Of Global.System.Double))
+    End Sub
+
+    Private Partial Sub OnNumeroPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property TitrePoint() As Global.System.String
+        Get
+            Return _TitrePoint
+        End Get
+        Set
+            OnTitrePointChanging(value)
+            ReportPropertyChanging("TitrePoint")
+            _TitrePoint = StructuralObject.SetValidValue(value, true, "TitrePoint")
+            ReportPropertyChanged("TitrePoint")
+            OnTitrePointChanged()
+        End Set
+    End Property
+
+    Private _TitrePoint As Global.System.String
+    Private Partial Sub OnTitrePointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnTitrePointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property NomPoint() As Global.System.String
+        Get
+            Return _NomPoint
+        End Get
+        Set
+            OnNomPointChanging(value)
+            ReportPropertyChanging("NomPoint")
+            _NomPoint = StructuralObject.SetValidValue(value, true, "NomPoint")
+            ReportPropertyChanged("NomPoint")
+            OnNomPointChanged()
+        End Set
+    End Property
+
+    Private _NomPoint As Global.System.String
+    Private Partial Sub OnNomPointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnNomPointChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property TitreOrdreJour() As Global.System.String
+        Get
+            Return _TitreOrdreJour
+        End Get
+        Set
+            OnTitreOrdreJourChanging(value)
+            ReportPropertyChanging("TitreOrdreJour")
+            _TitreOrdreJour = StructuralObject.SetValidValue(value, true, "TitreOrdreJour")
+            ReportPropertyChanged("TitreOrdreJour")
+            OnTitreOrdreJourChanged()
+        End Set
+    End Property
+
+    Private _TitreOrdreJour As Global.System.String
+    Private Partial Sub OnTitreOrdreJourChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnTitreOrdreJourChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property Notes() As Global.System.String
+        Get
+            Return _Notes
+        End Get
+        Set
+            OnNotesChanging(value)
+            ReportPropertyChanging("Notes")
+            _Notes = StructuralObject.SetValidValue(value, true, "Notes")
+            ReportPropertyChanged("Notes")
+            OnNotesChanged()
+        End Set
+    End Property
+
+    Private _Notes As Global.System.String
+    Private Partial Sub OnNotesChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnNotesChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property ChiffrePoint() As Global.System.String
+        Get
+            Return _ChiffrePoint
+        End Get
+        Set
+            OnChiffrePointChanging(value)
+            ReportPropertyChanging("ChiffrePoint")
+            _ChiffrePoint = StructuralObject.SetValidValue(value, true, "ChiffrePoint")
+            ReportPropertyChanged("ChiffrePoint")
+            OnChiffrePointChanged()
+        End Set
+    End Property
+
+    Private _ChiffrePoint As Global.System.String
+    Private Partial Sub OnChiffrePointChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnChiffrePointChanged()
     End Sub
 
     #End Region

@@ -46,7 +46,7 @@ Public Class frmModele
     End Sub
 
     Private Sub TxtModele_TextChanged(sender As Object, e As TextChangedEventArgs) Handles TxtModele.TextChanged
-        
+
         ViewComposante.ItemsSource = Modele.GetComposante(TxtModele.Text)
     End Sub
 
@@ -108,7 +108,7 @@ Public Class frmModele
         Modele.Collection.MoveCurrentTo(Modele.Collection.CurrentPosition + 1)
     End Sub
 
-    
+
     Private Sub btnRech_Click(sender As Object, e As RoutedEventArgs) Handles btnRech.Click
 
         Modele.GetModeleRech(TxtRech.Text)

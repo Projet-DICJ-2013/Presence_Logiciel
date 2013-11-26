@@ -43,7 +43,7 @@ Public Class GestionPDF
         Return Nothing
     End Function
 
-    Private Sub AddNewReport_Click(sender As Object, e As RoutedEventArgs) Handles AddNewReport.Click
+    Private Sub AddNewReport_Click(sender As Object, e As RoutedEventArgs)
         Dim fnGestRapport As New frmGenereRapport
         fnGestRapport.ShowDialog()
 

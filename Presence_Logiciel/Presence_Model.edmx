@@ -392,6 +392,7 @@
           <Property Name="MotDePasseLogin" Type="varchar" MaxLength="50" />
           <Property Name="EstAutorise" Type="bit" />
           <Property Name="IdMembre" Type="smallint" />
+          <Property Name="Hash" Type="char" Nullable="false" MaxLength="32" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -1520,6 +1521,9 @@
         <Function Name="GetCompoModele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MonMod" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SelOrdJour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoOrdre" Type="int" Mode="In" />
+        </Function>
         <Function Name="SelPointById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NoPoint" Type="int" Mode="In" />
         </Function>
@@ -1841,6 +1845,9 @@
             <End Role="tblLogin" EntitySet="tblLogin" />
           </AssociationSet>
           <EntitySet Name="tblActualite" EntityType="PresenceModel.tblActualite" />
+          <FunctionImport Name="SelOrdJour" ReturnType="Collection(PresenceModel.SelOrdJour_Result)">
+            <Parameter Name="NoOrdre" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1939,6 +1946,7 @@
           <Property Name="EstAutorise" Type="Boolean" />
           <Property Type="Int16" Name="IdMembre" />
           <NavigationProperty Name="tblMembre" Relationship="PresenceModel.FK_tblLogin_tblMembre" FromRole="tblLogin" ToRole="tblMembre" />
+          <Property Type="String" Name="Hash" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="tblMembre">
           <Key>
@@ -2900,6 +2908,14 @@
           <Property Type="String" Name="AuteurActu" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ImangeActu" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SelOrdJour_Result">
+          <Property Type="Double" Name="NumeroPoint" Nullable="true" />
+          <Property Type="String" Name="TitrePoint" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomPoint" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TitreOrdreJour" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ChiffrePoint" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2984,6 +3000,7 @@
           <EntitySetMapping Name="tblLogin">
             <EntityTypeMapping TypeName="PresenceModel.tblLogin">
               <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
                 <ScalarProperty Name="IdMembre" ColumnName="IdMembre" />
                 <ScalarProperty Name="IdLogin" ColumnName="IdLogin" />
                 <ScalarProperty Name="MotDePasseLogin" ColumnName="MotDePasseLogin" />
@@ -3501,6 +3518,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SelOrdJour" FunctionName="PresenceModel.Store.SelOrdJour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PresenceModel.SelOrdJour_Result">
+                <ScalarProperty Name="NumeroPoint" ColumnName="NumeroPoint" />
+                <ScalarProperty Name="TitrePoint" ColumnName="TitrePoint" />
+                <ScalarProperty Name="NomPoint" ColumnName="NomPoint" />
+                <ScalarProperty Name="TitreOrdreJour" ColumnName="TitreOrdreJour" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ChiffrePoint" ColumnName="ChiffrePoint" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
