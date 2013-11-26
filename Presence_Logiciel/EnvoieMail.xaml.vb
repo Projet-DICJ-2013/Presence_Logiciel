@@ -52,6 +52,6 @@ Public Class EnvoieMail
             End If
         Next
         _envoieMail.EnvoiMessage()
-        File.Delete(_rapport.TempFilePDF)
+
     End Sub
 End Class
