@@ -121,7 +121,7 @@ Public Module ModRapport
         Protected Overloads Sub GetData()
 
             Dim NoOrdre = (From Ordre In _Bd_Presence.SelOrdJour(_IdElem)
-                          Select Ordre.TitreOrdreJour)
+                          Select Ordre.TitreOrdreJour).FirstOrDefault
 
             _ContenuDoc = New XElement("Root", New XElement("Header", New XElement("head", New XAttribute("id", "Pts003"), NoOrdre) _
                                         ),

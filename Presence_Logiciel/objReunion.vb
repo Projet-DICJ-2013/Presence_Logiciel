@@ -65,8 +65,8 @@
     Public Function ajoutMembreParticipantBd(invites As List(Of tblMembre), redacteur As tblMembre)
         Dim numDerReu As List(Of tblReunion)
         Dim nombre As Int16
-        numDerReu = (From reu In _entitiesReunion.tblReunion Select reu).ToList()
-        nombre = numDerReu.Last.NoReunion
+        numDerReu = (From reu In _entitiesReunion.tblReunion Select reu).ToList
+        nombre = numDerReu.Last().NoReunion
 
 
         For Each membreinvite In invites
