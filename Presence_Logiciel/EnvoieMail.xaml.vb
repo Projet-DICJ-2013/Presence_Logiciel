@@ -39,9 +39,7 @@ Public Class EnvoieMail
             _envoieMail.AddDestinataire(invites.CourrielMembre)
             _nbrMail += _nbrMail
             If (_nbrMail = 10) Then
-                _envoieMail.EnvoiMessage()
-                _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
-                _nbrMail = 0
+                _envoieMail.Envoie_Reset()
             End If
         Next
 
