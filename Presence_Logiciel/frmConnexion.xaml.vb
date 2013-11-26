@@ -132,7 +132,7 @@ Public Class frmConnexion
         anim.Begin(rec3)
         anim.Begin(rec4)
         tim.Stop()
- 
+
     End Sub
 
     Private Sub rec1_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec1.MouseEnter
