@@ -1,6 +1,8 @@
-﻿Imports System.Windows.Media.Animation
+﻿Imports System.IO
+Imports System.Windows.Media.Animation
 Imports System.Data
 Imports System.Data.SqlClient
+
 
 
 
@@ -11,38 +13,85 @@ Public Class frmConnexion
     Dim LesActualites As IQueryable(Of tblActualite)
     Dim vu As ListCollectionView
     Dim tim As System.Windows.Threading.DispatcherTimer
-    Dim CptActu As Integer
-    Dim IndexActu As String
+    Dim nouvelUser As tblLogin
+
+
+#Region "functions"
+    Private Function StringToMd5(ByRef Content As String) As String
+        Dim M5 As New System.Security.Cryptography.MD5CryptoServiceProvider
+        Dim ByteString() As Byte = System.Text.Encoding.ASCII.GetBytes(Content)
+        ByteString = M5.ComputeHash(ByteString)
+        Dim FinalString As String = Nothing
+
+        For Each byt As Byte In ByteString
+            FinalString &= byt.ToString("x2")
+
+        Next
+        Return FinalString.ToUpper()
+    End Function
+
+#End Region
+
+    Private Function createUser(ByVal user As String, ByVal password As String) As String
+        If File.Exists(user & ".txt") = False Then    'check to see if the MD5 has value of pUser exsists as a text file
+            Try
+                My.Computer.FileSystem.WriteAllText(user & ".txt", StringToMd5(password), False)    ' write MD5 hash values of pUser and pass to a file names <pUser>.txt
+                File.SetAttributes(user & ".txt", FileAttributes.Hidden)
+
+                MsgBox("It worked", MsgBoxStyle.Information)  ' If it works 
+            Catch ex As Exception
+                MsgBox("Something had went wrong" & ex.Message, MsgBoxStyle.Information, "Error") ' if it fails to write
+            End Try
+        Else
+            MsgBox("pUsername has already been taken")
+        End If
+
+        Return user
+        Return password
+    End Function
+
+    Private Function createUser2(ByVal user As String, ByVal password As String) As String
+
+        Dim LesUser As IQueryable(Of tblLogin) = (From us In DM.tblLogin Where us.IdLogin = user Select us)
+        If (LesUser.Count = 0) Then
+            MsgBox("rien")
+
+
+            Dim HPW As String = StringToMd5(password)
+
+
+            nouvelUser = New tblLogin With _
+{
+ .IdLogin = txtLogin.Text, _
+ .EstAutorise = "True", _
+ .Hash = HPW.ToString
+}
+            Try
+
+                DM.AddTotblLogin(nouvelUser)
+                DM.SaveChanges()
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+            End Try
+
+        Else
+            Dim userTest As tblLogin = LesUser.First()
+            MsgBox("existe deja")
+        End If
+
+        Return user
+        Return password
+    End Function
 
 
 
     Private Sub enregistrerconnexion(sender As Object, e As RoutedEventArgs)
-        'test.EncodingLogin(txtIp.Text, txtBD.Text, txtLogin.Text, txtPassword.Text)
 
     End Sub
 
     Private Sub Connexion(sender As Object, e As RoutedEventArgs) Handles btnconnexion.Click
-        Try
-            test.DecodingLogin(txtLogin.Text, txtPassword.Text)
-        Catch ex1 As Exception
-            MsgBox("Mauvaise information de login.")
-            Exit Sub
-        End Try
+        createUser2(txtLogin.Text, txtPassword.Text)
 
-
-        Dim connectionString As String
-        Dim SqlCon As New SqlClient.SqlConnection
-
-        connectionString = test.GetConnectionString(txtLogin.Text, txtPassword.Text)
-
-        SqlCon = New SqlConnection(connectionString)
-        Try
-            SqlCon.Open()
-            MsgBox("reussi")
-
-        Catch ex As Exception
-            MsgBox("Erreur de connection ! ")
-        End Try
 
     End Sub
 
@@ -57,16 +106,6 @@ Public Class frmConnexion
         WindowState = WindowState.Minimized
     End Sub
 
-    Private Sub AfficherHeure(sender As Object, e As RoutedEventArgs)
-        DM = New PresenceEntities
-        LesActualites = (From act In DM.tblActualite Select act)
-
-        vu = New ListCollectionView(LesActualites.ToList())
-        txtActualite.DataContext = vu
-
-        tim = Nothing
-
-    End Sub
 
 
     Private Sub imglogo_IsMouseDirectlyOverChanged(sender As Object, e As DependencyPropertyChangedEventArgs)
@@ -74,7 +113,7 @@ Public Class frmConnexion
     End Sub
 
     Private Sub imglogo_MouseEnter(sender As Object, e As MouseEventArgs) Handles imglogo.MouseEnter
-        CptActu = 0
+
         Dim anim As Storyboard = FindResource("AnimTextBox")
         anim.Begin(txtActualite)
         anim.Begin(rec1)
@@ -132,7 +171,7 @@ Public Class frmConnexion
         anim.Begin(rec3)
         anim.Begin(rec4)
         tim.Stop()
- 
+
     End Sub
 
     Private Sub rec1_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec1.MouseEnter
@@ -192,5 +231,15 @@ Public Class frmConnexion
 
     Private Sub rec1_MouseLeave(sender As Object, e As MouseEventArgs) Handles rec1.MouseLeave, rec2.MouseLeave, rec3.MouseLeave, rec4.MouseLeave
         tim.Start()
+    End Sub
+
+    Private Sub ouverture(sender As Object, e As RoutedEventArgs)
+        DM = New PresenceEntities
+        LesActualites = (From act In DM.tblActualite Select act)
+
+        vu = New ListCollectionView(LesActualites.ToList())
+        txtActualite.DataContext = vu
+
+        tim = Nothing
     End Sub
 End Class
