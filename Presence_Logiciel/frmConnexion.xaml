@@ -8,10 +8,28 @@
 
             <Storyboard  x:Key="AnimTextBox">
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" BeginTime="0:0:1" />
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:2" BeginTime="0:0:1" />
 
             </Storyboard>
             <Storyboard  x:Key="AnimTextBox2">
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:0" BeginTime="0:0:0" />
+                <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="1" To="0" Duration="0:0:0" BeginTime="0:0:0" />
+
+            </Storyboard>
+            <Storyboard  x:Key="AnimRecBlanc">
+
+              <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
+                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
+                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
+                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
+
+
+            </Storyboard>
+            <Storyboard  x:Key="AnimRecBleu">
+
+                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="Blue" Duration="0:0:1" BeginTime="0:0:0"/>
+   
+
 
             </Storyboard>
             <ResourceDictionary.MergedDictionaries>
@@ -91,7 +109,7 @@
                 </Button.Background>
             </Button>
             <Label x:Name="lblHeure" Content="Label" Height="199.2" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtActualite" Height="109" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="10,40,324.6,0" FontSize="8" Opacity="0"/>
+            <TextBox x:Name="txtActualite" Height="109" TextWrapping="Wrap" Text="{Binding Path=TexteActu}" VerticalAlignment="Top" Margin="10,40,324.6,0" FontSize="8" Opacity="0"/>
             <Image x:Name="imglogo" HorizontalAlignment="Left" Height="80" Margin="10,66,0,0" VerticalAlignment="Top" Width="334" Source="images\logo.png" Stretch="fill">
                 <Image.Effect>
                     <DropShadowEffect Direction="320" ShadowDepth="10" Opacity="0.7"/>
@@ -105,14 +123,6 @@
                                     <Storyboard >
                                         <ThicknessAnimation Storyboard.TargetProperty="(FrameworkElement.Margin)"  To="10,-50,0,0"   Duration="0:0:1" BeginTime="0:0:0"/>
 
-                                        <!--<ObjectAnimationUsingKeyFrames   Storyboard.TargetProperty="(Image.Source)"  >
-                                                <DiscreteObjectKeyFrame KeyTime="00:00:02">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <BitmapImage UriSource="/images/logo2.png" />
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                                
-                                            </ObjectAnimationUsingKeyFrames>-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
@@ -129,10 +139,10 @@
                     </Style>
                 </Image.Style>
             </Image>
-            <Rectangle x:Name="rec2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="110,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
-            <Rectangle x:Name="rec1" Fill="#FF5959F8" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
-            <Rectangle x:Name="rec4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="210,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
-            <Rectangle x:Name="rec3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="160,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45"/>
+            <Rectangle x:Name="rec2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="110,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
+            <Rectangle x:Name="rec1" Fill="Blue" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
+            <Rectangle x:Name="rec4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="210,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
+            <Rectangle x:Name="rec3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="160,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
         </Grid>
     </Viewbox>
 </Window>

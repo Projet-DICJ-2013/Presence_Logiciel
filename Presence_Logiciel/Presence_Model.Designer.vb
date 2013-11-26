@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("bb98e93f-a953-424e-a7fb-bf18be68298f")>
+<Assembly: EdmSchemaAttribute("a631e3e8-d2cf-4b35-8213-7d0db3a33946")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -790,6 +790,20 @@ Public Partial Class PresenceEntities
 
     Private _tblTypeRapport As ObjectSet(Of tblTypeRapport)
 
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    Public ReadOnly Property tblActualite() As ObjectSet(Of tblActualite)
+        Get
+            If (_tblActualite Is Nothing) Then
+                _tblActualite = MyBase.CreateObjectSet(Of tblActualite)("tblActualite")
+            End If
+            Return _tblActualite
+        End Get
+    End Property
+
+    Private _tblActualite As ObjectSet(Of tblActualite)
+
     #End Region
 
     #Region "Méthodes AddTo"
@@ -1128,6 +1142,13 @@ Public Partial Class PresenceEntities
     ''' </summary>
     Public Sub AddTotblTypeRapport(ByVal tblTypeRapport As tblTypeRapport)
         MyBase.AddObject("tblTypeRapport", tblTypeRapport)
+    End Sub
+
+    ''' <summary>
+    ''' Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet tblActualite. Utilisez la méthode .Add de la propriété ObjectSet(Of T) associée à la place.
+    ''' </summary>
+    Public Sub AddTotblActualite(ByVal tblActualite As tblActualite)
+        MyBase.AddObject("tblActualite", tblActualite)
     End Sub
 
     #End Region
@@ -1599,6 +1620,167 @@ Public Partial Class sysdiagrams
     End Sub
 
     Private Partial Sub OndefinitionChanged()
+    End Sub
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' Aucune documentation sur les métadonnées n'est disponible.
+''' </summary>
+<EdmEntityTypeAttribute(NamespaceName:="PresenceModel", Name:="tblActualite")>
+<Serializable()>
+<DataContractAttribute(IsReference:=True)>
+Public Partial Class tblActualite
+    Inherits EntityObject
+    #Region "Méthode de fabrique"
+
+    ''' <summary>
+    ''' Créez un nouvel objet tblActualite.
+    ''' </summary>
+    ''' <param name="iDActualite">Valeur initiale de la propriété IDActualite.</param>
+    ''' <param name="texteActu">Valeur initiale de la propriété TexteActu.</param>
+    ''' <param name="titreActu">Valeur initiale de la propriété TitreActu.</param>
+    ''' <param name="auteurActu">Valeur initiale de la propriété AuteurActu.</param>
+    Public Shared Function CreatetblActualite(iDActualite As Global.System.Int32, texteActu As Global.System.String, titreActu As Global.System.String, auteurActu As Global.System.String) As tblActualite
+        Dim tblActualite as tblActualite = New tblActualite
+        tblActualite.IDActualite = iDActualite
+        tblActualite.TexteActu = texteActu
+        tblActualite.TitreActu = titreActu
+        tblActualite.AuteurActu = auteurActu
+        Return tblActualite
+    End Function
+
+    #End Region
+
+    #Region "Propriétés simples"
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDActualite() As Global.System.Int32
+        Get
+            Return _IDActualite
+        End Get
+        Set
+            If (_IDActualite <> Value) Then
+                OnIDActualiteChanging(value)
+                ReportPropertyChanging("IDActualite")
+                _IDActualite = StructuralObject.SetValidValue(value, "IDActualite")
+                ReportPropertyChanged("IDActualite")
+                OnIDActualiteChanged()
+            End If
+        End Set
+    End Property
+
+    Private _IDActualite As Global.System.Int32
+    Private Partial Sub OnIDActualiteChanging(value As Global.System.Int32)
+    End Sub
+
+    Private Partial Sub OnIDActualiteChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property TexteActu() As Global.System.String
+        Get
+            Return _TexteActu
+        End Get
+        Set
+            OnTexteActuChanging(value)
+            ReportPropertyChanging("TexteActu")
+            _TexteActu = StructuralObject.SetValidValue(value, false, "TexteActu")
+            ReportPropertyChanged("TexteActu")
+            OnTexteActuChanged()
+        End Set
+    End Property
+
+    Private _TexteActu As Global.System.String
+    Private Partial Sub OnTexteActuChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnTexteActuChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property TitreActu() As Global.System.String
+        Get
+            Return _TitreActu
+        End Get
+        Set
+            OnTitreActuChanging(value)
+            ReportPropertyChanging("TitreActu")
+            _TitreActu = StructuralObject.SetValidValue(value, false, "TitreActu")
+            ReportPropertyChanged("TitreActu")
+            OnTitreActuChanged()
+        End Set
+    End Property
+
+    Private _TitreActu As Global.System.String
+    Private Partial Sub OnTitreActuChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnTitreActuChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property AuteurActu() As Global.System.String
+        Get
+            Return _AuteurActu
+        End Get
+        Set
+            OnAuteurActuChanging(value)
+            ReportPropertyChanging("AuteurActu")
+            _AuteurActu = StructuralObject.SetValidValue(value, false, "AuteurActu")
+            ReportPropertyChanged("AuteurActu")
+            OnAuteurActuChanged()
+        End Set
+    End Property
+
+    Private _AuteurActu As Global.System.String
+    Private Partial Sub OnAuteurActuChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnAuteurActuChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property ImangeActu() As Global.System.String
+        Get
+            Return _ImangeActu
+        End Get
+        Set
+            OnImangeActuChanging(value)
+            ReportPropertyChanging("ImangeActu")
+            _ImangeActu = StructuralObject.SetValidValue(value, true, "ImangeActu")
+            ReportPropertyChanged("ImangeActu")
+            OnImangeActuChanged()
+        End Set
+    End Property
+
+    Private _ImangeActu As Global.System.String
+    Private Partial Sub OnImangeActuChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnImangeActuChanged()
     End Sub
 
     #End Region

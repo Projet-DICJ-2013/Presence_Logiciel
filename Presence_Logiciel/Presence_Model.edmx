@@ -62,6 +62,7 @@
           <EntitySet Name="tblPretExemplaire" EntityType="PresenceModel.Store.tblPretExemplaire" store:Type="Tables" Schema="S_ParcInformatique" />
           <EntitySet Name="tblReparation" EntityType="PresenceModel.Store.tblReparation" store:Type="Tables" Schema="S_ParcInformatique" />
           <EntitySet Name="tblSysteme" EntityType="PresenceModel.Store.tblSysteme" store:Type="Tables" Schema="S_ParcInformatique" />
+          <EntitySet Name="tblActualite" EntityType="PresenceModel.Store.tblActualite" store:Type="Tables" Schema="S_Rapport" />
           <EntitySet Name="tblElement" EntityType="PresenceModel.Store.tblElement" store:Type="Tables" Schema="S_Rapport" />
           <EntitySet Name="tblTypeRapport" EntityType="PresenceModel.Store.tblTypeRapport" store:Type="Tables" Schema="S_Rapport" />
           <AssociationSet Name="fk_Besoin_BesoinExemplaire" Association="PresenceModel.Store.fk_Besoin_BesoinExemplaire">
@@ -790,6 +791,16 @@
           <Property Name="ServiceTag" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="NomReseau" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="CodeBarre" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblActualite">
+          <Key>
+            <PropertyRef Name="IDActualite" />
+          </Key>
+          <Property Name="IDActualite" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TexteActu" Type="text" Nullable="false" />
+          <Property Name="TitreActu" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AuteurActu" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="ImangeActu" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tblElement">
           <Key>
@@ -1829,6 +1840,7 @@
             <End Role="tblMembre" EntitySet="tblMembre" />
             <End Role="tblLogin" EntitySet="tblLogin" />
           </AssociationSet>
+          <EntitySet Name="tblActualite" EntityType="PresenceModel.tblActualite" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2878,6 +2890,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblActualite">
+          <Key>
+            <PropertyRef Name="IDActualite" />
+          </Key>
+          <Property Type="Int32" Name="IDActualite" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TexteActu" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TitreActu" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AuteurActu" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ImangeActu" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3468,6 +3490,17 @@
           <FunctionImportMapping FunctionImportName="SelPointById" FunctionName="PresenceModel.Store.SelPointById">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RetournerEnfants" FunctionName="PresenceModel.Store.SelPointById" />
+          <EntitySetMapping Name="tblActualite">
+            <EntityTypeMapping TypeName="PresenceModel.tblActualite">
+              <MappingFragment StoreEntitySet="tblActualite">
+                <ScalarProperty Name="ImangeActu" ColumnName="ImangeActu" />
+                <ScalarProperty Name="AuteurActu" ColumnName="AuteurActu" />
+                <ScalarProperty Name="TitreActu" ColumnName="TitreActu" />
+                <ScalarProperty Name="TexteActu" ColumnName="TexteActu" />
+                <ScalarProperty Name="IDActualite" ColumnName="IDActualite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3586,6 +3619,7 @@
         <AssociationConnector Association="PresenceModel.fk_ProcesVerbaux_ProcesVerbaux" />
         <AssociationConnector Association="PresenceModel.tblPieceJointePoints1" />
         <AssociationConnector Association="PresenceModel.FK_tblLogin_tblMembre" />
+        <EntityTypeShape EntityType="PresenceModel.tblActualite" Width="1.5" PointX="1.4277737054171851" PointY="12.872188976440667" />
       </Diagram>
     </Diagrams>
   </Designer>
