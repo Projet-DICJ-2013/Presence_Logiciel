@@ -7,7 +7,7 @@ Public Class EnvoieMail
     Private _tblConstante As List(Of tblConstant)
     Private _entitiesReunion As PresenceEntities
     Private _texteSujet As TextRange
-
+    Private _nbrMail As Int16
     'Evenement qui appelle la fonction d'envoie de courrier
     Private Sub btnEnvoyer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnvoyer.Click
 
@@ -30,13 +30,19 @@ Public Class EnvoieMail
     End Sub
     'Creer l'objet mail et l'envoie
     Public Sub CreerMail()
-
+        _nbrMail = 0
         _texteSujet = New TextRange(rctMessage.Document.ContentStart, rctMessage.Document.ContentEnd)
         _tblConstante = (From constant In _entitiesReunion.tblConstant Select constant).ToList()
         _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
 
         For Each invites In _listeAdresse
             _envoieMail.AddDestinataire(invites.CourrielMembre)
+            _nbrMail += _nbrMail
+            If (_nbrMail = 10) Then
+                _envoieMail.EnvoiMessage()
+                _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
+                _nbrMail = 0
+            End If
         Next
 
     End Sub
