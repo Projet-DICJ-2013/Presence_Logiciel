@@ -1,5 +1,5 @@
 ﻿Imports mod_smtp
-
+Imports System.IO
 Public Class EnvoieMail
 
     'Declaration des données privées 
@@ -10,6 +10,8 @@ Public Class EnvoieMail
     Private _texteSujet As TextRange
     Private _nbrMail As Int16
     Private _rapport As GenereRapport
+    Private _idOrdre As Integer
+
     'Evenement qui appelle la fonction d'envoie de courrier
     Private Sub btnEnvoyer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnvoyer.Click
 
@@ -23,8 +25,9 @@ Public Class EnvoieMail
 
     End Sub
     'Initialise certain composant a l'aide de données venant de l'interface précédente
-    Public Sub New(listeinviter As List(Of tblMembre))
+    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer)
 
+        _idOrdre = idOrdre
         InitializeComponent()
         _listeAdresse = listeinviter
         _entitiesReunion = New PresenceEntities
@@ -37,12 +40,15 @@ Public Class EnvoieMail
         _texteSujet = New TextRange(rctMessage.Document.ContentStart, rctMessage.Document.ContentEnd)
         _tblConstante = (From constant In _entitiesReunion.tblConstant Select constant).ToList()
         _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
-        _envoieMail.AddPieceJointe(_rapport.CreerRapportOrd(1))
+        _rapport.CreerRapportOrd(_idOrdre)
+        _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
+        File.Delete(_rapport.TempFilePDF)
         For Each invites In _listeAdresse
             _envoieMail.AddDestinataire(invites.CourrielMembre)
             _nbrMail += _nbrMail
             If (_nbrMail = 10) Then
-                'envoieMail.Envoie_Reset()
+                EnvoieMail.Envoie_Reset()
+
             End If
         Next
 

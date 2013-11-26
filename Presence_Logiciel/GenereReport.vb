@@ -32,7 +32,7 @@ Public Module ModRapport
         End Property
 
         Public Sub New()
-            Path = Directory.GetCurrentDirectory + "bin/"
+            Path = Directory.GetCurrentDirectory + "\"
             Temp = Guid.NewGuid().ToString
         End Sub
 
@@ -121,7 +121,7 @@ Public Module ModRapport
         Protected Overloads Sub GetData()
 
             Dim NoOrdre = (From Ordre In _Bd_Presence.SelOrdJour(_IdElem)
-                          Select Ordre.TitreOrdreJour).FirstOrDefault.ToString
+                          Select Ordre.TitreOrdreJour)
 
             _ContenuDoc = New XElement("Root", New XElement("Header", New XElement("head", New XAttribute("id", "Pts003"), NoOrdre) _
                                         ),
