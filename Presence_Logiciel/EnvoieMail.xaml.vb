@@ -46,10 +46,10 @@ Public Class EnvoieMail
         For Each invites In _listeAdresse
             _envoieMail.AddDestinataire(invites.CourrielMembre)
             _nbrMail += _nbrMail
-            If (_nbrMail = 10) Then
-                _envoieMail.Envoie_Reset()
+            ' If (_nbrMail = 10) Then
+            '_envoieMail.Envoie_Reset()
 
-            End If
+            'End If
         Next
 
     End Sub
