@@ -17,8 +17,24 @@ Public Module ModRapport
         Private MonRapport As P2013_CreateDoc.CreateReport
         Private MonStyle As ModeleStyle
         Private MonPDF As P2013_CreateDoc.GenerePdf
-        Private Path As String = Directory.GetCurrentDirectory + "\"
-        Private Elem As Rapport
+        Private Path As String
+        Private Temp As String
+        Private FilePDF As String
+        Private FileWord As String
+
+        Public Property TempFilePDF As String
+            Get
+                Return FilePDF
+            End Get
+            Set(value As String)
+                FilePDF = value
+            End Set
+        End Property
+
+        Public Sub New()
+            Path = Directory.GetCurrentDirectory + "\"
+            Temp = Guid.NewGuid().ToString
+        End Sub
 
         Public Sub CreerRapportOrd(ByVal Id As Integer)
 
@@ -28,18 +44,19 @@ Public Module ModRapport
 
             MonStyle = New ModeleStyle("OrdJour001")
 
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleRapport.GetContenuDoc, Id, Path, False)
+            MonRapport = New P2013_CreateDoc.CreateReport(ModeleRapport.GetContenuDoc, Temp, Path, False)
 
-            MonRapport.DefineStyle(MonStyle.GetStyle(), MonStyle.GetModele())
+            MonRapport.DefineStyle(MonStyle.GetStyle(), Path + MonStyle.GetModele())
 
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
-            MsgBox(mon_msg)
 
-            MonPDF = New P2013_CreateDoc.GenerePdf(Id, Path)
+
+            MonPDF = New P2013_CreateDoc.GenerePdf(Temp, Path)
             mon_msg = MonPDF.ConvertToPDF()
-            MsgBox(mon_msg)
 
+            File.Delete(Path + Temp + ".docx")
+            TempFilePDF = Path + Temp + ".pdf"
         End Sub
 
         Public Sub CreerRapportMat(ByVal Id As String)
@@ -62,6 +79,8 @@ Public Module ModRapport
             mon_msg = MonPDF.ConvertToPDF()
             MsgBox(mon_msg)
 
+            File.Delete(Path + Temp + ".docx")
+            TempFilePDF = Path + Temp + ".pdf"
         End Sub
 
         Public Sub CreerRapportCours(ByVal Id As String)
@@ -84,6 +103,8 @@ Public Module ModRapport
             mon_msg = MonPDF.ConvertToPDF()
             MsgBox(mon_msg)
 
+            File.Delete(Path + Temp + ".docx")
+            TempFilePDF = Path + Temp + ".pdf"
         End Sub
     End Class
 
@@ -99,26 +120,30 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            _ContenuDoc = New XElement("Root",
-            (From List In _Bd_Presence.tblListePoint
-               Join Point In _Bd_Presence.tblPoints
-               On Point.tblListePoint1.FirstOrDefault Equals List
-                Where List.NoOrdreDuJour = _IdElem
-                Select New With {
-                                  Point.TitrePoint,
-                                 Point.NumeroPoint,
-                                 Point.InformationPoint}).ToList.Select(
-                      Function(x) New XElement("Point", New XElement("Conteneur",
-                               New XElement("Nom",
-                                   New XAttribute("id", "Pts001"),
-                                   x.NumeroPoint),
-                                New XElement("No",
-                                       New XAttribute("id", "Pts002"),
-                                       x.TitrePoint),
-                               New XElement("Infos",
-                                   New XAttribute("id", "Pts002"),
-                                   x.InformationPoint)))))
+            Dim NoOrdre = (From Ordre In _Bd_Presence.tblOrdreDuJour _
+            Where Ordre.NoOrdreDuJour = _IdElem
+                          Select Ordre.TitreOrdreJour).FirstOrDefault
 
+            _ContenuDoc = New XElement("Root", New XElement("Header", New XElement("head", New XAttribute("id", "Pts003"), NoOrdre) _
+                                        ),
+            (From Point In _Bd_Presence.SelOrdJour(_IdElem)
+                Select New With {Point.TitrePoint,
+                                 Point.ChiffrePoint}).ToList.Select(
+                      Function(x) New XElement("Point",
+                                New XElement("Conteneur",
+                                New XElement("Infos", New XAttribute("niv", x.ChiffrePoint),
+                                    x.ChiffrePoint & "  " & x.TitrePoint)
+                                       ))), New XElement("Footer", New XElement("Foot", New XAttribute("id", "Pts006"), "Departement d'informatique" & "  -  " & Date.Today)))
+
+            For Each el In _ContenuDoc...<Infos>
+                If el.@niv.Length >= 6 Then
+                    el.Add(New XAttribute("id", "Pts004"))
+                ElseIf el.@niv.Length >= 4 And el.@niv.Length < 6 Then
+                    el.Add(New XAttribute("id", "Pts002"))
+                ElseIf el.@niv.Length >= 2 And el.@niv.Length < 4 Then
+                    el.Add(New XAttribute("id", "Pts001"))
+                End If
+            Next
 
         End Sub
 
@@ -151,7 +176,7 @@ Public Module ModRapport
                                      Modele.NbAnneeGarantie,
                                      Modele.TypeMachine,
                                      Exemp.CodeBarre,
-                                     Exemp.TypeEtat}).ToList.Select(
+                                     Exemp.tblEtatExemplaire.TypeEtat}).ToList.Select(
                           Function(x) New XElement("Modele", New XElement("Conteneur", New XAttribute("id", "Mat004"),
                                    New XElement("NoModele",
                                        New XAttribute("id", "Mat001"),
@@ -203,7 +228,7 @@ Public Module ModRapport
                  Join Etu In _Bd_Presence.tblEtudiant
                 On Etu.tblProgramme.FirstOrDefault Equals Prog
                  Join Membre In _Bd_Presence.tblMembre
-                 On Membre.IdMembre Equals Etu.IdMembre
+                 On Membre.IdMembre Equals Etu.tblMembre.IdMembre
             Where Cours.CodeCours = _IdElem
                     Select New With {Cours.NomCours,
                                      Cours.PonderationCours,

@@ -6,19 +6,18 @@
 
         <Grid HorizontalAlignment="Left" Height="433" Margin="30,39,0,0" VerticalAlignment="Top" Width="430">
             <Grid HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="410" Margin="10,10,0,0">
-                <TextBox x:Name="txtNom" HorizontalAlignment="Left" Height="23" Margin="154,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                 <TextBox x:Name="txtDaEtudiant" HorizontalAlignment="Left" Height="23" Margin="154,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                <Label x:Name="lblNom" Content="id Membre" HorizontalAlignment="Left" Margin="12,49,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblDaEtudiant" Content="DA Etudiant&#xA;" HorizontalAlignment="Left" Margin="12,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <Label x:Name="lblDateInscription" Content="Date Inscription" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <TextBox x:Name="txtDateInscription" HorizontalAlignment="Left" Height="23" Margin="154,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                 <Label x:Name="lblAnnee" Content="Année" HorizontalAlignment="Left" Margin="12,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
-                <TextBox x:Name="txtIdMembre" HorizontalAlignment="Left" Height="23" Margin="154,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Text="{Binding Path=IdMembre}"/>
                 <ComboBox x:Name="cbAnnee" HorizontalAlignment="Left" Margin="154,159,0,0" VerticalAlignment="Top" Width="49">
                     <ListBoxItem Content="1"/>
                     <ListBoxItem Content="2"/>
                     <ListBoxItem Content="3"/>
                 </ComboBox>
+                <Label x:Name="lblPrenom" Content="{Binding Path=PrenomMembre}" HorizontalAlignment="Left" Margin="17,0,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblNom1" Content="{Binding Path=NomMembre}" HorizontalAlignment="Left" Margin="68,0,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Button x:Name="btnConfirmer" Content="Confirmer" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="123,0,119,10">
                 <Button.Background>
@@ -32,6 +31,7 @@
         <Button x:Name="btnX" Margin="459,0,0,0" VerticalAlignment="Top">
             <Image Stretch="Fill" Source="Images/icons/Error.png" Height="18" Width="27" MouseDown="Image_MouseDown"/>
         </Button>
+        <Label x:Name="lblAdresseMail" Content="{Binding Path=CourrielMembre}" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
 
 

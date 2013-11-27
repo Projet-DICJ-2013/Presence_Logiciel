@@ -7,6 +7,8 @@
     Private _lstRedac As List(Of tblMembre)
     Private _intMail As EnvoieMail
     Private _invites As List(Of tblMembre)
+    Private _idOrdre
+
     'Déclaration de l'interface d'envoie de courriels 
     Public Sub New()
 
@@ -41,6 +43,7 @@
     'Ajout les données de la réunion a la bd
     Public Function ajoutReunionBd(dateReunion As Date, Endroit As String, nolocal As String, nooredredujour As Int32)
 
+        _idOrdre = nooredredujour
         _reunion.DateReunion = dateReunion
         _reunion.EndroitReunion = Endroit
 
@@ -62,8 +65,9 @@
     Public Function ajoutMembreParticipantBd(invites As List(Of tblMembre), redacteur As tblMembre)
         Dim numDerReu As List(Of tblReunion)
         Dim nombre As Int16
-        numDerReu = (From reu In _entitiesReunion.tblReunion Select reu).ToList()
-        nombre = numDerReu.Last.NoReunion
+        numDerReu = (From reu In _entitiesReunion.tblReunion Select reu Order By reu.NoReunion).ToList
+
+        nombre = numDerReu.Last().NoReunion
 
 
         For Each membreinvite In invites
@@ -102,7 +106,7 @@
     'Ouvre l'interface d'envoie de courriers 
     Public Sub OuvrirMail()
 
-        _intMail = New EnvoieMail(_invites)
+        _intMail = New EnvoieMail(_invites, _idOrdre)
         _intMail.ShowDialog()
 
     End Sub
