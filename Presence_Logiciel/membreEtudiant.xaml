@@ -19,6 +19,8 @@
                     <ListBoxItem Content="2"/>
                     <ListBoxItem Content="3"/>
                 </ComboBox>
+                <Label x:Name="lblPrenom" Content="{Binding Path=PrenomMembre}" HorizontalAlignment="Left" Margin="17,0,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblNom1" Content="{Binding Path=NomMembre}" HorizontalAlignment="Left" Margin="68,0,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Button x:Name="btnConfirmer" Content="Confirmer" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="123,0,119,10">
                 <Button.Background>
@@ -32,6 +34,7 @@
         <Button x:Name="btnX" Margin="459,0,0,0" VerticalAlignment="Top">
             <Image Stretch="Fill" Source="Images/icons/Error.png" Height="18" Width="27" MouseDown="Image_MouseDown"/>
         </Button>
+        <Label x:Name="lblAdresseMail" Content="{Binding Path=CourrielMembre}" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
 
 

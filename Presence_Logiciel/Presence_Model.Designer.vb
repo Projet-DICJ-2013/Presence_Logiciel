@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("d6d1d35f-8dc6-41bb-aac7-5dfb6cb39e2c")>
+<Assembly: EdmSchemaAttribute("6b95116d-6b8e-4cd9-856f-04ef999d7097")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -4677,11 +4677,11 @@ Public Partial Class tblLogin
     ''' Créez un nouvel objet tblLogin.
     ''' </summary>
     ''' <param name="idLogin">Valeur initiale de la propriété IdLogin.</param>
-    ''' <param name="hash">Valeur initiale de la propriété Hash.</param>
-    Public Shared Function CreatetblLogin(idLogin As Global.System.String, hash As Global.System.String) As tblLogin
+    ''' <param name="administrateur">Valeur initiale de la propriété Administrateur.</param>
+    Public Shared Function CreatetblLogin(idLogin As Global.System.String, administrateur As Global.System.Boolean) As tblLogin
         Dim tblLogin as tblLogin = New tblLogin
         tblLogin.IdLogin = idLogin
-        tblLogin.Hash = hash
+        tblLogin.Administrateur = administrateur
         Return tblLogin
     End Function
 
@@ -4721,56 +4721,6 @@ Public Partial Class tblLogin
     ''' </summary>
     <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    Public Property MotDePasseLogin() As Global.System.String
-        Get
-            Return _MotDePasseLogin
-        End Get
-        Set
-            OnMotDePasseLoginChanging(value)
-            ReportPropertyChanging("MotDePasseLogin")
-            _MotDePasseLogin = StructuralObject.SetValidValue(value, true, "MotDePasseLogin")
-            ReportPropertyChanged("MotDePasseLogin")
-            OnMotDePasseLoginChanged()
-        End Set
-    End Property
-
-    Private _MotDePasseLogin As Global.System.String
-    Private Partial Sub OnMotDePasseLoginChanging(value As Global.System.String)
-    End Sub
-
-    Private Partial Sub OnMotDePasseLoginChanged()
-    End Sub
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
-    <DataMemberAttribute()>
-    Public Property EstAutorise() As Nullable(Of Global.System.Boolean)
-        Get
-            Return _EstAutorise
-        End Get
-        Set
-            OnEstAutoriseChanging(value)
-            ReportPropertyChanging("EstAutorise")
-            _EstAutorise = StructuralObject.SetValidValue(value, "EstAutorise")
-            ReportPropertyChanged("EstAutorise")
-            OnEstAutoriseChanged()
-        End Set
-    End Property
-
-    Private _EstAutorise As Nullable(Of Global.System.Boolean)
-    Private Partial Sub OnEstAutoriseChanging(value As Nullable(Of Global.System.Boolean))
-    End Sub
-
-    Private Partial Sub OnEstAutoriseChanged()
-    End Sub
-
-    ''' <summary>
-    ''' Aucune documentation sur les métadonnées n'est disponible.
-    ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
-    <DataMemberAttribute()>
     Public Property IdMembre() As Nullable(Of Global.System.Int16)
         Get
             Return _IdMembre
@@ -4794,7 +4744,7 @@ Public Partial Class tblLogin
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
     Public Property Hash() As Global.System.String
         Get
@@ -4803,7 +4753,7 @@ Public Partial Class tblLogin
         Set
             OnHashChanging(value)
             ReportPropertyChanging("Hash")
-            _Hash = StructuralObject.SetValidValue(value, false, "Hash")
+            _Hash = StructuralObject.SetValidValue(value, true, "Hash")
             ReportPropertyChanged("Hash")
             OnHashChanged()
         End Set
@@ -4814,6 +4764,31 @@ Public Partial Class tblLogin
     End Sub
 
     Private Partial Sub OnHashChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property Administrateur() As Global.System.Boolean
+        Get
+            Return _Administrateur
+        End Get
+        Set
+            OnAdministrateurChanging(value)
+            ReportPropertyChanging("Administrateur")
+            _Administrateur = StructuralObject.SetValidValue(value, "Administrateur")
+            ReportPropertyChanged("Administrateur")
+            OnAdministrateurChanged()
+        End Set
+    End Property
+
+    Private _Administrateur As Global.System.Boolean
+    Private Partial Sub OnAdministrateurChanging(value As Global.System.Boolean)
+    End Sub
+
+    Private Partial Sub OnAdministrateurChanged()
     End Sub
 
     #End Region
