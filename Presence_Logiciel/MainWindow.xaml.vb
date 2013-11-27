@@ -122,7 +122,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecPret.Effect = objDropShadow
         Dim gestPrets As New ListeExemplaire
-        gestPrets.ShowDialog()
+        gestPrets.Show()
     End Sub
 
 
@@ -155,6 +155,20 @@ Class MainWindow
     End Sub
 
 
-
+    Public Function verifier_int(ByVal entree As Integer)
+        Dim Resultat As Boolean
+        Resultat = IsNumeric(entree)
+        Return Resultat
+    End Function
+    Public Function verifier_null(ByVal entree As String)
+        If entree IsNot Nothing Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Sub message_box_validation(ByVal variable As String)
+        MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
+    End Sub
 
 End Class
