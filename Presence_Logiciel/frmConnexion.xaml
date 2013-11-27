@@ -27,7 +27,7 @@
             </Storyboard>
             <Storyboard  x:Key="AnimRecBleu">
 
-                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="Blue" Duration="0:0:1" BeginTime="0:0:0"/>
+                <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="DodgerBlue" Duration="0:0:1" BeginTime="0:0:0"/>
 
 
 
@@ -40,16 +40,18 @@
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.102"/>
-            <GradientStop Color="#FFC27217" Offset="0.293"/>
+            <GradientStop Color="Black" Offset="0.022"/>
+            <GradientStop Color="#FFC27217" Offset="0.722"/>
+            <GradientStop Color="#FFE5DACD" Offset="0.956"/>
+            <GradientStop Color="#FFC27217" Offset="0.389"/>
         </LinearGradientBrush>
     </Window.Background>
 
     <Viewbox Stretch="Fill">
         <Grid Margin="0,0,3.6,-4">
 
-            <DockPanel Margin="0,-9,-2.4,19.6"  HorizontalAlignment="Stretch">
-                <Menu DockPanel.Dock="Top" Height="10" Margin="0,-165,-0.4,0" >
+            <DockPanel Margin="0,-9,0,19.6"  HorizontalAlignment="Stretch">
+                <Menu DockPanel.Dock="Top" Height="8" Margin="0,-165,-0.4,0" FontSize="5" Width="720" >
                     <Menu.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                             <GradientStop Color="#FF080707" Offset="0.162"/>
@@ -58,20 +60,19 @@
                         </LinearGradientBrush>
                     </Menu.Background>
 
-                    <MenuItem Header="_Options" FontFamily="Stencil" TextBlock.Foreground="White" Margin="0,-1,0,0" FontSize="6" >
-                        <MenuItem Header="_1" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="White" Height="12"/>
-                        <MenuItem Header="_2" Background="#FF1768C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="12"/>
-                        <MenuItem Header="_fermer" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="12"/>
+                    <MenuItem Header="_Options" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4"  >
+                      
+                        <MenuItem Header="_fermer" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="10"/>
+                    </MenuItem>
+                    <MenuItem Header="_Quitter" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4" Click="MenuItem_Click"  >
+
+                        
                     </MenuItem>
 
-                    <MenuItem Header="_Connexion" FontFamily="Stencil" TextBlock.Foreground="White" Margin="0,-1,0,0" FontSize="6">
-                        <MenuItem Header="_Se Connecter" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="12"/>
-                        <MenuItem Header="_Se Déconnecter" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="12"/>
+                    <MenuItem Header="_?" TextBlock.Foreground="White" FontFamily="Stencil"  FontSize="4" Height="10">
+                        <MenuItem Header="_à propos" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="10"/>
                     </MenuItem>
-                    <MenuItem Header="_?" TextBlock.Foreground="White" FontFamily="Stencil" Margin="0,-1,0,0" FontSize="6">
-                        <MenuItem Header="_à propos" Height="12"/>
-                    </MenuItem>
-                    <MenuItem Header="_" TextBlock.Foreground="White" FontFamily="Stencil"  HorizontalAlignment="Right" Click="minimiser" />
+                    <MenuItem Header="_-" TextBlock.Foreground="White" FontFamily="Stencil"  HorizontalAlignment="Right" Click="minimiser" Height="10" FontSize="5" Width="20" />
 
                 </Menu>
 
@@ -83,21 +84,21 @@
 
             </DockPanel>
 
-            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="20" Margin="532,70,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <TextBox x:Name="txtPassword" HorizontalAlignment="Right" Height="20" Margin="527,100,24,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="428,66,0,0" VerticalAlignment="Top">
+            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="15" Margin="532,70,24,0"  VerticalAlignment="Top" Width="164" FontSize="8"/>
+           
+            <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="420,63,0,0" VerticalAlignment="Top" FontFamily="Cooper Black" Foreground="#FFD6D6D6" FontSize="14">
                 <Label.Effect>
                     <DropShadowEffect Direction="320" Opacity="0.705" ShadowDepth="6"/>
                 </Label.Effect>
             </Label>
-            <Label Content="Mot de passe"  x:Name="bob" HorizontalAlignment="Left" Margin="428,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.038,0.49" >
+            <Label Content="Mot de passe"  x:Name="lblMotPasse" HorizontalAlignment="Left" Margin="420,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.038,0.49" FontFamily="Cooper Black" Foreground="#FFD6D6D6" FontSize="14" >
                 <Label.Effect>
                     <DropShadowEffect Direction="320" Opacity="0.7" ShadowDepth="6"/>
                 </Label.Effect>
             </Label>
 
 
-            <Button x:Name="btnconnexion" Content="Connexion" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="154" Foreground="#FFFCFCFC" Height="25" FontSize="18" FontFamily="Calibri" Margin="0,0,30,50.6">
+            <Button x:Name="btnconnexion" Content="Connexion" HorizontalAlignment="Right" VerticalAlignment="top" Width="110" Foreground="#FFFCFCFC" Height="19" Margin="0,115,55,0" FontSize="10" FontFamily="Cooper Black">
                 <Button.Effect>
                     <DropShadowEffect Opacity="0.7" Direction="320" ShadowDepth="8"/>
                 </Button.Effect>
@@ -108,8 +109,8 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Label x:Name="lblHeure" Content="Label" Height="199.2" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtActualite" Height="109" TextWrapping="Wrap" Text="{Binding Path=TexteActu}" VerticalAlignment="Top" Margin="10,40,324.6,0" FontSize="8" Opacity="0"/>
+            <Label x:Name="lblHeure" Content="Label" Height="199.2" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden"/>
+            <TextBox x:Name="txtActualite" Height="109"  Width="350" MaxHeight="109"  MaxWidth="350" TextWrapping="Wrap"   AcceptsReturn="True" Text="{Binding Path=TexteActu}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,40,324.6,0" FontSize="8" Opacity="0" IsEnabled="False" Foreground="#FF4D0000" Background="#FFF57702"/>
             <Image x:Name="imglogo" HorizontalAlignment="Left" Height="80" Margin="10,66,0,0" VerticalAlignment="Top" Width="334" Source="images\logo.png" Stretch="fill">
                 <Image.Effect>
                     <DropShadowEffect Direction="320" ShadowDepth="10" Opacity="0.7"/>
@@ -140,9 +141,10 @@
                 </Image.Style>
             </Image>
             <Rectangle x:Name="rec2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="110,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
-            <Rectangle x:Name="rec1" Fill="Blue" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
+            <Rectangle x:Name="rec1" Fill="DodgerBlue" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
             <Rectangle x:Name="rec4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="210,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
             <Rectangle x:Name="rec3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="160,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Right" Height="15" Margin="527,90,24,0"  VerticalAlignment="Top" Width="164" FontSize="8"/>
         </Grid>
     </Viewbox>
 </Window>

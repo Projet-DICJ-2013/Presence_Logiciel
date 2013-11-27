@@ -3,9 +3,9 @@ Public Class membreEtudiant
     Public DM As PresenceEntities
     Dim newEtu As tblEtudiant
     Dim unEtu As IQueryable(Of tblEtudiant)
-    Dim donnemoiunmembre As IQueryable(Of tblMembre)
-    Dim vu As ListCollectionView
+
     Dim nouvelUser As tblLogin
+    Public LeNouveau As tblMembre
     Dim _envoimail As objSmtp
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
         Dim dateNow As Date
@@ -16,7 +16,7 @@ Public Class membreEtudiant
     .Annee = cbAnnee.SelectionBoxItem.ToString, _
     .DaEtudiant = txtDaEtudiant.Text, _
     .DateInscriptionEtudiant = dateNow, _
-    .IdMembre = txtIdMembre.Text _
+    .IdMembre = LeNouveau.IdMembre _
 }
 
 
@@ -32,9 +32,9 @@ Public Class membreEtudiant
         createUser2(txtDaEtudiant.Text, (lblNom1.Content & lblPrenom.Content))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
         _envoimail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
-        ''_envoimail.EnvoiMessage()
-        _envoimail.AddDestinataire(lblAdresseMail.DataContext.ToString)
+        _envoimail.AddCC("bolduc_etienne@hotmail.com")
         _envoimail.EnvoiMessage()
+
     End Sub
 
 
@@ -54,10 +54,10 @@ Public Class membreEtudiant
  .IdLogin = txtDaEtudiant.Text, _
  .Administrateur = "False", _
  .Hash = HPW.ToString, _
-.IdMembre = txtIdMembre.Text _
+.IdMembre = LeNouveau.IdMembre _
 }
             Try
-
+                DM.SaveChanges()
                 DM.AddTotblLogin(nouvelUser)
                 DM.SaveChanges()
             Catch ex As Exception
@@ -81,15 +81,11 @@ Public Class membreEtudiant
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Dim dateNow As Date
         dateNow = DateValue(Now)
-        donnemoiunmembre = (From m In DM.tblMembre Select m)
 
-        vu = New ListCollectionView(donnemoiunmembre.ToList())
 
-        vu.MoveCurrentToLast()
-        txtIdMembre.DataContext = vu
-        lblNom1.DataContext = vu
-        lblPrenom.DataContext = vu
-        lblAdresseMail.DataContext = vu
+        lblNom1.DataContext = LeNouveau
+        lblPrenom.DataContext = LeNouveau
+        lblAdresseMail.DataContext = LeNouveau
         txtDateInscription.Text = dateNow
 
     End Sub

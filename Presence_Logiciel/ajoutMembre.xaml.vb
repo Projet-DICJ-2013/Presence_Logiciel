@@ -26,20 +26,20 @@
         Try
 
             DM.tblMembre.AddObject(newMembre)
-            DM.SaveChanges()
-            If (rdProfesseur.IsChecked = True) Then
-                Dim unprof As New MembreProf
-                unprof.DM = DM
-                unprof.ShowDialog()
-            Else
-                Dim unEtudiant As New membreEtudiant
-                unEtudiant.DM = DM
-                unEtudiant.ShowDialog()
-            End If
+  
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
-
+        If (rdProfesseur.IsChecked = True) Then
+            Dim unprof As New MembreProf
+            unprof.DM = DM
+            unprof.ShowDialog()
+        Else
+            Dim unEtudiant As New membreEtudiant
+            unEtudiant.LeNouveau = newMembre
+            unEtudiant.DM = DM
+            unEtudiant.ShowDialog()
+        End If
 
     End Sub
 

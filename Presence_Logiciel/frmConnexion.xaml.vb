@@ -44,27 +44,42 @@ Public Class frmConnexion
 
 
             If (LesUser.Count = 0) Then
-                MsgBox("Cet utilisateur n'existe pas")
+                MsgBox("mauvaise informations de login")
 
                 Return user
                 Return password
 
             End If
+
             Dim TempUser As tblLogin = LesUser.First()
             Dim HPW As String = StringToMd5(password)
+
             If (TempUser.Hash = HPW) Then
+                If (TempUser.Administrateur = False) Then
+                    MsgBox("Vous n'avez pas les droits d'administrateur")
+                    Me.Close()
+                    Me.Finalize()
+                    Return user
+                    Return password
+
+                Else
+                    Dim main As New MainWindow
+                    main.Show()
+                    Me.Close()
+                    Me.Finalize()
+                    Return user
+                    Return password
+                End If
+
 
             End If
+            MsgBox("mauvaise informations de login")
 
         Catch ex As Exception
             MsgBox(ex.ToString)
 
         End Try
 
-        Dim main As New MainWindow
-        main.Show()
-        Me.Close()
-        Me.Finalize()
         Return user
         Return password
     End Function
@@ -73,7 +88,7 @@ Public Class frmConnexion
 
 
     Private Sub Connexion(sender As Object, e As RoutedEventArgs) Handles btnconnexion.Click
-        verifierLogin(txtLogin.Text, txtPassword.Text)
+        verifierLogin(txtLogin.Text, txtPassword.Password)
 
 
 
@@ -112,6 +127,7 @@ Public Class frmConnexion
         If (vu.CurrentPosition = 0) Then
 
         End If
+
 
     End Sub
     Private Sub affActuTim(sender As Object, e As EventArgs)
@@ -225,5 +241,10 @@ Public Class frmConnexion
         txtActualite.DataContext = vu
 
         tim = Nothing
+    End Sub
+
+    Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
+        Me.Close()
+        Me.Finalize()
     End Sub
 End Class
