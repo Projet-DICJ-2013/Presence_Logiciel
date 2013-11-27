@@ -103,7 +103,6 @@
     </Compile>
     <Compile Include="Composante.xaml.vb" />
     <Compile Include="creerGroupe.xaml.vb" />
-    <Compile Include="EnvoieMail.xaml.vb" />
     <Compile Include="Exemplaire.xaml.vb" />
     <Compile Include="FctConnexion.vb" />
     <Compile Include="frmConnexion.xaml.vb" />
