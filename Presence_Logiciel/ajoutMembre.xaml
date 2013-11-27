@@ -36,13 +36,7 @@
                 <RadioButton x:Name="rdProfesseur" Content="Professeur" HorizontalAlignment="Left" Margin="81,316,0,0" VerticalAlignment="Top" IsChecked="True"/>
                 <RadioButton x:Name="rdEtudiant" Content="Etudiant" HorizontalAlignment="Left" Margin="216,316,0,0" VerticalAlignment="Top"/>
             </Grid>
-            <Button x:Name="btnAjouter" Content="Ajouter" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="123,0,119,10">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF5479BB" Offset="0.015"/>
-                        <GradientStop Color="#FF2558B3" Offset="0.869"/>
-                    </LinearGradientBrush>
-                </Button.Background>
+            <Button Style="{StaticResource ResourceKey=btnGlobal}" x:Name="btnAjouter" Content="Ajouter" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Height="55" Margin="123,0,119,10">
             </Button>
         </Grid>
         <Button x:Name="btnX" Margin="459,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37">
