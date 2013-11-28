@@ -6,17 +6,16 @@
 
         <Grid HorizontalAlignment="Left" Height="433" Margin="30,39,0,0" VerticalAlignment="Top" Width="430">
             <Grid HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="410" Margin="0,10,0,0">
-                <TextBox x:Name="txtNom" HorizontalAlignment="Left" Height="23" Margin="154,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                 <TextBox x:Name="txtCourriel" HorizontalAlignment="Left" Height="23" Margin="154,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                <Label x:Name="lblNom" Content="id Membre" HorizontalAlignment="Left" Margin="12,49,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblChargeTravail" Content="Courriel professeur&#xA;" HorizontalAlignment="Left" Margin="12,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <Label x:Name="lblTelephone" Content="No Bureau" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <TextBox x:Name="txtNoBureau" HorizontalAlignment="Left" Height="23" Margin="154,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                 <Label x:Name="lblCourriel" Content="Poste telephone" HorizontalAlignment="Left" Margin="12,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <TextBox x:Name="txtPoste" HorizontalAlignment="Left" Height="23" Margin="154,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                <TextBox x:Name="txtIdMembre" HorizontalAlignment="Left" Height="23" Margin="154,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Text="{Binding Path=IdMembre}"/>
                 <TextBox x:Name="txtChargeTravail" HorizontalAlignment="Left" Height="23" Margin="154,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Text="{Binding I}"/>
                 <Label x:Name="lblChargeTravail1" Content="Charge Travail" HorizontalAlignment="Left" Margin="12,187,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtUtilisateur" HorizontalAlignment="Left" Height="23" Margin="154,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Label x:Name="lblNomUtilisateur" Content="Nom Utilisateur&#xA;" HorizontalAlignment="Left" Margin="12,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
             </Grid>
             <Button x:Name="btnConfirmer" Content="Confirmer" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="123,0,119,10">
                 <Button.Background>

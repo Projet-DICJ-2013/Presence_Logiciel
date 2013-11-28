@@ -24,7 +24,7 @@
             <Grid>
                 <Grid HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="1470" Margin="10,114,0,0">
                     <TextBox x:Name="txtNumProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding CodeProg}" RenderTransformOrigin="0.875,0.645" IsEnabled="False"/>
-                    <TextBox x:Name="txtNomProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding NomProg}" IsEnabled="False"/>
+                    <TextBox x:Name="txtNomProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding NomProg}" IsEnabled="False" />
                     <RichTextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="270" Margin="275,169,0,0" VerticalAlignment="Top" Width="474" IsEnabled="False">
                         <FlowDocument>
                             <Paragraph>

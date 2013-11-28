@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
 Public Class ajoutProgramme
     Public DM As PresenceEntities
     Dim nouveauProg As tblProgramme
@@ -10,6 +11,21 @@ Public Class ajoutProgramme
     End Sub
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
+
+
+
+
+
+        Dim myRegex3 As New Regex( _
+ "^\d{3}.[a-z0-9]{2}$")
+        If (myRegex3.IsMatch(txtCodeProgramme.Text) = False) Then
+            statut.Content = "Un code de programme doit être : 3x(chiffre) 1x(.) et 2x(lettre/chiffre)"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
         nouveauProg = New tblProgramme With _
 {
     .CodeProg = txtCodeProgramme.Text, _
@@ -38,5 +54,7 @@ Public Class ajoutProgramme
 
             anim.Begin(statut)
         End If
+
+
     End Sub
 End Class

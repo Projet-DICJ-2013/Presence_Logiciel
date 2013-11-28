@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
 
 Public Class gestProgrammes
     Dim DM As PresenceEntities
@@ -134,6 +135,9 @@ Public Class gestProgrammes
         btnFontEnregistrer.Visibility = Windows.Visibility.Hidden
         btnEnregistrer.Visibility = Windows.Visibility.Hidden
 
+
+
+
         Try
             Dim modTest As IQueryable(Of tblProgramme) = (From p In DM.tblProgramme Where p.CodeProg = txtNumProgramme.Text Select p)
             Dim CoursAmodifier As tblProgramme = modTest.First()
@@ -163,5 +167,9 @@ Public Class gestProgrammes
 
             anim.Begin(statut)
         End If
+
+
+
     End Sub
+
 End Class

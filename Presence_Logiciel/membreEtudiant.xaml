@@ -6,7 +6,7 @@
 
         <Grid HorizontalAlignment="Left" Height="433" Margin="30,39,0,0" VerticalAlignment="Top" Width="430">
             <Grid HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="410" Margin="10,10,0,0">
-                <TextBox x:Name="txtDaEtudiant" HorizontalAlignment="Left" Height="23" Margin="154,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <TextBox x:Name="txtDaEtudiant" HorizontalAlignment="Left" Height="23" Margin="154,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MaxLength="7"/>
                 <Label x:Name="lblDaEtudiant" Content="DA Etudiant&#xA;" HorizontalAlignment="Left" Margin="12,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <Label x:Name="lblDateInscription" Content="Date Inscription" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <TextBox x:Name="txtDateInscription" HorizontalAlignment="Left" Height="23" Margin="154,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
@@ -31,7 +31,6 @@
         <Button x:Name="btnX" Margin="459,0,0,0" VerticalAlignment="Top">
             <Image Stretch="Fill" Source="Images/icons/Error.png" Height="18" Width="27" MouseDown="Image_MouseDown"/>
         </Button>
-        <Label x:Name="lblAdresseMail" Content="{Binding Path=CourrielMembre}" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
 
 

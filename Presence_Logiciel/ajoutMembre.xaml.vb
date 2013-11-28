@@ -32,13 +32,19 @@
         End Try
         If (rdProfesseur.IsChecked = True) Then
             Dim unprof As New MembreProf
+            unprof.LeNouveau = newMembre
             unprof.DM = DM
             unprof.ShowDialog()
+            Me.Close()
+            Me.Finalize()
         Else
             Dim unEtudiant As New membreEtudiant
             unEtudiant.LeNouveau = newMembre
             unEtudiant.DM = DM
             unEtudiant.ShowDialog()
+            Me.Close()
+            Me.Finalize()
+
         End If
 
     End Sub

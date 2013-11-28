@@ -5,9 +5,9 @@
     <Window.Resources>
         <ResourceDictionary>
             <Storyboard  x:Key="AnimLabel">
-            <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
-            <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
-            <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
             </Storyboard>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
@@ -215,7 +215,7 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <Button x:Name="btnX" Content="x" Grid.Column="2" HorizontalAlignment="Left" Margin="10.067,10,0,0" VerticalAlignment="Top" Width="55"/>
+            <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="1489,10,15,0" VerticalAlignment="Top" Width="55" Grid.ColumnSpan="3"/>
             <GroupBox x:Name="grpGestGroupe" Header="Gestion des groupes" HorizontalAlignment="Left" Margin="839,510,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="532" Height="113" FontSize="20" FontFamily="Calibri"/>
             <Button x:Name="btnGestGroupe" Content="Gestion des Groupes" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="320" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="963,0,206.6,64.8">
                 <Button.Background>

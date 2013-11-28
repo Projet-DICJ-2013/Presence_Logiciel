@@ -32,7 +32,7 @@ Public Class membreEtudiant
         createUser2(txtDaEtudiant.Text, (lblNom1.Content & lblPrenom.Content))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
         _envoimail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
-        _envoimail.AddCC("bolduc_etienne@hotmail.com")
+        _envoimail.AddCC(LeNouveau.CourrielMembre)
         _envoimail.EnvoiMessage()
 
     End Sub
@@ -85,7 +85,6 @@ Public Class membreEtudiant
 
         lblNom1.DataContext = LeNouveau
         lblPrenom.DataContext = LeNouveau
-        lblAdresseMail.DataContext = LeNouveau
         txtDateInscription.Text = dateNow
 
     End Sub

@@ -1,9 +1,12 @@
-﻿Public Class MembreProf
+﻿Imports mod_smtp
+Public Class MembreProf
     Public DM As PresenceEntities
     Dim newProf As tblProfesseur
     Dim unmembre As IQueryable(Of tblMembre)
-    Dim donnemoiunmembre As IQueryable(Of tblMembre)
     Dim vu As ListCollectionView
+    Public LeNouveau As tblMembre
+    Dim _envoimail As objSmtp
+    Dim nouvelUser As tblLogin
 
 
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
@@ -15,7 +18,7 @@
     .PosteTelephoneProfesseur = txtPoste.Text, _
     .ChargeTravailProfesseur = txtChargeTravail.Text, _
     .CourrielCegepProfesseur = txtCourriel.Text, _
-    .IdMembre = txtIdMembre.Text _
+    .IdMembre = LeNouveau.IdMembre _
 }
 
 
@@ -28,7 +31,49 @@
             MessageBox.Show(ex.ToString)
         End Try
 
+        createUser2(txtUtilisateur.Text, (LeNouveau.NomMembre & LeNouveau.PrenomMembre))
+        Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
+        _envoimail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe temporaire est :" & LeNouveau.NomMembre & LeNouveau.PrenomMembre & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
+        _envoimail.AddCC(newProf.CourrielCegepProfesseur)
+        _envoimail.EnvoiMessage()
+
     End Sub
+
+
+    Private Function createUser2(ByVal user As String, ByVal password As String) As String
+        Dim test As New FctConnexion
+
+        Dim LesUser As IQueryable(Of tblLogin) = (From us In DM.tblLogin Where us.IdLogin = user Select us)
+        If (LesUser.Count = 0) Then
+            MsgBox("rien")
+
+
+            Dim HPW As String = test.StringToMd5(password)
+
+
+            nouvelUser = New tblLogin With _
+{
+ .IdLogin = user, _
+ .Administrateur = "False", _
+ .Hash = HPW.ToString, _
+.IdMembre = LeNouveau.IdMembre _
+}
+            Try
+                DM.SaveChanges()
+                DM.AddTotblLogin(nouvelUser)
+                DM.SaveChanges()
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+            End Try
+
+        Else
+            Dim userTest As tblLogin = LesUser.First()
+            MsgBox("existe deja")
+        End If
+
+        Return user
+        Return password
+    End Function
 
     Private Sub btnX_Click(sender As Object, e As RoutedEventArgs)
 
@@ -40,9 +85,7 @@
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        donnemoiunmembre = (From m In DM.tblMembre Select m)
-        vu = New ListCollectionView(donnemoiunmembre.ToList())
-        txtIdMembre.DataContext = vu
-        vu.MoveCurrentToLast()
+
+
     End Sub
 End Class
