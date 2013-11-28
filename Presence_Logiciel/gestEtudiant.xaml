@@ -35,7 +35,7 @@
                             </LinearGradientBrush>
                         </TextBox.BorderBrush>
                     </TextBox>
-                    <TextBox x:Name="txtNomMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding Path=NomMembre}" IsEnabled="False" Background="White" SelectionBrush="White" Foreground="Black" Grid.ColumnSpan="2">
+                    <TextBox x:Name="txtNomMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding Path=NomMembre}" IsEnabled="False" Background="White" SelectionBrush="White" Foreground="Black" MaxLength="50" Grid.ColumnSpan="2">
                         <TextBox.BorderBrush>
                             <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                 <GradientStop Color="White"/>
@@ -47,7 +47,7 @@
                     <Label x:Name="lblNomMembre" Style="{StaticResource ResourceKey=labelProg}" Content="Nom" Margin="10,83,0,0" RenderTransformOrigin="0.251,0.147"/>
                     <Label x:Name="lblPrenom" Style="{StaticResource ResourceKey=labelProg}" Content="Prénom" Margin="10,139,0,0" RenderTransformOrigin="0.553,-2.783"/>
                 </Grid>
-                <TextBox x:Name="txtPrenomMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,252,0,0" Text="{Binding Path=PrenomMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
+                <TextBox x:Name="txtPrenomMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,252,0,0" Text="{Binding Path=PrenomMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" MaxLength="50" SelectionBrush="White">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="White" Offset="0.002"/>
@@ -91,7 +91,7 @@
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
             </Grid>
             <Label x:Name="lblTelephone" Style="{StaticResource ResourceKey=labelProg}" Content="Téléphone" Margin="20,294,0,0" RenderTransformOrigin="0.553,-2.783"/>
-            <TextBox x:Name="txtTelephoneMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,294,0,0" Text="{Binding Path=TelephoneMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
+            <TextBox x:Name="txtTelephoneMembre" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,294,0,0" Text="{Binding Path=TelephoneMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" MaxLength="50" SelectionBrush="White">
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="White" Offset="0.002"/>
@@ -100,7 +100,7 @@
                 </TextBox.BorderBrush>
             </TextBox>
             <Label x:Name="lblCourriel" Style="{StaticResource ResourceKey=labelProg}" Content="Courriel" Margin="20,338,0,0" RenderTransformOrigin="0.553,-2.783"/>
-            <TextBox x:Name="txtCourriel" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,338,0,0" Text="{Binding Path=CourrielMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
+            <TextBox x:Name="txtCourriel" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,338,0,0" Text="{Binding Path=CourrielMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" MaxLength="100" SelectionBrush="White">
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="White" Offset="0.002"/>
@@ -109,7 +109,7 @@
                 </TextBox.BorderBrush>
             </TextBox>
             <Label x:Name="lblNoCivique" Style="{StaticResource ResourceKey=labelProg}" Content="NoCivique" Margin="20,387,0,0" RenderTransformOrigin="0.553,-2.783"/>
-            <TextBox x:Name="txtNoCivique" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,387,0,0" Text="{Binding Path=NoCiviqueMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
+            <TextBox x:Name="txtNoCivique" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,387,0,0" MaxLength="5" Text="{Binding Path=NoCiviqueMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="White" Offset="0.002"/>
@@ -118,7 +118,7 @@
                 </TextBox.BorderBrush>
             </TextBox>
             <Label x:Name="lblAdresse" Style="{StaticResource ResourceKey=labelProg}" Content="Adresse" Margin="20,432,0,0" RenderTransformOrigin="0.553,-2.783"/>
-            <TextBox x:Name="txtAdresse" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,429,0,0" Text="{Binding Path=AdresseMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
+            <TextBox x:Name="txtAdresse" Style="{StaticResource ResourceKey=textboxProg}" Margin="283,429,0,0" MaxLength="100" Text="{Binding Path=AdresseMembre}" Height="32" Width="420" IsEnabled="False" Foreground="Black" SelectionBrush="White">
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="White" Offset="0.002"/>
@@ -139,7 +139,7 @@
                 <TabItem x:Name="tbProfesseur" Header="Professeur">
                     <Grid Background="#FFE5E5E5">
                         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="324" Stroke="Black" VerticalAlignment="Top" Width="512"/>
-                        <TextBox x:Name="txtCourrielProfesseur" Style="{StaticResource ResourceKey=textboxProg}" Margin="258,42,0,0" Text="{Binding CourrielCegepProfesseur}" Height="32" Width="246" Foreground="Black" SelectionBrush="White" IsEnabled="False">
+                        <TextBox x:Name="txtCourrielProfesseur" Style="{StaticResource ResourceKey=textboxProg}" Margin="258,42,0,0" Text="{Binding CourrielCegepProfesseur}" Height="32" Width="246" Foreground="Black" MaxLength="9" SelectionBrush="White" IsEnabled="False">
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                     <GradientStop Color="White" Offset="0.002"/>
@@ -193,7 +193,7 @@
                                 </LinearGradientBrush>
                             </TextBox.BorderBrush>
                         </TextBox>
-                        <TextBox x:Name="txtDateInscription" Style="{StaticResource ResourceKey=textboxProg}" Margin="183,79,0,0" Text="{Binding DateInscriptionEtudiant}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" Width="204" Grid.Column="2">
+                        <TextBox x:Name="txtDateInscription" Style="{StaticResource ResourceKey=textboxProg}" Margin="183,79,0,0" Text="{Binding DateInscriptionEtudiant}" RenderTransformOrigin="0.875,0.645" Foreground="Black" Width="204" Grid.Column="2" IsEnabled="False">
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                     <GradientStop Color="White"/>

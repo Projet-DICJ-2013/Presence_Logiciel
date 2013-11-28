@@ -23,15 +23,8 @@
         <Grid Background="#FFE5E5E5" Loaded="Grid_Loaded">
             <Grid>
                 <Grid HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="1470" Margin="10,114,0,0">
-                    <TextBox x:Name="txtNumProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding CodeProg}" RenderTransformOrigin="0.875,0.645" IsEnabled="False"/>
-                    <TextBox x:Name="txtNomProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding NomProg}" IsEnabled="False" />
-                    <RichTextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="270" Margin="275,169,0,0" VerticalAlignment="Top" Width="474" IsEnabled="False">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="{Binding ObjectifProg}"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <TextBox x:Name="txtNumProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding CodeProg}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black"/>
+                    <TextBox x:Name="txtNomProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding NomProg}" IsEnabled="False" Foreground="Black" />
                     <Label x:Name="lblNumNours" Style="{StaticResource ResourceKey=labelProg}" Content="Code du programme" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
                     <Label x:Name="lblNomCours" Style="{StaticResource ResourceKey=labelProg}" Content="Nom du programme" Margin="10,83,0,0" RenderTransformOrigin="0.251,0.147"/>
                     <Label x:Name="lblDescriptionCours" Style="{StaticResource ResourceKey=labelProg}" Content="Objectif" Margin="10,169,0,0"/>
@@ -95,6 +88,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <TextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="274" Margin="283,283,0,0" TextWrapping="Wrap" Text="{Binding ObjectifProg}" VerticalAlignment="Top" Width="563" IsEnabled="False" Foreground="Black"/>
         </Grid>
     </Viewbox>
 </Window>

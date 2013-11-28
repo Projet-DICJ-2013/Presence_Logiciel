@@ -58,8 +58,8 @@
         <Grid Background="#FFE5E5E5">
             <Grid>
                 <Grid HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="1470" Margin="10,114,0,0">
-                    <TextBox x:Name="txtNumCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding Path=CodeCours}" RenderTransformOrigin="0.875,0.645" IsEnabled="False"/>
-                    <TextBox x:Name="txtNomCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding Path=NomCours}" IsEnabled="False"/>
+                    <TextBox x:Name="txtNumCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding Path=CodeCours}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black"/>
+                    <TextBox x:Name="txtNomCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding Path=NomCours}" IsEnabled="False" Foreground="Black"/>
                     <Label x:Name="lblNumNours" Style="{StaticResource ResourceKey=labelProg}" Content="Numéro du cours" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
                     <Label x:Name="lblNomCours" Style="{StaticResource ResourceKey=labelProg}" Content="Nom du cours" Margin="10,83,0,0" RenderTransformOrigin="0.251,0.147"/>
                     <Label x:Name="lblDescriptionCours" Style="{StaticResource ResourceKey=labelProg}" Content="Description" Margin="10,258,0,0"/>
@@ -104,10 +104,10 @@
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
             </Grid>
             <Label x:Name="lvlPonderation" Style="{StaticResource ResourceKey=labelProg}" Content="Pondération" Margin="23,243,0,0" RenderTransformOrigin="0.251,0.147"/>
-            <TextBox x:Name="txtPonderation" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,249,0,0" Text="{Binding Path=PonderationCours}" IsEnabled="False"/>
+            <TextBox x:Name="txtPonderation" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,249,0,0" Text="{Binding Path=PonderationCours}" IsEnabled="False" Foreground="Black"/>
             <Label x:Name="lblAnneeCours" Style="{StaticResource ResourceKey=labelProg}" Content="Année" Margin="23,296,0,0" RenderTransformOrigin="0.251,0.147"/>
-            <TextBox x:Name="txtAnneeCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,300,0,0" Text="{Binding Path=AnneeCours}" IsEnabled="False"/>
-            <TextBox x:Name="txtDescription" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,373,0,0" Text="{Binding Path=DescriptionCours}" Height="232" Width="572" IsEnabled="False">
+            <TextBox x:Name="txtAnneeCours" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,300,0,0" Text="{Binding Path=AnneeCours}" IsEnabled="False" Foreground="Black"/>
+            <TextBox x:Name="txtDescription" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,373,0,0" Text="{Binding Path=DescriptionCours}" Height="232" Width="572" IsEnabled="False" Foreground="Black">
             </TextBox>
             <GroupBox HorizontalAlignment="Left" Margin="1049,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.939,-4.734" Height="437" Width="401">
                 <Grid HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="388.8"/>

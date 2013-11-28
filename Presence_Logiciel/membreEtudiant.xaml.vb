@@ -1,4 +1,6 @@
-﻿Imports mod_smtp
+﻿Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
+Imports mod_smtp
 Public Class membreEtudiant
     Public DM As PresenceEntities
     Dim newEtu As tblEtudiant
@@ -7,9 +9,23 @@ Public Class membreEtudiant
     Dim nouvelUser As tblLogin
     Public LeNouveau As tblMembre
     Dim _envoimail As objSmtp
+    Public statut As Label
+
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
         Dim dateNow As Date
         dateNow = DateValue(Now)
+
+        Dim myRegex1 As New Regex( _
+"\d{7,9}")
+        If (myRegex1.IsMatch(txtDaEtudiant.Text) = False) Then
+            statut.Content = "Un numéro de DA doit comporter entre 7 et 9 chiffres"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
+
 
         newEtu = New tblEtudiant With _
 {
