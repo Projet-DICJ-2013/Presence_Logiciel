@@ -12,15 +12,9 @@ Class frmGestGroupe
         BD = New PresenceEntities
         'Pompage de données dans les tables des programmes pour pouvoir les afficher
         Dim _afficherProgramme = (From _programme In BD.tblProgramme Select _programme)
-
-        Dim _afficherGroupe = (From _groupe In BD.tblGroupe Select _groupe).ToList()
-
         'Afficher les données dans les liste view
         Try
             cmbProgramme.ItemsSource = _afficherProgramme
-
-            cmbGroupe1.ItemsSource = _afficherGroupe
-
         Catch ex As Exception
         End Try
 
@@ -75,8 +69,11 @@ Class frmGestGroupe
             'Pompage des données
             lstvGroupe.ItemsSource = Nothing
             lstvGroupe.ItemsSource = _afficherEtudiants
+
             btnajouteretu.IsEnabled = True
             btnsupprimeretu.IsEnabled = True
+
+
         End If
     End Sub
 
@@ -135,13 +132,16 @@ Class frmGestGroupe
         'Enregistre les données à déplacer
         Dim donnee = CType(e.Data.GetData("chose"), tblMembre)
         'Si la donnée existe deja dans la liste groupe ne pas l'ajouter
-        If CType(lstvGroupe.ItemsSource, IEnumerable(Of tblMembre)).Contains(donnee) = False Then
-            'sinon l'ajouter
-            AjouterEtu()
-        Else
-            'on annule le drag and drop
-            e.Effects = DragDropEffects.None
-        End If
+        Try
+            If CType(lstvGroupe.ItemsSource, IEnumerable(Of tblMembre)).Contains(donnee) = False Then
+                'sinon l'ajouter
+                AjouterEtu()
+            Else
+                'on annule le drag and drop
+                e.Effects = DragDropEffects.None
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub lstvEtudiants_Drop(sender As Object, e As DragEventArgs) Handles lstvEtudiants.Drop
@@ -157,20 +157,21 @@ Class frmGestGroupe
     End Sub
 
     Sub BougerSouris(sender As Object, e As MouseEventArgs)
+        Try
+            If e.LeftButton Then
+                Dim _p = lstvEtudiants.SelectedItem
+                Dim donnee = New DataObject
 
-        If e.LeftButton Then
-            Dim _p = lstvEtudiants.SelectedItem
+                donnee.SetData("chose", _p)
 
-            Dim donnee = New DataObject
+                Dim _q = DragDrop.DoDragDrop(sender, donnee, DragDropEffects.Move)
 
-            donnee.SetData("chose", _p)
-
-            Dim _q = DragDrop.DoDragDrop(sender, donnee, DragDropEffects.Move)
-
-            If _q = DragDropEffects.Move Then
-
+                If _q = DragDropEffects.Move Then
+                End If
             End If
-        End If
+        Catch ex As Exception
+        End Try
+
     End Sub
 
     Private Sub lstvEtudiants_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstvEtudiants.MouseDoubleClick
@@ -198,17 +199,23 @@ Class frmGestGroupe
         lstvGroupe.ItemsSource = From _m In CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant Select _m.tblMembre
 
         btnEnregistrer.IsEnabled = True
+        lstvEtudiants.AllowDrop = True
+        lstvGroupe.AllowDrop = True
     End Sub
 
     Sub SupprimerEtu()
         'Supprimer un Etudiant dans le groupe avec le double-click
-        Dim donnee = CType(lstvGroupe.SelectedItem, tblMembre)
-        CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant.Remove(donnee.tblEtudiant.First())
-        'Affichage de cette modification
-        lstvGroupe.ItemsSource = Nothing
-        lstvGroupe.ItemsSource = From _m In CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant Select _m.tblMembre
-
+        Try
+            Dim donnee = CType(lstvGroupe.SelectedItem, tblMembre)
+            CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant.Remove(donnee.tblEtudiant.First())
+            'Affichage de cette modification
+            lstvGroupe.ItemsSource = Nothing
+            lstvGroupe.ItemsSource = From _m In CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant Select _m.tblMembre
+        Catch ex As Exception
+        End Try
         btnEnregistrer.IsEnabled = True
+        lstvEtudiants.AllowDrop = True
+        lstvGroupe.AllowDrop = True
     End Sub
 
     Private Sub btnEnregistrer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnregistrer.Click
@@ -218,41 +225,17 @@ Class frmGestGroupe
             'Enregistrement envoyé à la BD
             BD.SaveChanges()
             MessageBox.Show("Votre modification a bien été enregistré", "Succès", MessageBoxButton.OK)
+            Me.Close()
         Else
             Return
         End If
     End Sub
 
-    Private Sub btncreergroupe_Click(sender As Object, e As RoutedEventArgs) Handles btncreergroupe.Click
+    Private Sub btncreergroupe1_Click(sender As Object, e As RoutedEventArgs) Handles btncreergroupe1.Click
         'Creer un groupe
         Dim ngroupe As New creerGroupe
         ngroupe.Forme = BD
         ngroupe.ShowDialog()
-    End Sub
-
-    Private Sub ComboBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
-    End Sub
-
-    Private Sub cmbAnnees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAnnees.SelectionChanged
-        'En développement
-        Dim _anneesCours = (From _cours In BD.tblCours Select _cours Where (cmbAnnees.SelectedIndex + 1) = _cours.AnneeCours).Distinct
-
-        lstCoursAnnee.ItemsSource = _anneesCours
-
-    End Sub
-
-    Private Sub cmbGroupe1_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbGroupe1.SelectionChanged
-        'lstvgroupe2.ItemsSource = Nothing
-        'Try
-        '    Dim x As tblCours
-        '    x = cmbGroupe1.SelectedItem
-        '    Dim _afficherCours = (From _coursessiongroupe In BD.tblCoursSessionGroupe Select _coursessiongroupe.tblGroupe)
-        '    lstvgroupe2.ItemsSource = _afficherCours
-        'Catch ex As Exception
-
-        'End Try
-
     End Sub
 
     Public Sub refresh()
@@ -281,5 +264,8 @@ Class frmGestGroupe
         refresh()
     End Sub
 
-
+    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
+        Me.Finalize()
+        Me.Close()
+    End Sub
 End Class
