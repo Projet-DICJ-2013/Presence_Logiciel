@@ -6,7 +6,6 @@
     Private Sub btncreergroupe_Click(sender As Object, e As RoutedEventArgs) Handles btncreergroupe.Click
         'Ajout d'un nouveau groupe
         Dim _nouveauGroupe = New tblGroupe
-        Dim _condition As Boolean = False
         Dim _vrai1 As Boolean = False
         Dim _vrai2 As Boolean = False
 
