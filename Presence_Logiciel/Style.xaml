@@ -306,4 +306,63 @@
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="Visibility" Value="Hidden"></Setter>
     </Style>
+    <!--AJOUT COURS-->
+        <!--textbox ajout cours-->
+    <Style TargetType="TextBox" x:Key="txtAjoutCours">
+        <Setter Property="Height" Value="23"></Setter>
+        <Setter Property="Width" Value="120"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"></Setter>
+    </Style>
+        <!--label ajout cours-->
+    <Style TargetType="Label" x:Key="lblAjoutCours">
+        <Setter Property="RenderTransformOrigin" Value="-0.018,0.426"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+    </Style>
+    <!--AJOUTER GROUPE-->
+        <!--combobox ajout groupe-->
+    <Style TargetType="ComboBox" x:Key="cmbAjoutGroupe">
+        <Setter Property="Width" Value="120"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+    </Style>
+        <!--label ajout groupe-->
+    <Style TargetType="Label" x:Key="lblAjoutGroupe">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+    </Style>
+    <!--AJOUTER MEMBRE-->
+        <!--textbox ajout membre-->
+    <Style TargetType="TextBox" x:Key="txtAjoutMembre">
+        <Setter Property="Height" Value="23"></Setter>
+        <Setter Property="Width" Value="200"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"></Setter>
+    </Style>
+        <!--label ajout membre-->
+    <Style TargetType="Label" x:Key="lblAjoutMembre">
+        <Setter Property="RenderTransformOrigin" Value="-0.018,0.426"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+    </Style>
+    
+    <!-- STYLE GLOBAL-->
+        <!--btn Global template-->
+    <Style TargetType="Button" x:Key="btnGlobal">
+        <Setter Property="Foreground" Value="#FFFCFCFC"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="FontFamily" Value="Calibri"></Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5479BB" Offset="0.015"/>
+                    <GradientStop Color="#FF2558B3" Offset="0.869"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

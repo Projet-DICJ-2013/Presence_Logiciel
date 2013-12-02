@@ -1,5 +1,7 @@
-﻿Imports System.Threading
+﻿
 Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
+
 
 Class gestCours
 
@@ -107,7 +109,9 @@ Class gestCours
         Catch ex2 As System.Data.SqlClient.SqlException
             MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
         Catch ex As Exception
-            MessageBox.Show(ex.ToString)
+            statut.Content = "Impossible de supprimer ce cours car il est actif à un programme de la session courrante"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
             'Dit l 'erreur
         End Try
         LesCours = (From cours In DM.tblCours Select cours)
@@ -137,6 +141,26 @@ Class gestCours
         btnDernier.IsEnabled = True
 
 
+
+        Dim myRegex2 As New Regex( _
+"\d-\d-\d")
+        If (myRegex2.IsMatch(txtPonderation.Text) = False) Then
+            statut.Content = "Une pondération de cours doit être : 1x(chiffre) 1x(-) 1x(chiffre) 1x(-) et 1x(chiffre) )"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
+        Dim myRegex3 As New Regex( _
+"[1-3]")
+        If (myRegex3.IsMatch(txtAnneeCours.Text) = False) Then
+            statut.Content = "Une année de cours doit être entre : 1 et 3 )"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
 
 
 

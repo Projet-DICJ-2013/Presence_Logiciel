@@ -1,6 +1,6 @@
 ﻿Public Class Pret
 
-    Dim BD As New PresenceEntities
+    Dim BD As PresenceEntities
 
     Dim _aPreter As List(Of tblPretExemplaire)
 
@@ -18,6 +18,8 @@
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
+
+        BD = New PresenceEntities
         _aPreter = New List(Of tblPretExemplaire)
 
         dtgItemPret.ItemsSource = _aPreter
@@ -27,9 +29,7 @@
 
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
 
-        Dim p = New tblPret
-
-        p.tblPretExemplaire.Add(_aPreter.First())
+  
 
 
     End Sub
@@ -40,25 +40,39 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-        Dim Pret As New tblPret
+        Dim Pret = New tblPret
+        Dim exemplaire As New tblExemplaire
 
 
-        While (_aPreter.Count <> 0)
 
-            Pret.tblPretExemplaire.Add(_aPreter.First())
-            _aPreter.RemoveAt(0)
+        For i As Integer = 0 To _aPreter.Count() - 1
 
-        End While
+            Pret.tblPretExemplaire.Add(_aPreter(i))
+            _aPreter(i).tblExemplaire.TypeEtat = "Prêté"
+
+
+
+        Next
+
+
+
+        '_aPreter.Clear()
 
         Pret.IdMembre = txtMembre.Text
         Pret.TypeEtat = "actif"
 
-        BD.AddTotblPret(Pret)
-        BD.SaveChanges()
+
+        Try
+            BD.tblPret.AddObject(Pret)
+            BD.SaveChanges()
+        Catch ex As Exception
+
+        End Try
+
         txtIdPret.Clear()
         txtMembre.Clear()
 
-
+        Dim r = From p In BD.tblPret Select p
 
 
     End Sub
@@ -68,11 +82,13 @@
         Dim i = e.OriginalSource.GetType()
         Dim fnListeExemplaireCompacte As New ListeExemplaireCompacte
 
+        fnListeExemplaireCompacte.BD = BD
         If e.OriginalSource.GetType().Name = "TextBlock" Then
             Dim tb = CType(sender, DataGrid).CurrentCell.Column.Header
             If (tb.ToString = "Code Barre") Then
                 fnListeExemplaireCompacte.ShowDialog()
-                CType(CType(sender, DataGrid).CurrentCell.Item, tblPretExemplaire).CodeBarre = CType(fnListeExemplaireCompacte.lstExemplaire.SelectedItem, tblExemplaire).CodeBarre
+                ' CType(CType(sender, DataGrid).CurrentCell.Item, tblPretExemplaire).CodeBarre = CType(fnListeExemplaireCompacte.lstExemplaire.SelectedItem, tblExemplaire).CodeBarre
+                CType(CType(sender, DataGrid).CurrentCell.Item, tblPretExemplaire).tblExemplaire = CType(fnListeExemplaireCompacte.lstExemplaire.SelectedItem, tblExemplaire)
             End If
         End If
 

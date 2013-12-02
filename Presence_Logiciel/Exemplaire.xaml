@@ -86,12 +86,12 @@
                 <TextBox x:Name="txtCodeBarre" Text="{Binding CodeBarre}" Grid.Column="1" Grid.Row="0"/>
                 <TextBox x:Name="txtNomReseau"  Grid.Column="1" Grid.Row="1"/>
                 <TextBox x:Name="txtNoSerie" Text="{Binding NoSerie}" Grid.Column="1" Grid.Row="2"/>
-                <TextBox x:Name="txtModele" Text="{Binding tblModele.NoModele}" Grid.Column="1" Grid.Row="3"/>
+                <TextBox x:Name="txtModele" Text="{Binding tblModele.NoModele}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0.4,-1.2,0" Grid.RowSpan="2"/>
                 <DatePicker x:Name="dtpDateAchat" Text="{Binding DateAchat}"  Width="150" Grid.Row="4" Grid.Column="1" />
             </Grid>
             <Image HorizontalAlignment="left" Width="100" Source="images/QrExample.jpg" Grid.Column="1"/>
         </Grid>
         <Label Style="{StaticResource ResourceKey=ParcInfo_LabelFormulaire}" Content="Note" Grid.Row="2" Margin="50,8.4,0,0" Grid.ColumnSpan="2"/>
-        <TextBox Name="txtNote" Text="{Binding NoteExemplaire}" HorizontalAlignment="Center" Height="100" TextWrapping="Wrap" Width="400" Grid.Row="2" Grid.ColumnSpan="2" Margin="47,35.4,46.6,35"/>
+        <TextBox MaxLength="100" Name="txtNote" Text="{Binding NoteExemplaire}" HorizontalAlignment="Center" Height="100" TextWrapping="Wrap" Width="400" Grid.Row="2" Grid.ColumnSpan="2" Margin="47,35.4,46.6,35"/>
     </Grid>
 </Window>

@@ -19,8 +19,8 @@ Class ListePret
 
 
     Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
-        Dim fnModele As New frmModele
-        fnModele.ShowDialog()
+        Dim fnPret As New Pret
+        fnPret.ShowDialog()
     End Sub
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
@@ -72,7 +72,15 @@ Class ListePret
             MessageBox.Show("Suppression réussie", "Résultat")
             Dim _req = From p In BD.tblPret
            Where p.IdPret = CType(grdListePret.SelectedItem, PretExemplaireMembre).Pret.IdPret
+
             _req.FirstOrDefault.TypeEtat = "Supprimé"
+            Dim _req2 = From p In BD.tblExemplaire
+            Where p.CodeBarre = CType(grdListePret.SelectedItem, PretExemplaireMembre).PretExemplaire.CodeBarre
+            For Each Exemplaire As tblExemplaire In _req2
+
+                _req2.FirstOrDefault.TypeEtat = "Disponible"
+
+            Next
             BD.SaveChanges()
         End If
     End Sub

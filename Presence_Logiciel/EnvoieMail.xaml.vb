@@ -42,15 +42,16 @@ Public Class EnvoieMail
         _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
         _rapport.CreerRapportOrd(_idOrdre)
         _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
-        File.Delete(_rapport.TempFilePDF)
+
         For Each invites In _listeAdresse
             _envoieMail.AddDestinataire(invites.CourrielMembre)
             _nbrMail += _nbrMail
             If (_nbrMail = 10) Then
                 _envoieMail.Envoie_Reset()
-
+                _nbrMail = 0
             End If
         Next
+        _envoieMail.EnvoiMessage()
 
     End Sub
 End Class

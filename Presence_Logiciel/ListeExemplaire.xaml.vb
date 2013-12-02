@@ -15,7 +15,7 @@ Class ListeExemplaire
 
     Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
         Dim fnExemp As New frmExemplaire
-        fnExemp.ShowDialog()
+        fnExemp.Show()
     End Sub
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
