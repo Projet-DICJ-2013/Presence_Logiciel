@@ -5,7 +5,7 @@ x:Class="rssActualite"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d"
-      Title="GestActualite" Height="502.798" Width="645.745">
+      Title="GestActualite" Height="502.798" Width="645.745" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,19 +19,14 @@ x:Class="rssActualite"
         <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="416" Margin="10,0,0,0" VerticalAlignment="Top" Width="626" Grid.RowSpan="2">
             <TabItem Header="Nouvelle">
                 <Grid Background="#FFE5E5E5" Margin="10,20,-10,-20">
-                    <GroupBox Header="Nouvelle Publication" HorizontalAlignment="Left" Margin="0,10,-22,0" VerticalAlignment="Top" Height="374" Width="638">
-                        <Image Margin="192,259,373.4,28" Source="images\Crystal_Clear_device_floppy_unmount.png" Stretch="Fill"/>
+                    <GroupBox Header="Nouvelle Publication" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="374" Width="606">
+
+                        <Image x:Name="btnAdd" Source="/images/Icons/Add.png" Margin="244,288,294.6,26" RenderTransformOrigin="0.651,0.5"/>
                     </GroupBox>
-                    <Label Content="Titre" HorizontalAlignment="Left" Margin="31,59,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Contenu" HorizontalAlignment="Left" Margin="31,163,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="105,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-                    <RichTextBox HorizontalAlignment="Left" Height="100" Margin="105,183,0,0" VerticalAlignment="Top" Width="291">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="RichTextBox"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <Label x:Name="lblTitre" Content="Titre" HorizontalAlignment="Left" Margin="31,59,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblContenu" Content="Contenu" HorizontalAlignment="Left" Margin="31,163,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtContenu" HorizontalAlignment="Left" Height="128" Margin="105,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302"/>
+                    <TextBox x:Name="txtTitre" HorizontalAlignment="Left" Height="23" Margin="105,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Consulter">
@@ -43,16 +38,18 @@ x:Class="rssActualite"
                     </Grid.ColumnDefinitions>
                     <Image Margin="377.4,25,175,311" Source="images\Crystal_Clear_action_button_cancel.png" Stretch="Fill" Grid.Column="2"/>
                     <GroupBox Header="Nouvelles" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Height="324" Width="366" Grid.ColumnSpan="3">
-                        <DataGrid HorizontalAlignment="Left" Height="273" VerticalAlignment="Top" Width="322" Margin="10,10,0,0"/>
+                        <ListView x:Name="lstNouvelles" HorizontalAlignment="Left" Height="301.6" VerticalAlignment="Top" Width="353.6">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding TitreActu}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </GroupBox>
                     <Image Grid.Column="2" Margin="437.4,25,105,311" Source="images\Crystal_Clear_mimetype_mime_txt.png" Stretch="Fill" RenderTransformOrigin="0.571,0.869"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <RadioButton Content="Professeur" HorizontalAlignment="Left" Margin="452,126.2,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <RadioButton Content="Etudiants" HorizontalAlignment="Left" Margin="452,147.2,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <RadioButton Content="Tous" HorizontalAlignment="Left" Margin="452,168.2,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Button Grid.ColumnSpan="2" Content="Terminer" HorizontalAlignment="Left" Margin="531,442.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>
