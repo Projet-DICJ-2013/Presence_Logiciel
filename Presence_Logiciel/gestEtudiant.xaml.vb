@@ -53,7 +53,8 @@ Public Class gestEtudiant
         txtDaEtudiant.DataContext = CType(leprof, tblMembre).tblEtudiant
         txtDateInscription.DataContext = CType(leprof, tblMembre).tblEtudiant
 
-        If (txtDaEtudiant.DataContext Is Nothing) Then
+        If (txtDaEtudiant.DataContext = "") Then
+            tbEtudiant.Visibility = False
             TabTypeMembre.SelectedIndex = 0
         Else
             TabTypeMembre.SelectedIndex = 1
