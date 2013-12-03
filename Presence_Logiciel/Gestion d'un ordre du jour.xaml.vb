@@ -479,7 +479,10 @@ Public Class GestionOdj
             SupprimerLiaison(Point)
             BD.tblPoints.DeleteObject(Point)
         End If
-        BD.SaveChanges()
+        Try
+            BD.SaveChanges()
+        Catch ex As Exception
+        End Try
 
         Return True
     End Function
@@ -516,8 +519,10 @@ Public Class GestionOdj
                 j = j + 1
             Next
         End If
-
-        BD.SaveChanges()
+        Try
+            BD.SaveChanges()
+        Catch ex As Exception
+        End Try
         Return True
     End Function
 End Class

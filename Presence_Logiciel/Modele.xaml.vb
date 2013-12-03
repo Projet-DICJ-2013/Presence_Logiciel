@@ -61,7 +61,6 @@ Public Class frmModele
 
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-        Try
             Dim tblModele As tblModele
 
             If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
@@ -79,8 +78,6 @@ Public Class frmModele
             If (tblModele IsNot Nothing) Then
                 Modele.AddModele(tblModele)
             End If
-        Catch
-        End Try
     End Sub
 
 
@@ -183,19 +180,19 @@ Public Class GestionModele
                                  Select Mode)
         Dim Modele As tblModele
 
-        Try
             If ModeleChange.Count Then
                 Modele = ModeleChange.First
                 Modele = MonModele
             Else
                 BD.AddTotblModele(MonModele)
             End If
-            BD.SaveChanges()
-        Catch ex As Exception
-            Return False
-        End Try
+            Try
+                BD.SaveChanges()
+            Catch ex As Exception
+                Return False
+            End Try
 
-        Return True
+            Return True
 
     End Function
 

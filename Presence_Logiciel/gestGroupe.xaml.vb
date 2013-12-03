@@ -36,10 +36,7 @@ Class frmGestGroupe
         Dim _afficherSession = (From _session In BD.tblCoursSessionGroupe Select _session).Distinct
 
         'Afficher les données dans les liste view
-        Try
             cmbSession.ItemsSource = _afficherSession
-        Catch ex As Exception
-        End Try
 
         'Activation des radio bouton après la sélection d'un programme
         lstvEtudiants.ItemsSource = Nothing
@@ -48,7 +45,6 @@ Class frmGestGroupe
     End Sub
 
     Private Sub cmbSession_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSession.SelectionChanged
-        Try
             If (cmbSession.SelectedItem IsNot Nothing) Then
                 'Pompage de données de cours selon la session
                 Dim _afficherCours = (From _cours In CType(cmbProgramme.SelectedItem, tblProgramme).tblCours Where _cours.tblCoursSessionGroupe.Contains(CType(cmbSession.SelectedItem, tblCoursSessionGroupe)) Select _cours)
@@ -56,8 +52,6 @@ Class frmGestGroupe
                 cmbCours.ItemsSource = Nothing
                 cmbCours.ItemsSource = _afficherCours
             End If
-        Catch ex As Exception
-        End Try
 
     End Sub
 
@@ -144,7 +138,6 @@ Class frmGestGroupe
 
     Private Sub lstvGroupe_Drop(sender As Object, e As DragEventArgs) Handles lstvGroupe.Drop
         'Enregistre les données à déplacer
-        Try
             Dim donnee = CType(e.Data.GetData("chose"), tblMembre)
             'Si la donnée existe deja dans la liste groupe ne pas l'ajouter
             If CType(lstvGroupe.ItemsSource, IEnumerable(Of tblMembre)).Contains(donnee) = False Then
@@ -154,8 +147,6 @@ Class frmGestGroupe
                 'on annule le drag and drop
                 e.Effects = DragDropEffects.None
             End If
-        Catch ex As Exception
-        End Try
     End Sub
 
     Private Sub lstvEtudiants_Drop(sender As Object, e As DragEventArgs) Handles lstvEtudiants.Drop
@@ -172,7 +163,6 @@ Class frmGestGroupe
 
     Sub BougerSouris(sender As Object, e As MouseEventArgs)
 
-        Try
             If e.LeftButton Then
                 Dim _p = lstvEtudiants.SelectedItem
 
@@ -186,8 +176,6 @@ Class frmGestGroupe
 
                 End If
             End If
-        Catch ex As Exception
-        End Try
     End Sub
 
     Private Sub lstvEtudiants_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstvEtudiants.MouseDoubleClick
@@ -220,15 +208,12 @@ Class frmGestGroupe
     End Sub
 
     Sub SupprimerEtu()
-        Try
             'Supprimer un Etudiant dans le groupe avec le double-click
             Dim donnee = CType(lstvGroupe.SelectedItem, tblMembre)
             CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant.Remove(donnee.tblEtudiant.First())
             'Affichage de cette modification
             lstvGroupe.ItemsSource = Nothing
             lstvGroupe.ItemsSource = From _m In CType(cmbGroupe.SelectedItem, tblGroupe).tblEtudiant Select _m.tblMembre
-        Catch ex As Exception
-        End Try
         btnEnregistrer.IsEnabled = True
     End Sub
 
@@ -260,12 +245,9 @@ Class frmGestGroupe
 
     Private Sub cmbAnnees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAnnees.SelectionChanged
         'En développement
-        Try
             Dim _anneesCours = (From _cours In BD.tblCours Select _cours Where (cmbAnnees.SelectedIndex + 1) = _cours.AnneeCours).Distinct
 
             lstCoursAnnee.ItemsSource = _anneesCours
-        Catch ex As Exception
-        End Try
     End Sub
 
     Private Sub cmbGroupe1_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbGroupe1.SelectionChanged
