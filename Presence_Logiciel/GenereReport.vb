@@ -91,7 +91,7 @@ Public Module ModRapport
         End Sub
     End Class
 
-   Public Class RaportOrd
+    Public Class RaportOrd
         Inherits P2013_CreateDoc.ModeleInfos
 
         Private _Bd_Presence As New PresenceEntities
