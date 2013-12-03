@@ -6,9 +6,9 @@
     Title="MainWindow" Height="1200" Width="1080" >
     <Window.Resources>
 
-        <ResourceDictionary>
+            <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--Non du fichier de styles-->
+                <!--Nom du fichier de styles-->
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Storyboard  x:Key="AnimLabel">
@@ -17,7 +17,9 @@
         </ResourceDictionary>
 
     </Window.Resources>
-    <Grid>
+
+    <Viewbox Stretch="Fill">
+        <Grid>
 
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -96,5 +98,7 @@
         <Button x:Name="btnPdf" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,450,0,0"/>
 
     </Grid>
+
+        </Viewbox>
 
 </Window>

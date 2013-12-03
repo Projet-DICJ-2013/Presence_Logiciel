@@ -111,6 +111,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecActualite.Effect = objDropShadow
         Dim gestActu As New rssActualite
+        gestActu.statut = lblStatut
         gestActu.ShowDialog()
     End Sub
 
