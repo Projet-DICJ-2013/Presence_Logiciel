@@ -3,19 +3,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="GestionPDF" Height="720.631" Width="1099.46">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <Storyboard  x:Key="AnimLabel">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+            </Storyboard>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Margin="0,0,-0.2,85.4">
         <DocumentViewer HorizontalAlignment="Left" Margin="10,56,0,-38.4"
                     Name="documentViewer1" VerticalAlignment="Top" Height="665" Width="1073" />
-        <TextBox Height="29" HorizontalAlignment="Left" Margin="163,9,0,0"
-             Name="SelectedFileTextBox" VerticalAlignment="Top" Width="632" />
+        <TextBox Height="29" HorizontalAlignment="Left" Margin="226,8,0,0"
+             Name="txtTypeRap" VerticalAlignment="Top" Width="288" Text="Saisir le type du rapport" />
         <Button Height="30" HorizontalAlignment="Right" Margin="0,8,155.8,0"
             Name="BrowseButton" VerticalAlignment="Top" Width="41" Click="BrowseButton_Click">
             <Image Source="Images/Icons/Search.png" Height="29" Width="20"/>
         </Button>
-        <Button Height="30" HorizontalAlignment="Right" Margin="0,8,77,0"
+        <Button Height="30" HorizontalAlignment="Right" Margin="0,8,90.4,0"
         	Name="AddNewReport" VerticalAlignment="Top" Width="41">
             <Image Source="Images/Icons/Add.png" Height="29" Width="20"/>
         </Button>
-        <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="1032,10,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="-0.285,0.316" Height="28"/>
+        <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="1032,8,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="-0.285,0.316" Height="30"/>
+        <ComboBox IsEditable="True"  Height="29" HorizontalAlignment="Left" Margin="566,8,0,0"
+        	x:Name="txtIdRap" VerticalAlignment="Top" Width="288" Text="Saisir l'id du rapport" ItemsSource="{Binding Path=Nom}"/>
     </Grid>
 </Window>
