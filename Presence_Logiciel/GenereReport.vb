@@ -51,12 +51,7 @@ Public Module ModRapport
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
 
-
-            MonPDF = New P2013_CreateDoc.GenerePdf(Temp, Path)
-            mon_msg = MonPDF.ConvertToPDF()
-
-            File.Delete(Path + Temp + ".docx")
-            TempFilePDF = Path + Temp + ".pdf"
+            TempFilePDF = Path + Temp
         End Sub
 
         Public Sub CreerRapportMat(ByVal Id As String)
@@ -67,20 +62,14 @@ Public Module ModRapport
 
             MonStyle = New ModeleStyle("LstMat001")
 
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleMat.GetContenuDoc, Id, Path, False)
+            MonRapport = New P2013_CreateDoc.CreateReport(ModeleMat.GetContenuDoc, Temp, Path, False)
 
             MonRapport.DefineStyle(MonStyle.GetStyle(), MonStyle.GetModele())
 
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
-            MsgBox(mon_msg)
 
-            MonPDF = New P2013_CreateDoc.GenerePdf(Id, Path)
-            mon_msg = MonPDF.ConvertToPDF()
-            MsgBox(mon_msg)
-
-            File.Delete(Path + Temp + ".docx")
-            TempFilePDF = Path + Temp + ".pdf"
+            TempFilePDF = Path + Temp
         End Sub
 
         Public Sub CreerRapportCours(ByVal Id As String)
@@ -91,24 +80,18 @@ Public Module ModRapport
 
             MonStyle = New ModeleStyle("LCours001")
 
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleCours.GetContenuDoc, Id, Path, False)
+            MonRapport = New P2013_CreateDoc.CreateReport(ModeleCours.GetContenuDoc, Temp, Path, False)
 
             MonRapport.DefineStyle(MonStyle.GetStyle(), MonStyle.GetModele())
 
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
-            MsgBox(mon_msg)
 
-            MonPDF = New P2013_CreateDoc.GenerePdf(Id, Path)
-            mon_msg = MonPDF.ConvertToPDF()
-            MsgBox(mon_msg)
-
-            File.Delete(Path + Temp + ".docx")
-            TempFilePDF = Path + Temp + ".pdf"
+            TempFilePDF = Path + Temp
         End Sub
     End Class
 
-    Public Class RaportOrd
+   Public Class RaportOrd
         Inherits P2013_CreateDoc.ModeleInfos
 
         Private _Bd_Presence As New PresenceEntities
@@ -120,9 +103,9 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            Dim NoOrdre = (From Ordre In _Bd_Presence.tblOrdreDuJour _
-            Where Ordre.NoOrdreDuJour = _IdElem
-                          Select Ordre.TitreOrdreJour).FirstOrDefault
+            Dim NoOrdre = (From Ordre In _Bd_Presence.tblOrdreDuJour
+                           Where Ordre.NoOrdreDuJour = _IdElem
+                           Select Ordre.TitreOrdreJour)
 
             _ContenuDoc = New XElement("Root", New XElement("Header", New XElement("head", New XAttribute("id", "Pts003"), NoOrdre) _
                                         ),
@@ -168,19 +151,17 @@ Public Module ModRapport
         Protected Overloads Sub GetData()
 
             _ContenuDoc = New XElement("Root",
-                (From Modele In _Bd_Presence.tblModele
-                 Join Exemp In _Bd_Presence.tblExemplaire
-                 On Exemp.tblModele.NoModele Equals Modele.NoModele
+                (From Modele In _Bd_Presence.tblModele _
+                 Where Modele.NoModele = _IdElem
                     Select New With {Modele.NoModele,
                                      Modele.Marque,
                                      Modele.NbAnneeGarantie,
                                      Modele.TypeMachine,
-                                     Exemp.CodeBarre,
-                                     Exemp.tblEtatExemplaire.TypeEtat}).ToList.Select(
+                                     Modele.PrixModele}).ToList.Select(
                           Function(x) New XElement("Modele", New XElement("Conteneur", New XAttribute("id", "Mat004"),
                                    New XElement("NoModele",
                                        New XAttribute("id", "Mat001"),
-                                       x.NoModele),
+                                        x.NoModele),
                                     New XElement("Marque",
                                            New XAttribute("id", "Mat002"),
                                            x.Marque),
@@ -190,13 +171,10 @@ Public Module ModRapport
                                    New XElement("Type",
                                        New XAttribute("id", "Mat002"),
                                        x.TypeMachine),
-                                    New XElement("CodeBarre",
-                                           New XAttribute("id", "Mat003"),
-                                           x.CodeBarre),
-                                   New XElement("Etat",
-                                       New XAttribute("id", "Mat003"),
-                                       x.TypeEtat)
-                                   ))))
+                                   New XElement("Prix",
+                                       New XAttribute("id", "Mat002"),
+                                       x.PrixModele))
+                                   )))
 
 
         End Sub
@@ -223,12 +201,12 @@ Public Module ModRapport
 
             _ContenuDoc = New XElement("Root",
                 (From Cours In _Bd_Presence.tblCours
-                 Join Prog In _Bd_Presence.tblProgramme
-                 On Prog.tblCours.FirstOrDefault Equals Cours
+                 Join Groupe In _Bd_Presence.tblGroupe
+                 On Cours.tblCoursSessionGroupe.FirstOrDefault Equals Groupe.tblCoursSessionGroupe.FirstOrDefault
                  Join Etu In _Bd_Presence.tblEtudiant
-                On Etu.tblProgramme.FirstOrDefault Equals Prog
+                 On Groupe Equals Etu.tblGroupe.FirstOrDefault
                  Join Membre In _Bd_Presence.tblMembre
-                 On Membre.IdMembre Equals Etu.tblMembre.IdMembre
+                 On Etu.tblMembre Equals Membre
             Where Cours.CodeCours = _IdElem
                     Select New With {Cours.NomCours,
                                      Cours.PonderationCours,
@@ -252,6 +230,7 @@ Public Module ModRapport
                                    New XElement("Annee",
                                        New XAttribute("id", "Co002"),
                                        x.AnneeCours),
+                                New XElement("Fiche", New XAttribute("id", "Co004"),
                                     New XElement("DaEtudiant",
                                            New XAttribute("id", "Co003"),
                                            x.DaEtudiant),
@@ -267,7 +246,7 @@ Public Module ModRapport
                                    New XElement("Courriel",
                                        New XAttribute("id", "Co003"),
                                        x.CourrielMembre)
-                                   ))))
+                                   )))))
 
 
         End Sub
@@ -281,4 +260,3 @@ Public Module ModRapport
     End Class
 
 End Module
-
