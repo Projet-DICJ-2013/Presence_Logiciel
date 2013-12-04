@@ -18,7 +18,11 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <Assembly: EdmSchemaAttribute("cb65115f-a138-4a54-a7aa-09d9a07c679b")> 
+=======
+<Assembly: EdmSchemaAttribute("6b95116d-6b8e-4cd9-856f-04ef999d7097")>
+>>>>>>> parent of 78c4571... Merge branch 'master' of https://github.com/Projet-DICJ-2013/Presence_Logiciel
 =======
 <Assembly: EdmSchemaAttribute("6b95116d-6b8e-4cd9-856f-04ef999d7097")>
 >>>>>>> parent of 78c4571... Merge branch 'master' of https://github.com/Projet-DICJ-2013/Presence_Logiciel
