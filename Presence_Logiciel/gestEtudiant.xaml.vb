@@ -53,7 +53,7 @@ Public Class gestEtudiant
         txtDaEtudiant.DataContext = CType(leprof, tblMembre).tblEtudiant
         txtDateInscription.DataContext = CType(leprof, tblMembre).tblEtudiant
 
-        If (txtDaEtudiant.DataContext = "") Then
+        If (txtDaEtudiant.DataContext Is Nothing) Then
             tbEtudiant.Visibility = False
             TabTypeMembre.SelectedIndex = 0
         Else
@@ -146,100 +146,100 @@ Public Class gestEtudiant
         txtDateInscription.IsEnabled = False
 
 
-        Dim myRegex1 As New Regex( _
-"^[a-zA-Z]+$")
-        If (myRegex1.IsMatch(txtPrenomMembre.Text) = False) Then
-            statut.Content = "Un prénom doit contenir que des lettres"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex1 As New Regex( _
+        '"^[a-zA-Z]+$")
+        '        If (myRegex1.IsMatch(txtPrenomMembre.Text) = False) Then
+        '            statut.Content = "Un prénom doit contenir que des lettres"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        If (myRegex1.IsMatch(txtNomMembre.Text) = False) Then
-            statut.Content = "Un nom doit contenir que des lettres"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-            anim.Begin(statut)
-            Return
-        End If
+        '        If (myRegex1.IsMatch(txtNomMembre.Text) = False) Then
+        '            statut.Content = "Un nom doit contenir que des lettres"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex2 As New Regex( _
-"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")
-        If (myRegex2.IsMatch(txtTelephoneMembre.Text) = False) Then
-            statut.Content = "La structure du numéro de téléphone est mauvaise"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-            anim.Begin(statut)
-            Return
-        End If
+        '        Dim myRegex2 As New Regex( _
+        '"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")
+        '        If (myRegex2.IsMatch(txtTelephoneMembre.Text) = False) Then
+        '            statut.Content = "La structure du numéro de téléphone est mauvaise"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex3 As New Regex( _
-"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
-        If (myRegex3.IsMatch(txtCourriel.Text) = False) Then
-            statut.Content = "L'email entré est invalide"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-            anim.Begin(statut)
-            Return
-        End If
+        '        Dim myRegex3 As New Regex( _
+        '"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
+        '        If (myRegex3.IsMatch(txtCourriel.Text) = False) Then
+        '            statut.Content = "L'email entré est invalide"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex4 As New Regex( _
-"^\d{1,5}$")
-        If (myRegex4.IsMatch(txtNoCivique.Text) = False) Then
-            statut.Content = "Un numéro civique doit comprendre au moin 1 chiffre et aucune lettre"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-            anim.Begin(statut)
-            Return
-        End If
+        '        Dim myRegex4 As New Regex( _
+        '"^\d{1,5}$")
+        '        If (myRegex4.IsMatch(txtNoCivique.Text) = False) Then
+        '            statut.Content = "Un numéro civique doit comprendre au moin 1 chiffre et aucune lettre"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex5 As New Regex( _
-"\d{7,9}")
-        If (myRegex5.IsMatch(txtDaEtudiant.Text) = False) Then
-            statut.Content = "Un numéro de DA doit comporter entre 7 et 9 chiffres"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex5 As New Regex( _
+        '"\d{7,9}")
+        '        If (myRegex5.IsMatch(txtDaEtudiant.Text) = False) Then
+        '            statut.Content = "Un numéro de DA doit comporter entre 7 et 9 chiffres"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
 
-        Dim myRegex6 As New Regex( _
-"[1-2][2-4]")
-        If (myRegex6.IsMatch(txtChargeTravail.Text) = False) Then
-            statut.Content = "La charge de travail d'un professeur doit être située entre 12 et 25 heures"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex6 As New Regex( _
+        '"[1-2][2-4]")
+        '        If (myRegex6.IsMatch(txtChargeTravail.Text) = False) Then
+        '            statut.Content = "La charge de travail d'un professeur doit être située entre 12 et 25 heures"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex7 As New Regex( _
-"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
-        If (myRegex7.IsMatch(txtCourrielProfesseur.Text) = False) Then
-            statut.Content = "Le courriel est invalide"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex7 As New Regex( _
+        '"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
+        '        If (myRegex7.IsMatch(txtCourrielProfesseur.Text) = False) Then
+        '            statut.Content = "Le courriel est invalide"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex8 As New Regex( _
-"\d{3}.\d")
-        If (myRegex8.IsMatch(txtNoBureau.Text) = False) Then
-            statut.Content = "Un numéro de bureau doit être structuré 3x(chiffre) 1x(.) et 1x(chiffre)"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex8 As New Regex( _
+        '"\d{3}.\d")
+        '        If (myRegex8.IsMatch(txtNoBureau.Text) = False) Then
+        '            statut.Content = "Un numéro de bureau doit être structuré 3x(chiffre) 1x(.) et 1x(chiffre)"
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
-        Dim myRegex9 As New Regex( _
-"\d{1,4}")
-        If (myRegex9.IsMatch(txtPosteTelephone.Text) = False) Then
-            statut.Content = "Un numéro de poste doit comprendre entre 1 et 4 chiffre "
-            Dim anim As Storyboard = FindResource("AnimLabel")
+        '        Dim myRegex9 As New Regex( _
+        '"\d{1,4}")
+        '        If (myRegex9.IsMatch(txtPosteTelephone.Text) = False) Then
+        '            statut.Content = "Un numéro de poste doit comprendre entre 1 et 4 chiffre "
+        '            Dim anim As Storyboard = FindResource("AnimLabel")
 
-            anim.Begin(statut)
-            Return
-        End If
+        '            anim.Begin(statut)
+        '            Return
+        '        End If
 
         Try
             Dim modTest As IQueryable(Of tblMembre) = (From m In DM.tblMembre Where m.IdMembre = txtIdMembre.Text Select m)
