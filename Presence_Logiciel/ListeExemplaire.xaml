@@ -79,16 +79,6 @@
             <Button x:Name="btnAReimager" Content="À réimager"/>
         </StackPanel>
         <DataGrid x:Name="grdListeExemplaire" SelectionMode="Single" ItemsSource="{Binding}" AutoGenerateColumns = "false" HorizontalAlignment="Stretch" IsReadOnly="false" VerticalAlignment="Top" Grid.Row="1" Margin="0,30,-0.2,10.2" Grid.RowSpan="2" DataContext="{Binding}" >
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="miDisponible" Header="Disponible"/>
-                    <MenuItem x:Name="miAReparer" Header="A Réparer" Click="MenuItem_Click"/>
-                    <MenuItem x:Name="miDetruit" Header="Détruit"/>
-                    <MenuItem x:Name="miPerdu" Header="Perdu"/>
-                    <MenuItem x:Name="miHorsservice" Header="hors-service"/>
-
-                </ContextMenu>
-            </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="true" Header="No série" Width="0.5*" Binding="{Binding Path=Exemplaire.CodeBarre, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
                 <DataGridTextColumn IsReadOnly="true" Header="Nom réseau" Width="0.5*" Binding="{Binding Path=Exemplaire.NomReseau, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />

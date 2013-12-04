@@ -171,30 +171,4 @@ Class MainWindow
         MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
     End Sub
 
-    Public Sub changer_statut(ByVal statut As String)
-        lblStatut.Content = statut
-    End Sub
-End Class
-
-Public Class FonctionsGlobales
-    Private Main As MainWindow
-    Public Function verifier_int(ByVal entree As Integer)
-        Dim Resultat As Boolean
-        Resultat = IsNumeric(entree)
-        Return Resultat
-    End Function
-    Public Function verifier_null(ByVal entree As String)
-        If entree IsNot Nothing Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-    Public Sub message_box_validation(ByVal variable As String)
-        MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
-    End Sub
-
-    Public Sub changer_statut(ByVal statut As String)
-        Main.lblStatut.Content = statut
-    End Sub
 End Class

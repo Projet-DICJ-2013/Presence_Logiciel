@@ -1,6 +1,6 @@
 ﻿Imports System.Linq
 Class frmExemplaire
-    Private App As New FonctionsGlobales
+    Private App As New MainWindow
     Private BD As New PresenceEntities
     Private List As ListCollectionView
 
