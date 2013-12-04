@@ -61,10 +61,7 @@ Class ListeExemplaire
 
 
     Private Sub Button_save(sender As Object, e As RoutedEventArgs) Handles btn_save.Click
-        Try
-            BD.SaveChanges()
-        Catch ex As Exception
-        End Try
+        BD.SaveChanges()
     End Sub
 
     Private Sub btnSupression_Click(sender As Object, e As RoutedEventArgs) Handles btnSupression.Click
@@ -74,10 +71,7 @@ Class ListeExemplaire
             Dim _req = From ex In BD.tblExemplaire
            Where ex.CodeBarre = CType(grdListeExemplaire.SelectedItem, ExemplaireModele).Exemplaire.CodeBarre
             _req.FirstOrDefault.TypeEtat = "Supprimé"
-            Try
-                BD.SaveChanges()
-            Catch ex As Exception
-            End Try
+            BD.SaveChanges()
         End If
     End Sub
     Private Sub MenuContextuelEx(j As String)

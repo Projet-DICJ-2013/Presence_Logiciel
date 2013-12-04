@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Rapport à générer" Height="524.431" Width="506.66">
 
-    <Grid Margin="0,0,-0.6,-17.2">
+    <Grid Margin="0,0,42.2,-17.2">
         <Grid.RowDefinitions>
             <RowDefinition Height="48*"/>
             <RowDefinition/>
@@ -24,7 +24,7 @@
             <ComboBoxItem Name="cbi2">Liste des matériel</ComboBoxItem>
             <ComboBoxItem Name="cbi3">Liste des étudiants inscrits à un cours</ComboBoxItem>
         </ComboBox>
-        <ListView Name="LstRapport" Margin="66,246,57.2,87.2">
+        <ListView Name="LstRapport" Margin="66,253,56.8,80.2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type de Rapport" Width="150" DisplayMemberBinding="{Binding Type}"/>

@@ -85,10 +85,7 @@ Class ListePret
                 _req2.FirstOrDefault.TypeEtat = "Disponible"
 
             Next
-            Try
-                BD.SaveChanges()
-            Catch ex As Exception
-            End Try
+            BD.SaveChanges()
         End If
     End Sub
 

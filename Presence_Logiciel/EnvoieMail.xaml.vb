@@ -25,7 +25,7 @@ Public Class EnvoieMail
 
     End Sub
     'Initialise certain composant a l'aide de données venant de l'interface précédente
-    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer)
+    Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer)
 
         _idOrdre = idOrdre
         InitializeComponent()
@@ -39,7 +39,7 @@ Public Class EnvoieMail
         _nbrMail = 0
         _texteSujet = New TextRange(rctMessage.Document.ContentStart, rctMessage.Document.ContentEnd)
         _tblConstante = (From constant In _entitiesReunion.tblConstant Select constant).ToList()
-        _envoieMail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
+        _envoieMail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
         _rapport.CreerRapportOrd(_idOrdre)
         _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
 

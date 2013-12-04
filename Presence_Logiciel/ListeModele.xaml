@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="ListeModele" Height="350" Width="500">
 
-    <Window.Resources>       
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
@@ -48,16 +48,8 @@
                 <Image Source="Images/icons/Button_Next.png"/>
             </Button>
         </StackPanel>
-
-
-        
-            <ListView  x:Name="lstModele" HorizontalAlignment="stretch" Margin="10,10,10,10.4" ItemsSource="{Binding}"  Grid.Row="1" VerticalAlignment="stretch" DataContext="Binding" Grid.ColumnSpan="2">
-            <ListView.Resources>
-                <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
-                    <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClick" />
-                </Style>
-            </ListView.Resources>
-                <ListView.View>
+        <ListView  x:Name="lstModele" HorizontalAlignment="stretch" Margin="10,10,10,10.4" ItemsSource="{Binding}"  Grid.Row="1" VerticalAlignment="stretch" DataContext="Binding" Grid.ColumnSpan="2">
+            <ListView.View>
                 <GridView ColumnHeaderStringFormat="test">
                     <GridViewColumn HeaderStringFormat="" Header="Marque" Width="100">
                         <GridViewColumn.CellTemplate>
@@ -83,6 +75,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-            
     </Grid>
 </Window>

@@ -3,6 +3,7 @@
     Private _MesCompos As GestionComposante
     Private _NoModele As String
     Private _Modele As tblModele
+    Private app As FonctionsGlobales
 
     Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
 
@@ -17,15 +18,19 @@
     End Sub
 
     Private Sub BindControl()
-            _MesCompos = New GestionComposante(_NoModele)
 
-            lstComposante.DataContext = _MesCompos.CollectComposante
-            lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
+        _MesCompos = New GestionComposante(_NoModele)
+
+        lstComposante.DataContext = _MesCompos.CollectComposante
+        lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
     End Sub
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
-
-        _MesCompos.AddComposante(txtCompo.Text)
+        If app.verifier_null(txtCompo.Text) Then
+            _MesCompos.AddComposante(txtCompo.Text)
+        Else
+            app.changer_statut("Veuillez Entrer une valeur de type composante")
+        End If
 
         BindControl()
 
@@ -33,9 +38,10 @@
 
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
-            _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
+        _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
 
-            BindControl()
+        BindControl()
+
     End Sub
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
@@ -43,7 +49,6 @@
     End Sub
 
     Private Sub AjoutModele_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutModele.Click
-
         _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
 
         BindControl()
@@ -82,7 +87,7 @@ Public Class GestionComposante
     Public Sub New(ByVal _NoModele As String)
 
         Dim MesCompos = From el In BD.GetLstCompo(_NoModele)
-
+                                        
         CollectComposante = New ListCollectionView(MesCompos.ToList)
 
         Dim CompoModele = From Compo In BD.tblModele
@@ -90,7 +95,6 @@ Public Class GestionComposante
                           Select Compo
 
         ModeleComposante = New ListCollectionView(CompoModele.ToList)
-
     End Sub
 
     Public Function AddComposante(ByVal TypeCom As String) As Boolean
