@@ -1,4 +1,6 @@
-﻿Imports mod_smtp
+﻿Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
+Imports mod_smtp
 Public Class membreEtudiant
     Public DM As PresenceEntities
     Dim newEtu As tblEtudiant
@@ -7,9 +9,23 @@ Public Class membreEtudiant
     Dim nouvelUser As tblLogin
     Public LeNouveau As tblMembre
     Dim _envoimail As objSmtp
+    Public statut As Label
+
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
         Dim dateNow As Date
         dateNow = DateValue(Now)
+
+        Dim myRegex1 As New Regex( _
+"\d{7,9}")
+        If (myRegex1.IsMatch(txtDaEtudiant.Text) = False) Then
+            statut.Content = "Un numéro de DA doit comporter entre 7 et 9 chiffres"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
+
 
         newEtu = New tblEtudiant With _
 {
@@ -32,7 +48,7 @@ Public Class membreEtudiant
         createUser2(txtDaEtudiant.Text, (lblNom1.Content & lblPrenom.Content))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
         _envoimail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
-        _envoimail.AddCC("dany.lalancette.g@hotmail.com")
+        _envoimail.AddCC(LeNouveau.CourrielMembre)
         _envoimail.EnvoiMessage()
 
     End Sub
@@ -85,7 +101,6 @@ Public Class membreEtudiant
 
         lblNom1.DataContext = LeNouveau
         lblPrenom.DataContext = LeNouveau
-        lblAdresseMail.DataContext = LeNouveau
         txtDateInscription.Text = dateNow
 
     End Sub

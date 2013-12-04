@@ -53,7 +53,7 @@
         <Button Name="btnAjoutModele"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="245.4,255,0,0" VerticalAlignment="Top" Width="44">
             <Image Source="/Images/icons/Button_Next.png"/>
         </Button>
-        <TextBox Name="txtCompo" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="73.4,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="141"/>
+        <TextBox Name="txtCompo" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="73.4,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <Button Name="btnSupCompo" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="158.4,113,0,0" VerticalAlignment="Top" Width="44">
             <Image Source="Images/Icons/Button_Up.png"/>
         </Button>

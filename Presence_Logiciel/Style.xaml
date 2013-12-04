@@ -349,4 +349,20 @@
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
     </Style>
+    
+    <!-- STYLE GLOBAL-->
+        <!--btn Global template-->
+    <Style TargetType="Button" x:Key="btnGlobal">
+        <Setter Property="Foreground" Value="#FFFCFCFC"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="FontFamily" Value="Calibri"></Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5479BB" Offset="0.015"/>
+                    <GradientStop Color="#FF2558B3" Offset="0.869"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
