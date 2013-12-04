@@ -89,10 +89,10 @@ Public Class MembreProf
         End Try
 
         createUser2(txtUtilisateur.Text, (LeNouveau.NomMembre & LeNouveau.PrenomMembre))
-        'Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
-        '_envoimail = New objSmtp("dicj@cjonquiere.qc.ca", "dicj@cjonquiere.qc.ca", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe temporaire est :" & LeNouveau.NomMembre & LeNouveau.PrenomMembre & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
-        '_envoimail.AddCC(newProf.CourrielCegepProfesseur)
-        '_envoimail.EnvoiMessage()
+        Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
+        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe temporaire est :" & LeNouveau.NomMembre & LeNouveau.PrenomMembre & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
+        _envoimail.AddCC(newProf.CourrielCegepProfesseur)
+        _envoimail.EnvoiMessage()
 
     End Sub
 

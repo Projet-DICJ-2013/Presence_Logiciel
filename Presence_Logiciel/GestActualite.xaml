@@ -50,7 +50,7 @@ x:Class="rssActualite"
                     <Label x:Name="lblTitre" Content="Titre" HorizontalAlignment="Left" Margin="31,59,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblContenu" Content="Contenu" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtContenu" HorizontalAlignment="Left" Height="163" Margin="105,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302"/>
-                    <TextBox x:Name="txtTitre" HorizontalAlignment="Left" Height="23" Margin="105,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302"/>
+                    <TextBox x:Name="txtTitre" HorizontalAlignment="Left" Height="23" Margin="105,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302" MaxLength="50"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Consulter">
