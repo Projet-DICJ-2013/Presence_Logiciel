@@ -1,6 +1,6 @@
 ﻿Imports mod_smtp
 Public Class Pret
-
+    Public statut As Label
     Dim BD As PresenceEntities
     Dim Smtp As objSmtp
     Dim _aPreter As List(Of tblPretExemplaire)
