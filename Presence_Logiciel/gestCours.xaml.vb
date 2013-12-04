@@ -181,13 +181,20 @@ Class gestCours
             CoursAmodifier.NomCours = txtNomCours.Text
             CoursAmodifier.PonderationCours = txtPonderation.Text
 
-            'If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
-            '    DM.tblStatutCoursCours.AddObject(newStatut)
-            'End If
-            CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
+            If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
+                DM.tblStatutCoursCours.AddObject(newStatut)
+            End If
+
             DM.SaveChanges()
             If (StatutVisible = True) Then
-                CacherStatuts()
+                Dim anim As Storyboard = FindResource("AnimRectFin")
+
+                anim.Begin(recActif)
+                anim.Begin(recAnnulé)
+                anim.Begin(recInactif)
+                anim.Begin(lblActif)
+                anim.Begin(lblAnnule)
+                anim.Begin(lblInactif)
             End If
 
         Catch ex2 As System.Data.SqlClient.SqlException
@@ -197,7 +204,7 @@ Class gestCours
             'Dit l 'erreur
         End Try
 
-        ' Page_Loaded(sender, e)
+        Page_Loaded(sender, e)
         afficherStatut()
 
 
@@ -229,16 +236,12 @@ Class gestCours
         Try
 
 
-
+            lblStatutCours.DataContext = Nothing
             lblDateAcquisition.DataContext = Nothing
             Dim eCours = (From l In DM.tblStatutCoursCours Where l.CodeCours = CType(vu.CurrentItem, tblCours).CodeCours Order By l.DateAcquisitionStatut Descending Select l)
             Dim leecour As tblStatutCoursCours
             leecour = eCours.FirstOrDefault
-
-            lblStatutCours.DataContext = Nothing
-            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours.FirstOrDefault   'CType(leecour, tblStatutCoursCours)
-
-
+            lblStatutCours.DataContext = CType(leecour, tblStatutCoursCours)
             lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
         Catch ex As Exception
 
@@ -276,34 +279,26 @@ Class gestCours
         End If
     End Sub
 
-    
-    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown
-
+    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown, recAnnulé.MouseDown, recInactif.MouseDown
         lblStatutCours.Content = lblActif.Content
-        CacherStatuts()
 
-    End Sub
-
-    Private Sub CacherStatuts()
         Dim anim As Storyboard = FindResource("AnimRectFin")
-        Dim anim2 As Storyboard = FindResource("AnimLblFin")
+
         anim.Begin(recActif)
         anim.Begin(recAnnulé)
         anim.Begin(recInactif)
-        anim2.Begin(lblActif)
-        anim2.Begin(lblAnnule)
-        anim2.Begin(lblInactif)
-        StatutVisible = False
+        anim.Begin(lblActif)
+        anim.Begin(lblAnnule)
+        anim.Begin(lblInactif)
     End Sub
 
     Private Sub recInactif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recInactif.MouseDown
         lblStatutCours.Content = lblInactif.Content
-        CacherStatuts()
+
     End Sub
 
     Private Sub recAnnulé_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recAnnulé.MouseDown
         lblStatutCours.Content = lblAnnule.Content
-        CacherStatuts()
     End Sub
 
 

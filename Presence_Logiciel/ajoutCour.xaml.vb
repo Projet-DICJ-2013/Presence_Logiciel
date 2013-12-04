@@ -67,19 +67,6 @@ Public Class ajoutCour
             MessageBox.Show(ex.ToString)
         End Try
 
-        Try
-            Dim newStatut As tblStatutCoursCours
-            newStatut = New tblStatutCoursCours With _
-   {
-       .CodeCours = txtCodeCours.Text, _
-       .DateAcquisitionStatut = DateTime.Now().ToString, _
-       .NomStatutCours = CType(cmbStatut.SelectedItem, ComboBoxItem).Content.ToString()
-   }
-
-        Catch ex As Exception
-
-        End Try
-
 
     End Sub
 
@@ -99,5 +86,4 @@ Public Class ajoutCour
             anim.Begin(statut)
         End If
     End Sub
-
 End Class

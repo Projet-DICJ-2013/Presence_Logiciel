@@ -66,14 +66,6 @@
             <Button x:Name="btnInnactif" Content="Innactif"/>
         </StackPanel>
         <DataGrid x:Name="grdListePret" SelectionMode="Single" ItemsSource="{Binding}" AutoGenerateColumns = "false" HorizontalAlignment="Stretch" IsReadOnly="false" VerticalAlignment="Top" Grid.Row="1" Margin="0,30,-0.2,10.2" Grid.RowSpan="2" DataContext="{Binding}" >
-            <DataGrid.ContextMenu>
-                <ContextMenu IsManipulationEnabled="True" Cursor="Arrow">
-                    <MenuItem x:Name="miSuprimer" Header="supprimer le pret" />
-                    <MenuItem x:Name="miTerminer" Header="terminer le pret"/>
-                    <MenuItem/>
-                    <MenuItem/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="true" Header="Id Prêt" Width="0.3*" Binding="{Binding Path=Pret.IdPret, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
                 <DataGridTextColumn IsReadOnly="true" Header="Id Exemplaire" Width="0.3*" Binding="{Binding Path=Exemplaire.CodeBarre, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />

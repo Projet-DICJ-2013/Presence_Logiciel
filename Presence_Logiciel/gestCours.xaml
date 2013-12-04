@@ -48,11 +48,6 @@
                 <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,176,0,0"  Duration="0:0:1" BeginTime="0:0:0"/>
 
             </Storyboard>
-            <Storyboard  x:Key="AnimLblFin">
-                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:0"/>
-                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)" To="1103,176,0,0"  Duration="0:0:1" BeginTime="0:0:0"/>
-
-            </Storyboard>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
@@ -118,7 +113,7 @@
                 <Grid HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="388.8"/>
             </GroupBox>
             <Rectangle x:Name="recStatutCours" Fill="#FF5F5FFF" HorizontalAlignment="Left" Height="62" Margin="1103,176,0,0" Stroke="Black" VerticalAlignment="Top" Width="252"/>
-            <Label x:Name="lblStatutCours" Content="{Binding Path=NomStatutCours}" HorizontalAlignment="Left" Margin="1163,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.245,-0.069" Foreground="White"/>
+            <Label x:Name="lblStatutCours" Content="{Binding NomStatutCours}" HorizontalAlignment="Left" Margin="1163,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.245,-0.069" Foreground="White"/>
             <Button x:Name="btnO" Content="O" HorizontalAlignment="Left" Margin="1373,187,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="3.79,-3.999" Visibility="Hidden"/>
             <Rectangle x:Name="recActif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,280,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Opacity="0"/>
             <Rectangle x:Name="recInactif" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="52" Margin="1103,337,0,0" Stroke="Black" VerticalAlignment="Top" Width="252" Opacity="0"/>

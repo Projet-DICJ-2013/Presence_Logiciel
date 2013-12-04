@@ -89,7 +89,7 @@
                     <ColumnDefinition Width="149.6"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Marque" Width="69" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                <Label Content="NoModele" Width="66" Grid.Row="2" Margin="0,0.4,0,0"/>
+                <Label Content="Modele" Width="66" Grid.Row="2" Margin="0,0.4,0,0"/>
                 <Label Content="Type" Width="56" Grid.Row="3"/>
                 <Label Content="Garantie" Width="77" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,7.2,0,-2.8"/>
 

@@ -47,7 +47,7 @@ Public Class membreEtudiant
 
         createUser2(txtDaEtudiant.Text, (lblNom1.Content & lblPrenom.Content))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
-        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
+        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("Votre numéro de DA est :" & txtDaEtudiant.Text & " votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
         _envoimail.AddCC(LeNouveau.CourrielMembre)
         _envoimail.EnvoiMessage()
 

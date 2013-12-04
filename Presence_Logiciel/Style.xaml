@@ -365,6 +365,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <!--Événement sélection Item listview-->
 </ResourceDictionary>

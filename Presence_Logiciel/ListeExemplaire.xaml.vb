@@ -62,10 +62,7 @@ Class ListeExemplaire
 
 
     Private Sub Button_save(sender As Object, e As RoutedEventArgs) Handles btn_save.Click
-        Try
-            BD.SaveChanges()
-        Catch ex As Exception
-        End Try
+        BD.SaveChanges()
     End Sub
 
     Private Sub btnSupression_Click(sender As Object, e As RoutedEventArgs) Handles btnSupression.Click
@@ -75,47 +72,11 @@ Class ListeExemplaire
             Dim _req = From ex In BD.tblExemplaire
            Where ex.CodeBarre = CType(grdListeExemplaire.SelectedItem, ExemplaireModele).Exemplaire.CodeBarre
             _req.FirstOrDefault.TypeEtat = "Supprimé"
-            Try
-                BD.SaveChanges()
-            Catch ex As Exception
-            End Try
-        End If
-    End Sub
-    Private Sub MenuContextuelEx(j As String)
-        Dim confirmation = MessageBox.Show("l'exemplaire va maintenant être " + j, "Modification d'un prêt", MessageBoxButton.YesNo)
-        If confirmation = MessageBoxResult.Yes Then
-            Dim _req2 = From p In BD.tblExemplaire
-                    Where p.CodeBarre = CType(grdListeExemplaire.SelectedItem, ExemplaireModele).Exemplaire.CodeBarre
-            _req2.FirstOrDefault.TypeEtat = j
-
             BD.SaveChanges()
             statut.Content = "votre exemplaire est désormait" + j
             Dim anim As Storyboard = FindResource("AnimLabel")
 
             anim.Begin(statut)
         End If
-
-
-    End Sub
-
-
-    Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
-        MenuContextuelEx("À Réparé")
-    End Sub
-
-    Private Sub miDetruit_Click(sender As Object, e As RoutedEventArgs) Handles miDetruit.Click
-        MenuContextuelEx("Détruit")
-    End Sub
-
-    Private Sub miPerdu_Click(sender As Object, e As RoutedEventArgs) Handles miPerdu.Click
-        MenuContextuelEx("Perdu")
-    End Sub
-
-    Private Sub miHorsservice_Click(sender As Object, e As RoutedEventArgs) Handles miHorsservice.Click
-        MenuContextuelEx("Supprimé")
-    End Sub
-
-    Private Sub miDisponible_Click(sender As Object, e As RoutedEventArgs) Handles miDisponible.Click
-        MenuContextuelEx("Disponible")
     End Sub
 End Class
