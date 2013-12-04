@@ -3551,7 +3551,7 @@
       <Diagram DiagramId="056de796b8bf4b92baf5b5d7c1ff41a8" Name="Diagramme1" ZoomLevel="86">
         <EntityTypeShape EntityType="PresenceModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblConstant" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PresenceModel.tblCours" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PresenceModel.tblCours" Width="1.5" PointX="3.625" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblCoursSessionGroupe" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblEtudiant" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PresenceModel.tblGroupe" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />

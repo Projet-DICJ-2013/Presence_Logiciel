@@ -15,8 +15,11 @@
         Dim _reponse = MessageBox.Show("Voulez-vous vraiment creer ce nouveau groupe", "Créer un groupe", MessageBoxButton.YesNo)
         If _reponse = 6 Then
             'Enregistrement du nouveau groupe
-            Forme.SaveChanges()
-            MessageBox.Show("Un nouveau groupe a bien été enregistré", "Succès", MessageBoxButton.OK)
+            Try
+                Forme.SaveChanges()
+                MessageBox.Show("Un nouveau groupe a bien été enregistré", "Succès", MessageBoxButton.OK)
+            Catch ex As Exception
+            End Try
         Else
             Return
         End If

@@ -36,4 +36,9 @@
         Me.Close()
         Me.Finalize()
     End Sub
+    
+
+    Private Sub HandleDoubleClick(sender As Object, e As RoutedEventArgs) Handles lstModele.MouseDoubleClick
+        Me.Close()
+    End Sub
 End Class

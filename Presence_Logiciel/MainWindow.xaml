@@ -1,22 +1,33 @@
-﻿<Window x:Name="frmMain" WindowState="Maximized" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
- WindowStyle="None"  x:Class="MainWindow"
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="frmMain" WindowState="Maximized" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
+ WindowStyle="None"  x:Class="MainWindow"
     Title="MainWindow" Height="1200" Width="1080" >
     <Window.Resources>
 
-        <ResourceDictionary>
+            <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--Non du fichier de styles-->
+                <!--Nom du fichier de styles-->
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Storyboard  x:Key="AnimLabel">
-                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:3:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:3:0"/>
             </Storyboard>
         </ResourceDictionary>
 
     </Window.Resources>
-    <Grid>
+
+    <Viewbox Stretch="Fill">
+        <Grid>
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF424242" Offset="1"/>
+                <GradientStop Color="#FE434D56" Offset="0.422"/>
+                <GradientStop Color="#FE1D2E3E" Offset="0.028"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Rectangle Style="{StaticResource ResourceKey=recMain}" Height="834" Margin="0,21,0,0"/>
         <DockPanel Grid.ColumnSpan="5" Margin="1,1,-3,10" Grid.RowSpan="2" HorizontalAlignment="Stretch">
             <Menu Style="{StaticResource ResourceKey=menuMain}" >
@@ -32,12 +43,10 @@
                     <MenuItem Header="_Se Connecter" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Header="_Se Déconnecter" Style="{StaticResource ResourceKey=sousitemMain}"/>
                 </MenuItem>
-                <MenuItem Header="_Quitter" Style="{StaticResource ResourceKey=itemMain}" Click="fermer">
-
-                </MenuItem>
+                <MenuItem Header="_Quitter" Style="{StaticResource ResourceKey=itemMain}" Click="fermer"/>
                 <MenuItem Header="_" Style="{StaticResource ResourceKey=itemMain}"  HorizontalAlignment="Right" Click="minimiser" />
                 <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Parc Informatique" >
-                    <MenuItem Click="AffLstPret" Name="menuListePret" Header="_Liste des pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
+                    <MenuItem Click="AffLstPret" x:Name="menuListePret" Header="_Liste des pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Click="CreerPret" Header="_Créer un pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     <MenuItem Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
@@ -53,24 +62,15 @@
             </StackPanel>
         </DockPanel>
 
-        <Rectangle Style="{StaticResource ResourceKey=bigrecMain}" Height="37" Margin="0,858,-840,0">
-        </Rectangle>
-        <Rectangle Style="{StaticResource ResourceKey=iconMain}" x:Name="RecCours"  Margin="10,30,0,0">
-        </Rectangle>
-        <Rectangle x:Name="RecPret" Style="{StaticResource ResourceKey=iconMain}" Margin="10,750,0,0" >
-        </Rectangle>
-        <Rectangle x:Name="RecProgramme" Style="{StaticResource ResourceKey=iconMain}" Margin="10,135,0,0">
-        </Rectangle>
-        <Rectangle x:Name="RecPdf" Style="{StaticResource ResourceKey=iconMain}" Margin="10,450,0,0" >
-        </Rectangle>
-        <Rectangle x:Name="RecGroupe" Style="{StaticResource ResourceKey=iconMain}" Margin="10,240,0,0">
-        </Rectangle>
-        <Rectangle x:Name="RecOrdreJour" Style="{StaticResource ResourceKey=iconMain}" Margin="10,550,0,0">
-        </Rectangle>
-        <Rectangle x:Name="RecAsso" Style="{StaticResource ResourceKey=iconMain}" Margin="10,345,0,0">
-        </Rectangle>
-        <Rectangle x:Name="RecActualite" Style="{StaticResource ResourceKey=iconMain}" Margin="10,650,0,0">
-        </Rectangle>
+        <Rectangle Style="{StaticResource ResourceKey=bigrecMain}" HorizontalAlignment="Left"  Width="2000" Height="37" Margin="0,854,-830,0"/>
+        <Rectangle Style="{StaticResource ResourceKey=iconMain}" x:Name="RecCours"  Margin="10,30,0,0"/>
+        <Rectangle x:Name="RecPret" Style="{StaticResource ResourceKey=iconMain}" Margin="10,750,0,0" />
+        <Rectangle x:Name="RecProgramme" Style="{StaticResource ResourceKey=iconMain}" Margin="10,135,0,0"/>
+        <Rectangle x:Name="RecPdf" Style="{StaticResource ResourceKey=iconMain}" Margin="10,450,0,0" />
+        <Rectangle x:Name="RecGroupe" Style="{StaticResource ResourceKey=iconMain}" Margin="10,240,0,0"/>
+        <Rectangle x:Name="RecOrdreJour" Style="{StaticResource ResourceKey=iconMain}" Margin="10,550,0,0"/>
+        <Rectangle x:Name="RecAsso" Style="{StaticResource ResourceKey=iconMain}" Margin="10,345,0,0"/>
+        <Rectangle x:Name="RecActualite" Style="{StaticResource ResourceKey=iconMain}" Margin="10,650,0,0"/>
         <Image Style="{StaticResource ResourceKey=imageMain}"  Height="90" Margin="15,30,0,0"  Width="110" RenderTransformOrigin="0.28,0.192" Source="/images/desk.png"/>
         <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,135,0,0"  Width="100" RenderTransformOrigin="0.506,0.418" Source="/images/choipeau.png" />
         <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,240,0,0"  Width="100" Source="/images/group-icon.png" Stretch="Fill" />
@@ -79,42 +79,26 @@
         <Image Style="{StaticResource ResourceKey=imageMain}" Height="60" Margin="15,560,0,0"  Width="90" Source="/images/Microphone_icon.png"/>
         <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,750,0,0"  Width="100" Source="/images/CNC.Laptop.png"/>
         <Image Style="{StaticResource ResourceKey=imageMain}" Height="70" Margin="15,655,0,0"  Width="90" Source="/images/Crystal_Clear_app_kedit.png"/>
-        <Label Style="{StaticResource ResourceKey=labelMain}" Content="Gestion Cours"  Margin="20,110,0,0" >
-        </Label>
-        <Label Content="Gestion Programme" Style="{StaticResource ResourceKey=labelMain}" Margin="10,215,0,0" >
-        </Label>
-        <Label Content="Gestion Membres" Style="{StaticResource ResourceKey=labelMain}" Margin="15,320,0,0">
-        </Label>
-        <Label Content="Association Étudiante" Style="{StaticResource ResourceKey=labelMain}" Margin="10,425,0,0">
-        </Label>
+        <Label Style="{StaticResource ResourceKey=labelMain}" Content="Gestion Cours"  Margin="20,110,0,0" />
+        <Label Content="Gestion Programme" Style="{StaticResource ResourceKey=labelMain}" Margin="10,215,0,0" />
+        <Label Content="Gestion Membres" Style="{StaticResource ResourceKey=labelMain}" Margin="15,320,0,0"/>
+        <Label Content="Association Étudiante" Style="{StaticResource ResourceKey=labelMain}" Margin="10,425,0,0"/>
         <Button  Style="{StaticResource ResourceKey=buttonMain}" Margin="15,450,0,0" RenderTransformOrigin="-0.11,0.01" BorderThickness="2"/>
         <Button x:Name="btnGroupe" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,240,0,0"/>
         <Button x:Name="btnProgramme" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,135,0,0"/>
         <Button x:Name="btnCours" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,30,0,0"/>
-        <Label Content="Pdf" Style="{StaticResource ResourceKey=labelMain}" Margin="50,530,0,0" RenderTransformOrigin="0.635,1.14">
-        </Label>
-        <Label Content="Ordre du jour" Style="{StaticResource ResourceKey=labelMain}" Margin="20,630,0,0" RenderTransformOrigin="0.635,1.14">
-        </Label>
-        <Label Content="Actualités" Style="{StaticResource ResourceKey=labelMain}" Margin="30,728,0,0" RenderTransformOrigin="0.635,1.14">
-        </Label>
-        <Label Content="Gestion Prêts" Style="{StaticResource ResourceKey=labelMain}" Margin="25,830,0,0" RenderTransformOrigin="0.635,1.14">
-        </Label>
+        <Label Content="Pdf" Style="{StaticResource ResourceKey=labelMain}" Margin="50,530,0,0" RenderTransformOrigin="0.635,1.14"/>
+        <Label Content="Ordre du jour" Style="{StaticResource ResourceKey=labelMain}" Margin="20,630,0,0" RenderTransformOrigin="0.635,1.14"/>
+        <Label Content="Actualités" Style="{StaticResource ResourceKey=labelMain}" Margin="30,728,0,0" RenderTransformOrigin="0.635,1.14"/>
+        <Label Content="Gestion Prêts" Style="{StaticResource ResourceKey=labelMain}" Margin="25,830,0,0" RenderTransformOrigin="0.635,1.14"/>
         <Button x:Name="btnOrdreJour" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,550,0,0"/>
         <Button x:Name="btnAsso" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,345,0,0"/>
         <Button x:Name="btnActualite" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,650,0,0"/>
         <Button x:Name="btnPret" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,750,0,0"/>
         <Button x:Name="btnPdf" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,450,0,0"/>
 
-        <Grid.Background>
-            <RadialGradientBrush>
-                <GradientStop Color="#FF303336" Offset="1"/>
-                <GradientStop Color="#FFC1C6CC"/>
-                <GradientStop Color="#FF4E5053" Offset="0.708"/>
-                <GradientStop Color="#FF989CA1" Offset="0.427"/>
-                <GradientStop Color="#FFBDC2C8" Offset="0.055"/>
-                <GradientStop Color="#FEBABFC4" Offset="0.142"/>
-            </RadialGradientBrush>
-        </Grid.Background>
     </Grid>
+
+        </Viewbox>
 
 </Window>

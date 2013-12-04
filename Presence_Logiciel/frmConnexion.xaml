@@ -84,7 +84,7 @@
 
             </DockPanel>
 
-            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="15" Margin="532,70,24,0"  VerticalAlignment="Top" Width="164" FontSize="8"/>
+            <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="15" Margin="532,70,24,0"  VerticalAlignment="Top" Width="164" FontSize="8" MaxLength="9"/>
            
             <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="420,63,0,0" VerticalAlignment="Top" FontFamily="Cooper Black" Foreground="#FFD6D6D6" FontSize="14">
                 <Label.Effect>

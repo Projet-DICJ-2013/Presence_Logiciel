@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("6b95116d-6b8e-4cd9-856f-04ef999d7097")>
+<Assembly: EdmSchemaAttribute("57f996e9-dcea-4100-b13b-e2e3765a82cb")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>

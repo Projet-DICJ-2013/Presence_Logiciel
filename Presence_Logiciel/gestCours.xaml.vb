@@ -1,5 +1,7 @@
-﻿Imports System.Threading
+﻿
 Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
+
 
 Class gestCours
 
@@ -107,7 +109,9 @@ Class gestCours
         Catch ex2 As System.Data.SqlClient.SqlException
             MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
         Catch ex As Exception
-            MessageBox.Show(ex.ToString)
+            statut.Content = "Impossible de supprimer ce cours car il est actif à un programme de la session courrante"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
             'Dit l 'erreur
         End Try
         LesCours = (From cours In DM.tblCours Select cours)
@@ -138,6 +142,26 @@ Class gestCours
 
 
 
+        Dim myRegex2 As New Regex( _
+"\d-\d-\d")
+        If (myRegex2.IsMatch(txtPonderation.Text) = False) Then
+            statut.Content = "Une pondération de cours doit être : 1x(chiffre) 1x(-) 1x(chiffre) 1x(-) et 1x(chiffre) )"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
+        Dim myRegex3 As New Regex( _
+"[1-3]")
+        If (myRegex3.IsMatch(txtAnneeCours.Text) = False) Then
+            statut.Content = "Une année de cours doit être entre : 1 et 3 )"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+
+            anim.Begin(statut)
+            Return
+        End If
+
 
 
         newStatut = New tblStatutCoursCours With _
@@ -157,20 +181,13 @@ Class gestCours
             CoursAmodifier.NomCours = txtNomCours.Text
             CoursAmodifier.PonderationCours = txtPonderation.Text
 
-            If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
-                DM.tblStatutCoursCours.AddObject(newStatut)
-            End If
-
+            'If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
+            '    DM.tblStatutCoursCours.AddObject(newStatut)
+            'End If
+            CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
             DM.SaveChanges()
             If (StatutVisible = True) Then
-                Dim anim As Storyboard = FindResource("AnimRectFin")
-
-                anim.Begin(recActif)
-                anim.Begin(recAnnulé)
-                anim.Begin(recInactif)
-                anim.Begin(lblActif)
-                anim.Begin(lblAnnule)
-                anim.Begin(lblInactif)
+                CacherStatuts()
             End If
 
         Catch ex2 As System.Data.SqlClient.SqlException
@@ -180,7 +197,7 @@ Class gestCours
             'Dit l 'erreur
         End Try
 
-        Page_Loaded(sender, e)
+        ' Page_Loaded(sender, e)
         afficherStatut()
 
 
@@ -212,12 +229,16 @@ Class gestCours
         Try
 
 
-            lblStatutCours.DataContext = Nothing
+
             lblDateAcquisition.DataContext = Nothing
             Dim eCours = (From l In DM.tblStatutCoursCours Where l.CodeCours = CType(vu.CurrentItem, tblCours).CodeCours Order By l.DateAcquisitionStatut Descending Select l)
             Dim leecour As tblStatutCoursCours
             leecour = eCours.FirstOrDefault
-            lblStatutCours.DataContext = CType(leecour, tblStatutCoursCours)
+
+            lblStatutCours.DataContext = Nothing
+            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours.FirstOrDefault   'CType(leecour, tblStatutCoursCours)
+
+
             lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
         Catch ex As Exception
 
@@ -255,26 +276,34 @@ Class gestCours
         End If
     End Sub
 
-    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown, recAnnulé.MouseDown, recInactif.MouseDown
+    
+    Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown
+
         lblStatutCours.Content = lblActif.Content
+        CacherStatuts()
 
+    End Sub
+
+    Private Sub CacherStatuts()
         Dim anim As Storyboard = FindResource("AnimRectFin")
-
+        Dim anim2 As Storyboard = FindResource("AnimLblFin")
         anim.Begin(recActif)
         anim.Begin(recAnnulé)
         anim.Begin(recInactif)
-        anim.Begin(lblActif)
-        anim.Begin(lblAnnule)
-        anim.Begin(lblInactif)
+        anim2.Begin(lblActif)
+        anim2.Begin(lblAnnule)
+        anim2.Begin(lblInactif)
+        StatutVisible = False
     End Sub
 
     Private Sub recInactif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recInactif.MouseDown
         lblStatutCours.Content = lblInactif.Content
-
+        CacherStatuts()
     End Sub
 
     Private Sub recAnnulé_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recAnnulé.MouseDown
         lblStatutCours.Content = lblAnnule.Content
+        CacherStatuts()
     End Sub
 
 

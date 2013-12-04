@@ -1,5 +1,5 @@
 ﻿Imports System.Data.Objects
-
+'PATRICK EST BIN TROP COOL POUR METTRE DES COMMENTAIRES IL SE PENSE HOT LE GARS
 Public Class frmModele
 
     Private Modele As GestionModele
@@ -61,24 +61,23 @@ Public Class frmModele
 
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-        Dim tblModele As tblModele
+            Dim tblModele As tblModele
 
-        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
+            If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
 
-            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
-            Return
+                MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
+                Return
 
-        End If
+            End If
 
-        tblModele = New tblModele With {.NoModele = TxtModele.Text, _
-                                                .Marque = TxtMarque.Text, _
-                                                .NbAnneeGarantie = TxtGaranti.Text, _
-                                                .TypeMachine = TxtMarque.Text}
+            tblModele = New tblModele With {.NoModele = TxtModele.Text, _
+                                                    .Marque = TxtMarque.Text, _
+                                                    .NbAnneeGarantie = TxtGaranti.Text, _
+                                                    .TypeMachine = TxtMarque.Text}
 
-        If (tblModele IsNot Nothing) Then
-            Modele.AddModele(tblModele)
-        End If
-
+            If (tblModele IsNot Nothing) Then
+                Modele.AddModele(tblModele)
+            End If
     End Sub
 
 
@@ -115,6 +114,8 @@ Public Class frmModele
         SynchroControl()
 
     End Sub
+
+
 End Class
 
 Public Class GestionModele
@@ -179,19 +180,19 @@ Public Class GestionModele
                                  Select Mode)
         Dim Modele As tblModele
 
-        Try
             If ModeleChange.Count Then
                 Modele = ModeleChange.First
                 Modele = MonModele
             Else
                 BD.AddTotblModele(MonModele)
             End If
-            BD.SaveChanges()
-        Catch ex As Exception
-            Return False
-        End Try
+            Try
+                BD.SaveChanges()
+            Catch ex As Exception
+                Return False
+            End Try
 
-        Return True
+            Return True
 
     End Function
 
@@ -217,5 +218,6 @@ Public Class GestionModele
         Return True
     End Function
 
+    'PARTIE DE LA VALIDATION DES ENTRÉES
 
 End Class

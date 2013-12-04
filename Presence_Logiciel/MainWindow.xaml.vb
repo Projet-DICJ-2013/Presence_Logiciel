@@ -96,7 +96,8 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecPdf.Effect = objDropShadow
 
-        Dim FnPdf As New GestionPDF
+        Dim FnPdf As New GestionPDF()
+        FnPdf.PStatut = lblStatut
         FnPdf.ShowDialog()
     End Sub
 
@@ -110,6 +111,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecActualite.Effect = objDropShadow
         Dim gestActu As New rssActualite
+        gestActu.statut = lblStatut
         gestActu.ShowDialog()
     End Sub
 

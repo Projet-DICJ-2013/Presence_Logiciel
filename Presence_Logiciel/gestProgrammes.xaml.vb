@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
 
 Public Class gestProgrammes
     Dim DM As PresenceEntities
@@ -79,16 +80,22 @@ Public Class gestProgrammes
         Try
             Dim SupprTest As IQueryable(Of tblProgramme) = (From p In DM.tblProgramme Where p.CodeProg = txtNumProgramme.Text Select p)
             Dim CoursASupprimer As tblProgramme = SupprTest.First()
+
             DM.DeleteObject(CoursASupprimer)
             DM.SaveChanges()
 
-
         Catch ex2 As System.Data.SqlClient.SqlException
-            MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
+            MessageBox.Show("Impossible de supprimer ce programme car il a des cours attribué")
         Catch ex As Exception
-            MessageBox.Show(ex.ToString)
+            statut.Content = "Impossible de supprimer ce programme car il a des cours attribué"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
+
             'Dit l 'erreur
         End Try
+
+
+
         LesProgrammes = (From prog In DM.tblProgramme Select prog)
         vu = New ListCollectionView(LesProgrammes.ToList())
         txtNumProgramme.DataContext = vu
@@ -134,12 +141,16 @@ Public Class gestProgrammes
         btnFontEnregistrer.Visibility = Windows.Visibility.Hidden
         btnEnregistrer.Visibility = Windows.Visibility.Hidden
 
+
+
+
         Try
             Dim modTest As IQueryable(Of tblProgramme) = (From p In DM.tblProgramme Where p.CodeProg = txtNumProgramme.Text Select p)
             Dim CoursAmodifier As tblProgramme = modTest.First()
             CoursAmodifier.CodeProg = txtNumProgramme.Text
             CoursAmodifier.NomProg = txtNomProgramme.Text
-            CoursAmodifier.ObjectifProg = txtObjectif.DataContext.ToString
+            CoursAmodifier.ObjectifProg = txtObjectif.Text
+
 
             DM.SaveChanges()
 
@@ -163,5 +174,9 @@ Public Class gestProgrammes
 
             anim.Begin(statut)
         End If
+
+
+
     End Sub
+
 End Class
