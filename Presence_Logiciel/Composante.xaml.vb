@@ -3,6 +3,7 @@
     Private _MesCompos As GestionComposante
     Private _NoModele As String
     Private _Modele As tblModele
+    Private app As FonctionsGlobales
 
     Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
 
@@ -25,8 +26,11 @@
     End Sub
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
-
-        _MesCompos.AddComposante(txtCompo.Text)
+        If app.verifier_null(txtCompo.Text) Then
+            _MesCompos.AddComposante(txtCompo.Text)
+        Else
+            app.changer_statut("Veuillez Entrer une valeur de type composante")
+        End If
 
         BindControl()
 
