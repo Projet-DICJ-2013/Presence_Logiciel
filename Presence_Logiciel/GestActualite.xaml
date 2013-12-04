@@ -6,6 +6,27 @@ x:Class="rssActualite"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d"
       Title="GestActualite" Height="502.798" Width="645.745" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Storyboard  x:Key="AnimLabel">
+                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-30,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" />
+                <DoubleAnimation Storyboard.TargetProperty="(Label.FontSize)" From="12" To="20" Duration="0:0:1" BeginTime="0:0:2"/>
+                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-100,0,0"  Duration="0:0:5" BeginTime="0:0:9"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:4"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" BeginTime="0:0:5"/>
+                <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Red" Duration="0:0:0" BeginTime="0:0:5"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:6"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" BeginTime="0:0:7"/>
+                <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:0" BeginTime="0:0:7"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.FontSize)" From="20" To="12" Duration="0:0:1" BeginTime="0:0:7"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+
+            </Storyboard>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,28 +37,30 @@ x:Class="rssActualite"
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="416" Margin="10,0,0,0" VerticalAlignment="Top" Width="626" Grid.RowSpan="2">
-            <TabItem Header="Nouvelle">
-                <Grid Background="#FFE5E5E5" Margin="10,20,-10,-20">
-                    <GroupBox Header="Nouvelle Publication" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="374" Width="606">
+        <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="416" Margin="10,29.2,0,0" VerticalAlignment="Top" Width="626" Grid.Row="1">
+            <TabItem Header="Nouvelle" MouseDown="TabItem_MouseDown">
+                <Grid Background="#FFE5E5E5" Margin="0,12,0,-12">
+                    <GroupBox Header="Nouvelle Publication" HorizontalAlignment="Left" VerticalAlignment="Top" Height="374" Width="606">
 
-                        <Image x:Name="btnAdd" Source="/images/Icons/Add.png" Margin="244,288,294.6,26" RenderTransformOrigin="0.651,0.5"/>
+                        <Button x:Name="btnAdd" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Margin="240,298,0,0">
+                            <Image x:Name="btnEditt1" Source="images/Icons/Add_Symbol.png" Height="30" Width="40"/>
+
+                        </Button>
                     </GroupBox>
                     <Label x:Name="lblTitre" Content="Titre" HorizontalAlignment="Left" Margin="31,59,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lblContenu" Content="Contenu" HorizontalAlignment="Left" Margin="31,163,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtContenu" HorizontalAlignment="Left" Height="128" Margin="105,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302"/>
-                    <TextBox x:Name="txtTitre" HorizontalAlignment="Left" Height="23" Margin="105,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+                    <Label x:Name="lblContenu" Content="Contenu" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtContenu" HorizontalAlignment="Left" Height="163" Margin="105,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302"/>
+                    <TextBox x:Name="txtTitre" HorizontalAlignment="Left" Height="23" Margin="105,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302" MaxLength="50"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Consulter">
-                <Grid Background="#FFE5E5E5" Margin="10,3,-10,-3">
+                <Grid Background="#FFE5E5E5" Margin="0,4,0,-4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="6*"/>
-                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="13.6"/>
                         <ColumnDefinition Width="295*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Margin="377.4,25,175,311" Source="images\Crystal_Clear_action_button_cancel.png" Stretch="Fill" Grid.Column="2"/>
-                    <GroupBox Header="Nouvelles" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Height="324" Width="366" Grid.ColumnSpan="3">
+                    <GroupBox Header="Nouvelles" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Height="324" Width="366" Grid.ColumnSpan="3">
                         <ListView x:Name="lstNouvelles" HorizontalAlignment="Left" Height="301.6" VerticalAlignment="Top" Width="353.6">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -46,10 +69,34 @@ x:Class="rssActualite"
                             </ListView.ItemTemplate>
                         </ListView>
                     </GroupBox>
-                    <Image Grid.Column="2" Margin="437.4,25,105,311" Source="images\Crystal_Clear_mimetype_mime_txt.png" Stretch="Fill" RenderTransformOrigin="0.571,0.869"/>
+                    <Button x:Name="btnbackk" Grid.Column="1" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Width="42" Grid.ColumnSpan="2" Visibility="Hidden">
+                        <Image x:Name="btnBack" Source="/images/Icons/Button_Back.png" Height="30" Width="40"/>
+
+                    </Button>
+                    <Button x:Name="btnEdit" Grid.Column="2" HorizontalAlignment="Left" Margin="369.4,25,0,0" VerticalAlignment="Top" Width="42" Visibility="Hidden">
+                        <Image x:Name="btnEditt" Source="images/Icons/File_Edit.png" Height="30" Width="40"/>
+
+                    </Button>
+                    <Button x:Name="btnDelete" Grid.Column="2" HorizontalAlignment="Left" Margin="431.4,25,0,0" VerticalAlignment="Top" Width="42">
+                        <Image x:Name="btnSupprimer" Source="images/delete.png" Height="30" Width="40"/>
+
+                    </Button>
+                    <Button x:Name="btnSavee" Grid.Column="2" HorizontalAlignment="Left" Margin="490.4,25,0,0" VerticalAlignment="Top" Width="42" Visibility="Hidden">
+                        <Image x:Name="btnsave" Source="images/icons/save.png" Height="30" Width="40"/>
+
+                    </Button>
                 </Grid>
             </TabItem>
         </TabControl>
+        <TextBox x:Name="txtActu"  Text="{Binding TexteActu}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="299" Margin="32,120.2,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="353" IsEnabled="False" Foreground="Black" Visibility="Hidden">
+            <TextBox.BorderBrush>
+                <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="White" Offset="0.999"/>
+                </LinearGradientBrush>
+            </TextBox.BorderBrush>
+        </TextBox>
+        <Button x:Name="btnX" Grid.ColumnSpan="2" Content="x" HorizontalAlignment="Left" Margin="602,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="34" RenderTransformOrigin="2.174,-0.112" Height="19"/>
 
     </Grid>
 </Window>

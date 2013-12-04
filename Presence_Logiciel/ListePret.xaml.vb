@@ -17,6 +17,9 @@ Class ListePret
     Private req As IQueryable(Of PretExemplaireMembre)
     Private reqFiltre As IQueryable(Of PretExemplaireMembre)
 
+    Private Sub test1()
+        MessageBox.Show("test")
+    End Sub
 
     Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
         Dim fnPret As New Pret
@@ -74,6 +77,7 @@ Class ListePret
            Where p.IdPret = CType(grdListePret.SelectedItem, PretExemplaireMembre).Pret.IdPret
 
             _req.FirstOrDefault.TypeEtat = "Supprimé"
+
             Dim _req2 = From p In BD.tblExemplaire
             Where p.CodeBarre = CType(grdListePret.SelectedItem, PretExemplaireMembre).PretExemplaire.CodeBarre
             For Each Exemplaire As tblExemplaire In _req2
@@ -86,5 +90,37 @@ Class ListePret
             Catch ex As Exception
             End Try
         End If
+    End Sub
+
+    Private Sub Menu_contextuel(i As String, j As String, k As String)
+
+        Dim confirmation = MessageBox.Show("le prèt va maintenant être " + k, "Modification d'un prêt", MessageBoxButton.YesNo)
+        If confirmation = MessageBoxResult.Yes Then
+            MessageBox.Show("l'élément est maintenant " + k, "Résultat")
+            Dim _req = From p In BD.tblPret
+           Where p.IdPret = CType(grdListePret.SelectedItem, PretExemplaireMembre).Pret.IdPret
+
+            _req.FirstOrDefault.TypeEtat = i
+            Dim _req2 = From p In BD.tblExemplaire
+            Where p.CodeBarre = CType(grdListePret.SelectedItem, PretExemplaireMembre).PretExemplaire.CodeBarre
+            For Each Exemplaire As tblExemplaire In _req2
+
+                _req2.FirstOrDefault.TypeEtat = j
+
+            Next
+            BD.SaveChanges()
+        End If
+    End Sub
+
+    Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
+        Menu_contextuel("Suprimé", "Disponible", "Suprimé")
+    End Sub
+
+    Private Sub miSuprimer_Click(sender As Object, e As RoutedEventArgs) Handles miSuprimer.Click
+        Menu_contextuel("Supprimé", "Disponible", "Supprimé")
+    End Sub
+
+    Private Sub miTerminer_Click(sender As Object, e As RoutedEventArgs) Handles miTerminer.Click
+        Menu_contextuel("Innactif", "Disponible", "Innactif")
     End Sub
 End Class
