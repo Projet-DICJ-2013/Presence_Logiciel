@@ -5,10 +5,6 @@ Public Class ajoutProgramme
     Dim nouveauProg As tblProgramme
     Public statut As Label
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Finalize()
-        Me.Close()
-    End Sub
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
 

@@ -308,11 +308,6 @@ Class gestCours
 
 
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-
-    End Sub
 
 
 

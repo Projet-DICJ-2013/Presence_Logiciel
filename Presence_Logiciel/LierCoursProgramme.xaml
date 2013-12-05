@@ -1,7 +1,7 @@
 ﻿<Window x:Class="LierCoursProgramme"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="LierCoursProgramme" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" WindowStyle="None" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Loaded="Window_Loaded"  >
+    Title="LierCoursProgramme" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Loaded="Window_Loaded"  >
     <Window.Resources>
         <!--button ordre-->
         <Style TargetType="{x:Type Button}" x:Key="btnOrdre" >
@@ -56,7 +56,7 @@
                 <Label Content="Cours attribués à ce programme" Grid.Column="1" HorizontalAlignment="Left" Margin="203.4,41,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" RenderTransformOrigin="0.59,0.592"/>
             </Grid>
         </Grid>
-        <Button x:Name="btnX" Margin="453,0,6,0" VerticalAlignment="Top" Content="x"/>
+        
         <Button Margin="401,39,0,422" HorizontalAlignment="Left">
             <Image x:Name="btnSupprimer1" Source="images/Icons/Trash.png"/>
         </Button>

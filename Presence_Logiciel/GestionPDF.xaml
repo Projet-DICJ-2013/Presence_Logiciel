@@ -1,4 +1,4 @@
-﻿<Window x:Class="GestionPDF"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window x:Class="GestionPDF"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="GestionPDF" Height="720.631" Width="1099.46">
@@ -28,7 +28,7 @@
         	Name="AddNewReport" VerticalAlignment="Top" Width="41">
             <Image Source="Images/Icons/Add.png" Height="29" Width="20"/>
         </Button>
-        <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="1032,8,0,0" VerticalAlignment="Top" Width="39" RenderTransformOrigin="-0.285,0.316" Height="30"/>
+        
         <ComboBox IsEditable="True"  Height="29" HorizontalAlignment="Left" Margin="566,8,0,0"
         	x:Name="txtIdRap" VerticalAlignment="Top" Width="288" Text="Saisir l'id du rapport" ItemsSource="{Binding Path=Nom}"/>
     </Grid>

@@ -1,4 +1,4 @@
-﻿<Window ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
   x:Class="gestProgrammes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -73,9 +73,6 @@
                 </StackPanel>
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,14,0,0" RenderTransformOrigin="0.5,0.5"/>
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
-                <Button HorizontalAlignment="Left" Margin="1448,0,-0.4,0" VerticalAlignment="Top" Width="42">
-                    <Image x:Name="imgX" Stretch="Fill" Source="Images/icons/Error.png" Height="18" Width="27"/>
-                </Button>
 
             </Grid>
             <Rectangle x:Name="recListeCours" Fill="#FF5353E1" HorizontalAlignment="Right" Height="38" Margin="0,156,41.6,0" Stroke="Black" VerticalAlignment="Top" Width="391"/>

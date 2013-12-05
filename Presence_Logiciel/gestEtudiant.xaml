@@ -1,4 +1,4 @@
-﻿<Window x:Class="gestEtudiant"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window x:Class="gestEtudiant"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="GestEtudiant" Height="700" Width="1200" Loaded="Window_Loaded">
@@ -215,7 +215,6 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="1489,10,15,0" VerticalAlignment="Top" Width="55" Grid.ColumnSpan="3"/>
             <GroupBox x:Name="grpGestGroupe" Header="Gestion des groupes" HorizontalAlignment="Left" Margin="839,510,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="532" Height="113" FontSize="20" FontFamily="Calibri"/>
             <Button x:Name="btnGestGroupe" Content="Gestion des Groupes" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="320" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="963,0,206.6,64.8">
                 <Button.Background>

@@ -1,4 +1,4 @@
-﻿<Window ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
 x:Class="rssActualite"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -96,7 +96,7 @@ x:Class="rssActualite"
                 </LinearGradientBrush>
             </TextBox.BorderBrush>
         </TextBox>
-        <Button x:Name="btnX" Grid.ColumnSpan="2" Content="x" HorizontalAlignment="Left" Margin="602,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="34" RenderTransformOrigin="2.174,-0.112" Height="19"/>
+        
 
     </Grid>
 </Window>

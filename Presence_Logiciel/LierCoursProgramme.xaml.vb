@@ -6,10 +6,7 @@
     Dim lstprog As IQueryable(Of tblProgramme)
 
 
-    Private Sub Fermer(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Finalize()
-        Me.Close()
-    End Sub
+
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
 

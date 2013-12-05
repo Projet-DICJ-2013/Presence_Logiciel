@@ -108,10 +108,7 @@ Public Class gestProgrammes
         AffProgramme(sender, e)
     End Sub
 
-    Private Sub imgX_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgX.MouseDown
-        Me.Close()
-        Me.Finalize()
-    End Sub
+ 
 
 
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click

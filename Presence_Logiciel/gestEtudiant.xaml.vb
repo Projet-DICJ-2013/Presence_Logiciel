@@ -301,10 +301,7 @@ Public Class gestEtudiant
 
     End Sub
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
+  
 
     Private Sub btnGestGroupe_Click(sender As Object, e As RoutedEventArgs) Handles btnGestGroupe.Click
         Dim gestgroupe As New frmGestGroupe
