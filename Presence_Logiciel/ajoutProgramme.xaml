@@ -4,7 +4,9 @@
  Title="ajoutProgramme" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
     <Window.Resources>
         <ResourceDictionary>
+            <!-- c'est ici qu'il faut construire les animations -->
             <Storyboard  x:Key="AnimLabel">
+                <!-- animation de la barre de statut-->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
