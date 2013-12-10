@@ -4,19 +4,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="frmConnexion"
     Title="frmConnexion" Height="1920" Width="1080" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="ouverture">
     <Window.Resources>
-        <ResourceDictionary>
 
+
+        <ResourceDictionary>
+            <!--C'est ici qu'il faut construire les animations-->
             <Storyboard  x:Key="AnimTextBox">
+                <!--Aparition en fondu d'un label et d'un rectangle-->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" BeginTime="0:0:1" />
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:2" BeginTime="0:0:1" />
 
             </Storyboard>
+            <!--Disparition en fondu d'un label et d'un rectangle-->
             <Storyboard  x:Key="AnimTextBox2">
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:0" BeginTime="0:0:0" />
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="1" To="0" Duration="0:0:0" BeginTime="0:0:0" />
 
             </Storyboard>
             <Storyboard  x:Key="AnimRecBlanc">
+                <!-- Changement de couleur lorsque la position de l'actualité change -->
 
                 <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
                 <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="White" Duration="0:0:0" BeginTime="0:0:0"/>
@@ -25,8 +30,8 @@
 
 
             </Storyboard>
+            <!-- Changement de couleur lorsque la position de l'actualité change -->
             <Storyboard  x:Key="AnimRecBleu">
-
                 <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="DodgerBlue" Duration="0:0:1" BeginTime="0:0:0"/>
 
 
@@ -64,7 +69,7 @@
 
                         <MenuItem Header="_fermer" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="10"/>
                     </MenuItem>
-                    <MenuItem Header="_Quitter" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4" Click="MenuItem_Click"  >
+                    <MenuItem Header="_Quitter" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4" Click="fermer"  >
 
 
                     </MenuItem>
