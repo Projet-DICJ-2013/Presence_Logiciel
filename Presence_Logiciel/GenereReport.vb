@@ -107,25 +107,40 @@ Public Module ModRapport
                            Where Ordre.NoOrdreDuJour = _IdElem
                            Select Ordre.TitreOrdreJour)
 
-            _ContenuDoc = New XElement("Root", New XElement("Header", New XElement("head", New XAttribute("id", "Pts003"), NoOrdre) _
-                                        ),
-            (From Point In _Bd_Presence.SelOrdJour(_IdElem)
-                Select New With {Point.TitrePoint,
-                                 Point.ChiffrePoint}).ToList.Select(
-                      Function(x) New XElement("Point",
-                                New XElement("Conteneur",
-                                New XElement("Infos", New XAttribute("niv", x.ChiffrePoint),
-                                    x.ChiffrePoint & "  " & x.TitrePoint)
-                                       ))), New XElement("Footer", New XElement("Foot", New XAttribute("id", "Pts006"), "Departement d'informatique" & "  -  " & Date.Today)))
 
-            For Each el In _ContenuDoc...<Infos>
-                If el.@niv.Length >= 6 Then
-                    el.Add(New XAttribute("id", "Pts004"))
-                ElseIf el.@niv.Length >= 4 And el.@niv.Length < 6 Then
-                    el.Add(New XAttribute("id", "Pts002"))
-                ElseIf el.@niv.Length >= 2 And el.@niv.Length < 4 Then
-                    el.Add(New XAttribute("id", "Pts001"))
-                End If
+            Dim res = From od As tblListePoint In _Bd_Presence.tblListePoint Where od.NoOrdreDuJour = _IdElem Select od
+            Dim prem = res.First()
+
+            Dim rap = New XElement("root", New XElement("Contenu", New XElement("Head", New XAttribute("id", "Pts003"), NoOrdre)))
+
+            TraiterPoint(rap, prem.tblPoints1)
+
+            _ContenuDoc = rap
+
+        End Sub
+
+        Protected Sub TraiterPoint(parent As XElement, lst As IEnumerable(Of tblPoints))
+            Dim enf As XElement
+            For Each p As tblPoints In lst
+                Try
+                    enf = New XElement("Titre", p.ChiffrePoint & "  " & p.TitrePoint)
+                    parent.Element("Contenu").Add(enf)
+
+                    If p.ChiffrePoint.Length >= 6 Then
+                        enf.Add(New XAttribute("id", "Pts004"))
+                    ElseIf p.ChiffrePoint.Length >= 4 And p.ChiffrePoint.Length < 6 Then
+                        enf.Add(New XAttribute("id", "Pts002"))
+                    ElseIf p.ChiffrePoint.Length >= 2 And p.ChiffrePoint.Length < 4 Then
+                        enf.Add(New XAttribute("id", "Pts001"))
+                    End If
+
+                    If p.ListeEnfants IsNot Nothing Then
+                        TraiterPoint(parent, p.tblListePoint.tblPoints1)
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Crash dans TraiterPoint")
+                End Try
+
             Next
 
         End Sub
@@ -150,31 +165,63 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            _ContenuDoc = New XElement("Root",
-                (From Modele In _Bd_Presence.tblModele _
-                 Where Modele.NoModele = _IdElem
-                    Select New With {Modele.NoModele,
+            _ContenuDoc = New XElement("Root", New XElement("Head", New XElement("header", New XAttribute("id", "Mat005"), "Rapport de prêt - " & Date.Today)),
+                (From Pret In _Bd_Presence.tblPret
+                 Join Membre In _Bd_Presence.tblMembre
+                 On Pret.IdMembre Equals Membre.IdMembre
+                 Join PretExemp In _Bd_Presence.tblPretExemplaire
+                 On PretExemp.IdPret Equals Pret.IdPret
+                 Join Exemp In _Bd_Presence.tblExemplaire
+                 On PretExemp.CodeBarre Equals Exemp.CodeBarre
+                 Join Modele In _Bd_Presence.tblModele
+                 On Exemp.NoModele Equals Modele.NoModele
+            Where Pret.IdPret = _IdElem
+                    Select New With {Pret.TypeEtat,
+                                     Membre.PrenomMembre,
+                                     Membre.NomMembre,
+                                     Modele.NoModele,
+                                     PretExemp.CommentairePretEx,
+                                     PretExemp.DateDebutPretEx,
+                                     PretExemp.DateFinPretEx,
+                                     Exemp.CodeBarre,
+                                     Exemp.NoSerie,
                                      Modele.Marque,
                                      Modele.NbAnneeGarantie,
                                      Modele.TypeMachine,
                                      Modele.PrixModele}).ToList.Select(
-                          Function(x) New XElement("Modele", New XElement("Conteneur", New XAttribute("id", "Mat004"),
-                                   New XElement("NoModele",
-                                       New XAttribute("id", "Mat001"),
-                                        x.NoModele),
-                                    New XElement("Marque",
+                          Function(x) New XElement("Modele",
+                                New XElement("Conteneur",
+                                    New XElement("Nom",
                                            New XAttribute("id", "Mat002"),
-                                           x.Marque),
+                                           "Matériel prêté:  " & x.PrenomMembre & "  " & x.NomMembre),
+                                    New XElement("DateDeb",
+                                        New XAttribute("id", "Mat002"),
+                                        "Du: " & x.DateDebutPretEx),
+                                    New XElement("DateFin",
+                                        New XAttribute("id", "Mat002"),
+                                        "Au: " & x.DateFinPretEx),
+                                    New XElement("Commentaire",
+                                        New XAttribute("id", "Mat002"),
+                                        "Notes: " & x.CommentairePretEx),
+                                    New XElement("Liste",
+                                       New XAttribute("id", "Mat001"),
+                                       "Vos Emprunts: "),
+                                   New XElement("CodeBarre",
+                                       New XAttribute("id", "Mat003"),
+                                       "Code barre: " & x.CodeBarre),
+                                   New XElement("NoSerie",
+                                       New XAttribute("id", "Mat003"),
+                                       "No série: " & x.NoSerie),
+                                   New XElement("Marque",
+                                       New XAttribute("id", "Mat003"),
+                                       "Marque: " & x.Marque),
                                    New XElement("Garantie",
-                                       New XAttribute("id", "Mat002"),
-                                       x.NbAnneeGarantie),
-                                   New XElement("Type",
-                                       New XAttribute("id", "Mat002"),
-                                       x.TypeMachine),
-                                   New XElement("Prix",
-                                       New XAttribute("id", "Mat002"),
-                                       x.PrixModele))
-                                   )))
+                                       New XAttribute("id", "Mat003"),
+                                       "Nombre d'années de garanti: " & x.NbAnneeGarantie),
+                                   New XElement("TypeMachine",
+                                       New XAttribute("id", "Mat003"),
+                                       "Type de machine: " & x.TypeMachine)
+                                   ))))
 
 
         End Sub
@@ -199,54 +246,47 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            _ContenuDoc = New XElement("Root",
-                (From Cours In _Bd_Presence.tblCours
-                 Join Groupe In _Bd_Presence.tblGroupe
-                 On Cours.tblCoursSessionGroupe.FirstOrDefault Equals Groupe.tblCoursSessionGroupe.FirstOrDefault
-                 Join Etu In _Bd_Presence.tblEtudiant
-                 On Groupe Equals Etu.tblGroupe.FirstOrDefault
-                 Join Membre In _Bd_Presence.tblMembre
-                 On Etu.tblMembre Equals Membre
-            Where Cours.CodeCours = _IdElem
-                    Select New With {Cours.NomCours,
-                                     Cours.PonderationCours,
-                                     Cours.DescriptionCours,
-                                     Cours.AnneeCours,
-                                     Etu.DaEtudiant,
-                                     Membre.PrenomMembre,
-                                     Membre.NomMembre,
-                                     Membre.AdresseMembre,
-                                     Membre.CourrielMembre}).ToList.Select(
-                          Function(x) New XElement("Cours", New XElement("Conteneur",
-                                   New XElement("NomCours",
-                                       New XAttribute("id", "Co001"),
-                                       x.NomCours),
-                                    New XElement("Ponderation",
-                                           New XAttribute("id", "Co002"),
-                                           x.PonderationCours),
-                                   New XElement("DescCours",
-                                       New XAttribute("id", "Co002"),
-                                       x.DescriptionCours),
-                                   New XElement("Annee",
-                                       New XAttribute("id", "Co002"),
-                                       x.AnneeCours),
-                                New XElement("Fiche", New XAttribute("id", "Co004"),
-                                    New XElement("DaEtudiant",
-                                           New XAttribute("id", "Co003"),
-                                           x.DaEtudiant),
-                                   New XElement("Prenom",
-                                       New XAttribute("id", "Co003"),
-                                       x.PrenomMembre),
-                                   New XElement("NomMembre",
-                                       New XAttribute("id", "Co003"),
-                                       x.NomMembre),
-                                    New XElement("Adresse",
-                                           New XAttribute("id", "Co003"),
-                                           x.AdresseMembre),
-                                   New XElement("Courriel",
-                                       New XAttribute("id", "Co003"),
-                                       x.CourrielMembre)
-                                   )))))
+            '_ContenuDoc = New XElement("Root",
+            '    (From Lst In _Bd_Presence.LstEtu(_IdElem)
+            '        Select New With {Lst.NomCours,
+            '                         Lst.PonderationCours,
+            '                         Lst.DescriptionCours,
+            '                         Lst.AnneeCours,
+            '                         Lst.DaEtudiant,
+            '                         Lst.PrenomMembre,
+            '                         Lst.NomMembre,
+            '                         Lst.AdresseMembre,
+            '                         Lst.CourrielMembre}).ToList.Select(
+            '              Function(x) New XElement("Cours", New XElement("Conteneur",
+            '                       New XElement("NomCours",
+            '                           New XAttribute("id", "Co001"),
+            '                           x.NomCours),
+            '                        New XElement("Ponderation",
+            '                               New XAttribute("id", "Co002"),
+            '                               x.PonderationCours),
+            '                       New XElement("DescCours",
+            '                           New XAttribute("id", "Co002"),
+            '                           x.DescriptionCours),
+            '                       New XElement("Annee",
+            '                           New XAttribute("id", "Co002"),
+            '                           x.AnneeCours),
+            '                    New XElement("Fiche", New XAttribute("id", "Co004"),
+            '                        New XElement("DaEtudiant",
+            '                               New XAttribute("id", "Co003"),
+            '                               x.DaEtudiant),
+            '                       New XElement("Prenom",
+            '                           New XAttribute("id", "Co003"),
+            '                           x.PrenomMembre),
+            '                       New XElement("NomMembre",
+            '                           New XAttribute("id", "Co003"),
+            '                           x.NomMembre),
+            '                        New XElement("Adresse",
+            '                               New XAttribute("id", "Co003"),
+            '                               x.AdresseMembre),
+            '                       New XElement("Courriel",
+            '                           New XAttribute("id", "Co003"),
+            '                           x.CourrielMembre)
+            '                       )))))
 
 
         End Sub
