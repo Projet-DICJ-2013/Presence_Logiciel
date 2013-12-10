@@ -9,10 +9,7 @@ Public Class ajoutCour
 
     End Sub
 
-    Private Sub FermerAjoutCours(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
+   
 
     Private Sub AjouterCours(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
 

@@ -1,10 +1,9 @@
 ﻿Imports System
 Imports System.IO
 Imports System.Linq
-Imports System.Windows.Media.Animation
+
 
 Class ListeExemplaire
-    Public statut As Label
     Public Class ExemplaireModele
         Property Exemplaire As tblExemplaire
         Property Modele As tblModele
@@ -89,10 +88,6 @@ Class ListeExemplaire
             _req2.FirstOrDefault.TypeEtat = j
 
             BD.SaveChanges()
-            statut.Content = "votre exemplaire est désormait" + j
-            Dim anim As Storyboard = FindResource("AnimLabel")
-
-            anim.Begin(statut)
         End If
 
 

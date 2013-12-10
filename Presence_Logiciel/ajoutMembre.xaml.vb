@@ -29,7 +29,7 @@ Public Class ajoutMembre
             anim.Begin(statut)
             Return
         End If
-
+        
         If (myRegex1.IsMatch(txtNom.Text) = False) Then
             statut.Content = "Un nom doit contenir que des lettres"
             Dim anim As Storyboard = FindResource("AnimLabel")
@@ -127,8 +127,4 @@ Public Class ajoutMembre
     End Sub
 
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
 End Class

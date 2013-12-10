@@ -1,7 +1,7 @@
 ﻿<Window  x:Class="ajoutMembre"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ajoutCour" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" WindowStyle="None" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"  >
+    Title="ajoutCour" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"  >
     <Window.Resources>
         <ResourceDictionary>
             <Storyboard  x:Key="AnimLabel">
@@ -53,9 +53,7 @@
             <Button Style="{StaticResource ResourceKey=btnGlobal}" x:Name="btnAjouter" Content="Ajouter" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Height="55" Margin="123,0,119,10">
             </Button>
         </Grid>
-        <Button x:Name="btnX" Margin="459,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37">
-            <Image Stretch="Fill" Source="Images/icons/Error.png" Height="18" Width="27" MouseDown="Image_MouseDown" RenderTransformOrigin="1,0.989"/>
-        </Button>
+        
 
 
 

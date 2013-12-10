@@ -1,8 +1,7 @@
-﻿Imports mod_smtp
-Public Class Pret
-    Public statut As Label
+﻿Public Class Pret
+
     Dim BD As PresenceEntities
-    Dim Smtp As objSmtp
+
     Dim _aPreter As List(Of tblPretExemplaire)
 
     Private Sub txtMembre_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles txtMembre.MouseDoubleClick
@@ -30,7 +29,7 @@ Public Class Pret
 
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
 
-
+  
 
 
     End Sub
@@ -57,7 +56,7 @@ Public Class Pret
 
 
 
-
+        '_aPreter.Clear()
 
         Pret.IdMembre = txtMembre.Text
         Pret.TypeEtat = "actif"
@@ -69,15 +68,7 @@ Public Class Pret
         Catch ex As Exception
 
         End Try
-        Try
-            Dim _tblConstante = (From constant In BD.tblConstant Select constant).ToList()
 
-            Dim envoie = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "confirmation du pret", "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse)
-        Catch ex As Exception
-
-        End Try
-
-        _aPreter.Clear()
         txtIdPret.Clear()
         txtMembre.Clear()
 
