@@ -114,7 +114,9 @@
     <Compile Include="GestActualite.xaml.vb" />
     <Compile Include="gestCours.xaml.vb" />
     <Compile Include="gestEtudiant.xaml.vb" />
-    <Compile Include="gestGroupe.xaml.vb" />
+    <Compile Include="gestGroupe.xaml.vb">
+      <DependentUpon>gestGroupe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gestion d%27un ordre du jour.xaml.vb" />
     <Compile Include="GestionPDF.xaml.vb" />
     <Compile Include="gestProgrammes.xaml.vb">

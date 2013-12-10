@@ -5,12 +5,6 @@
     Dim leprog As tblProgramme
     Dim lstprog As IQueryable(Of tblProgramme)
 
-
-    Private Sub Fermer(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Finalize()
-        Me.Close()
-    End Sub
-
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
 
         lstprog = (From p In DM.tblProgramme Select p Where p.CodeProg = codeprog)
@@ -102,5 +96,10 @@
             lvCoursActuels.ItemsSource = Nothing
             lvCoursActuels.ItemsSource = CType(leprog, tblProgramme).tblCours
         End If
+    End Sub
+
+    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
+        Me.Close()
+        Me.Finalize()
     End Sub
 End Class

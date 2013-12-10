@@ -57,11 +57,6 @@ Public Class frmGenereRapport
         Me.Close()
         Me.Finalize()
     End Sub
-
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
 End Class
 
 Public Class Rapport

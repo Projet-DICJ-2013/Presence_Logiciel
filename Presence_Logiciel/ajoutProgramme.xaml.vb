@@ -12,7 +12,7 @@ Public Class ajoutProgramme
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
 
-
+        Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
 
 
@@ -21,6 +21,8 @@ Public Class ajoutProgramme
         If (myRegex3.IsMatch(txtCodeProgramme.Text) = False) Then
             statut.Content = "Un code de programme doit être : 3x(chiffre) 1x(.) et 2x(lettre/chiffre)"
             Dim anim As Storyboard = FindResource("AnimLabel")
+            txtCodeProgramme.BorderBrush = Brushes.Red
+            anim2.Begin(txtCodeProgramme)
 
             anim.Begin(statut)
             Return
@@ -51,8 +53,14 @@ Public Class ajoutProgramme
             statut.Content = "le champ : " + objTextBox.Name + " est vide"
 
             Dim anim As Storyboard = FindResource("AnimLabel")
-
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
             anim.Begin(statut)
+
+            objTextBox.BorderBrush = Brushes.Red
+
+            anim2.Begin(objTextBox)
+
+
         End If
 
 

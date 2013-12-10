@@ -15,13 +15,15 @@ Public Class MembreProf
 
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
         Dim RandGen As New Random
-
+        Dim anim As Storyboard = FindResource("AnimLabel")
+        Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
         Dim myRegex1 As New Regex( _
 "[a-zA-z0-9]{3,15}")
         If (myRegex1.IsMatch(txtUtilisateur.Text) = False) Then
             statut.Content = "Nom d'utilisateur doit comprendre entre 3 et 15 lettres et chiffres"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtUtilisateur.BorderBrush = Brushes.Red
+            anim2.Begin(txtUtilisateur)
 
             anim.Begin(statut)
             Return
@@ -31,7 +33,8 @@ Public Class MembreProf
 "[1-2][2-4]")
         If (myRegex2.IsMatch(txtChargeTravail.Text) = False) Then
             statut.Content = "La charge de travail d'un professeur doit être située entre 12 et 25 heures"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtChargeTravail.BorderBrush = Brushes.Red
+            anim2.Begin(txtChargeTravail)
 
             anim.Begin(statut)
             Return
@@ -41,7 +44,8 @@ Public Class MembreProf
 "^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
         If (myRegex3.IsMatch(txtCourriel.Text) = False) Then
             statut.Content = "Le courriel est invalide"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtCourriel.BorderBrush = Brushes.Red
+            anim2.Begin(txtCourriel)
 
             anim.Begin(statut)
             Return
@@ -51,8 +55,8 @@ Public Class MembreProf
 "\d{3}.\d")
         If (myRegex4.IsMatch(txtNoBureau.Text) = False) Then
             statut.Content = "Un numéro de bureau doit être structuré 3x(chiffre) 1x(.) et 1x(chiffre)"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-
+            txtNoBureau.BorderBrush = Brushes.Red
+            anim2.Begin(txtNoBureau)
             anim.Begin(statut)
             Return
         End If
@@ -61,7 +65,8 @@ Public Class MembreProf
 "\d{1,4}")
         If (myRegex5.IsMatch(txtPoste.Text) = False) Then
             statut.Content = "Un numéro de poste doit comprendre entre 1 et 4 chiffre "
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtPoste.BorderBrush = Brushes.Red
+            anim2.Begin(txtPoste)
 
             anim.Begin(statut)
             Return
@@ -90,7 +95,7 @@ Public Class MembreProf
 
         createUser2(txtUtilisateur.Text, (LeNouveau.NomMembre & LeNouveau.PrenomMembre))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
-        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe temporaire est :" & LeNouveau.NomMembre & LeNouveau.PrenomMembre & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
+        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("Votre nom d'utilisateur est: " & txtUtilisateur.Text & "votre mot de passe temporaire est :" & LeNouveau.NomMembre & LeNouveau.PrenomMembre & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
         _envoimail.AddCC(newProf.CourrielCegepProfesseur)
         _envoimail.EnvoiMessage()
 

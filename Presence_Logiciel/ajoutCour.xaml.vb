@@ -16,12 +16,15 @@ Public Class ajoutCour
 
     Private Sub AjouterCours(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
 
+        Dim anim As Storyboard = FindResource("AnimLabel")
+        Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+
         Dim myRegex1 As New Regex( _
 "[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{2}")
         If (myRegex1.IsMatch(txtCodeCours.Text) = False) Then
             statut.Content = "Un code de cours doit être : 3x(chiffre) 1x(-) 3x(lettre) 1x(-) et 2x(lettre)"
-            Dim anim As Storyboard = FindResource("AnimLabel")
-
+            txtCodeCours.BorderBrush = Brushes.Red
+            anim2.Begin(txtCodeCours)
             anim.Begin(statut)
             Return
         End If
@@ -30,7 +33,8 @@ Public Class ajoutCour
 "\d-\d-\d")
         If (myRegex2.IsMatch(txtPonderation.Text) = False) Then
             statut.Content = "Une pondération de cours doit être : 1x(chiffre) 1x(-) 1x(chiffre) 1x(-) et 1x(chiffre) )"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtPonderation.BorderBrush = Brushes.Red
+            anim2.Begin(txtPonderation)
 
             anim.Begin(statut)
             Return
@@ -40,7 +44,8 @@ Public Class ajoutCour
 "[1-3]")
         If (myRegex3.IsMatch(txtAnneeCours.Text) = False) Then
             statut.Content = "Une année de cours doit être entre : 1 et 3 )"
-            Dim anim As Storyboard = FindResource("AnimLabel")
+            txtAnneeCours.BorderBrush = Brushes.Red
+            anim2.Begin(txtAnneeCours)
 
             anim.Begin(statut)
             Return
@@ -96,7 +101,11 @@ Public Class ajoutCour
 
             Dim anim As Storyboard = FindResource("AnimLabel")
 
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+
             anim.Begin(statut)
+            objTextBox.BorderBrush = Brushes.Red
+            anim2.Begin(objTextBox)
         End If
     End Sub
 

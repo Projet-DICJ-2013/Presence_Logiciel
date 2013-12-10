@@ -172,7 +172,11 @@ Public Class gestProgrammes
 
             Dim anim As Storyboard = FindResource("AnimLabel")
 
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
             anim.Begin(statut)
+            objTextBox.BorderBrush = Brushes.Red
+
+            anim2.Begin(objTextBox)
         End If
 
 

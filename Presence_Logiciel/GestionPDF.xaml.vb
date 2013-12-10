@@ -68,13 +68,6 @@ Public Class GestionPDF
         Return Nothing
     End Function
 
-
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-
-    End Sub
-
     Private Sub txtTypeRapport_LostFocus(sender As Object, e As RoutedEventArgs) Handles txtTypeRap.LostFocus
 
         If txtTypeRap.Text <> "Facture" And txtTypeRap.Text <> "ListeEtudiant" And txtTypeRap.Text <> "OrdreDuJour" Then

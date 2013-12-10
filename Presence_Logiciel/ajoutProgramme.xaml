@@ -18,12 +18,12 @@
 
         <Grid HorizontalAlignment="Left" Height="433" Margin="30,39,0,0" VerticalAlignment="Top" Width="430">
             <Grid HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="410" Margin="10,10,0,0">
-                <TextBox x:Name="txtCodeProgramme" HorizontalAlignment="Left" Height="23" Margin="132,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MaxLength="6"/>
-                <TextBox x:Name="txtProgramme" HorizontalAlignment="Left" Height="23" Margin="132,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <TextBox x:Name="txtCodeProgramme" HorizontalAlignment="Left" Height="23" Margin="132,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MaxLength="6" BorderThickness="1,2"/>
+                <TextBox x:Name="txtProgramme" HorizontalAlignment="Left" Height="23" Margin="132,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderThickness="1,2"/>
                 <Label x:Name="lblCodeProgramme" Content="Code du programme" HorizontalAlignment="Left" Margin="12,49,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblNomProgramme" Content="Nom du programme&#xA;" HorizontalAlignment="Left" Margin="12,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
                 <Label x:Name="lblObjectif" Content="Objectif" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.018,0.426"/>
-                <TextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="218" Margin="132,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <TextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="218" Margin="132,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderThickness="1,2"/>
             </Grid>
             <Button x:Name="btnAjouter" Content="Ajouter" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="188" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="120,0,120,10">
                 <Button.Background>

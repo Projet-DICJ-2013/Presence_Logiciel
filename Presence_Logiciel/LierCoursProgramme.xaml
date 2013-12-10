@@ -39,7 +39,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <ListView x:Name="lvCoursActuels" HorizontalAlignment="Left" Height="314" Margin="193.4,72,0,0" VerticalAlignment="Top" Width="177" AllowDrop="True" Grid.Column="1"  >
-      
+
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding NomCours}"/>
@@ -56,10 +56,10 @@
                 <Label Content="Cours attribués à ce programme" Grid.Column="1" HorizontalAlignment="Left" Margin="203.4,41,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" RenderTransformOrigin="0.59,0.592"/>
             </Grid>
         </Grid>
-        <Button x:Name="btnX" Margin="453,0,6,0" VerticalAlignment="Top" Content="x"/>
         <Button Margin="401,39,0,422" HorizontalAlignment="Left">
             <Image x:Name="btnSupprimer1" Source="images/Icons/Trash.png"/>
         </Button>
+        <Button x:Name="btnX" Content="X" HorizontalAlignment="Left" Margin="459,0,0,0" VerticalAlignment="Top" Width="37" RenderTransformOrigin="-0.133,0.06"/>
 
 
 

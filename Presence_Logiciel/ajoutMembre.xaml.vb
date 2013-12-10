@@ -14,12 +14,17 @@ Public Class ajoutMembre
     End Sub
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
+        Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
         Dim myRegex1 As New Regex( _
 "^[a-zA-Z]+$")
         If (myRegex1.IsMatch(txtPrenom.Text) = False) Then
             statut.Content = "Un prénom doit contenir que des lettres"
             Dim anim As Storyboard = FindResource("AnimLabel")
+
+
+            txtPrenom.BorderBrush = Brushes.Red
+            anim2.Begin(txtPrenom)
 
             anim.Begin(statut)
             Return
@@ -29,6 +34,8 @@ Public Class ajoutMembre
             statut.Content = "Un nom doit contenir que des lettres"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
+            txtNom.BorderBrush = Brushes.Red
+            anim2.Begin(txtNom)
             Return
         End If
 
@@ -38,6 +45,9 @@ Public Class ajoutMembre
             statut.Content = "La structure du numéro de téléphone est mauvaise"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
+
+            txtTelephone.BorderBrush = Brushes.Red
+            anim2.Begin(txtTelephone)
             Return
         End If
 
@@ -47,6 +57,9 @@ Public Class ajoutMembre
             statut.Content = "L'email entré est invalide"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
+
+            txtCourriel.BorderBrush = Brushes.Red
+            anim2.Begin(txtCourriel)
             Return
         End If
 
@@ -55,6 +68,9 @@ Public Class ajoutMembre
         If (myRegex4.IsMatch(txtNoCivique.Text) = False) Then
             statut.Content = "Un numéro civique doit comprendre au moin 1 chiffre et aucune lettre"
             Dim anim As Storyboard = FindResource("AnimLabel")
+
+            txtNoCivique.BorderBrush = Brushes.Red
+            anim2.Begin(txtNoCivique)
             anim.Begin(statut)
             Return
         End If

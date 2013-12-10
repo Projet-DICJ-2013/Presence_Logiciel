@@ -61,12 +61,12 @@
                     </Menu.Background>
 
                     <MenuItem Header="_Options" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4"  >
-                      
+
                         <MenuItem Header="_fermer" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="10"/>
                     </MenuItem>
                     <MenuItem Header="_Quitter" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4" Click="MenuItem_Click"  >
 
-                        
+
                     </MenuItem>
 
                     <MenuItem Header="_?" TextBlock.Foreground="White" FontFamily="Stencil"  FontSize="4" Height="10">
@@ -85,7 +85,8 @@
             </DockPanel>
 
             <TextBox x:Name="txtLogin" HorizontalAlignment="right" Height="15" Margin="532,70,24,0"  VerticalAlignment="Top" Width="164" FontSize="8" MaxLength="9"/>
-           
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Right" Height="15" Margin="527,90,24,0"  VerticalAlignment="Top" Width="164" FontSize="8"/>
+
             <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="420,63,0,0" VerticalAlignment="Top" FontFamily="Cooper Black" Foreground="#FFD6D6D6" FontSize="14">
                 <Label.Effect>
                     <DropShadowEffect Direction="320" Opacity="0.705" ShadowDepth="6"/>
@@ -144,7 +145,6 @@
             <Rectangle x:Name="rec1" Fill="DodgerBlue" HorizontalAlignment="Left" Height="8" Margin="60,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
             <Rectangle x:Name="rec4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="210,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
             <Rectangle x:Name="rec3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="8" Margin="160,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="45" Opacity="0"/>
-            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Right" Height="15" Margin="527,90,24,0"  VerticalAlignment="Top" Width="164" FontSize="8"/>
         </Grid>
     </Viewbox>
 </Window>

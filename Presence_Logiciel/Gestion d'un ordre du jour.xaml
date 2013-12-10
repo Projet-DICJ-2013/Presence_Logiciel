@@ -66,7 +66,5 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListView>
-        <Button x:Name="btnX" Content="x" HorizontalAlignment="Left" Margin="863,10,0,0" VerticalAlignment="Top" Width="44"/>
-
     </Grid>
 </Window>

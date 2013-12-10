@@ -112,6 +112,7 @@ Class gestCours
             statut.Content = "Impossible de supprimer ce cours car il est actif à un programme de la session courrante"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
+         
             'Dit l 'erreur
         End Try
         LesCours = (From cours In DM.tblCours Select cours)
@@ -128,18 +129,7 @@ Class gestCours
 
     Private Sub Enregistrer(sender As Object, e As MouseButtonEventArgs) Handles btnEnregistrer.MouseDown
         Dim newStatut As tblStatutCoursCours
-        txtAnneeCours.IsEnabled = False
-        txtDescription.IsEnabled = False
-        txtNomCours.IsEnabled = False
-        txtPonderation.IsEnabled = False
-        btnfontEnregistrer.Visibility = Windows.Visibility.Hidden
-        btnEnregistrer.Visibility = Windows.Visibility.Hidden
-        btnO.Visibility = Windows.Visibility.Hidden
-        btnSuivant.IsEnabled = True
-        btnPrecedent.IsEnabled = True
-        btnPremier.IsEnabled = True
-        btnDernier.IsEnabled = True
-
+    Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
 
         Dim myRegex2 As New Regex( _
@@ -147,8 +137,10 @@ Class gestCours
         If (myRegex2.IsMatch(txtPonderation.Text) = False) Then
             statut.Content = "Une pondération de cours doit être : 1x(chiffre) 1x(-) 1x(chiffre) 1x(-) et 1x(chiffre) )"
             Dim anim As Storyboard = FindResource("AnimLabel")
-
             anim.Begin(statut)
+
+            txtPonderation.BorderBrush = Brushes.Red
+            anim2.Begin(txtPonderation)
             Return
         End If
 
@@ -157,6 +149,8 @@ Class gestCours
         If (myRegex3.IsMatch(txtAnneeCours.Text) = False) Then
             statut.Content = "Une année de cours doit être entre : 1 et 3 )"
             Dim anim As Storyboard = FindResource("AnimLabel")
+            txtAnneeCours.BorderBrush = Brushes.Red
+            anim2.Begin(txtAnneeCours)
 
             anim.Begin(statut)
             Return
@@ -181,9 +175,7 @@ Class gestCours
             CoursAmodifier.NomCours = txtNomCours.Text
             CoursAmodifier.PonderationCours = txtPonderation.Text
 
-            'If Not (NomStatutCours = lblStatutCours.Content And CodeStatutCours = txtNumCours.Text) Then
-            '    DM.tblStatutCoursCours.AddObject(newStatut)
-            'End If
+
             CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
             DM.SaveChanges()
             If (StatutVisible = True) Then
@@ -191,13 +183,24 @@ Class gestCours
             End If
 
         Catch ex2 As System.Data.SqlClient.SqlException
-            MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
+            MessageBox.Show("Impossible modifier ce cours")
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             'Dit l 'erreur
         End Try
 
-        ' Page_Loaded(sender, e)
+        txtAnneeCours.IsEnabled = False
+        txtDescription.IsEnabled = False
+        txtNomCours.IsEnabled = False
+        txtPonderation.IsEnabled = False
+        btnfontEnregistrer.Visibility = Windows.Visibility.Hidden
+        btnEnregistrer.Visibility = Windows.Visibility.Hidden
+        btnO.Visibility = Windows.Visibility.Hidden
+        btnSuivant.IsEnabled = True
+        btnPrecedent.IsEnabled = True
+        btnPremier.IsEnabled = True
+        btnDernier.IsEnabled = True
+
         afficherStatut()
 
 
@@ -223,6 +226,7 @@ Class gestCours
         StatutVisible = False
 
 
+
     End Sub
 
     Private Sub afficherStatut()
@@ -236,7 +240,7 @@ Class gestCours
             leecour = eCours.FirstOrDefault
 
             lblStatutCours.DataContext = Nothing
-            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours.FirstOrDefault   'CType(leecour, tblStatutCoursCours)
+            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours.FirstOrDefault
 
 
             lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
@@ -324,8 +328,11 @@ Class gestCours
             statut.Content = "le champ : " + objTextBox.Name + " est vide"
 
             Dim anim As Storyboard = FindResource("AnimLabel")
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+            objTextBox.BorderBrush = Brushes.Red
 
             anim.Begin(statut)
+            anim2.Begin(objTextBox)
         End If
     End Sub
 End Class

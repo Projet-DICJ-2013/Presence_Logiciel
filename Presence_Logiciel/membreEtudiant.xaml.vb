@@ -14,6 +14,7 @@ Public Class membreEtudiant
     Private Sub btnConfirmer_Click(sender As Object, e As RoutedEventArgs) Handles btnConfirmer.Click
         Dim dateNow As Date
         dateNow = DateValue(Now)
+        Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
         Dim myRegex1 As New Regex( _
 "\d{7,9}")
@@ -21,6 +22,9 @@ Public Class membreEtudiant
             statut.Content = "Un numéro de DA doit comporter entre 7 et 9 chiffres"
             Dim anim As Storyboard = FindResource("AnimLabel")
 
+
+            txtDaEtudiant.BorderBrush = Brushes.Red
+            anim2.Begin(txtDaEtudiant)
             anim.Begin(statut)
             Return
         End If
@@ -47,7 +51,7 @@ Public Class membreEtudiant
 
         createUser2(txtDaEtudiant.Text, (lblNom1.Content & lblPrenom.Content))
         Dim lstinfolog = (From tblconstant In DM.tblConstant Select tblconstant).ToList
-        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
+        _envoimail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", "Bienvenue au Cégep de Jonquière en Ligne ", ("votre numéro de DA est : " & txtDaEtudiant.Text & " votre mot de passe est :" & lblNom1.Content & lblPrenom.Content & " Vous devrez le changer lors de votre première visite"), lstinfolog.Item(0).AdresseEmail, lstinfolog.Item(0).MotdePasse)
         _envoimail.AddCC(LeNouveau.CourrielMembre)
         _envoimail.EnvoiMessage()
 
