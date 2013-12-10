@@ -23,7 +23,7 @@ Class gestCours
 
 
 
-
+    ''Ce produit lors du click sur le boutton (+)     Permet l'ajout d'un cours
     Private Sub affAjoutCours(sender As Object, e As RoutedEventArgs)
         Dim uncours As New ajoutCour
 
@@ -44,9 +44,6 @@ Class gestCours
 
     End Sub
 
-    Private Sub test(sender As Object, e As RoutedEventArgs)
-
-    End Sub
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         DM = New PresenceEntities
@@ -112,8 +109,7 @@ Class gestCours
             statut.Content = "Impossible de supprimer ce cours car il est actif à un programme de la session courrante"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
-         
-            'Dit l 'erreur
+ 
         End Try
         LesCours = (From cours In DM.tblCours Select cours)
         vu = New ListCollectionView(LesCours.ToList())
@@ -131,6 +127,7 @@ Class gestCours
         Dim newStatut As tblStatutCoursCours
     Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
+        ''Vérification des données entrées
 
         Dim myRegex2 As New Regex( _
 "\d-\d-\d")
@@ -167,6 +164,8 @@ Class gestCours
 
 
         Try
+
+            ''Essai de modifier le cours sur la BD
             Dim modTest As IQueryable(Of tblCours) = (From c In DM.tblCours Where c.CodeCours = txtNumCours.Text Select c)
             Dim CoursAmodifier As tblCours = modTest.First()
 
@@ -176,17 +175,19 @@ Class gestCours
             CoursAmodifier.PonderationCours = txtPonderation.Text
 
 
+
             CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
             DM.SaveChanges()
+
+            ''Si les rectangles de statut sont encore visible alors
             If (StatutVisible = True) Then
                 CacherStatuts()
             End If
 
         Catch ex2 As System.Data.SqlClient.SqlException
-            MessageBox.Show("Impossible modifier ce cours")
+            statut.Content = ex2.ToString
         Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-            'Dit l 'erreur
+            statut.Content = ex.ToString
         End Try
 
         txtAnneeCours.IsEnabled = False
@@ -201,6 +202,8 @@ Class gestCours
         btnPremier.IsEnabled = True
         btnDernier.IsEnabled = True
 
+
+        ''Actualisation du statut
         afficherStatut()
 
 
@@ -313,7 +316,7 @@ Class gestCours
 
 
 
-
+    ''Vérifi si un des champ est vide
 
     Private Sub txtNomCours_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtNomCours.PreviewLostKeyboardFocus, txtAnneeCours.PreviewLostKeyboardFocus, txtPonderation.PreviewLostKeyboardFocus
         Dim objTextBox As TextBox = CType(sender, TextBox)
