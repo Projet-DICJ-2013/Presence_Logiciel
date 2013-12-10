@@ -105,12 +105,13 @@ Public Class gestProgrammes
     End Sub
 
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
+        ''Initialisation de la forme
         AffProgramme(sender, e)
     End Sub
 
  
 
-
+    '' Apparition de la forme d'ajout de programme lors du clic sur le bouton (+)
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
         Dim ajProg As New ajoutProgramme
         ajProg.DM = DM
@@ -124,6 +125,7 @@ Public Class gestProgrammes
         lvCours.ItemsSource = CType(LesProgrammes.First, tblProgramme).tblCours
     End Sub
 
+    ''Apparition de la forme pour ajouter des cours au programme
     Private Sub btnLier_Click(sender As Object, e As RoutedEventArgs) Handles btnLier.Click
         Dim uncours As New LierCoursProgramme
         codeprog = txtNumProgramme.Text
@@ -140,7 +142,7 @@ Public Class gestProgrammes
 
 
 
-
+        ''Début des modifications
         Try
             Dim modTest As IQueryable(Of tblProgramme) = (From p In DM.tblProgramme Where p.CodeProg = txtNumProgramme.Text Select p)
             Dim CoursAmodifier As tblProgramme = modTest.First()
@@ -153,13 +155,16 @@ Public Class gestProgrammes
 
 
         Catch ex2 As System.Data.SqlClient.SqlException
-            MessageBox.Show("Impossible de supprimer ce cours car il est actif à un programme de la session courrante")
+            statut.Content = "Impossible de supprimer ce cours car il est actif à un programme de la session courrante"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             'Dit l 'erreur
         End Try
     End Sub
 
+    ''Se produit si un champs modifié est vide
     Private Sub txtNomProgramme_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtNomProgramme.PreviewLostKeyboardFocus
         Dim objTextBox As TextBox = CType(sender, TextBox)
         Dim texte As String = objTextBox.Text

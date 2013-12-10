@@ -9,11 +9,14 @@
       Title="gestProgrammes">
     <Window.Resources>
         <ResourceDictionary>
+            <!-- c'est ici qu'il faut construire les animations -->
             <Storyboard  x:Key="AnimLabel">
+                <!-- Ce produit lorsqu'une erreur doit être affiché dans la barre de statut -->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
             </Storyboard>
+            <!-- textbox devient rouge lors d'un erreur -->
             <Storyboard  x:Key="AnimTxtRouge">
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>
@@ -26,7 +29,11 @@
     </Window.Resources>
     <Viewbox Stretch="Fill">
         <Grid Background="#FFE5E5E5" Loaded="Grid_Loaded">
-            <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="264*"/>
+                <ColumnDefinition Width="481*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.ColumnSpan="2" Margin="0,0,-0.4,-0.2">
                 <Grid HorizontalAlignment="Left" Height="463" VerticalAlignment="Top" Width="1470" Margin="10,114,0,0">
                     <TextBox x:Name="txtNumProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,39,0,0" Text="{Binding CodeProg}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" BorderThickness="1,2" Width="96"/>
                     <TextBox x:Name="txtNomProgramme" Style="{StaticResource ResourceKey=textboxProg}" Margin="275,86,0,0" Text="{Binding NomProg}" IsEnabled="False" Foreground="Black" BorderThickness="1,2" />
@@ -80,9 +87,9 @@
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
 
             </Grid>
-            <Rectangle x:Name="recListeCours" Fill="#FF5353E1" HorizontalAlignment="Right" Height="38" Margin="0,156,41.6,0" Stroke="Black" VerticalAlignment="Top" Width="391"/>
-            <Label Content="Liste des cours" HorizontalAlignment="Left" Margin="1177,159,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" FontSize="20"/>
-            <Button x:Name="btnLier" Content="Ajouter cours " HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="206" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="1159,0,124.6,62.8">
+            <Rectangle x:Name="recListeCours" Fill="#FF5353E1" HorizontalAlignment="Right" Height="38" Margin="0,156,41.6,0" Stroke="Black" VerticalAlignment="Top" Width="391" Grid.Column="1"/>
+            <Label Content="Liste des cours" HorizontalAlignment="Left" Margin="649.08,159,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" FontSize="20" Grid.Column="1"/>
+            <Button x:Name="btnLier" Content="Ajouter cours " HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="206" Foreground="#FFFCFCFC" Height="55" FontSize="18" FontFamily="Calibri" Margin="631.08,0,124.6,62.8" Grid.Column="1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF5479BB" Offset="0.015"/>
@@ -90,7 +97,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <TextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="274" Margin="283,283,0,0" TextWrapping="Wrap" Text="{Binding ObjectifProg}" VerticalAlignment="Top" Width="563" IsEnabled="False" Foreground="Black" BorderThickness="1,2"/>
+            <TextBox x:Name="txtObjectif" HorizontalAlignment="Left" Height="274" Margin="283,283,0,0" TextWrapping="Wrap" Text="{Binding ObjectifProg}" VerticalAlignment="Top" Width="563" IsEnabled="False" Foreground="Black" BorderThickness="1,2" Grid.ColumnSpan="2"/>
         </Grid>
     </Viewbox>
 </Window>
