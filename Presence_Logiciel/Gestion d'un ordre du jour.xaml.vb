@@ -154,12 +154,10 @@ Public Class frmGestOrdJour
                         i = lstOdj.Items.Count
                         lstOdj.Items(i - 1).IsSelected = True
                     End If
-
-
             End Select
-
         End If
     End Sub
+
 
     Private Sub NumeroterArbre()
         Dim i As Int16
@@ -204,35 +202,35 @@ Public Class frmGestOrdJour
         Dim tblOrdreDuJour As tblOrdreDuJour
         Dim tblListePoint As tblListePoint
 
-        If txtTitreOdj.Text = Nothing Then
-            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouvelle ordre du jour!")
-            Return
-        End If
-
+        If txtTitreOdj.Text IsNot Nothing Then
+           
         tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
                                                 .Notes = Nothing}
 
-
         If (tblOrdreDuJour IsNot Nothing) Then
             OrdreDuJour.AddOdj(tblOrdreDuJour)
+
+                lstOrdreJour.SelectedItem = OrdreDuJour.Collection.CurrentItem
+
+                tblListePoint = New tblListePoint With {.NoOrdreDuJour = CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour}
+
+                If (tblListePoint IsNot Nothing) Then
+                    OrdreDuJour.AddListe(tblListePoint)
+                End If
+            End If
+
+            OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "1.")
+            OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "2.")
+            OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "3.")
+            OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "4.")
+            OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "5.")
+
+            txtTitreOdj.Text = ""
+            lstOrdreJour.ItemsSource = OrdreDuJour.Collection
+        Else
+            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouvelle ordre du jour!")
+            Return
         End If
-        lstOrdreJour.SelectedItem = OrdreDuJour.Collection.CurrentItem
-
-        tblListePoint = New tblListePoint With {.NoOrdreDuJour = CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour}
-
-        If (tblListePoint IsNot Nothing) Then
-            OrdreDuJour.AddListe(tblListePoint)
-        End If
-
-        OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "1.")
-        OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "2.")
-        OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "3.")
-        OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "4.")
-        OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "5.")
-
-
-        txtTitreOdj.Text = ""
-        lstOrdreJour.ItemsSource = OrdreDuJour.Collection
     End Sub
 
     Private Sub lstOrdreJour_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstOrdreJour.SelectionChanged
