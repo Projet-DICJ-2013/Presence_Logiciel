@@ -1,9 +1,11 @@
 ﻿Imports System.Data.Objects
+Imports System.Windows.Media.Animation
 
 Public Class frmModele
 
     Private Modele As GestionModele
     Private _Statut As Label
+    Private _MsgErreur
 
     Public Sub New(Statut As Label)
 
@@ -22,7 +24,9 @@ Public Class frmModele
 
     End Sub
 
-    Private Sub SynchroControl()
+    Private Sub SynchroControl(Optional ByVal CurrentPos As Integer = 0)
+
+        Modele.Collection.MoveCurrentTo(CurrentPos)
 
         Try
             TxtMarque.DataContext = Modele.Collection
@@ -33,9 +37,9 @@ Public Class frmModele
             UpdateComposante()
             TxtRech.Text = "Saisir un critère de recherche"
         Catch ex As Exception
-            _Statut.Content = "Un problème est survenu lors de la synchronisation des données!"
+            _MsgErreur = "Un problème est survenu lors de la synchronisation des données!"
+            AffMsgErr()
         End Try
-
 
     End Sub
 
@@ -71,22 +75,22 @@ Public Class frmModele
 
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
-        Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _
-                                              CType(Modele.Collection.CurrentItem, tblModele), _Statut)
-        FnComposante.ShowDialog()
-
-        SynchroControl()
+        If Modele.Collection.CurrentItem IsNot Nothing Then
+            Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _Statut)
+            FnComposante.ShowDialog()
+            SynchroControl()
+        Else
+            _MsgErreur = "Pour ajouter une composante, vous devez sélectionner un modèle"
+            AffMsgErr()
+        End If
     End Sub
-
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
         Dim tblModele As tblModele
 
         If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
-
             MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
             Return
-
         End If
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
@@ -96,10 +100,10 @@ Public Class frmModele
                                                 .PrixModele = TxtPrix.Text}
 
         If (tblModele IsNot Nothing) Then
-            Modele.AddModele(tblModele)
+            _MsgErreur = Modele.AddModele(tblModele)
+            AffMsgErr()
         End If
     End Sub
-
 
     Private Sub OnQuit(sender As Object, e As RoutedEventArgs) Handles MyBase.Closed
         Me.Close()
@@ -107,16 +111,18 @@ Public Class frmModele
     End Sub
 
     Private Sub txtModele_LostFocus(sender As Object, e As RoutedEventArgs) Handles TxtModele.LostFocus
-        If txtModele.Text = "" Then
-            txtModele.BorderBrush = Brushes.Red
-            txtModele.Text = "0"
+        If TxtModele.Text = "" Then
+            TxtModele.BorderBrush = Brushes.Red
+            TxtModele.Text = "0"
         Else
-            txtModele.BorderBrush = Brushes.Green
+            TxtModele.BorderBrush = Brushes.Green
         End If
     End Sub
 
-    Private Sub TxtRech_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.MouseDoubleClick
-        TxtRech.Text = ""
+    Private Sub TxtRech_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
+        If TxtRech.Text = "Saisir un critère de recherche" Then
+            TxtRech.Text = " "
+        End If
     End Sub
 
 
@@ -135,7 +141,13 @@ Public Class frmModele
 
     End Sub
 
+    Protected Sub AffMsgErr()
 
+        Dim anim As Storyboard = FindResource("AnimLabel")
+
+        _Statut.Content = _MsgErreur
+        anim.Begin(_Statut)
+    End Sub
 End Class
 
 Public Class GestionModele
@@ -193,7 +205,7 @@ Public Class GestionModele
 
     End Sub
 
-    Public Function AddModele(ByVal MonModele As tblModele) As Boolean
+    Public Function AddModele(ByVal MonModele As tblModele) As String
 
         Dim ModeleChange As IQueryable(Of tblModele) = (From Mode In BD.tblModele
                                  Where Mode.NoModele = MonModele.NoModele
@@ -209,10 +221,10 @@ Public Class GestionModele
         Try
             BD.SaveChanges()
         Catch ex As Exception
-            Return False
+            Return "Les modifications ont échouées"
         End Try
 
-        Return True
+        Return "Les modifications ont réussies"
 
     End Function
 

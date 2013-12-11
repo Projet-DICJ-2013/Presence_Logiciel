@@ -5,15 +5,13 @@ Public Class frmComposante
 
     Private _MesCompos As GestionComposante
     Private _NoModele As String
-    Private _Modele As tblModele
     Private _MsgErr As String
     Private _Statut As Label
 
-    Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele, Statut As Label)
+    Public Sub New(ByVal NoModele As String, Statut As Label)
 
         InitializeComponent()
         _NoModele = NoModele
-        _Modele = Modele
         _Statut = Statut
     End Sub
 

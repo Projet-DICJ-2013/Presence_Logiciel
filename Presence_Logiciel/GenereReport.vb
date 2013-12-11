@@ -53,6 +53,8 @@ Public Module ModRapport
 
             If _IsPDF Then
                 CreerPDF(Temp, Path)
+            Else
+                TempFilePDF = Path + Temp
             End If
 
         End Sub
@@ -74,6 +76,8 @@ Public Module ModRapport
 
             If _IsPDF Then
                 CreerPDF(Temp, Path)
+            Else
+                TempFilePDF = Path + Temp
             End If
         End Sub
 
@@ -94,6 +98,8 @@ Public Module ModRapport
 
             If _IsPDF Then
                 CreerPDF(Temp, Path)
+            Else
+                TempFilePDF = Path + Temp
             End If
         End Sub
 
