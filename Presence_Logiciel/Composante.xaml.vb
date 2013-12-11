@@ -7,13 +7,14 @@ Public Class frmComposante
     Private _NoModele As String
     Private _Modele As tblModele
     Private _MsgErr As String
+    Private _Statut As Label
 
-    Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
+    Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele, Statut As Label)
 
         InitializeComponent()
         _NoModele = NoModele
         _Modele = Modele
-
+        _Statut = Statut
     End Sub
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
@@ -23,7 +24,7 @@ Public Class frmComposante
     Private Sub BindControl()
         _MesCompos = New GestionComposante(_NoModele)
 
-        lstComposante.DataContext = _MesCompos.CollectComposante
+        lstComposante.DataContext = _MesCompos.AllComposante
         lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
     End Sub
 
@@ -31,9 +32,10 @@ Public Class frmComposante
 
         If txtCompo.Text <> " " Then
             _MsgErr = _MesCompos.AddComposante(txtCompo.Text)
-            'Me.changer_statut(_MsgErr)
+            AffMsgErr()
         Else
-            'Me.changer_statut("Veuillez Entrer une valeur de type composante")
+            _MsgErr = "Veuillez Entrer une valeur de type composante"
+            AffMsgErr()
         End If
 
         BindControl()
@@ -43,25 +45,29 @@ Public Class frmComposante
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
         _MsgErr = _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
-
-        'Me.changer_statut(_MsgErr)
-
+        AffMsgErr()
         BindControl()
     End Sub
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
 
-        'Me.changer_statut(_MsgErr)
+        AffMsgErr()
 
     End Sub
 
     Private Sub AjoutModele_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutModele.Click
 
-        _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
-
-        'Me.changer_statut(_MsgErr)
-
+        _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _NoModele)
+        AffMsgErr()
         BindControl()
+    End Sub
+
+    Protected Sub AffMsgErr()
+
+        Dim anim As Storyboard = FindResource("AnimLabel")
+
+        _Statut.Content = _MsgErr
+        anim.Begin(_Statut)
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
@@ -76,7 +82,7 @@ Public Class GestionComposante
     Private _CompoMod
     Private BD As New PresenceEntities
 
-    Public Property CollectComposante As ListCollectionView
+    Public Property AllComposante As ListCollectionView
         Get
             Return _Compos
         End Get
@@ -98,7 +104,7 @@ Public Class GestionComposante
 
         Dim MesCompos = From el In BD.GetLstCompo(_NoModele)
 
-        CollectComposante = New ListCollectionView(MesCompos.ToList)
+        AllComposante = New ListCollectionView(MesCompos.ToList)
 
         Dim CompoModele = From Compo In BD.tblModele
                           Where Compo.NoModele = _NoModele
@@ -135,12 +141,14 @@ Public Class GestionComposante
 
     End Function
 
-    Public Function AddCompoToModele(ByVal Content As tblCompoModele, ByVal Modele As tblModele) As String
+    Public Function AddCompoToModele(ByVal Content As tblCompoModele, ByVal _NoModele As String) As String
+
+        Dim Modele = (From Mode In BD.tblModele
+                     Where Mode.NoModele = _NoModele
+                     Select Mode).First
 
         Try
-
             Modele.tblCompoModele.Add(Content)
-            BD.AddTotblModele(Modele)
             BD.SaveChanges()
         Catch ex As Exception
             Return "Un problème est survenu lors de l'ajout de la composante!"

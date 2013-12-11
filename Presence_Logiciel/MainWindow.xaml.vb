@@ -125,7 +125,7 @@ Class MainWindow
         objDropShadow.BlurRadius = 0
         objDropShadow.Color = Colors.Transparent
         Me.RecPret.Effect = objDropShadow
-        Dim gestPrets As New ListeExemplaire
+        Dim gestPrets As New ListeExemplaire(lblStatut)
         gestPrets.ShowDialog()
     End Sub
 
@@ -136,25 +136,25 @@ Class MainWindow
     End Sub
     Private Sub AffLstPret()
 
-        Dim fnlistePret As New ListePret
+        Dim fnlistePret As New ListePret(lblStatut)
         fnlistePret.ShowDialog()
 
     End Sub
 
     Private Sub CreerPret()
-        Dim fnPret As New Pret
+        Dim fnPret As New Pret(lblStatut)
         fnPret.ShowDialog()
 
     End Sub
 
     Private Sub AffLstExemp()
-        Dim fnLstExemp As New ListeExemplaire
+        Dim fnLstExemp As New ListeExemplaire(lblStatut)
         fnLstExemp.ShowDialog()
 
     End Sub
 
     Private Sub CreerExemp()
-        Dim fnExemp As New frmExemplaire
+        Dim fnExemp As New frmExemplaire(lblStatut)
         fnExemp.ShowDialog()
     End Sub
 
