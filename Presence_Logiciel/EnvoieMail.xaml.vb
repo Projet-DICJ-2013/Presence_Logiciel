@@ -17,7 +17,6 @@ Public Class EnvoieMail
 
         If ((txtObj.Text IsNot Nothing) And (rctMessage.Document IsNot Nothing)) Then
             CreerMail()
-            _envoieMail.EnvoiMessage()
             Me.Close()
         Else
             MessageBox.Show("Veuillez remplir tous les champs.", "Attention", MessageBoxButton.OK, MessageBoxImage.Information)
@@ -40,17 +39,17 @@ Public Class EnvoieMail
         _texteSujet = New TextRange(rctMessage.Document.ContentStart, rctMessage.Document.ContentEnd)
         _tblConstante = (From constant In _entitiesReunion.tblConstant Select constant).ToList()
         _envoieMail = New objSmtp("dicj@outlook.fr", "dicj@outlook.fr", txtObj.Text, "", _tblConstante.Item(0).AdresseEmail, _tblConstante.Item(0).MotdePasse, _texteSujet)
-        _rapport.CreerRapportOrd(_idOrdre)
-        _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
 
         For Each invites In _listeAdresse
-            _envoieMail.AddDestinataire(invites.CourrielMembre)
+            _envoieMail.AddCC(invites.CourrielMembre)
             _nbrMail += _nbrMail
             If (_nbrMail = 10) Then
                 _envoieMail.Envoie_Reset()
                 _nbrMail = 0
             End If
         Next
+        _rapport.CreerRapportOrd(_idOrdre)
+        _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
         _envoieMail.EnvoiMessage()
 
     End Sub
