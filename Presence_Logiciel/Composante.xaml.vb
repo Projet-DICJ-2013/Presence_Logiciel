@@ -51,7 +51,9 @@ Public Class frmComposante
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
 
+        _MsgErr = _MesCompos.DeleteCompoToModele(CType(lstCompoModele.SelectedItem, tblCompoModele), _NoModele)
         AffMsgErr()
+        BindControl()
 
     End Sub
 
@@ -101,11 +103,13 @@ Public Class GestionComposante
     End Property
 
     Public Sub New(ByVal _NoModele As String)
+        Try
+            Dim MesCompos = (From el In BD.GetLstCompo(_NoModele))
 
-        Dim MesCompos = From el In BD.GetLstCompo(_NoModele)
+            AllComposante = New ListCollectionView(MesCompos.ToList)
+        Catch ex As Exception
 
-        AllComposante = New ListCollectionView(MesCompos.ToList)
-
+        End Try
         Dim CompoModele = From Compo In BD.tblModele
                           Where Compo.NoModele = _NoModele
                           Select Compo
@@ -143,17 +147,38 @@ Public Class GestionComposante
 
     Public Function AddCompoToModele(ByVal Content As tblCompoModele, ByVal _NoModele As String) As String
 
-        Dim Modele = (From Mode In BD.tblModele
-                     Where Mode.NoModele = _NoModele
-                     Select Mode).First
+        Dim Modele As tblModele = GetModeleByID(_NoModele)
 
         Try
             Modele.tblCompoModele.Add(Content)
             BD.SaveChanges()
         Catch ex As Exception
-            Return "Un problème est survenu lors de l'ajout de la composante!"
+            Return "Un problème est survenu lors de l'ajout de la composante au modèle!"
         End Try
-        Return "Composante ajoutée sans problème!"
+        Return "La composante à été ajouté du modèle sans problème!"
 
+    End Function
+
+
+    Public Function DeleteCompoToModele(ByVal Content As tblCompoModele, ByVal _NoModele As String) As String
+
+        Dim Modele As tblModele = GetModeleByID(_NoModele)
+
+        Try
+            Modele.tblCompoModele.Remove(Content)
+            BD.SaveChanges()
+        Catch ex As Exception
+            Return "Un problème est survenu lors du retrait de la composante du modèle!"
+        End Try
+        Return "La composante à été retiré du modèle sans problème!"
+
+    End Function
+
+    Protected Function GetModeleByID(ByVal _NoModele As String) As tblModele
+        Dim Modele = (From Mode In BD.tblModele
+                     Where Mode.NoModele = _NoModele
+                     Select Mode).First
+
+        Return Modele
     End Function
 End Class

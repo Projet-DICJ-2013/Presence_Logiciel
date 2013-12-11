@@ -16,13 +16,13 @@ Public Class frmModele
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
-        Modele = New GestionModele
-
         SynchroControl()
 
     End Sub
 
-    Private Sub SynchroControl()
+    Private Sub SynchroControl(Optional ByVal CurrentPos As Integer = 0)
+
+        Modele = New GestionModele
 
         Try
             TxtMarque.DataContext = Modele.Collection
@@ -30,10 +30,10 @@ Public Class frmModele
             TxtType.DataContext = Modele.Collection
             TxtGaranti.DataContext = Modele.Collection
             TxtPrix.DataContext = Modele.Collection
-            ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
+            UpdateComposante()
             TxtRech.Text = "Saisir un critère de recherche"
         Catch ex As Exception
-
+            _Statut.Content = "Une erreur est survenue lors du chargement des données!"
         End Try
 
 
@@ -41,24 +41,29 @@ Public Class frmModele
 
     Private Sub btnFirst_Click(sender As Object, e As RoutedEventArgs) Handles btnFirst.Click
         Modele.Collection.MoveCurrentToFirst()
+        UpdateComposante()
 
     End Sub
 
     Private Sub btnPrevious_Click(sender As Object, e As RoutedEventArgs) Handles btnPrevious.Click
         Modele.Collection.MoveCurrentToPrevious()
+        UpdateComposante()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As RoutedEventArgs) Handles btnNext.Click
         Modele.Collection.MoveCurrentToNext()
+        UpdateComposante()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As RoutedEventArgs) Handles btnLast.Click
         Modele.Collection.MoveCurrentToLast()
+        UpdateComposante()
     End Sub
 
-    Private Sub TxtModele_TextChanged(sender As Object, e As TextChangedEventArgs) Handles TxtModele.TextChanged
-
-        ViewComposante.ItemsSource = Modele.GetComposante(TxtModele.Text)
+    Protected Sub UpdateComposante()
+        If Modele.Collection.CurrentItem IsNot Nothing Then
+            ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
+        End If
     End Sub
 
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
@@ -72,14 +77,14 @@ Public Class frmModele
 
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-            Dim tblModele As tblModele
+        Dim tblModele As tblModele
 
-            If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
+        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
 
-                MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
-                Return
+            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
+            Return
 
-            End If
+        End If
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
                                                 .Marque = TxtMarque.Text, _
@@ -87,9 +92,9 @@ Public Class frmModele
                                                 .TypeMachine = TxtMarque.Text, _
                                                 .PrixModele = TxtPrix.Text}
 
-            If (tblModele IsNot Nothing) Then
-                Modele.AddModele(tblModele)
-            End If
+        If (tblModele IsNot Nothing) Then
+            Modele.AddModele(tblModele)
+        End If
     End Sub
 
 
@@ -209,7 +214,5 @@ Public Class GestionModele
     End Function
 
 
-
-    'PARTIE DE LA VALIDATION DES ENTRÉES
 
 End Class
