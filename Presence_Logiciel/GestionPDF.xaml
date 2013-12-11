@@ -28,6 +28,9 @@
         	Name="AddNewReport" VerticalAlignment="Top" Width="41">
             <Image Source="Images/Icons/Add.png" Height="29" Width="20"/>
         </Button>
+        <Button x:Name="btnClose" Height="30" HorizontalAlignment="Right" Margin="0,8,30.4,0" VerticalAlignment="Top" Width="41">
+            <Image Source="Images/Icons/Error.png" Height="29" Width="20"/>
+        </Button>
         <ComboBox IsEditable="True"  Height="29" HorizontalAlignment="Left" Margin="566,8,0,0"
         	x:Name="txtIdRap" VerticalAlignment="Top" Width="288" Text="Saisir l'id du rapport" ItemsSource="{Binding Path=Nom}"/>
     </Grid>

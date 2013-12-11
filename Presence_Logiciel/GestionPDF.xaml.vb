@@ -119,6 +119,11 @@ Public Class GestionPDF
             txtIdRap.Text = ""
         End If
     End Sub
+
+    Private Sub OnQuit(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Finalize()
+        Me.Close()
+    End Sub
 End Class
 
 Public Class ListId
@@ -164,8 +169,8 @@ Public Class ListId
     End Sub
 
     Public Sub GetMatElem()
-        Dim LstMat As List(Of String) = (From Modele In _Modele.tblModele
-                             Select Id = Modele.NoModele & " - " & Modele.Marque).ToList
+        Dim LstMat As List(Of String) = (From Pret In _Modele.tblPret
+                             Select Id = Pret.IdPret & "  ").ToList
 
         List = LstMat
     End Sub
