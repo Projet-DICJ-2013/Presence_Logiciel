@@ -1,11 +1,11 @@
 ﻿<Window x:Name="frmCedReu" x:Class="int_CedReunion"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Planification Réunion" Height="733.552" Width="1160.4">
-    <Grid x:Name="frmCedReunion" Margin="0,0,3.6,77.2">
+    Title="Planification Réunion" Height="694.352" Width="1160.4">
+    <Grid x:Name="frmCedReunion" Margin="0,0,3.6,-1.6">
         <Label x:Name="lblTitre" Content="Ordre du jour :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <GroupBox Header="Invitations " HorizontalAlignment="Left" Height="326" Margin="51,336,0,0" VerticalAlignment="Top" Width="1035" AllowDrop="True" RenderTransformOrigin="0.5,0.5">
-            <Grid x:Name="grdAnnee" HorizontalAlignment="Left" Width="1025" Margin="0,10,-2.6,-22" RenderTransformOrigin="0.496,0.574">
+        <GroupBox Header="Invitations " HorizontalAlignment="Left" Height="282" Margin="51,336,0,0" VerticalAlignment="Top" Width="1035" AllowDrop="True" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="grdAnnee" HorizontalAlignment="Left" Width="1025" Margin="0,10,-2.6,-12.8" RenderTransformOrigin="0.496,0.574">
                 <Label x:Name="lblRecherche" Content="Recherche : " HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="29" Width="78" FontSize="14"/>
                 <ComboBox x:Name="cmbType" HorizontalAlignment="Left" Margin="102,47,0,0" VerticalAlignment="Top" Width="269">
                     <ListBoxItem Content="Étudiant"/>
@@ -44,7 +44,7 @@
                 <Label x:Name="lblType" Content="Type :" HorizontalAlignment="Left" Margin="44,48,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btnCeduler" Content="Planifier" HorizontalAlignment="Left" Margin="910,711,0,0" VerticalAlignment="Top" Width="102" Height="34"/>
+        <Button x:Name="btnCeduler" Content="Planifier" HorizontalAlignment="Left" Margin="827,623,0,0" VerticalAlignment="Top" Width="102" Height="34"/>
         <GroupBox x:Name="grpInfoReu" Header="Info Réunion " HorizontalAlignment="Left" Margin="51,141,0,0" VerticalAlignment="Top" Height="171" Width="646">
             <Grid HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="636" Margin="0,10,-2.4,-22.2">
                 <Label x:Name="lblLocal" Content="Num. Local :" HorizontalAlignment="Left" Margin="22,107,0,0" VerticalAlignment="Top"/>
