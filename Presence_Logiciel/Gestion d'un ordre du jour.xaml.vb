@@ -7,64 +7,55 @@ Imports System.Data.Objects
 
 
 Public Class frmGestOrdJour
-    Dim startPoint As New Point
-
+    Private startPoint As New Point
     Private OrdreDuJour As GestionOdj
     Private _intReu As int_CedReunion
-    Private Rapport As GenereRapport
+
 
 
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
         OrdreDuJour = New GestionOdj
-
         lstOrdreJour.ItemsSource = OrdreDuJour.Collection
-        btnPlanifReun.IsEnabled = False
-        btnProdRapport.IsEnabled = False
-        btnEnregistrer.IsEnabled = False
     End Sub
 
     Private Sub btnNouveauPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnNouveauPoint.Click
-        NettoyerArbre()
         If txtTitrePoint.Text <> "" Then
+            NettoyerArbre()
             lstOdj.Items.Add(New TreeViewItem() With {.Header = txtTitrePoint.Text})
+            NumeroterArbre()
+            btnPlanifReun.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
         Else
             MessageBox.Show("Le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
-        NumeroterArbre()
-        btnProdRapport.IsEnabled = False
-        btnPlanifReun.IsEnabled = False
-        btnEnregistrer.IsEnabled = True
     End Sub
 
     Private Sub btnAttacher_Click(sender As Object, e As RoutedEventArgs) Handles btnAttacher.Click
-        NettoyerArbre()
         Dim item As TreeViewItem = TryCast(lstOdj.SelectedItem, TreeViewItem)
         If item IsNot Nothing And txtTitrePoint.Text <> "" Then
+            NettoyerArbre()
             item.Items.Add(New TreeViewItem() With {.Header = txtTitrePoint.Text})
             item.ExpandSubtree()
+            NumeroterArbre()
+            btnPlanifReun.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
         Else
             MessageBox.Show("Aucun point est séléctionné ou le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
-        NumeroterArbre()
-        btnProdRapport.IsEnabled = False
-        btnPlanifReun.IsEnabled = False
-        btnEnregistrer.IsEnabled = True
     End Sub
 
     Private Sub btnSupprimerPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnSupprimerPoint.Click
         Dim ElementTemporaire As TreeViewItem = DirectCast(lstOdj.SelectedItem, TreeViewItem)
-        If ElementTemporaire Is Nothing Then
-            Return
-        End If
+        If ElementTemporaire IsNot Nothing Then
+            If TypeOf ElementTemporaire.Parent Is TreeViewItem Then
+                TryCast(ElementTemporaire.Parent, TreeViewItem).Items.Remove(ElementTemporaire)
+            Else
+                Me.lstOdj.Items.Remove(ElementTemporaire)
+            End If
 
-        If TypeOf ElementTemporaire.Parent Is TreeViewItem Then
-            TryCast(ElementTemporaire.Parent, TreeViewItem).Items.Remove(ElementTemporaire)
-        Else
-            Me.lstOdj.Items.Remove(ElementTemporaire)
+            btnPlanifReun.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
         End If
-        btnProdRapport.IsEnabled = False
-        btnPlanifReun.IsEnabled = False
-        btnEnregistrer.IsEnabled = True
     End Sub
 
 
@@ -79,8 +70,8 @@ Public Class frmGestOrdJour
         If e.LeftButton = MouseButtonState.Pressed AndAlso (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance OrElse Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance) Then
             Dim treeView As TreeView = TryCast(sender, TreeView)
             Dim treeViewItem As TreeViewItem = FindAnchestor(Of TreeViewItem)(DirectCast(e.OriginalSource, DependencyObject))
-
             Dim contact As TreeViewItem
+
             If TypeOf e.Source Is TreeViewItem Then
                 contact = e.Source
 
@@ -108,9 +99,8 @@ Public Class frmGestOrdJour
             Dim MonParentArbre As TreeView
             Dim MonParentNoeud As TreeViewItem
             Dim i As Int16
-
+            NettoyerArbre()
             If TypeOf contact.Parent Is TreeViewItem Then
-                NettoyerArbre()
                 MonParentNoeud = contact.Parent
                 i = MonParentNoeud.Items.IndexOf(treeViewItem)
                 MonParentNoeud.Items.Remove(contact)
@@ -119,9 +109,7 @@ Public Class frmGestOrdJour
                 ElseIf i > -1 Then
                     MonParentNoeud.Items.Insert(i, contact)
                 End If
-                NumeroterArbre()
             Else
-                NettoyerArbre()
                 MonParentArbre = contact.Parent
                 i = MonParentArbre.Items.IndexOf(treeViewItem)
                 MonParentArbre.Items.Remove(contact)
@@ -130,9 +118,8 @@ Public Class frmGestOrdJour
                 ElseIf i > -1 Then
                     MonParentArbre.Items.Insert(i, contact)
                 End If
-                NumeroterArbre()
             End If
-            btnProdRapport.IsEnabled = False
+            NumeroterArbre()
             btnPlanifReun.IsEnabled = False
             btnEnregistrer.IsEnabled = True
         End If
@@ -217,7 +204,6 @@ Public Class frmGestOrdJour
         Dim tblOrdreDuJour As tblOrdreDuJour
         Dim tblListePoint As tblListePoint
 
-
         If txtTitreOdj.Text = Nothing Then
             MsgBox("Veuillez remplir tous les champs pour enregistrer un nouvelle ordre du jour!")
             Return
@@ -253,11 +239,11 @@ Public Class frmGestOrdJour
         ReloadList()
         If lstOrdreJour.SelectedIndex > -1 Then
             btnPlanifReun.IsEnabled = True
-            btnProdRapport.IsEnabled = True
+
             btnEnregistrer.IsEnabled = False
         Else
             btnPlanifReun.IsEnabled = False
-            btnProdRapport.IsEnabled = False
+
             btnEnregistrer.IsEnabled = True
         End If
     End Sub
@@ -283,7 +269,7 @@ Public Class frmGestOrdJour
         NettoyerArbre()
         OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
         ReloadList()
-        btnProdRapport.IsEnabled = True
+
         btnPlanifReun.IsEnabled = True
         btnEnregistrer.IsEnabled = False
     End Sub
@@ -311,9 +297,11 @@ Public Class frmGestOrdJour
         _intReu.ShowDialog()
     End Sub
 
-    Private Sub btnProdRapport_Click(sender As Object, e As RoutedEventArgs) Handles btnProdRapport.Click
-            Rapport = New GenereRapport
-            Rapport.CreerRapportOrd(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour)
+    Private Sub btnFermer_Click(sender As Object, e As RoutedEventArgs) Handles btnFermer.Click
+        Dim DialogResult = MessageBox.Show("Êtes-vous sur de vouloir quitter?", "Attention!", MessageBoxButton.YesNo, MessageBoxImage.Warning)
+        If DialogResult = MessageBoxResult.Yes Then
+            Me.Close()
+        End If
     End Sub
 End Class
 

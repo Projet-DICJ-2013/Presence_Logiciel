@@ -2,7 +2,8 @@
       
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Liste Exemplaire" Height="443.785" Width="867.248" Loaded="Page_Loaded">
+    Title="Liste Exemplaire" Height="501.493" Width="890.836" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Loaded="Page_Loaded" Icon="images/Icons/User.png">
+
 
     <Window.Resources>
         <ResourceDictionary>
@@ -12,7 +13,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.5" Margin="0,0,-0.2,-38">
+    <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.5" Margin="0,0,0.2,0.6">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

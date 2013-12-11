@@ -1,9 +1,12 @@
-﻿Public Class frmComposante
+﻿Imports System.Windows.Media.Animation
+
+Public Class frmComposante
+
 
     Private _MesCompos As GestionComposante
     Private _NoModele As String
     Private _Modele As tblModele
-    Private app As FonctionsGlobales
+    Private _MsgErr As String
 
     Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
 
@@ -18,17 +21,19 @@
     End Sub
 
     Private Sub BindControl()
-            _MesCompos = New GestionComposante(_NoModele)
+        _MesCompos = New GestionComposante(_NoModele)
 
-            lstComposante.DataContext = _MesCompos.CollectComposante
-            lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
+        lstComposante.DataContext = _MesCompos.CollectComposante
+        lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
     End Sub
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
-        If app.verifier_null(txtCompo.Text) Then
-            _MesCompos.AddComposante(txtCompo.Text)
+
+        If txtCompo.Text <> " " Then
+            _MsgErr = _MesCompos.AddComposante(txtCompo.Text)
+            'Me.changer_statut(_MsgErr)
         Else
-            app.changer_statut("Veuillez Entrer une valeur de type composante")
+            'Me.changer_statut("Veuillez Entrer une valeur de type composante")
         End If
 
         BindControl()
@@ -37,18 +42,24 @@
 
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
-            _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
+        _MsgErr = _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
 
-            BindControl()
+        'Me.changer_statut(_MsgErr)
+
+        BindControl()
     End Sub
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
+
+        'Me.changer_statut(_MsgErr)
 
     End Sub
 
     Private Sub AjoutModele_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutModele.Click
 
-        _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
+        _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
+
+        'Me.changer_statut(_MsgErr)
 
         BindControl()
     End Sub
@@ -97,7 +108,7 @@ Public Class GestionComposante
 
     End Sub
 
-    Public Function AddComposante(ByVal TypeCom As String) As Boolean
+    Public Function AddComposante(ByVal TypeCom As String) As String
 
         Dim Composante As New tblCompoModele With {.TypeCompo = TypeCom}
 
@@ -111,7 +122,7 @@ Public Class GestionComposante
         Return "L'ajout de la composante à réussi"
     End Function
 
-    Public Function DeleteComposante(ByVal TypeCom As tblCompoModele) As Boolean
+    Public Function DeleteComposante(ByVal TypeCom As tblCompoModele) As String
 
         Try
             BD.tblCompoModele.DeleteObject(TypeCom)
@@ -138,5 +149,3 @@ Public Class GestionComposante
 
     End Function
 End Class
-
-'test push3

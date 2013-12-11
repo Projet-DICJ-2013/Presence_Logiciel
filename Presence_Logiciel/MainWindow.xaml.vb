@@ -1,4 +1,6 @@
 ﻿Imports System.Threading
+Imports System.Windows.Media.Animation
+Imports System.IO
 Class MainWindow
 
 
@@ -124,7 +126,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecPret.Effect = objDropShadow
         Dim gestPrets As New ListeExemplaire
-        gestPrets.Show()
+        gestPrets.ShowDialog()
     End Sub
 
 
@@ -173,9 +175,13 @@ Class MainWindow
         MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
     End Sub
 
+
     Public Sub changer_statut(ByVal statut As String)
         lblStatut.Content = statut
+        Dim anim As Storyboard = FindResource("AnimLabel")
+        anim.Begin(lblStatut)
     End Sub
+
 End Class
 
 Public Class FonctionsGlobales
@@ -196,7 +202,5 @@ Public Class FonctionsGlobales
         MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
     End Sub
 
-    Public Sub changer_statut(ByVal statut As String)
-        Main.lblStatut.Content = statut
-    End Sub
+
 End Class

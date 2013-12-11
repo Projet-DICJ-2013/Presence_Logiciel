@@ -1,14 +1,13 @@
-﻿<Window x:Name="frmcreergroupe" x:Class="creerGroupe" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window x:Name="frmcreergroupe" x:Class="creerGroupe" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Creer Groupe" Height="105.468" Width="231.449">
+    Title="Creer Groupe" Height="135.068" Width="236.249" Icon="images/Icons/User.png">
     <Grid>
         <Label x:Name="lblidGroupe" Content="IdGroupe: " HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblnoGroupe" Content="NoGroupe: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtidgroupe" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="82,41,0,0"/>
         <TextBox x:Name="txtnogroupe" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="82,10,0,0"/>
         <Button x:Name="btncreergroupe" Content="Créer Groupe" HorizontalAlignment="Left" Margin="114,69,0,0" VerticalAlignment="Top" Width="88"/>
-        <Button x:Name="btnFermer" Content="X" HorizontalAlignment="Left" Margin="214,0,0,84.6" VerticalAlignment="Bottom" Width="17" Height="21" RenderTransformOrigin="0.5,0.51"/>
 
     </Grid>
 </Window>

@@ -3,26 +3,21 @@ Imports System.Windows.Media.Animation
 Public Class ajoutMembre
     Public DM As PresenceEntities
     Dim newMembre As tblMembre
-    Dim LesMembres As IQueryable(Of tblMembre)
-    Dim vu As ListCollectionView
-    Dim lemembre As tblMembre
     Public statut As Label
 
 
-    Private Sub cmbVille_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
-    End Sub
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
         Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
+
+        ''Verification du contenu des champs
         Dim myRegex1 As New Regex( _
 "^[a-zA-Z]+$")
         If (myRegex1.IsMatch(txtPrenom.Text) = False) Then
+            ''Debut des animations
             statut.Content = "Un prénom doit contenir que des lettres"
             Dim anim As Storyboard = FindResource("AnimLabel")
-
-
             txtPrenom.BorderBrush = Brushes.Red
             anim2.Begin(txtPrenom)
 
@@ -75,7 +70,7 @@ Public Class ajoutMembre
             Return
         End If
 
-
+        ''Si tout est ok, création d'un objet tblMembre
         newMembre = New tblMembre With _
 {
     .AdresseMembre = txtAdresse.Text, _
@@ -89,26 +84,32 @@ Public Class ajoutMembre
 
 
         Try
+            ''Tentative d'ajout dans la BD
 
             DM.tblMembre.AddObject(newMembre)
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
+
+        ''S'il est ajouté dans la BD donc  si le radio button Professeur est coché :
         If (rdProfesseur.IsChecked = True) Then
             Dim unprof As New MembreProf
             unprof.LeNouveau = newMembre
-
             unprof.DM = DM
             unprof.statut = statut
+            ''Ouverture de la fenêtre membreprof
             unprof.ShowDialog()
             Me.Close()
             Me.Finalize()
+
+            ''Sinon si c'est l'étudiant
         Else
             Dim unEtudiant As New membreEtudiant
             unEtudiant.LeNouveau = newMembre
             unEtudiant.statut = statut
             unEtudiant.DM = DM
+            ''Ouverture de la fenêtre MembreEtudiant
             unEtudiant.ShowDialog()
             Me.Close()
             Me.Finalize()
@@ -117,14 +118,8 @@ Public Class ajoutMembre
 
     End Sub
 
-    Private Sub Image_MouseDown(sender As Object, e As MouseButtonEventArgs)
-        Me.Close()
-        Me.Finalize()
-    End Sub
 
-    Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
 
-    End Sub
 
 
 End Class

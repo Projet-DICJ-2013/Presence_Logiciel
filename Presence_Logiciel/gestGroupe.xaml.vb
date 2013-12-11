@@ -264,8 +264,5 @@ Class frmGestGroupe
         refresh()
     End Sub
 
-    Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
-        Me.Finalize()
-        Me.Close()
-    End Sub
+
 End Class

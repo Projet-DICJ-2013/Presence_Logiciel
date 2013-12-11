@@ -36,7 +36,7 @@ Public Module ModRapport
             Temp = Guid.NewGuid().ToString
         End Sub
 
-        Public Sub CreerRapportOrd(ByVal Id As Integer)
+        Public Sub CreerRapportOrd(ByVal Id As Integer, Optional ByVal _IsPDF As Boolean = False)
 
             Dim mon_msg As String
 
@@ -51,10 +51,13 @@ Public Module ModRapport
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
 
-            TempFilePDF = Path + Temp
+            If _IsPDF Then
+                CreerPDF(Temp, Path)
+            End If
+
         End Sub
 
-        Public Sub CreerRapportMat(ByVal Id As String)
+        Public Sub CreerRapportMat(ByVal Id As String, Optional ByVal _IsPDF As Boolean = False)
 
             Dim mon_msg As String
 
@@ -69,10 +72,12 @@ Public Module ModRapport
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
 
-            TempFilePDF = Path + Temp
+            If _IsPDF Then
+                CreerPDF(Temp, Path)
+            End If
         End Sub
 
-        Public Sub CreerRapportCours(ByVal Id As String)
+        Public Sub CreerRapportCours(ByVal Id As String, Optional ByVal _IsPDF As Boolean = False)
 
             Dim mon_msg As String
 
@@ -87,7 +92,17 @@ Public Module ModRapport
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
 
-            TempFilePDF = Path + Temp
+            If _IsPDF Then
+                CreerPDF(Temp, Path)
+            End If
+        End Sub
+
+        Protected Sub CreerPDF(ByVal Temp As String, ByVal Path As String)
+
+            MonPDF = New GenerePdf(Temp, Path)
+            MonPDF.ConvertToPDF()
+            TempFilePDF = Path + Temp + ".pdf"
+
         End Sub
     End Class
 
