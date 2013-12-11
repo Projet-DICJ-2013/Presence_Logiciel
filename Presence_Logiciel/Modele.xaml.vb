@@ -16,13 +16,13 @@ Public Class frmModele
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
+        Modele = New GestionModele
+
         SynchroControl()
 
     End Sub
 
-    Private Sub SynchroControl(Optional ByVal CurrentPos As Integer = 0)
-
-        Modele = New GestionModele
+    Private Sub SynchroControl()
 
         Try
             TxtMarque.DataContext = Modele.Collection
@@ -33,7 +33,7 @@ Public Class frmModele
             UpdateComposante()
             TxtRech.Text = "Saisir un critère de recherche"
         Catch ex As Exception
-            _Statut.Content = "Une erreur est survenue lors du chargement des données!"
+            _Statut.Content = "Un problème est survenu lors de la synchronisation des données!"
         End Try
 
 
@@ -42,7 +42,6 @@ Public Class frmModele
     Private Sub btnFirst_Click(sender As Object, e As RoutedEventArgs) Handles btnFirst.Click
         Modele.Collection.MoveCurrentToFirst()
         UpdateComposante()
-
     End Sub
 
     Private Sub btnPrevious_Click(sender As Object, e As RoutedEventArgs) Handles btnPrevious.Click
@@ -60,10 +59,14 @@ Public Class frmModele
         UpdateComposante()
     End Sub
 
-    Protected Sub UpdateComposante()
+    Private Sub UpdateComposante()
+
         If Modele.Collection.CurrentItem IsNot Nothing Then
             ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
+        Else
+            ViewComposante.ItemsSource = Nothing
         End If
+
     End Sub
 
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
@@ -197,22 +200,38 @@ Public Class GestionModele
                                  Select Mode)
         Dim Modele As tblModele
 
-            If ModeleChange.Count Then
-                Modele = ModeleChange.First
-                Modele = MonModele
-            Else
-                BD.AddTotblModele(MonModele)
-            End If
-            Try
-                BD.SaveChanges()
-            Catch ex As Exception
-                Return False
-            End Try
+        If ModeleChange.Count Then
+            Modele = ModeleChange.First
+            Modele = MonModele
+        Else
+            BD.AddTotblModele(MonModele)
+        End If
+        Try
+            BD.SaveChanges()
+        Catch ex As Exception
+            Return False
+        End Try
 
-            Return True
+        Return True
 
     End Function
 
 
 
+    'PARTIE DE LA VALIDATION DES ENTRÉES
+    Private Function valider_modele()
+        Dim verifie As Boolean = True
+
+    End Function
+
+    Private Function verifier_doublon_nomodele(ByVal nomod As String) As Boolean
+        Dim modV = (From modB In BD.tblModele
+                   Where modB.NoModele = nomod
+                   Select modB)
+        If modV.ToList.Count() > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 End Class
