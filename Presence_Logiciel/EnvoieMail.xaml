@@ -1,7 +1,7 @@
 ﻿<Window x:Name="intEnvoieMail" x:Class="EnvoieMail"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Envoie Message" Height="348" Width="528">
+    Title="Envoie Message" Height="348" Width="528" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Icon="images/Icons/User.png">
     <Grid Margin="0,0,-0.4,-3">
         <Label x:Name="lblMessage" Content="Sujet :" HorizontalAlignment="Left" Margin="21,77,0,0" VerticalAlignment="Top"/>
         <RichTextBox x:Name="rctMessage" HorizontalAlignment="Left" Height="130" Margin="21,108,0,0" VerticalAlignment="Top" Width="477">

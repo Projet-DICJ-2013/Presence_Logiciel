@@ -1,10 +1,10 @@
-﻿<Window x:Class="frmGestOrdJour"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" WindowStyle="None"
+﻿<Window x:Class="frmGestOrdJour"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d"
-      Title="Gestion d'un ordre du jour" Height="616.052" Width="916.704">
+      Title="Gestion d'un ordre du jour" Height="685.306" Width="933.42" Icon="images/Icons/User.png">
     <Window.Resources>
         <!--label programmes-->
         <Style TargetType="{x:Type Label}" x:Key="labelProg">

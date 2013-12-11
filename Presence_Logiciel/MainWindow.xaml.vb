@@ -1,4 +1,6 @@
 ﻿Imports System.Threading
+Imports System.Windows.Media.Animation
+Imports System.IO
 Class MainWindow
 
 
@@ -123,8 +125,8 @@ Class MainWindow
         objDropShadow.BlurRadius = 0
         objDropShadow.Color = Colors.Transparent
         Me.RecPret.Effect = objDropShadow
-        Dim gestPrets As New ListeExemplaire
-        gestPrets.Show()
+        Dim gestPrets As New ListeExemplaire(lblStatut)
+        gestPrets.ShowDialog()
     End Sub
 
 
@@ -134,25 +136,25 @@ Class MainWindow
     End Sub
     Private Sub AffLstPret()
 
-        Dim fnlistePret As New ListePret
+        Dim fnlistePret As New ListePret(lblStatut)
         fnlistePret.ShowDialog()
 
     End Sub
 
     Private Sub CreerPret()
-        Dim fnPret As New Pret
+        Dim fnPret As New Pret(lblStatut)
         fnPret.ShowDialog()
 
     End Sub
 
     Private Sub AffLstExemp()
-        Dim fnLstExemp As New ListeExemplaire
+        Dim fnLstExemp As New ListeExemplaire(lblStatut)
         fnLstExemp.ShowDialog()
 
     End Sub
 
     Private Sub CreerExemp()
-        Dim fnExemp As New frmExemplaire
+        Dim fnExemp As New frmExemplaire(lblStatut)
         fnExemp.ShowDialog()
     End Sub
 
@@ -173,9 +175,13 @@ Class MainWindow
         MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
     End Sub
 
+
     Public Sub changer_statut(ByVal statut As String)
         lblStatut.Content = statut
+        Dim anim As Storyboard = FindResource("AnimLabel")
+        anim.Begin(lblStatut)
     End Sub
+
 End Class
 
 Public Class FonctionsGlobales
@@ -196,7 +202,5 @@ Public Class FonctionsGlobales
         MessageBox.Show("Le " + variable + " entré ne correspond pas aux critères établis")
     End Sub
 
-    Public Sub changer_statut(ByVal statut As String)
-        Main.lblStatut.Content = statut
-    End Sub
+
 End Class

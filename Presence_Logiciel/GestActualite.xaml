@@ -6,7 +6,7 @@ x:Class="rssActualite"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d"
-      Title="GestActualite" Height="502.798" Width="645.745" Loaded="Window_Loaded">
+      Title="GestActualite" Height="502.798" Width="645.745" Loaded="Window_Loaded" Icon="images/Icons/User.png">
     <Window.Resources>
         <ResourceDictionary>
             <!--C'est ici qu'il faut construire les animations-->

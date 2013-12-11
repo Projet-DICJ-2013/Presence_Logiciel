@@ -17,12 +17,23 @@ Class ListePret
     Private req As IQueryable(Of PretExemplaireMembre)
     Private reqFiltre As IQueryable(Of PretExemplaireMembre)
 
+    Private _Statut As Label
+
+    Public Sub New(statut As Label)
+
+        ' Cet appel est requis par le concepteur.
+        InitializeComponent()
+
+        ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
+        _Statut = statut
+    End Sub
+
     Private Sub test1()
         MessageBox.Show("test")
     End Sub
 
     Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
-        Dim fnPret As New Pret
+        Dim fnPret As New Pret(_Statut)
         fnPret.ShowDialog()
     End Sub
 

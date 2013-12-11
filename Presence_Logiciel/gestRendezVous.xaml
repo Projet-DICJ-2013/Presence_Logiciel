@@ -6,14 +6,18 @@ x:Class="gestRendezVous"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1500"
-      Title="gestRendezVous">
+      Title="gestRendezVous" Icon="images/Icons/User.png">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="428*"/>
+            <ColumnDefinition Width="1065*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Grid.RowSpan="2" Margin="10,0,-10,-165.2"/>
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Grid.RowSpan="2" Margin="10,0,-10.4,-165" Grid.ColumnSpan="2"/>
         <GroupBox Header="Ordre du jour" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Height="92" Width="252">
             <Label Content="(*)" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.889,0.609" Margin="213,38,0,0"/>
         </GroupBox>
@@ -22,9 +26,9 @@ x:Class="gestRendezVous"
         <Label Content="Local:" HorizontalAlignment="Left" Margin="17,59,0,0" VerticalAlignment="Top" Height="26" Width="40"/>
         <ListBox HorizontalAlignment="Left" Height="26" Margin="73,63,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="(*)" HorizontalAlignment="Left" Margin="229,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.889,0.609" Height="26" Width="22"/>
-        <DatePicker HorizontalAlignment="Left" Margin="343,35,0,0" VerticalAlignment="Top" Width="175" Height="24"/>
+        <DatePicker HorizontalAlignment="Left" Margin="343,35,0,0" VerticalAlignment="Top" Width="175" Height="24" Grid.ColumnSpan="2"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="301,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.464,1.391" Height="26" Width="37"/>
-        <GroupBox Header="Invitations" HorizontalAlignment="Left" Margin="17,102,0,-94.2" VerticalAlignment="Top" Height="365" Width="508" Grid.RowSpan="2">
+        <GroupBox Header="Invitations" HorizontalAlignment="Left" Margin="17,102,0,0" VerticalAlignment="Top" Height="365" Width="508" Grid.ColumnSpan="2">
             <Button Content="&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Foreground="#FFFCFCFC" Margin="226,208,0,0" RenderTransformOrigin="0.492,-0.086">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -34,8 +38,8 @@ x:Class="gestRendezVous"
                 </Button.Background>
             </Button>
         </GroupBox>
-        <DataGrid HorizontalAlignment="Left" Margin="25,182,0,-50.2" VerticalAlignment="Top" Width="207" Height="241" Grid.RowSpan="2"/>
-        <DataGrid HorizontalAlignment="Left" Margin="311,182,0,-50.2" VerticalAlignment="Top" Width="207" Height="241" Grid.RowSpan="2"/>
+        <DataGrid HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" Width="207" Height="241"/>
+        <DataGrid HorizontalAlignment="Left" Margin="311,182,0,0" VerticalAlignment="Top" Width="207" Height="241" Grid.ColumnSpan="2"/>
         <Label Content="Invités:" HorizontalAlignment="Left" Margin="301,142,0,0" VerticalAlignment="Top" Width="100" Height="26"/>
         <ListBox HorizontalAlignment="Left" Height="26" Margin="110,123,0,0" VerticalAlignment="Top" Width="171"/>
         <Label Content="Catégorie:" HorizontalAlignment="Left" Margin="17,123,0,0" VerticalAlignment="Top" Width="80" Height="26"/>
@@ -65,7 +69,7 @@ x:Class="gestRendezVous"
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Planifier" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Foreground="#FFFCFCFC" Margin="402,99.2,0,-120.2" Height="21" Grid.Row="1" RenderTransformOrigin="0.567,4.257">
+        <Button Content="Planifier" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Foreground="#FFFCFCFC" Margin="402,99,0,-120" Height="21" Grid.Row="1" RenderTransformOrigin="0.567,4.257" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5479BB" Offset="0.015"/>
@@ -73,7 +77,7 @@ x:Class="gestRendezVous"
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Attribuer le rédacteur" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Foreground="#FFFCFCFC" Margin="372,55.2,0,-76.2" Height="21" Grid.Row="1" RenderTransformOrigin="0.445,2.2">
+        <Button Content="Attribuer le rédacteur" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Foreground="#FFFCFCFC" Margin="372,55,0,-76" Height="21" Grid.Row="1" RenderTransformOrigin="0.445,2.2" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5479BB" Offset="0.015"/>
