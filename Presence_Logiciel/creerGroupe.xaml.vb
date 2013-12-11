@@ -66,9 +66,5 @@
 
     End Sub
 
-    Private Sub btnFermer_Click(sender As Object, e As RoutedEventArgs) Handles btnFermer.Click
-        'Fermeture de la fenêtre
-        Me.Finalize()
-        Me.Close()
-    End Sub
+  
 End Class

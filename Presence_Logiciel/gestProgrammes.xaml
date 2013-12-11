@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1500"
-      Title="gestProgrammes">
+      Title="gestProgrammes" Icon="images/Icons/User.png">
     <Window.Resources>
         <ResourceDictionary>
             <!-- c'est ici qu'il faut construire les animations -->
