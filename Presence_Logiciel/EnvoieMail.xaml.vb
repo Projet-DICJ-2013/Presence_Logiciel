@@ -48,7 +48,7 @@ Public Class EnvoieMail
                 _nbrMail = 0
             End If
         Next
-        _rapport.CreerRapportOrd(_idOrdre)
+        _rapport.CreerRapportOrd(_idOrdre, True)
         _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
         _envoieMail.EnvoiMessage()
 
