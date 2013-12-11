@@ -1,11 +1,10 @@
-﻿ <Window x:Class="Pret"
+﻿<Window x:Class="Pret"
         
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Pret" Height="450" Width="500" Loaded="Window_Loaded"
-    WindowStartupLocation="CenterScreen">
-     
-<Window.Resources>
+    Title="Pret" Height="450" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Loaded="Window_Loaded" Icon="images/Icons/User.png" >
+
+    <Window.Resources>
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
             <ResourceDictionary Source="Style.xaml" />

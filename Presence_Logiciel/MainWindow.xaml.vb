@@ -126,7 +126,7 @@ Class MainWindow
         objDropShadow.Color = Colors.Transparent
         Me.RecPret.Effect = objDropShadow
         Dim gestPrets As New ListeExemplaire
-        gestPrets.Show()
+        gestPrets.ShowDialog()
     End Sub
 
 

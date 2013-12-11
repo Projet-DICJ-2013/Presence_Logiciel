@@ -2,11 +2,10 @@
 
 Public Class frmComposante
 
+
     Private _MesCompos As GestionComposante
     Private _NoModele As String
     Private _Modele As tblModele
-    Private app As FonctionsGlobales
-    Private Main As MainWindow = Application.Current.MainWindow
     Private _MsgErr As String
 
     Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
@@ -14,7 +13,6 @@ Public Class frmComposante
         InitializeComponent()
         _NoModele = NoModele
         _Modele = Modele
-        app = New FonctionsGlobales
 
     End Sub
 
@@ -31,12 +29,11 @@ Public Class frmComposante
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
-        If txtCompo.Text = "" Then
+        If txtCompo.Text <> " " Then
             _MsgErr = _MesCompos.AddComposante(txtCompo.Text)
-            Main.changer_statut(_MsgErr)
+            'Me.changer_statut(_MsgErr)
         Else
-            _MsgErr = "Veuillez Entrer une valeur de type composante"
-
+            'Me.changer_statut("Veuillez Entrer une valeur de type composante")
         End If
 
         BindControl()
@@ -46,15 +43,15 @@ Public Class frmComposante
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
         _MsgErr = _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
-        Main.changer_statut(_MsgErr)
-        
+
+        'Me.changer_statut(_MsgErr)
 
         BindControl()
     End Sub
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
 
-        Main.changer_statut(_MsgErr)
+        'Me.changer_statut(_MsgErr)
 
     End Sub
 
@@ -62,12 +59,14 @@ Public Class frmComposante
 
         _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
 
-        Main.changer_statut(_MsgErr)
+        'Me.changer_statut(_MsgErr)
 
         BindControl()
     End Sub
 
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
 
+    End Sub
 End Class
 
 
