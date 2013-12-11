@@ -3,6 +3,16 @@ Class frmExemplaire
     Private App As New FonctionsGlobales
     Private BD As New PresenceEntities
     Private List As ListCollectionView
+    Private _Statut As Label
+
+    Public Sub New(Statut As Label)
+
+        ' Cet appel est requis par le concepteur.
+        InitializeComponent()
+
+        ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
+        _Statut = Statut
+    End Sub
 
     Private Sub txtNomReseau_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtNomReseau.TextChanged
 
@@ -62,7 +72,7 @@ Class frmExemplaire
 
     Private Sub txtModele_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles txtModele.MouseDoubleClick
 
-        Dim fnListeModele As New ListeModele
+        Dim fnListeModele As New ListeModele(_Statut)
         fnListeModele.ShowDialog()
 
         If (fnListeModele.lstModele.SelectedItem IsNot Nothing) Then

@@ -1,8 +1,17 @@
 ﻿Public Class Pret
 
     Dim BD As PresenceEntities
-
     Dim _aPreter As List(Of tblPretExemplaire)
+    Private _Statut As Label
+
+    Public Sub New(statut As Label)
+
+        ' Cet appel est requis par le concepteur.
+        InitializeComponent()
+
+        ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
+        _Statut = statut
+    End Sub
 
     Private Sub txtMembre_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles txtMembre.MouseDoubleClick
         Dim fnListeMembre As New ListeMembre

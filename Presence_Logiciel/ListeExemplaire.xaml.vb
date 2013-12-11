@@ -12,9 +12,19 @@ Class ListeExemplaire
     Private BD As PresenceEntities
     Private req As IQueryable(Of ExemplaireModele)
     Private reqFiltre As IQueryable(Of ExemplaireModele)
+    Private _Statut As Label
+
+    Public Sub New(Statut As Label)
+
+        ' Cet appel est requis par le concepteur.
+        InitializeComponent()
+
+        ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
+        _Statut = Statut
+    End Sub
 
     Private Sub btnAddExe_Click(sender As Object, e As RoutedEventArgs) Handles btnAddExe.Click
-        Dim fnExemp As New frmExemplaire
+        Dim fnExemp As New frmExemplaire(_Statut)
         fnExemp.Show()
     End Sub
 

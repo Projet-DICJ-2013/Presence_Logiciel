@@ -1,8 +1,18 @@
 ﻿Imports System.Data.Objects
-'PATRICK EST BIN TROP COOL POUR METTRE DES COMMENTAIRES IL SE PENSE HOT LE GARS
+
 Public Class frmModele
 
     Private Modele As GestionModele
+    Private _Statut As Label
+
+    Public Sub New(Statut As Label)
+
+        ' Cet appel est requis par le concepteur.
+        InitializeComponent()
+
+        ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
+        _Statut = Statut
+    End Sub
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
@@ -54,7 +64,7 @@ Public Class frmModele
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
         Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _
-                                              CType(Modele.Collection.CurrentItem, tblModele))
+                                              CType(Modele.Collection.CurrentItem, tblModele), _Statut)
         FnComposante.ShowDialog()
 
         SynchroControl()
