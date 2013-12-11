@@ -139,6 +139,7 @@ Public Module ModRapport
                     End If
                 Catch ex As Exception
                     MessageBox.Show("Crash dans TraiterPoint")
+
                 End Try
 
             Next
@@ -157,6 +158,13 @@ Public Module ModRapport
         Inherits P2013_CreateDoc.ModeleInfos
 
         Private _Bd_Presence As New PresenceEntities
+        Private _ModListe As XElement = <Liste>
+                                            <Date></Date>
+                                            <NoSerie></NoSerie>
+                                            <Marque></Marque>
+                                            <TypeMachine></TypeMachine>
+                                            <Commentaire></Commentaire>
+                                        </Liste>
 
         Public Sub New(ByVal IdOrdre As String)
             MyBase.New(IdOrdre)
@@ -165,64 +173,40 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            _ContenuDoc = New XElement("Root", New XElement("Head", New XElement("header", New XAttribute("id", "Mat005"), "Rapport de prêt - " & Date.Today)),
-                (From Pret In _Bd_Presence.tblPret
-                 Join Membre In _Bd_Presence.tblMembre
-                 On Pret.IdMembre Equals Membre.IdMembre
-                 Join PretExemp In _Bd_Presence.tblPretExemplaire
-                 On PretExemp.IdPret Equals Pret.IdPret
-                 Join Exemp In _Bd_Presence.tblExemplaire
-                 On PretExemp.CodeBarre Equals Exemp.CodeBarre
-                 Join Modele In _Bd_Presence.tblModele
-                 On Exemp.NoModele Equals Modele.NoModele
-            Where Pret.IdPret = _IdElem
-                    Select New With {Pret.TypeEtat,
-                                     Membre.PrenomMembre,
-                                     Membre.NomMembre,
-                                     Modele.NoModele,
-                                     PretExemp.CommentairePretEx,
-                                     PretExemp.DateDebutPretEx,
-                                     PretExemp.DateFinPretEx,
-                                     Exemp.CodeBarre,
-                                     Exemp.NoSerie,
-                                     Modele.Marque,
-                                     Modele.NbAnneeGarantie,
-                                     Modele.TypeMachine,
-                                     Modele.PrixModele}).ToList.Select(
-                          Function(x) New XElement("Modele",
-                                New XElement("Conteneur",
-                                    New XElement("Nom",
-                                           New XAttribute("id", "Mat002"),
-                                           "Matériel prêté:  " & x.PrenomMembre & "  " & x.NomMembre),
-                                    New XElement("DateDeb",
-                                        New XAttribute("id", "Mat002"),
-                                        "Du: " & x.DateDebutPretEx),
-                                    New XElement("DateFin",
-                                        New XAttribute("id", "Mat002"),
-                                        "Au: " & x.DateFinPretEx),
-                                    New XElement("Commentaire",
-                                        New XAttribute("id", "Mat002"),
-                                        "Notes: " & x.CommentairePretEx),
-                                    New XElement("Liste",
-                                       New XAttribute("id", "Mat001"),
-                                       "Vos Emprunts: "),
-                                   New XElement("CodeBarre",
-                                       New XAttribute("id", "Mat003"),
-                                       "Code barre: " & x.CodeBarre),
-                                   New XElement("NoSerie",
-                                       New XAttribute("id", "Mat003"),
-                                       "No série: " & x.NoSerie),
-                                   New XElement("Marque",
-                                       New XAttribute("id", "Mat003"),
-                                       "Marque: " & x.Marque),
-                                   New XElement("Garantie",
-                                       New XAttribute("id", "Mat003"),
-                                       "Nombre d'années de garanti: " & x.NbAnneeGarantie),
-                                   New XElement("TypeMachine",
-                                       New XAttribute("id", "Mat003"),
-                                       "Type de machine: " & x.TypeMachine)
-                                   ))))
+            Dim Materiel As XElement
+            Dim Rap As New XElement("Root", New XElement("Head", New XElement _
+            ("header", New XAttribute("id", "Mat005"), "Rapport de prêt - " & Date.Today)))
 
+            Dim Pret = (From MonPret As tblPret In _Bd_Presence.tblPret
+                        Where MonPret.IdPret = _IdElem
+                        Select MonPret).First
+
+            Materiel = New XElement("LstEmprunt", New XAttribute("id", "Mat006"))
+
+            Rap.Add(New XElement("Corps",
+                    New XElement("Nom",
+                        New XAttribute("id", "Mat002"),
+                        "Matériel prêté:  " & Pret.tblMembre.PrenomMembre _
+                        & "  " & Pret.tblMembre.NomMembre), Materiel))
+
+            Materiel.Add(CreateLstMat("Date du prêt", "Numéro de série", "Marque", "Type de machine", "Commentaire", _
+                                      New XAttribute("id", "Mat003")))
+
+            Dim PretExemp As IEnumerable(Of tblPretExemplaire) = Pret.tblPretExemplaire
+
+            For Each exemp As tblPretExemplaire In PretExemp
+
+                Materiel.Add(CreateLstMat("Du: " & exemp.DateDebutPretEx & "  " & "Au: " & exemp.DateFinPretEx, _
+                                exemp.tblExemplaire.NoSerie, _
+                                exemp.tblExemplaire.tblModele.Marque, _
+                                exemp.tblExemplaire.tblModele.TypeMachine, _
+                                exemp.CommentairePretEx, _
+                                 New XAttribute("id", "Mat002")))
+                'Materiel.Add(New XElement("Image", New XAttribute("id", "Mat007"), "\images\dell.jpg"))
+            Next
+
+
+            _ContenuDoc = Rap
 
         End Sub
 
@@ -230,7 +214,23 @@ Public Module ModRapport
             Return _ContenuDoc
         End Function
 
+        Protected Function CreateLstMat(DatePret As String, NoSerie As String, Marque As String, Type As String, _
+                                         ByVal Commentaire As String, ByVal Attr As XAttribute) As XElement
+            Dim lstMat As New XElement(_ModListe)
 
+            lstMat.Element("Date").Add(New XAttribute(Attr), New XText(DatePret))
+            lstMat.Element("NoSerie").Add(New XAttribute(Attr), New XText(NoSerie))
+            lstMat.Element("Marque").Add(New XAttribute(Attr), New XText(Marque))
+            lstMat.Element("TypeMachine").Add(New XAttribute(Attr), New XText(Type))
+            If (Commentaire Is Nothing) Then
+                lstMat.Element("Commentaire").Add(New XAttribute(Attr), New XText("Aucun"))
+            Else
+                lstMat.Element("Commentaire").Add(New XAttribute(Attr), New XText(Commentaire))
+            End If
+
+
+            Return lstMat
+        End Function
 
     End Class
 
