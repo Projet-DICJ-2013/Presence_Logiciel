@@ -19,6 +19,7 @@ Public Class frmModele
             TxtModele.DataContext = Modele.Collection
             TxtType.DataContext = Modele.Collection
             TxtGaranti.DataContext = Modele.Collection
+            TxtPrix.DataContext = Modele.Collection
             ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
             TxtRech.Text = "Saisir un critère de recherche"
         Catch ex As Exception
@@ -70,10 +71,11 @@ Public Class frmModele
 
             End If
 
-            tblModele = New tblModele With {.NoModele = TxtModele.Text, _
-                                                    .Marque = TxtMarque.Text, _
-                                                    .NbAnneeGarantie = TxtGaranti.Text, _
-                                                    .TypeMachine = TxtMarque.Text}
+        tblModele = New tblModele With {.NoModele = TxtModele.Text, _
+                                                .Marque = TxtMarque.Text, _
+                                                .NbAnneeGarantie = TxtGaranti.Text, _
+                                                .TypeMachine = TxtMarque.Text, _
+                                                .PrixModele = TxtPrix.Text}
 
             If (tblModele IsNot Nothing) Then
                 Modele.AddModele(tblModele)
@@ -196,27 +198,7 @@ Public Class GestionModele
 
     End Function
 
-    Public Function AddComposante(ByVal Mode As Object, ByVal Compo As Object) As Boolean
 
-        Try
-
-        Catch ex As Exception
-            Return False
-        End Try
-
-        Return True
-    End Function
-
-    Public Function DeleteComposante(ByVal Mode As Object, ByVal Compo As Object) As Boolean
-
-        Try
-            CType(Mode, tblModele).tblCompoModele.Remove(Compo)
-        Catch ex As Exception
-            Return False
-        End Try
-
-        Return True
-    End Function
 
     'PARTIE DE LA VALIDATION DES ENTRÉES
 

@@ -65,12 +65,12 @@
         </StackPanel>
 
 
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="24.2,20.2,-46.2,73.6" Name="GridExemp" Grid.Column="1">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="-17,20.2,6,9.6" Name="GridExemp" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="329*"/>
                 <ColumnDefinition Width="165*"/>
             </Grid.ColumnDefinitions>
-            <Grid HorizontalAlignment="Center" Height="133" VerticalAlignment="Center" Width="253" Margin="97,14,64.4,0">
+            <Grid HorizontalAlignment="Center" Height="155" VerticalAlignment="Center" Width="253" Margin="97,14,64.4,-22">
                 <Grid.Resources>
                     <Style BasedOn="{StaticResource ParcInfo_LabelFormulaire}" TargetType="{x:Type Label}" />
                     <Style BasedOn="{StaticResource ParcInfo_TextBoxFormulaire}" TargetType="{x:Type TextBox}" />
@@ -78,9 +78,10 @@
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"/>
-                    <RowDefinition Height="28*"/>
+                    <RowDefinition Height="33*"/>
                     <RowDefinition Height="33*"/>
                     <RowDefinition Height="32*"/>
+                    <RowDefinition Height="33*"/>
                     <RowDefinition Height="33*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -89,21 +90,23 @@
                     <ColumnDefinition Width="149.6"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Marque" Width="69" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                <Label Content="NoModele" Width="66" Grid.Row="2" Margin="0,0.4,0,0"/>
+                <Label Content="NoModele" Width="66" Grid.Row="2" />
                 <Label Content="Type" Width="56" Grid.Row="3"/>
-                <Label Content="Garantie" Width="77" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,7.2,0,-2.8"/>
+                <Label Content="Garantie" Width="77" Grid.Row="4" Grid.ColumnSpan="3" />
+                <Label Content="Prix" Width="77" Grid.Row="5" Grid.ColumnSpan="3"/>
 
                 <TextBox Name="TxtMarque" Text="{Binding Path=Marque}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="1.4,0,0,0" Width="149"/>
-                <TextBox Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="1.4,0.2,0,6.4" VerticalAlignment="Stretch" Height="Auto" Grid.Column="2" Width="149"/>
-                <TextBox   Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="0.4,3.6,0,0" Width="150" Grid.Column="2" />
-                <TextBox Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="2" Grid.Row="4" Margin="1,7.2,0,0"/>
+                <TextBox Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="1.4,0.2,0,6.4" VerticalAlignment="Stretch"  Grid.Column="2" Width="149"/>
+                <TextBox   Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="1.4,2.0,0,0" Width="150" Grid.Column="2" />
+                <TextBox Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="2" Grid.Row="4" Margin="1,4.2,0,0"/>
+                <TextBox Name="TxtPrix" Text="{Binding Path=PrixModele}" Grid.Column="2" Grid.Row="5" Margin="1,4.2,0,0"/>
             </Grid>
-            <Image HorizontalAlignment="left" Width="154"  Margin="366,14,0,-9" Grid.ColumnSpan="2"/>
+            <Image HorizontalAlignment="left" Width="154"  Margin="370,46,0,19" Grid.ColumnSpan="2"/>
         </Grid>
         <Button Name="btnAddCompo"  Style="{StaticResource ResourceKey=ParcInfo_BoutonMenuHorizontal}"   Margin="453,35.4,90,96.6" Grid.Row="2" Grid.Column="1" Width="57" RenderTransformOrigin="2.513,1.577" Height="Auto">
             <Image Source="/Images/icons/Add.png" Height="29" Width="20"/>
         </Button>
-        <ListView Name="ViewComposante" Grid.Column="1" HorizontalAlignment="Left" Height="118" Margin="76,2.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="298">
+        <ListView Name="ViewComposante" Grid.Column="1" HorizontalAlignment="Left" Height="118" Margin="80,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="298">
             <ListView.View>
                 <GridView>
                     <GridView.Columns >
