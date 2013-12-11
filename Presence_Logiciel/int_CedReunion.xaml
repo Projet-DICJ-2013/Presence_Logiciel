@@ -39,9 +39,11 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListView>
-                <Button x:Name="tblAjouter" Content="Ajouter" HorizontalAlignment="Left" Margin="296,230,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="tblAjouter" Content="Ajouter" HorizontalAlignment="Left" Margin="197,231,0,0" VerticalAlignment="Top" Width="75"/>
                 <Button x:Name="btnRetirer" Content="Retirer" HorizontalAlignment="Left" Margin="522,230,0,0" VerticalAlignment="Top" Width="75"/>
                 <Label x:Name="lblType" Content="Type :" HorizontalAlignment="Left" Margin="44,48,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnClear" Content="Vider" HorizontalAlignment="Left" Margin="602,231,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="btnAjoutAll" Content="Ajout Complet" HorizontalAlignment="Left" Margin="277,231,0,0" VerticalAlignment="Top" Width="92"/>
             </Grid>
         </GroupBox>
         <Button x:Name="btnCeduler" Content="Planifier" HorizontalAlignment="Left" Margin="827,623,0,0" VerticalAlignment="Top" Width="102" Height="34"/>
