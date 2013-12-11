@@ -93,10 +93,10 @@
                 <Label Content="Type" Width="56" Grid.Row="3"/>
                 <Label Content="Garantie" Width="77" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,7.2,0,-2.8"/>
 
-                <TextBox Name="TxtMarque" Text="{Binding Path=Marque}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="1.4,0,0,0" Width="149"/>
-                <TextBox Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="1.4,0.2,0,6.4" VerticalAlignment="Stretch" Height="Auto" Grid.Column="2" Width="149"/>
-                <TextBox   Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="0.4,3.6,0,0" Width="150" Grid.Column="2" />
-                <TextBox Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="2" Grid.Row="4" Margin="1,7.2,0,0"/>
+                <TextBox MaxLength="10" Name="TxtMarque" Text="{Binding Path=Marque}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="1.4,0,0,0" Width="149"/>
+                <TextBox MaxLength="10" Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="1.4,0.2,0,6.4" VerticalAlignment="Stretch" Height="Auto" Grid.Column="2" Width="149"/>
+                <TextBox MaxLength="10"  Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="0.4,3.6,0,0" Width="150" Grid.Column="2" />
+                <TextBox MaxLength="2" Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="2" Grid.Row="4" Margin="1,7.2,0,0"/>
             </Grid>
             <Image HorizontalAlignment="left" Width="154"  Margin="366,14,0,-9" Grid.ColumnSpan="2"/>
         </Grid>
