@@ -1,14 +1,17 @@
 ﻿<Window  x:Class="MembreProf"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ajoutCour" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Loaded="Window_Loaded"  >
+    Title="ajoutCour" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"  >
     <Window.Resources>
         <ResourceDictionary>
+            <!--C'est ici qu'il faut construire les animations-->
             <Storyboard  x:Key="AnimLabel">
+                <!--Animation de la barre de statut-->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
             </Storyboard>
+            <!--Animation des textbox en rouge si une erreur apparait-->
             <Storyboard  x:Key="AnimTxtRouge">
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>

@@ -16,9 +16,7 @@
 
     End Sub
 
-    Private Sub lvTousCours_PreviewMouseLeftButtonUp(sender As Object, e As MouseButtonEventArgs) Handles lvTousCours.PreviewMouseLeftButtonUp
 
-    End Sub
 
   
 
@@ -34,6 +32,7 @@
             e.Effects = DragDropEffects.None
         End If
     End Sub
+
 
     Private Sub lvTousCours_MouseMove(sender As Object, e As MouseEventArgs) Handles lvTousCours.MouseMove
         If e.LeftButton Then
@@ -98,8 +97,5 @@
         End If
     End Sub
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
+  
 End Class
