@@ -24,7 +24,7 @@
 
     </Window.Resources>
     <Grid Margin="0,0,-0.4,-0.4" Loaded="Grid_Loaded">
-        <Label x:Name="lblTitreOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Titre de l'ordre du jour:" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
+        <Label x:Name="lblTitreOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Sujet de l'ordre du jour:" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
         <TextBox x:Name="txtTitreOdj"  Text="" Style="{StaticResource ResourceKey=textboxProg}" Margin="177,45,0,0" RenderTransformOrigin="0.875,0.645" Width="492"/>
 
         <Label x:Name="lblOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Ordre du jour:" Margin="10,167,0,0" RenderTransformOrigin="0.251,0.147"/>
