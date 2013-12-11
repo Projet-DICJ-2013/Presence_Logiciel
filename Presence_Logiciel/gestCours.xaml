@@ -132,8 +132,9 @@
                         <Image x:Name="btnEdit" Source="/images/Icons/File_Edit.png"/>
                     </Button>
                 </StackPanel>
-                <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="57,34,-47.4,0" RenderTransformOrigin="0.5,0.5"/>
-                <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
+                <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="0,48,0,0" RenderTransformOrigin="0.5,0.5"/>
+                <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="0,577,0,-0.2" RenderTransformOrigin="0.52,0.041"/>
+                <TextBox x:Name="txtRecherche" HorizontalAlignment="Left" Height="23" Margin="30,582,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" BorderThickness="1,2" />
             </Grid>
             <Label x:Name="lvlPonderation" Style="{StaticResource ResourceKey=labelProg}" Content="Pondération" Margin="23,243,0,0" RenderTransformOrigin="0.251,0.147"/>
             <TextBox x:Name="txtPonderation" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,249,0,0" Text="{Binding Path=PonderationCours}" IsEnabled="False" Foreground="Black" BorderThickness="1,2" Width="60">
@@ -153,7 +154,7 @@
                     </LinearGradientBrush>
                 </TextBox.BorderBrush>
             </TextBox>
-            <TextBox x:Name="txtDescription" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,373,0,0" Text="{Binding Path=DescriptionCours}" Height="232" Width="572" IsEnabled="False" Foreground="Black">
+            <TextBox x:Name="txtDescription" Style="{StaticResource ResourceKey=textboxProg}" Margin="288,373,0,0" Text="{Binding Path=DescriptionCours}" Height="180" Width="572" IsEnabled="False" Foreground="Black">
             </TextBox>
             <GroupBox HorizontalAlignment="Left" Margin="1049,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.939,-4.734" Height="437" Width="401">
                 <Grid HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="388.8"/>
@@ -168,7 +169,15 @@
             <Label x:Name="lblInactif" Content="En attente" HorizontalAlignment="Left" Margin="1195,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,0.034" Opacity="0"/>
             <Label x:Name="lblAnnule" Content="Annulé" HorizontalAlignment="Left" Margin="1195,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.137,6.569" Opacity="0"/>
             <Label x:Name="lblDateAcquisition" Content="{Binding DataAcquisitionStatut}" HorizontalAlignment="Left" Margin="1163,243,0,0" VerticalAlignment="Top"/>
-            
+            <Button x:Name="btnRecherche" Margin="311,574,1133.6,83.2" RenderTransformOrigin="0.44,0.06">
+                <Image Source="images/Icons/Search.png" RenderTransformOrigin="0.023,0.083">
+                    <Image.BindingGroup>
+                        <BindingGroup/>
+                    </Image.BindingGroup>
+                </Image>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="501,803,0,-123.8" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+
         </Grid>
     </Viewbox>
 </Window>
