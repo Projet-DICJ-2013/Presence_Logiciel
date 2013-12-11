@@ -6,7 +6,8 @@ Public Class frmComposante
     Private _NoModele As String
     Private _Modele As tblModele
     Private app As FonctionsGlobales
-    Private _MsgErr
+    Private Main As MainWindow = Application.Current.MainWindow
+    Private _MsgErr As String
 
     Public Sub New(ByVal NoModele As String, ByVal Modele As tblModele)
 
@@ -30,11 +31,12 @@ Public Class frmComposante
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
-        If app.verifier_null(txtCompo.Text) Then
+        If txtCompo.Text = "" Then
             _MsgErr = _MesCompos.AddComposante(txtCompo.Text)
-            app.changer_statut(_MsgErr)
+            Main.changer_statut(_MsgErr)
         Else
-            app.changer_statut("Veuillez Entrer une valeur de type composante")
+            _MsgErr = "Veuillez Entrer une valeur de type composante"
+
         End If
 
         BindControl()
@@ -44,15 +46,15 @@ Public Class frmComposante
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
         _MsgErr = _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
-
-        app.changer_statut(_MsgErr)
+        Main.changer_statut(_MsgErr)
+        
 
         BindControl()
     End Sub
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
 
-        app.changer_statut(_MsgErr)
+        Main.changer_statut(_MsgErr)
 
     End Sub
 
@@ -60,10 +62,11 @@ Public Class frmComposante
 
         _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _Modele)
 
-        app.changer_statut(_MsgErr)
+        Main.changer_statut(_MsgErr)
 
         BindControl()
     End Sub
+
 
 End Class
 
