@@ -82,9 +82,14 @@
                     <Button x:Name="btnEdit" Margin="-125,0" HorizontalAlignment="Left">
                         <Image x:Name="imgEdit" Source="/images/Icons/File_Edit.png"/>
                     </Button>
+
                 </StackPanel>
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,14,0,0" RenderTransformOrigin="0.5,0.5"/>
                 <Separator Style="{StaticResource ResourceKey=separatorProg}" Margin="10,577,0,0" RenderTransformOrigin="0.52,0.041"/>
+                <TextBox x:Name="txtRecherche" HorizontalAlignment="Left" Height="23" Margin="10,577,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+                <Button x:Name="btnRechercher"  HorizontalAlignment="Left" Margin="300,574,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="-0.064,0.507" Height="32">
+                    <Image Source="images/Icons/Search.png"/>
+                </Button>
 
             </Grid>
             <Rectangle x:Name="recListeCours" Fill="#FF5353E1" HorizontalAlignment="Right" Height="38" Margin="0,156,41.8,0" Stroke="Black" VerticalAlignment="Top" Width="450" Grid.Column="1"/>

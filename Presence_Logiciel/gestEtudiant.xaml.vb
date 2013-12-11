@@ -319,4 +319,45 @@ Public Class gestEtudiant
         End If
     End Sub
 
+    Private Sub btnRechercher_Click(sender As Object, e As RoutedEventArgs) Handles btnRechercher.Click
+        If (txtRecherche.Text = "") Then
+            Return
+        End If
+
+        Try
+            LesMembres = (From m In DM.tblMembre Where m.TelephoneMembre = txtRecherche.Text Select m)
+            vu = Nothing
+            vu = New ListCollectionView(LesMembres.ToList())
+            txtAdresse.DataContext = vu
+            txtCourriel.DataContext = vu
+            txtIdMembre.DataContext = vu
+            txtNoCivique.DataContext = vu
+            txtNomMembre.DataContext = vu
+            txtPrenomMembre.DataContext = vu
+            txtTelephoneMembre.DataContext = vu
+            txtVille.DataContext = vu
+            afficherTypeMembre()
+            If (txtDaEtudiant.DataContext Is Nothing) Then
+                TabTypeMembre.SelectedIndex = 0
+            Else
+                TabTypeMembre.SelectedIndex = 1
+            End If
+        Catch ex As Exception
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+            statut.Content = " Membre introuvable, veuillez entrer un numéro de téléphone existant"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
+            txtRecherche.BorderBrush = Brushes.Red
+            anim2.Begin(txtRecherche)
+
+        End Try
+    End Sub
+
+    Private Sub txtRecherche_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtRecherche.PreviewLostKeyboardFocus
+
+        If (txtRecherche.Text = "") Then
+            Window_Loaded(sender, e)
+        End If
+    End Sub
+
 End Class
