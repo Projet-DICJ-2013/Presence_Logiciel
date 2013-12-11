@@ -5,22 +5,17 @@ Public Class rssActualite
     Public DM As PresenceEntities
     Dim LesActu As IQueryable(Of tblActualite)
     Dim nouvelleActualite As tblActualite
-    Dim vu As ListCollectionView
     Public statut As Label
 
 
 
-    Private Sub btnAdd_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnAdd.MouseDown
-    End Sub
-
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         DM = New PresenceEntities
-
         LesActu = (From actu In DM.tblActualite Select actu)
-
-        lstNouvelles.ItemsSource = LesActu '(LesActu.First, tblActualite).TitreActu
+        lstNouvelles.ItemsSource = LesActu
     End Sub
 
+    ''Sert à afficher le contenu de l'actualité lors d'un click sur le titre
     Private Sub lstNouvelles_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstNouvelles.MouseDoubleClick
         lstNouvelles.Visibility = Windows.Visibility.Hidden
         txtActu.Visibility = Windows.Visibility.Visible
@@ -32,6 +27,7 @@ Public Class rssActualite
 
     End Sub
 
+    ''Quitter le contenu de l'actualité pour retourner à la liste de titre
     Private Sub btnBack_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnBack.MouseDown
         lstNouvelles.Visibility = Windows.Visibility.Visible
         txtActu.Visibility = Windows.Visibility.Hidden
@@ -60,14 +56,19 @@ Public Class rssActualite
 
     End Sub
 
+
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
 
+        ''Vérification du contenu vide
         If (txtTitre.Text = "") Or (txtContenu.Text = "") Then
+            ''Utilisation de l'animation de la barre de statut
             statut.Content = "Un de vos champs est vide"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
             Return
         End If
+
+        ''Création d'un objet tblActualite
         nouvelleActualite = New tblActualite With _
 {
 .TitreActu = txtTitre.Text, _
@@ -76,7 +77,7 @@ Public Class rssActualite
 }
 
         Try
-
+            ''Tentative d'ajout de l'objet TblActualite dans la BD
             DM.AddTotblActualite(nouvelleActualite)
             DM.SaveChanges()
         Catch ex As Exception
@@ -100,23 +101,23 @@ Public Class rssActualite
 
 
         Catch ex2 As System.Data.SqlClient.SqlException
+            'Début de l'animation de la barre de statut
+
             statut.Content = "Impossible de modifier cette actualité"
             Dim anim As Storyboard = FindResource("AnimLabel")
             anim.Begin(statut)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            'Dit l 'erreur
+
         End Try
         txtActu.IsEnabled = False
         btnSavee.Visibility = Windows.Visibility.Hidden
     End Sub
 
+    'Force le cotenu du titre à disparaitre si précédement il n'a pas été fermé lors du changement d'onglet
     Private Sub TabItem_MouseDown(sender As Object, e As MouseButtonEventArgs)
         txtActu.Visibility = Windows.Visibility.Hidden
     End Sub
 
-    Private Sub btnX_Click(sender As Object, e As RoutedEventArgs) Handles btnX.Click
-        Me.Close()
-        Me.Finalize()
-    End Sub
+
 End Class

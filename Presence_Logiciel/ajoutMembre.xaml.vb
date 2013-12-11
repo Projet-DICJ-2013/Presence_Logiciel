@@ -3,15 +3,9 @@ Imports System.Windows.Media.Animation
 Public Class ajoutMembre
     Public DM As PresenceEntities
     Dim newMembre As tblMembre
-    Dim LesMembres As IQueryable(Of tblMembre)
-    Dim vu As ListCollectionView
-    Dim lemembre As tblMembre
     Public statut As Label
 
 
-    Private Sub cmbVille_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
-    End Sub
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
         Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
@@ -117,14 +111,8 @@ Public Class ajoutMembre
 
     End Sub
 
-    Private Sub Image_MouseDown(sender As Object, e As MouseButtonEventArgs)
-        Me.Close()
-        Me.Finalize()
-    End Sub
 
-    Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
 
-    End Sub
 
 
 End Class
