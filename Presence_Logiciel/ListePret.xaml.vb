@@ -50,6 +50,8 @@ Class ListePret
         Select Case (boutton.Content)
             Case "Tous"
                 reqFiltre = req.Where(Function(r) CType(r.Pret.TypeEtat, String).Contains(""))
+            Case "Actif"
+                reqFiltre = req.Where(Function(r) CType(r.Pret.TypeEtat, String).Equals("actif"))
             Case Else
                 reqFiltre = req.Where(Function(r) CType(r.Pret.TypeEtat, String).Contains(boutton.Content))
         End Select
