@@ -7,11 +7,11 @@ Public Class ajoutProgramme
 
 
     Private Sub btnAjouter_Click(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
-
+        ''Initialisation de l'animation des textbox créée dans le XAML
         Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
 
-
+        ''Vérification du contenu des textbox
         Dim myRegex3 As New Regex( _
  "^\d{3}.[a-z0-9]{2}$")
         If (myRegex3.IsMatch(txtCodeProgramme.Text) = False) Then
@@ -33,7 +33,7 @@ Public Class ajoutProgramme
 
 
         Try
-
+            ''tentative d'ajouter un nouvel objet de tblProgramme
             DM.AddTotblProgramme(nouveauProg)
             DM.SaveChanges()
         Catch ex As Exception
@@ -41,6 +41,7 @@ Public Class ajoutProgramme
         End Try
     End Sub
 
+    ''Vérifie si les champs sont vide
     Private Sub txtCodeProgramme_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtCodeProgramme.PreviewLostKeyboardFocus, txtObjectif.PreviewLostKeyboardFocus, txtProgramme.PreviewLostKeyboardFocus
         Dim objTextBox As TextBox = CType(sender, TextBox)
         Dim texte As String = objTextBox.Text

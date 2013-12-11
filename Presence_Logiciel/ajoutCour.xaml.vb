@@ -5,17 +5,16 @@ Public Class ajoutCour
     Dim newCours As tblCours
     Public statut As Label
 
-    Private Sub Fer(sender As Object, e As RoutedEventArgs)
-
-    End Sub
 
    
 
     Private Sub AjouterCours(sender As Object, e As RoutedEventArgs) Handles btnAjouter.Click
-
+        ''Initialisation des animations créées dans le XAML
         Dim anim As Storyboard = FindResource("AnimLabel")
         Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
+
+        ''Vérification du contenu des champs
         Dim myRegex1 As New Regex( _
 "[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{2}")
         If (myRegex1.IsMatch(txtCodeCours.Text) = False) Then
@@ -33,6 +32,7 @@ Public Class ajoutCour
             txtPonderation.BorderBrush = Brushes.Red
             anim2.Begin(txtPonderation)
 
+
             anim.Begin(statut)
             Return
         End If
@@ -48,6 +48,8 @@ Public Class ajoutCour
             Return
         End If
 
+
+        ''Création d'un nouvel objet  tblcours
         newCours = New tblCours With _
         {
             .AnneeCours = txtAnneeCours.Text, _
@@ -62,14 +64,16 @@ Public Class ajoutCour
 
 
         Try
-
+            ''Essai d'ajouter cet objet sur la BD
             DM.tblCours.AddObject(newCours)
             DM.SaveChanges()
         Catch ex As Exception
+
             MessageBox.Show(ex.ToString)
         End Try
 
         Try
+            ''Si passe, Attribution d'un statut au cours
             Dim newStatut As tblStatutCoursCours
             newStatut = New tblStatutCoursCours With _
    {
@@ -79,16 +83,14 @@ Public Class ajoutCour
    }
 
         Catch ex As Exception
+            MsgBox(ex)
 
         End Try
 
 
     End Sub
 
-    Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
-
-    End Sub
-
+    ''Se produit si un champ est vide
     Private Sub txtCodeCours_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtCodeCours.PreviewLostKeyboardFocus, txtNomCours.PreviewLostKeyboardFocus, txtAnneeCours.PreviewLostKeyboardFocus, txtPonderation.PreviewLostKeyboardFocus
         Dim objTextBox As TextBox = CType(sender, TextBox)
         Dim texte As String = objTextBox.Text

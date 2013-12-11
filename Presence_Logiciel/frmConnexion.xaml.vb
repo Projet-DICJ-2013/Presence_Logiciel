@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Windows.Media.Animation
-Imports System.Data
-Imports System.Data.SqlClient
+
 
 
 
@@ -12,11 +11,10 @@ Public Class frmConnexion
     Dim DM As PresenceEntities
     Dim LesActualites As IQueryable(Of tblActualite)
     Dim vu As ListCollectionView
-    Dim vu2 As ListCollectionView
     Dim tim As System.Windows.Threading.DispatcherTimer
 
 
-
+    ''Fonction servant à l'enctyption d'un string en MD5
 #Region "functions"
     Private Function StringToMd5(ByRef Content As String) As String
         Dim M5 As New System.Security.Cryptography.MD5CryptoServiceProvider
@@ -32,8 +30,6 @@ Public Class frmConnexion
     End Function
 
 #End Region
-
-
 
 
 
@@ -96,6 +92,7 @@ Public Class frmConnexion
 
     Private Sub fermer(sender As Object, e As RoutedEventArgs)
         Me.Close()
+        Me.Finalize()
     End Sub
 
 
@@ -107,18 +104,21 @@ Public Class frmConnexion
 
 
 
-    Private Sub imglogo_IsMouseDirectlyOverChanged(sender As Object, e As DependencyPropertyChangedEventArgs)
 
-    End Sub
-
+    ''Actions effectués lorsque la souris est placé sur le logo
     Private Sub imglogo_MouseEnter(sender As Object, e As MouseEventArgs) Handles imglogo.MouseEnter
 
+        ''Création d'une animation précédement déclaré dans le XAML
         Dim anim As Storyboard = FindResource("AnimTextBox")
+
+        ''Ciblage de l'objet que nous voulont effectué l'animation
         anim.Begin(txtActualite)
         anim.Begin(rec1)
         anim.Begin(rec2)
         anim.Begin(rec3)
         anim.Begin(rec4)
+
+        ''Déclaration d'un timer qui est utilisé pour le changement d'actualités
         If tim Is Nothing Then
             tim = New System.Windows.Threading.DispatcherTimer(New TimeSpan(0, 0, 0, 5, 0), Windows.Threading.DispatcherPriority.Normal, AddressOf affActuTim, Dispatcher)
             tim.Stop()
@@ -130,6 +130,8 @@ Public Class frmConnexion
 
 
     End Sub
+
+    ''Animations à chaque 5 seconde du début du timer
     Private Sub affActuTim(sender As Object, e As EventArgs)
         Dim anim As Storyboard = FindResource("AnimRecBlanc")
         Dim anim2 As Storyboard = FindResource("AnimRecBleu")
@@ -163,6 +165,8 @@ Public Class frmConnexion
 
 
     End Sub
+
+    ''Animations lors de la fermeture du logo (click)
     Private Sub imglogo_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles imglogo.MouseLeftButtonDown
         Dim anim As Storyboard = FindResource("AnimTextBox2")
         anim.Begin(txtActualite)
@@ -174,6 +178,8 @@ Public Class frmConnexion
 
     End Sub
 
+
+    ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec1_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec1.MouseEnter
         tim.Stop()
         vu.MoveCurrentToFirst()
@@ -187,6 +193,7 @@ Public Class frmConnexion
         anim2.Begin(rec1)
     End Sub
 
+    ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec2_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec2.MouseEnter
         tim.Stop()
         vu.MoveCurrentToFirst()
@@ -201,6 +208,7 @@ Public Class frmConnexion
         anim2.Begin(rec2)
     End Sub
 
+    ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec3_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec3.MouseEnter
         tim.Stop()
         vu.MoveCurrentToLast()
@@ -216,6 +224,7 @@ Public Class frmConnexion
 
     End Sub
 
+    ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec4_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec4.MouseEnter
         tim.Stop()
         vu.MoveCurrentToLast()
@@ -229,10 +238,13 @@ Public Class frmConnexion
         anim2.Begin(rec4)
     End Sub
 
+    ''Redémarrage du timer lorsque la souris quitte un des rectangle
     Private Sub rec1_MouseLeave(sender As Object, e As MouseEventArgs) Handles rec1.MouseLeave, rec2.MouseLeave, rec3.MouseLeave, rec4.MouseLeave
         tim.Start()
     End Sub
 
+
+    ''Page_Load
     Private Sub ouverture(sender As Object, e As RoutedEventArgs)
         DM = New PresenceEntities
         LesActualites = (From act In DM.tblActualite Select act)
@@ -243,8 +255,7 @@ Public Class frmConnexion
         tim = Nothing
     End Sub
 
-    Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
-        Me.Close()
-        Me.Finalize()
-    End Sub
+
+
+
 End Class

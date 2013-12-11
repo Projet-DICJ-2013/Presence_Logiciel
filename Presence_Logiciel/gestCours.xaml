@@ -8,8 +8,10 @@
       Title="gestCours" Loaded="Page_Loaded">
     <Window.Resources>
         <ResourceDictionary>
+            <!--C'est ici qu'il faut construire les animations-->
             <Storyboard  x:Key="AnimLabel">
-                <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-30,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
+                <!--Ceci ce produit est l'animation de la barre de statut-->
+                    <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-30,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:2" />
                 <DoubleAnimation Storyboard.TargetProperty="(Label.FontSize)" From="12" To="20" Duration="0:0:1" BeginTime="0:0:2"/>
                 <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)"  To="0,-100,0,0"  Duration="0:0:5" BeginTime="0:0:9"/>
@@ -24,6 +26,7 @@
 
             </Storyboard>
             <Storyboard  x:Key="AnimRect1">
+                <!--Ceci ce produit lorsque l'on change le statut du cours-->
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" />
 
@@ -31,12 +34,14 @@
 
             </Storyboard>
             <Storyboard  x:Key="AnimRect2">
+                <!--Ceci ce produit lorsque l'on change le statut du cours-->
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
 
                 <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,337,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:1" />
             </Storyboard>
             <Storyboard  x:Key="AnimRect3">
+                <!--Ceci ce produit lorsque l'on change le statut du cours-->
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="0" To="1" Duration="0:0:1" />
 
                 <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,394,0,0"  Duration="0:0:0" BeginTime="0:0:0"/>
@@ -44,16 +49,19 @@
 
             </Storyboard>
             <Storyboard  x:Key="AnimRectFin">
+                <!--Ceci ce produit lorsque le statut du cours est changé-->
                 <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ThicknessAnimation Storyboard.TargetProperty="(Rectangle.Margin)" To="1103,176,0,0"  Duration="0:0:1" BeginTime="0:0:0"/>
 
             </Storyboard>
             <Storyboard  x:Key="AnimLblFin">
+                <!--Ceci ce produit lorsque le statut du cours est changé-->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ThicknessAnimation Storyboard.TargetProperty="(Label.Margin)" To="1103,176,0,0"  Duration="0:0:1" BeginTime="0:0:0"/>
 
             </Storyboard>
             <Storyboard  x:Key="AnimTxtRouge">
+                <!--Ceci change le contour du rectangle lors d'une erreur-->
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>
 
