@@ -4,6 +4,7 @@ Public Class frmModele
 
     Private Modele As GestionModele
     Private _Statut As Label
+    Private app As MainWindow
 
     Public Sub New(Statut As Label)
 
@@ -72,14 +73,14 @@ Public Class frmModele
 
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-            Dim tblModele As tblModele
+        Dim tblModele As tblModele
 
-            If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
+        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
 
-                MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
-                Return
+            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
+            Return
 
-            End If
+        End If
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
                                                 .Marque = TxtMarque.Text, _
@@ -87,9 +88,9 @@ Public Class frmModele
                                                 .TypeMachine = TxtMarque.Text, _
                                                 .PrixModele = TxtPrix.Text}
 
-            If (tblModele IsNot Nothing) Then
-                Modele.AddModele(tblModele)
-            End If
+        If (tblModele IsNot Nothing) Then
+            Modele.AddModele(tblModele)
+        End If
     End Sub
 
 
@@ -126,7 +127,23 @@ Public Class frmModele
         SynchroControl()
 
     End Sub
+    'PARTIE DE LA VALIDATION DES ENTRÉES
+    Private Function valider_modele()
+        Dim verifie As Boolean = True
+        If(
+            Return verifie
+    End Function
 
+    Private Function verifier_doublon_nomodele(ByVal nomod As String) As Boolean
+        Dim modV = (From modB In BD.tblModele
+                   Where modB.NoModele = nomod
+                   Select modB)
+        If modV.ToList.Count() > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 
 End Class
 
@@ -206,24 +223,5 @@ Public Class GestionModele
 
             Return True
 
-    End Function
-
-
-
-    'PARTIE DE LA VALIDATION DES ENTRÉES
-    Private Function valider_modele()
-        Dim verifie As Boolean = True
-
-    End Function
-
-    Private Function verifier_doublon_nomodele(ByVal nomod As String) As Boolean
-        Dim modV = (From modB In BD.tblModele
-                   Where modB.NoModele = nomod
-                   Select modB)
-        If modV.ToList.Count() > 0 Then
-            Return False
-        Else
-            Return True
-        End If
     End Function
 End Class
