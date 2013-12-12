@@ -32,29 +32,29 @@
                     <GradientStop Color="#FE1D2E3E" Offset="0.028"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Rectangle Style="{StaticResource ResourceKey=recMain}" Height="834" Margin="0,21,0,0"/>
-            <DockPanel Grid.ColumnSpan="2" Margin="1,1,-3,10.2" HorizontalAlignment="Stretch">
-                <Menu Style="{StaticResource ResourceKey=menuMain}" >
+            <Rectangle x:Name="rectMenu" Style="{StaticResource ResourceKey=recMain}" Height="834" Margin="0,21,0,0"/>
+            <DockPanel x:Name="dockMenu" Grid.ColumnSpan="2" Margin="1,1,-3,10.2" HorizontalAlignment="Stretch">
+                <Menu x:Name="MenuPrinc" Style="{StaticResource ResourceKey=menuMain}" >
 
-                    <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Options" >
-                        <MenuItem Header="_1" Style="{StaticResource ResourceKey=sousitemMain}"  Foreground="White"/>
-                        <MenuItem Header="_2" Style="{StaticResource ResourceKey=sousitemMain}" />
-                        <MenuItem Header="_fermer" Style="{StaticResource ResourceKey=sousitemMain}"  Click="fermer" />
+                    <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Couleurs" >
+                        <MenuItem x:Name="menuBleu" Header="_Bleu" Style="{StaticResource ResourceKey=sousitemMain}" Click="CouleurBleu"   />
+                        <MenuItem x:Name="menuGris" Header="_Gris" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurGris" />
+                        <MenuItem x:Name="menuRouge" Header="_Rouge" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurRouge" />
+                        <MenuItem x:Name="menuVert" Header="_Vert" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurVert" />
 
                     </MenuItem>
 
-                    <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Connexion" >
-                        <MenuItem Header="_Se Connecter" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                        <MenuItem Header="_Se Déconnecter" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                    </MenuItem>
+             
                     <MenuItem Header="_Quitter" Style="{StaticResource ResourceKey=itemMain}" Click="fermer"/>
                     <MenuItem Header="_" Style="{StaticResource ResourceKey=itemMain}"  HorizontalAlignment="Right" Click="minimiser" />
                     <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Parc Informatique" >
                         <MenuItem Click="AffLstPret" x:Name="menuListePret" Header="_Liste des pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                        <MenuItem Click="CreerPret" Header="_Créer un pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                        <MenuItem Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
-                        <MenuItem Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
+                        <MenuItem x:Name="menuCreerPret" Click="CreerPret" Header="_Créer un pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
+                        <MenuItem x:Name="menuListeExemplaire" Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
+                        <MenuItem x:Name="menuCreerExemplaire" Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     </MenuItem>
+                    <MenuItem Header="_À Propos" Style="{StaticResource ResourceKey=itemMain}" Click="OuvrirAPropos"/>
+
 
 
                 </Menu>
@@ -66,7 +66,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <Rectangle Style="{StaticResource ResourceKey=bigrecMain}" HorizontalAlignment="Left"  Width="2000" Height="37" Margin="0,854,-464,0" Grid.ColumnSpan="2"/>
+            <Rectangle x:Name="rectBottom" Style="{StaticResource ResourceKey=bigrecMain}" HorizontalAlignment="Left"  Width="2000" Height="37" Margin="0,854,-464,0" Grid.ColumnSpan="2"/>
             <Rectangle Style="{StaticResource ResourceKey=iconMain}" x:Name="RecCours"  Margin="10,30,0,0"/>
             <Rectangle x:Name="RecPret" Style="{StaticResource ResourceKey=iconMain}" Margin="10,750,0,0" />
             <Rectangle x:Name="RecProgramme" Style="{StaticResource ResourceKey=iconMain}" Margin="10,135,0,0"/>
@@ -75,26 +75,26 @@
             <Rectangle x:Name="RecOrdreJour" Style="{StaticResource ResourceKey=iconMain}" Margin="10,550,0,0"/>
             <Rectangle x:Name="RecAsso" Style="{StaticResource ResourceKey=iconMain}" Margin="10,345,0,0"/>
             <Rectangle x:Name="RecActualite" Style="{StaticResource ResourceKey=iconMain}" Margin="10,650,0,0"/>
-            <Image Style="{StaticResource ResourceKey=imageMain}"  Height="90" Margin="15,30,0,0"  Width="110" RenderTransformOrigin="0.28,0.192" Source="/images/desk.png"/>
-            <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,135,0,0"  Width="100" RenderTransformOrigin="0.506,0.418" Source="/images/choipeau.png" />
+            <Image x:Name="imgCours" Style="{StaticResource ResourceKey=imageMain}"  Height="90" Margin="15,30,0,0"  Width="110" RenderTransformOrigin="0.28,0.192" Source="/images/desk.png"/>
+            <Image x:Name="imgProgramme" Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,135,0,0"  Width="100" RenderTransformOrigin="0.506,0.418" Source="/images/choipeau.png" />
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,240,0,0"  Width="100" Source="/images/group-icon.png" Stretch="Fill" />
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="60" Margin="20,355,0,0"  Width="90" Source="/images/AGEECJ_sans.jpg" RenderTransformOrigin="0.386,0.498"/>
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="60" Margin="15,460,0,0"  Width="90" Source="/images/pngtest.png" RenderTransformOrigin="0.386,0.498"/>
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="60" Margin="15,560,0,0"  Width="90" Source="/images/Microphone_icon.png"/>
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="80" Margin="15,750,0,0"  Width="100" Source="/images/CNC.Laptop.png"/>
             <Image Style="{StaticResource ResourceKey=imageMain}" Height="70" Margin="15,655,0,0"  Width="90" Source="/images/Crystal_Clear_app_kedit.png"/>
-            <Label Style="{StaticResource ResourceKey=labelMain}" Content="Gestion Cours"  Margin="20,110,0,0" />
-            <Label Content="Gestion Programme" Style="{StaticResource ResourceKey=labelMain}" Margin="10,215,0,0" />
-            <Label Content="Gestion Membres" Style="{StaticResource ResourceKey=labelMain}" Margin="15,320,0,0"/>
-            <Label Content="Association Étudiante" Style="{StaticResource ResourceKey=labelMain}" Margin="10,425,0,0"/>
+            <Label x:Name="lblCours" Style="{StaticResource ResourceKey=labelMain}" Content="Gestion Cours"  Margin="20,110,0,0" />
+            <Label x:Name="lblProgramme" Content="Gestion Programme" Style="{StaticResource ResourceKey=labelMain}" Margin="10,215,0,0" />
+            <Label x:Name="lblGestMembre" Content="Gestion Membres" Style="{StaticResource ResourceKey=labelMain}" Margin="15,320,0,0"/>
+            <Label x:Name="lblAsso" Content="Association Étudiante" Style="{StaticResource ResourceKey=labelMain}" Margin="10,425,0,0"/>
             <Button  Style="{StaticResource ResourceKey=buttonMain}" Margin="15,450,0,0" RenderTransformOrigin="-0.11,0.01" BorderThickness="2"/>
             <Button x:Name="btnGroupe" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,240,0,0"/>
             <Button x:Name="btnProgramme" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,135,0,0"/>
             <Button x:Name="btnCours" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,30,0,0"/>
-            <Label Content="Pdf" Style="{StaticResource ResourceKey=labelMain}" Margin="50,530,0,0" RenderTransformOrigin="0.635,1.14"/>
-            <Label Content="Ordre du jour" Style="{StaticResource ResourceKey=labelMain}" Margin="20,630,0,0" RenderTransformOrigin="0.635,1.14"/>
-            <Label Content="Actualités" Style="{StaticResource ResourceKey=labelMain}" Margin="30,728,0,0" RenderTransformOrigin="0.635,1.14"/>
-            <Label Content="Gestion Prêts" Style="{StaticResource ResourceKey=labelMain}" Margin="25,830,0,0" RenderTransformOrigin="0.635,1.14"/>
+            <Label x:Name="lblPdf" Content="Pdf" Style="{StaticResource ResourceKey=labelMain}" Margin="50,530,0,0" RenderTransformOrigin="0.635,1.14"/>
+            <Label x:Name="lblOrdreJour" Content="Ordre du jour" Style="{StaticResource ResourceKey=labelMain}" Margin="20,630,0,0" RenderTransformOrigin="0.635,1.14"/>
+            <Label x:Name="lblActualite" Content="Actualités" Style="{StaticResource ResourceKey=labelMain}" Margin="30,728,0,0" RenderTransformOrigin="0.635,1.14"/>
+            <Label x:Name="lblGestPret" Content="Gestion Prêts" Style="{StaticResource ResourceKey=labelMain}" Margin="25,830,0,0" RenderTransformOrigin="0.635,1.14"/>
             <Button x:Name="btnOrdreJour" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,550,0,0"/>
             <Button x:Name="btnAsso" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,345,0,0"/>
             <Button x:Name="btnActualite" Style="{StaticResource ResourceKey=buttonMain}" Margin="10,650,0,0"/>
