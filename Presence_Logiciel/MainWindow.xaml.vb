@@ -105,7 +105,6 @@ Class MainWindow
 
     Private Sub AffActualite(sender As Object, e As RoutedEventArgs) Handles btnActualite.Click
 
-        'code servant au effet du bouton
         RemettreEffect()
         Dim objDropShadow As New Effects.DropShadowEffect
         objDropShadow.ShadowDepth = 0
@@ -118,7 +117,7 @@ Class MainWindow
     End Sub
 
     Private Sub AffPret(sender As Object, e As RoutedEventArgs) Handles btnPret.Click
-        'code servant au effet du bouton
+
         RemettreEffect()
         Dim objDropShadow As New Effects.DropShadowEffect
         objDropShadow.ShadowDepth = 0
@@ -182,6 +181,10 @@ Class MainWindow
         anim.Begin(lblStatut)
     End Sub
 
+    Private Sub OuvrirAPropos(sender As Object, e As RoutedEventArgs)
+        Dim aPropos As New frmaPropos
+        aPropos.ShowDialog()
+    End Sub
 End Class
 
 Public Class FonctionsGlobales
