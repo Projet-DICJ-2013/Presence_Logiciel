@@ -1,9 +1,11 @@
 ﻿Imports System.Data.Objects
+Imports System.Windows.Media.Animation
 
 Public Class frmModele
 
     Private Modele As GestionModele
     Private _Statut As Label
+    Private _MsgErreur
 
     Public Sub New(Statut As Label)
 
@@ -16,13 +18,19 @@ Public Class frmModele
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
-        Modele = New GestionModele
-
-        SynchroControl()
+        SynchroControl(False)
 
     End Sub
 
-    Private Sub SynchroControl()
+    Private Sub SynchroControl(ByVal _IsCrit As Boolean, Optional ByVal CurrentPos As Integer = 0)
+
+        If _IsCrit Then
+            Modele = New GestionModele(TxtRech.Text)
+        Else
+            Modele = New GestionModele
+        End If
+
+        Modele.Collection.MoveCurrentToPosition(CurrentPos)
 
         Try
             TxtMarque.DataContext = Modele.Collection
@@ -30,56 +38,64 @@ Public Class frmModele
             TxtType.DataContext = Modele.Collection
             TxtGaranti.DataContext = Modele.Collection
             TxtPrix.DataContext = Modele.Collection
-            ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
+            UpdateComposante()
             TxtRech.Text = "Saisir un critère de recherche"
         Catch ex As Exception
-
+            _MsgErreur = "Un problème est survenu lors de la synchronisation des données!"
+            AffMsgErr()
         End Try
-
 
     End Sub
 
     Private Sub btnFirst_Click(sender As Object, e As RoutedEventArgs) Handles btnFirst.Click
         Modele.Collection.MoveCurrentToFirst()
-
+        UpdateComposante()
     End Sub
 
     Private Sub btnPrevious_Click(sender As Object, e As RoutedEventArgs) Handles btnPrevious.Click
         Modele.Collection.MoveCurrentToPrevious()
+        UpdateComposante()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As RoutedEventArgs) Handles btnNext.Click
         Modele.Collection.MoveCurrentToNext()
+        UpdateComposante()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As RoutedEventArgs) Handles btnLast.Click
         Modele.Collection.MoveCurrentToLast()
+        UpdateComposante()
     End Sub
 
-    Private Sub TxtModele_TextChanged(sender As Object, e As TextChangedEventArgs) Handles TxtModele.TextChanged
+    Private Sub UpdateComposante()
 
-        ViewComposante.ItemsSource = Modele.GetComposante(TxtModele.Text)
+        If Modele.Collection.CurrentItem IsNot Nothing Then
+            ViewComposante.ItemsSource = CType(Modele.Collection.CurrentItem, tblModele).tblCompoModele
+        Else
+            ViewComposante.ItemsSource = Nothing
+        End If
+
     End Sub
 
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
-        Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _
-                                              CType(Modele.Collection.CurrentItem, tblModele), _Statut)
-        FnComposante.ShowDialog()
-
-        SynchroControl()
+        If Modele.Collection.CurrentItem IsNot Nothing Then
+            Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _Statut)
+            FnComposante.ShowDialog()
+            SynchroControl(False, Modele.Collection.CurrentPosition)
+        Else
+            _MsgErreur = "Pour ajouter une composante, vous devez sélectionner un modèle"
+            AffMsgErr()
+        End If
     End Sub
 
-
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-            Dim tblModele As tblModele
+        Dim tblModele As tblModele
 
-            If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
-
-                MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
-                Return
-
-            End If
+        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
+            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
+            Return
+        End If
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
                                                 .Marque = TxtMarque.Text, _
@@ -87,11 +103,11 @@ Public Class frmModele
                                                 .TypeMachine = TxtMarque.Text, _
                                                 .PrixModele = TxtPrix.Text}
 
-            If (tblModele IsNot Nothing) Then
-                Modele.AddModele(tblModele)
-            End If
+        If (tblModele IsNot Nothing) Then
+            _MsgErreur = Modele.AddModele(tblModele)
+            AffMsgErr()
+        End If
     End Sub
-
 
     Private Sub OnQuit(sender As Object, e As RoutedEventArgs) Handles MyBase.Closed
         Me.Close()
@@ -99,35 +115,43 @@ Public Class frmModele
     End Sub
 
     Private Sub txtModele_LostFocus(sender As Object, e As RoutedEventArgs) Handles TxtModele.LostFocus
-        If txtModele.Text = "" Then
-            txtModele.BorderBrush = Brushes.Red
-            txtModele.Text = "0"
+        If TxtModele.Text = "" Then
+            TxtModele.BorderBrush = Brushes.Red
+            TxtModele.Text = "0"
         Else
-            txtModele.BorderBrush = Brushes.Green
+            TxtModele.BorderBrush = Brushes.Green
         End If
     End Sub
 
-    Private Sub TxtRech_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.MouseDoubleClick
-        TxtRech.Text = ""
+    Private Sub TxtRech_PreviewMouseDown(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
+        If TxtRech.Text = "Saisir un critère de recherche" Then
+            TxtRech.Text = ""
+        End If
     End Sub
 
 
     Private Sub btnReset_Click(sender As Object, e As RoutedEventArgs) Handles btnReset.Click
-        Modele = New GestionModele
-        Modele.Collection.MoveCurrentToLast()
-
-        Modele.Collection.MoveCurrentTo(Modele.Collection.CurrentPosition + 1)
+        SynchroControl(False)
     End Sub
 
 
     Private Sub btnRech_Click(sender As Object, e As RoutedEventArgs) Handles btnRech.Click
 
-        Modele.GetModeleRech(TxtRech.Text)
-        SynchroControl()
-
+        If TxtRech.Text IsNot Nothing Then
+            SynchroControl(True)
+        Else
+            _MsgErreur = "Vous devez remplir le champ de recherche"
+            AffMsgErr()
+        End If
     End Sub
 
+    Protected Sub AffMsgErr()
 
+        Dim anim As Storyboard = FindResource("AnimLabel")
+
+        _Statut.Content = _MsgErreur
+        anim.Begin(_Statut)
+    End Sub
 End Class
 
 Public Class GestionModele
@@ -144,12 +168,20 @@ Public Class GestionModele
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional ByVal Critere As String = Nothing)
 
         Dim MonMode = From Ex In BD.tblModele
                         Select Ex
 
-        Collection = New ListCollectionView(MonMode.ToList())
+        If Critere IsNot Nothing Then
+            Collection = New ListCollectionView(MonMode.Where( _
+                Function(x) x.NoModele.Contains(Critere) Or _
+                            x.Marque.Contains(Critere) Or _
+                            x.TypeMachine.Contains(Critere)).ToList)
+            Return
+        End If
+
+        Collection = New ListCollectionView(MonMode.ToList)
 
     End Sub
 
@@ -162,19 +194,6 @@ Public Class GestionModele
         Return MesCompo.ToList()
     End Function
 
-    Public Sub GetModeleRech(ByVal Critere As Object)
-        Dim req As IQueryable(Of tblModele) = From Mode In BD.tblModele
-                                              Select Mode
-
-
-
-        req.Where(Function(x) x.NoModele = Critere Or _
-                              x.Marque = Critere Or _
-                              x.TypeMachine = Critere)
-
-        Collection = New ListCollectionView(req.ToList)
-    End Sub
-
     Public Sub SelectItemByType(ByVal Type As String)
 
         Dim Collect = From Ex In BD.tblModele
@@ -185,26 +204,26 @@ Public Class GestionModele
 
     End Sub
 
-    Public Function AddModele(ByVal MonModele As tblModele) As Boolean
+    Public Function AddModele(ByVal MonModele As tblModele) As String
 
         Dim ModeleChange As IQueryable(Of tblModele) = (From Mode In BD.tblModele
                                  Where Mode.NoModele = MonModele.NoModele
                                  Select Mode)
         Dim Modele As tblModele
 
-            If ModeleChange.Count Then
-                Modele = ModeleChange.First
-                Modele = MonModele
-            Else
-                BD.AddTotblModele(MonModele)
-            End If
-            Try
-                BD.SaveChanges()
-            Catch ex As Exception
-                Return False
-            End Try
+        If ModeleChange.Count Then
+            Modele = ModeleChange.First
+            Modele = MonModele
+        Else
+            BD.AddTotblModele(MonModele)
+        End If
+        Try
+            BD.SaveChanges()
+        Catch ex As Exception
+            Return "Les modifications ont échouées"
+        End Try
 
-            Return True
+        Return "Les modifications ont réussies"
 
     End Function
 
