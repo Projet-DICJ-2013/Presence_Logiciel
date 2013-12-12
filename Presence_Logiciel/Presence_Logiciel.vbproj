@@ -107,6 +107,9 @@
     </Compile>
     <Compile Include="Exemplaire.xaml.vb" />
     <Compile Include="FctConnexion.vb" />
+    <Compile Include="frmAPropos.xaml.vb">
+      <DependentUpon>frmAPropos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmConnexion.xaml.vb" />
     <Compile Include="GenereRapport.xaml.vb" />
     <Compile Include="GenereReport.vb" />
@@ -233,6 +236,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Exemplaire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmAPropos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
