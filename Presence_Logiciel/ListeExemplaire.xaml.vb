@@ -49,7 +49,6 @@ Class ListeExemplaire
         Select Case (boutton.Name)
             Case "btnModele"
                 reqFiltre = req.Where(Function(r) r.Exemplaire.TypeEtat.Contains(""))
-
             Case "btnAReimager"
                 reqFiltre = req.Where(Function(r) CType(r.Exemplaire.AReimager, String).Contains("1"))
             Case "btnReserve"

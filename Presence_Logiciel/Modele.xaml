@@ -48,7 +48,7 @@
             <Button Name="btnReset" Margin="30,12,15,12">
                 <Image Source="Images/Icons/Button_Sync.png"/>
             </Button>
-            <TextBox x:Name="TxtRech"  Margin="0,12,20,13" Width="195" />
+            <TextBox x:Name="TxtRech"  FontSize="12" Margin="0,12,20,13" Width="195" />
             <Button x:Name="btnRech" RenderTransformOrigin="-1.006,0.657" Margin="0,12,15,0" VerticalAlignment="Top">
                 <Image Source="images/Icons/Search.png"/>
             </Button>

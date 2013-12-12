@@ -18,15 +18,19 @@ Public Class frmModele
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
 
-        Modele = New GestionModele
-
-        SynchroControl()
+        SynchroControl(False)
 
     End Sub
 
-    Private Sub SynchroControl(Optional ByVal CurrentPos As Integer = 0)
+    Private Sub SynchroControl(ByVal _IsCrit As Boolean, Optional ByVal CurrentPos As Integer = 0)
 
-        Modele.Collection.MoveCurrentTo(CurrentPos)
+        If _IsCrit Then
+            Modele = New GestionModele(TxtRech.Text)
+        Else
+            Modele = New GestionModele
+        End If
+
+        Modele.Collection.MoveCurrentToPosition(CurrentPos)
 
         Try
             TxtMarque.DataContext = Modele.Collection
@@ -78,7 +82,7 @@ Public Class frmModele
         If Modele.Collection.CurrentItem IsNot Nothing Then
             Dim FnComposante As New frmComposante(CType(Modele.Collection.CurrentItem, tblModele).NoModele, _Statut)
             FnComposante.ShowDialog()
-            SynchroControl()
+            SynchroControl(False, Modele.Collection.CurrentPosition)
         Else
             _MsgErreur = "Pour ajouter une composante, vous devez sélectionner un modèle"
             AffMsgErr()
@@ -119,26 +123,26 @@ Public Class frmModele
         End If
     End Sub
 
-    Private Sub TxtRech_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
+    Private Sub TxtRech_PreviewMouseDown(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
         If TxtRech.Text = "Saisir un critère de recherche" Then
-            TxtRech.Text = " "
+            TxtRech.Text = ""
         End If
     End Sub
 
 
     Private Sub btnReset_Click(sender As Object, e As RoutedEventArgs) Handles btnReset.Click
-        Modele = New GestionModele
-        Modele.Collection.MoveCurrentToLast()
-
-        Modele.Collection.MoveCurrentTo(Modele.Collection.CurrentPosition + 1)
+        SynchroControl(False)
     End Sub
 
 
     Private Sub btnRech_Click(sender As Object, e As RoutedEventArgs) Handles btnRech.Click
 
-        Modele.GetModeleRech(TxtRech.Text)
-        SynchroControl()
-
+        If TxtRech.Text IsNot Nothing Then
+            SynchroControl(True)
+        Else
+            _MsgErreur = "Vous devez remplir le champ de recherche"
+            AffMsgErr()
+        End If
     End Sub
 
     Protected Sub AffMsgErr()
@@ -164,12 +168,20 @@ Public Class GestionModele
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional ByVal Critere As String = Nothing)
 
         Dim MonMode = From Ex In BD.tblModele
                         Select Ex
 
-        Collection = New ListCollectionView(MonMode.ToList())
+        If Critere IsNot Nothing Then
+            Collection = New ListCollectionView(MonMode.Where( _
+                Function(x) x.NoModele.Contains(Critere) Or _
+                            x.Marque.Contains(Critere) Or _
+                            x.TypeMachine.Contains(Critere)).ToList)
+            Return
+        End If
+
+        Collection = New ListCollectionView(MonMode.ToList)
 
     End Sub
 
@@ -181,19 +193,6 @@ Public Class GestionModele
 
         Return MesCompo.ToList()
     End Function
-
-    Public Sub GetModeleRech(ByVal Critere As Object)
-        Dim req As IQueryable(Of tblModele) = From Mode In BD.tblModele
-                                              Select Mode
-
-
-
-        req.Where(Function(x) x.NoModele = Critere Or _
-                              x.Marque = Critere Or _
-                              x.TypeMachine = Critere)
-
-        Collection = New ListCollectionView(req.ToList)
-    End Sub
 
     Public Sub SelectItemByType(ByVal Type As String)
 
