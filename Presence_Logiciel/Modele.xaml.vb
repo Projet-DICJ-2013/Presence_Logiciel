@@ -227,23 +227,4 @@ Public Class GestionModele
         Return "Les modifications ont réussies"
 
     End Function
-
-
-
-    'PARTIE DE LA VALIDATION DES ENTRÉES
-    Private Function valider_modele()
-        Dim verifie As Boolean = True
-
-    End Function
-
-    Private Function verifier_doublon_nomodele(ByVal nomod As String) As Boolean
-        Dim modV = (From modB In BD.tblModele
-                   Where modB.NoModele = nomod
-                   Select modB)
-        If modV.ToList.Count() > 0 Then
-            Return False
-        Else
-            Return True
-        End If
-    End Function
 End Class
