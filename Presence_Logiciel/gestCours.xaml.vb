@@ -249,7 +249,14 @@ Class gestCours
             lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
         Catch ex As Exception
 
-            MessageBox.Show(ex.ToString)
+            statut.Content = "Ce cours n'exise pas"
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+            txtRecherche.BorderBrush = Brushes.Red
+
+            anim.Begin(statut)
+            anim2.Begin(txtRecherche)
+
         End Try
 
     End Sub
@@ -333,4 +340,39 @@ Class gestCours
             anim2.Begin(objTextBox)
         End If
     End Sub
+
+    Private Sub Rechercher(sender As Object, e As RoutedEventArgs) Handles btnRecherche.Click
+        If (txtRecherche.Text = "") Then
+            Return
+        End If
+
+
+        LesCours = (From cours In DM.tblCours Where cours.CodeCours = txtRecherche.Text Select cours)
+        vu = Nothing
+        vu = New ListCollectionView(LesCours.ToList())
+        txtNomCours.DataContext = vu
+        txtAnneeCours.DataContext = vu
+        txtDescription.DataContext = vu
+        txtNumCours.DataContext = vu
+        txtPonderation.DataContext = vu
+        afficherStatut()
+
+    End Sub
+
+    Private Sub txtRecherche_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtRecherche.PreviewLostKeyboardFocus
+        If (txtRecherche.Text = "") Then
+            LesCours = (From cours In DM.tblCours Select cours)
+            vu = Nothing
+            vu = New ListCollectionView(LesCours.ToList())
+            txtNomCours.DataContext = vu
+            txtAnneeCours.DataContext = vu
+            txtDescription.DataContext = vu
+            txtNumCours.DataContext = vu
+
+            txtPonderation.DataContext = vu
+            afficherStatut()
+        End If
+    End Sub
+
+
 End Class

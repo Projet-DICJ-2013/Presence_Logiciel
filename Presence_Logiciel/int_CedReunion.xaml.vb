@@ -9,6 +9,7 @@ Public Class int_CedReunion
     Private _elementidentique As Boolean
 
     Private _dateTom As Date
+
     'Initialisation de la fenetre de reunion.
     Public Sub New(noordredujour As Integer)
 
@@ -38,6 +39,7 @@ Public Class int_CedReunion
         _lesInvitee = New List(Of tblMembre)
         dtpDateRenc.SelectedDate = Date.Today
         lstInvite.ItemsSource = _lesInvitee
+        _elementidentique = False
 
     End Sub
     'Permet d'ajouter un membre dans la liste choix vers la liste des invités.
@@ -52,6 +54,16 @@ Public Class int_CedReunion
         _lesInvitee.Remove(CType(lstInvite.SelectedItem, tblMembre))
         lstInvite.ItemsSource = Nothing
         lstInvite.ItemsSource = _lesInvitee
+
+    End Sub
+    'Clear la liste des invitées.
+    Private Sub btnClear_Click(sender As Object, e As RoutedEventArgs) Handles btnClear.Click
+
+        lstInvite.ItemsSource = Nothing
+
+    End Sub
+    Private Sub btnAjoutAll_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutAll.Click
+
 
     End Sub
     'Lors de changement dans entre étudiant et enseignant un combobox des années s'active ou pas.
@@ -94,7 +106,7 @@ Public Class int_CedReunion
     Private Sub cmbTypeRedac_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbTypeRedac.SelectionChanged
         cmbRedac.ItemsSource = _objReunion.loadListRedac(cmbTypeRedac.SelectedIndex)
     End Sub
-
+    'Load liste étudiant selon l'année choisie.
     Private Sub cmbAnnée_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAnnée.SelectionChanged
         If (cmbType.SelectedIndex = 0) Then
             lstChoix.ItemsSource = _objReunion.Chargerliste(0, cmbAnnée.SelectedIndex)
@@ -102,16 +114,16 @@ Public Class int_CedReunion
             lstChoix.ItemsSource = _objReunion.Chargerliste(cmbType.SelectedIndex)
         End If
     End Sub
-
+    'Permet l'ajout de membre dans la liste invité en double cliquant.
     Private Sub lstChoix_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstChoix.MouseDoubleClick
 
         AjoutInviter()
 
     End Sub
-
+    'Permet l'ajout de membre dans la liste invité.
     Public Function AjoutInviter()
 
-        _elementidentique = False
+
 
         For Each invites In lstInvite.Items
             If (invites Is lstChoix.SelectedItem) Then
@@ -132,7 +144,7 @@ Public Class int_CedReunion
         End If
 
     End Function
-
+    'Permet en double cliquant sur la liste invité d'enlever un membre.
     Private Sub lstInvite_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstInvite.MouseDoubleClick
 
         _lesInvitee.Remove(CType(lstInvite.SelectedItem, tblMembre))

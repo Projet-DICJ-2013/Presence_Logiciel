@@ -185,4 +185,45 @@ Public Class gestProgrammes
 
     End Sub
 
+    Private Sub btnRechercher_Click(sender As Object, e As RoutedEventArgs) Handles btnRechercher.Click
+        If (txtRecherche.Text = "") Then
+            Return
+        End If
+        txtNomProgramme.Text = ""
+        txtObjectif.Text = ""
+        Try
+
+            LesProgrammes = (From prog In DM.tblProgramme Where prog.CodeProg = txtRecherche.Text Select prog)
+            vu = Nothing
+     
+            vu = New ListCollectionView(LesProgrammes.ToList())
+            txtNumProgramme.DataContext = vu
+            txtNomProgramme.DataContext = vu
+            txtObjectif.DataContext = vu
+            lvCours.ItemsSource = CType(LesProgrammes.First, tblProgramme).tblCours
+        Catch ex As Exception
+            statut.Content = "Ce programme ne figure pas dans la liste"
+            Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
+            Dim anim As Storyboard = FindResource("AnimLabel")
+            anim.Begin(statut)
+            txtRecherche.BorderBrush = Brushes.Red
+            anim2.Begin(txtRecherche)
+        End Try
+
+    End Sub
+
+    Private Sub txtRecherche_PreviewLostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtRecherche.PreviewLostKeyboardFocus
+        If (txtRecherche.Text = "") Then
+
+            LesProgrammes = (From prog In DM.tblProgramme Select prog)
+            vu = Nothing
+            txtNomProgramme.Text = ""
+            txtObjectif.Text = ""
+            vu = New ListCollectionView(LesProgrammes.ToList())
+            txtNumProgramme.DataContext = vu
+            txtNomProgramme.DataContext = vu
+            txtObjectif.DataContext = vu
+            lvCours.ItemsSource = CType(LesProgrammes.First, tblProgramme).tblCours
+        End If
+    End Sub
 End Class

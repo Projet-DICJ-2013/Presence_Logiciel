@@ -8,6 +8,11 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <Storyboard  x:Key="AnimLabel">
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
+                <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
+            </Storyboard>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>

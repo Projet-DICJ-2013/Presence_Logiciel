@@ -11,6 +11,13 @@
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
             </Storyboard>
+            <Storyboard  x:Key="AnimTxtRouge">
+                <!--Changement de couleur des textbox lors d'une erreur-->
+                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:1" BeginTime="0:0:0"/>
+                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>
+
+            </Storyboard>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -225,6 +232,14 @@
                         <GradientStop Color="#FF2558B3" Offset="0.869"/>
                     </LinearGradientBrush>
                 </Button.Background>
+            </Button>
+            <TextBox x:Name="txtRecherche" HorizontalAlignment="Left" Height="23" Margin="20,574,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" BorderThickness="1,2"/>
+            <Button x:Name="btnRechercher" Margin="382,561,1072.4,80.6" RenderTransformOrigin="5.59,6.671">
+                <Image x:Name="btnAdd1" Source="images/Icons/Search.png">
+                    <Image.BindingGroup>
+                        <BindingGroup/>
+                    </Image.BindingGroup>
+                </Image>
             </Button>
         </Grid>
     </Viewbox>
