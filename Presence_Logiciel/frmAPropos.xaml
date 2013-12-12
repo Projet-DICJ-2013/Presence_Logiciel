@@ -1,0 +1,50 @@
+﻿<Window x:Class="frmAPropos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="À propos" Height="399.2" Width="566.4" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="images/Icons/Help.png" Background="#FFB1A9A9" Opacity="0.8">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="428*"/>
+        </Grid.ColumnDefinitions>
+        <RichTextBox HorizontalAlignment="Left" Height="351" Margin="10,10,0,0" VerticalAlignment="Top" Width="540" Grid.ColumnSpan="3" Background="#FFDEDEDE" FontFamily="Times New Roman" FontSize="14">
+            <FlowDocument>
+                <Paragraph Margin="160,Auto,Auto,Auto" TextIndent="20">
+                    <Run Text="Concepteurs et développeurs:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Aubé-Larouche, Pascal"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Bolduc, Etienne"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Bouchard, Jonathan"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Chouinard, Simon"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Lalancette-Guay, Dany"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Lapointe, Simon"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Lauzier, Marc-André"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Pearson, Patrick"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Truchon, David"/>
+                </Paragraph>
+                <Paragraph Margin="40,Auto,Auto,Auto" TextIndent="20">
+                    <Run Text="*Copyright Département Informatique Cégep de Jonquière 2013"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+    </Grid>
+</Window>
