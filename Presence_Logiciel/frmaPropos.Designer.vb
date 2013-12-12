@@ -29,6 +29,7 @@ Partial Class frmaPropos
         'RichTextBox1
         '
         Me.RichTextBox1.BackColor = System.Drawing.SystemColors.Menu
+        Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.RichTextBox1.Font = New System.Drawing.Font("Times New Roman", 10.15!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
         Me.RichTextBox1.Name = "RichTextBox1"
