@@ -37,8 +37,6 @@
                 <Menu Style="{StaticResource ResourceKey=menuMain}" >
 
                     <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Options" >
-                        <MenuItem Header="_1" Style="{StaticResource ResourceKey=sousitemMain}"  Foreground="White"/>
-                        <MenuItem Header="_2" Style="{StaticResource ResourceKey=sousitemMain}" />
                         <MenuItem Header="_fermer" Style="{StaticResource ResourceKey=sousitemMain}"  Click="fermer" />
 
                     </MenuItem>
@@ -55,6 +53,8 @@
                         <MenuItem Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                         <MenuItem Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     </MenuItem>
+                    <MenuItem Header="_À Propos" Style="{StaticResource ResourceKey=itemMain}" Click="OuvrirAPropos"/>
+
 
 
                 </Menu>
