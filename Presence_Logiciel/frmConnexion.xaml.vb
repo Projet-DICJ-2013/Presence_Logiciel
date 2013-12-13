@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 Imports System.Windows.Media.Animation
+Imports System.Windows.Media.LinearGradientBrush
+Imports System.Windows.Media.Color
 
 
 
@@ -253,6 +255,100 @@ Public Class frmConnexion
         txtActualite.DataContext = vu
 
         tim = Nothing
+
+        If (IO.File.Exists("couleur.txt")) Then
+
+            If (IO.File.ReadAllText("couleur.txt") = "Vert") Then
+                CouleurVert(sender, e)
+
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Rouge") Then
+                CouleurRouge(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Gris") Then
+                CouleurGris(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Bleu") Then
+                CouleurBleu(sender, e)
+            End If
+        Else
+
+            My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+            File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+        End If
+    End Sub
+
+
+    Private Sub CouleurBleu(sender As Object, e As RoutedEventArgs)
+   
+        Dim couleur = New SolidColorBrush(Color.FromRgb(37, 88, 179))
+        Dim gradientBrush = New LinearGradientBrush(Color.FromRgb(0, 0, 0), Color.FromRgb(194, 114, 23), New Point(0.5, 0), New Point(0.5, 1))
+        Dim gradientBrush2 = New LinearGradientBrush(Color.FromRgb(8, 7, 7), Color.FromRgb(23, 103, 194), New Point(0.5, 0), New Point(0.5, 1))
+        MainWindowFond.Background = gradientBrush
+        MenuPrinc.Background = gradientBrush2
+        btnconnexion.Background = couleur
+        menuBleu.Background = couleur
+        menuRouge.Background = couleur
+        menuGris.Background = couleur
+        menuVert.Background = couleur
+        menuFermer.Background = couleur
+        menuApropos.Background = couleur
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+    End Sub
+
+    Private Sub CouleurGris(sender As Object, e As RoutedEventArgs)
+        Dim gradientBrush1 = New LinearGradientBrush(Color.FromRgb(31, 27, 27), Color.FromRgb(109, 109, 109), New Point(0.5, 0), New Point(0.5, 1))
+        MainWindowFond.Background = gradientBrush1
+        menuPrinc.Background = Brushes.DimGray
+        btnconnexion.Background = Brushes.Silver
+        menuBleu.Background = Brushes.DimGray
+        menuRouge.Background = Brushes.DimGray
+        menuGris.Background = Brushes.DimGray
+        menuVert.Background = Brushes.DimGray
+        menuFermer.Background = Brushes.DimGray
+        menuApropos.Background = Brushes.DimGray
+
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Gris", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+
+    End Sub
+
+    Private Sub CouleurRouge(sender As Object, e As RoutedEventArgs)
+        Dim gradientBrush = New LinearGradientBrush(Color.FromRgb(220, 75, 75), Color.FromRgb(255, 129, 129), New Point(0.5, 0), New Point(0.5, 1))
+        MainWindowFond.Background = gradientBrush
+        menuPrinc.Background = Brushes.DarkRed
+        btnconnexion.Background = Brushes.DarkRed
+        menuBleu.Background = Brushes.DarkRed
+        menuRouge.Background = Brushes.DarkRed
+        menuGris.Background = Brushes.DarkRed
+        menuVert.Background = Brushes.DarkRed
+        menuFermer.Background = Brushes.DarkRed
+        menuApropos.Background = Brushes.DarkRed
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Rouge", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+
+
+
+    End Sub
+
+    Private Sub CouleurVert(sender As Object, e As RoutedEventArgs)
+        Dim gradientBrush = New LinearGradientBrush(Color.FromRgb(115, 110, 63), Color.FromRgb(240, 230, 140), New Point(0.5, 0), New Point(0.5, 1))
+        MainWindowFond.Background = gradientBrush
+        menuPrinc.Background = Brushes.DarkGreen
+        btnconnexion.Background = Brushes.DarkGreen
+        menuBleu.Background = Brushes.DarkGreen
+        menuRouge.Background = Brushes.DarkGreen
+        menuGris.Background = Brushes.DarkGreen
+        menuVert.Background = Brushes.DarkGreen
+        menuFermer.Background = Brushes.DarkGreen
+        menuApropos.Background = Brushes.DarkGreen
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Vert", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
     End Sub
 
 
