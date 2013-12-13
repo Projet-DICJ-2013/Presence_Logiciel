@@ -122,7 +122,7 @@ Public Class int_CedReunion
     End Sub
     'Permet l'ajout de membre dans la liste invité.
     Public Function AjoutInviter()
-
+        _elementidentique = False
 
 
         For Each invites In lstInvite.Items
