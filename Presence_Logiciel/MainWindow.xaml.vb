@@ -216,7 +216,6 @@ Class MainWindow
         lblOrdreJour.Foreground = Brushes.White
         lblPdf.Foreground = Brushes.White
         lblProgramme.Foreground = Brushes.White
-     
         RecCours.Fill = couleur
         RecActualite.Fill = couleur
         RecAsso.Fill = couleur
@@ -225,6 +224,9 @@ Class MainWindow
         RecOrdreJour.Fill = couleur
         RecPret.Fill = couleur
         RecProgramme.Fill = couleur
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
     End Sub
 
     Private Sub CouleurGris(sender As Object, e As RoutedEventArgs)
@@ -255,6 +257,10 @@ Class MainWindow
         RecOrdreJour.Fill = Brushes.Silver
         RecPret.Fill = Brushes.Silver
         RecProgramme.Fill = Brushes.Silver
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Gris", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+
     End Sub
 
     Private Sub CouleurRouge(sender As Object, e As RoutedEventArgs)
@@ -285,6 +291,9 @@ Class MainWindow
         lblOrdreJour.Foreground = Brushes.White
         lblPdf.Foreground = Brushes.White
         lblProgramme.Foreground = Brushes.White
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Rouge", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
      
 
     End Sub
@@ -317,6 +326,32 @@ Class MainWindow
         lblOrdreJour.Foreground = Brushes.Black
         lblPdf.Foreground = Brushes.Black
         lblProgramme.Foreground = Brushes.Black
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Vert", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+    End Sub
+
+    Private Sub frmMain_Loaded(sender As Object, e As RoutedEventArgs) Handles frmMain.Loaded
+        If (IO.File.Exists("couleur.txt")) Then
+
+            If (IO.File.ReadAllText("couleur.txt") = "Vert") Then
+                CouleurVert(sender, e)
+
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Rouge") Then
+                CouleurRouge(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Gris") Then
+                CouleurGris(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Bleu") Then
+                CouleurBleu(sender, e)
+            End If
+        Else
+
+            My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+            File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+        End If
 
     End Sub
 End Class
