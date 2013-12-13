@@ -96,13 +96,11 @@
             _lstRedac = (From membre In _entitiesReunion.tblMembre Join prof In _entitiesReunion.tblProfesseur On prof.IdMembre Equals membre.IdMembre Select membre).ToList()
         Else
             _lstRedac = (From membre In _entitiesReunion.tblMembre Join etu In _entitiesReunion.tblEtudiant On etu.IdMembre Equals membre.IdMembre Select membre).ToList()
-
         End If
-
-
         Return _lstRedac
-
     End Function
+
+
     'Ouvre l'interface d'envoie de courriers 
     Public Sub OuvrirMail()
 
@@ -110,4 +108,7 @@
         _intMail.ShowDialog()
 
     End Sub
+    Public Function GetId()
+        Return _idOrdre
+    End Function
 End Class

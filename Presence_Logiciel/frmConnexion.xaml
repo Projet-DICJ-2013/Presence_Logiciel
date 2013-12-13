@@ -74,10 +74,8 @@
 
                     </MenuItem>
 
-                    <MenuItem Header="_?" TextBlock.Foreground="White" FontFamily="Stencil"  FontSize="4" Height="10">
-                        <MenuItem Header="_à propos" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="10"/>
-                    </MenuItem>
-                    <MenuItem Header="_-" TextBlock.Foreground="White" FontFamily="Stencil"  HorizontalAlignment="Right" Click="minimiser" Height="10" FontSize="5" Width="20" />
+                    
+                    
 
                 </Menu>
 

@@ -121,7 +121,7 @@ Public Class int_CedReunion
 
     End Sub
     'Permet l'ajout de membre dans la liste invité.
-    Public Function AjoutInviter()
+    Public Sub AjoutInviter()
 
 
 
@@ -143,7 +143,7 @@ Public Class int_CedReunion
             lstInvite.ItemsSource = _lesInvitee
         End If
 
-    End Function
+    End Sub
     'Permet en double cliquant sur la liste invité d'enlever un membre.
     Private Sub lstInvite_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstInvite.MouseDoubleClick
 

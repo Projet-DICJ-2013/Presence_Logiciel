@@ -11,6 +11,7 @@ Public Class EnvoieMail
     Private _nbrMail As Int16
     Private _rapport As GenereRapport
     Private _idOrdre As Integer
+    Private _reunion As objReunion
 
     'Evenement qui appelle la fonction d'envoie de courrier
     Private Sub btnEnvoyer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnvoyer.Click
@@ -52,5 +53,13 @@ Public Class EnvoieMail
         _envoieMail.AddPieceJointe(_rapport.TempFilePDF)
         _envoieMail.EnvoiMessage()
 
+    End Sub
+
+    Private Sub Envoie_Loaded(sender As Object, e As RoutedEventArgs) Handles intEnvoieMail.Loaded
+        Dim ID = _reunion.GetId()
+        Dim titre = (From Odj In _entitiesReunion.tblOrdreDuJour
+                      Where Odj.NoOrdreDuJour = ID
+                      Select Odj.TitreOrdreJour)
+        txtObj.Text = titre.ToString()
     End Sub
 End Class
