@@ -1,7 +1,7 @@
 ﻿<Window 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="frmConnexion"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="MainWindowFond" mc:Ignorable="d" x:Class="frmConnexion"
     Title="frmConnexion" Height="1920" Width="1080" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="ouverture" Icon="images/Icons/User.png">
     <Window.Resources>
 
@@ -56,7 +56,7 @@
         <Grid Margin="0,0,3.6,-4">
 
             <DockPanel Margin="0,-9,0,19.6"  HorizontalAlignment="Stretch">
-                <Menu DockPanel.Dock="Top" Height="8" Margin="0,-165,-0.4,0" FontSize="5" Width="720" >
+                <Menu x:Name="menuPrinc" DockPanel.Dock="Top" Height="8" Margin="1,-165,-2,0" FontSize="5" Width="750" >
                     <Menu.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                             <GradientStop Color="#FF080707" Offset="0.162"/>
@@ -67,16 +67,25 @@
 
                     <MenuItem Header="_Options" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4"  >
 
-                        <MenuItem Header="_fermer" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="10"/>
+                        <MenuItem x:Name="menuFermer" Header="_fermer" Background="#FF245EA1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Click="fermer"  Height="10"/>
                     </MenuItem>
                     <MenuItem Header="_Quitter" FontFamily="Stencil" TextBlock.Foreground="White"  Height="10" FontSize="4" Click="fermer"  >
 
 
                     </MenuItem>
 
-                    
-                    
+                    <MenuItem Header="_?" TextBlock.Foreground="White" FontFamily="Stencil"  FontSize="4" Height="10">
+                        <MenuItem x:Name="menuApropos" Header="_à propos" Background="#FF1767C2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="10"/>
+                    </MenuItem>
+                    <MenuItem Header="_-" TextBlock.Foreground="White" FontFamily="Stencil"  HorizontalAlignment="Right" Click="minimiser" Height="10" FontSize="5" Width="20" />
 
+                    <MenuItem Style="{StaticResource ResourceKey=itemMain}" Header="_Couleurs" TextBlock.Foreground="White" FontFamily="Stencil"  FontSize="4" Height="10" >
+                        <MenuItem x:Name="menuBleu" Header="_Bleu" Style="{StaticResource ResourceKey=sousitemMain}" Click="CouleurBleu" Height="10"  />
+                        <MenuItem x:Name="menuGris" Header="_Gris" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurGris" Height="10" />
+                        <MenuItem x:Name="menuRouge" Header="_Rouge" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurRouge" Height="10"/>
+                        <MenuItem x:Name="menuVert" Header="_Vert" Style="{StaticResource ResourceKey=sousitemMain}"  Click="CouleurVert" Height="10"/>
+
+                    </MenuItem>
                 </Menu>
 
 
