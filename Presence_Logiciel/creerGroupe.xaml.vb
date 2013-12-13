@@ -84,5 +84,5 @@
     ' ''        Return True
     ' ''    End If
     ' ''End Function
-  
+
 End Class
