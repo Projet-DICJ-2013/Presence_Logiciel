@@ -3,22 +3,20 @@ Imports System.Data.OleDb
 Imports System.Data.Objects
 
 
-
-
-
 Public Class frmGestOrdJour
+
+    'Declaration des variables privés
     Private startPoint As New Point
     Private OrdreDuJour As GestionOdj
     Private _intReu As int_CedReunion
 
-
-
     Private Sub Grid_Loaded(sender As Object, e As RoutedEventArgs)
+        'Initialisation de la fenêtre
         OrdreDuJour = New GestionOdj
         lstOrdreJour.ItemsSource = OrdreDuJour.Collection
     End Sub
-
     Private Sub btnNouveauPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnNouveauPoint.Click
+        'Fonction permettant l'ajout d'un élément en dernière position dans le treeview
         If txtTitrePoint.Text <> "" Then
             NettoyerArbre()
             lstOdj.Items.Add(New TreeViewItem() With {.Header = txtTitrePoint.Text})
@@ -29,8 +27,8 @@ Public Class frmGestOrdJour
             MessageBox.Show("Le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
     End Sub
-
     Private Sub btnAttacher_Click(sender As Object, e As RoutedEventArgs) Handles btnAttacher.Click
+        'Fonction permettant d'attacher un élément à l'élément selectionné dans le treeview
         Dim item As TreeViewItem = TryCast(lstOdj.SelectedItem, TreeViewItem)
         If item IsNot Nothing And txtTitrePoint.Text <> "" Then
             NettoyerArbre()
@@ -43,8 +41,8 @@ Public Class frmGestOrdJour
             MessageBox.Show("Aucun point est séléctionné ou le nouveau point n'a pas de titre!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Exclamation)
         End If
     End Sub
-
     Private Sub btnSupprimerPoint_Click(sender As Object, e As RoutedEventArgs) Handles btnSupprimerPoint.Click
+        'Fonction permettant la suppression de l'élément sélectionné dans le treeview
         Dim ElementTemporaire As TreeViewItem = DirectCast(lstOdj.SelectedItem, TreeViewItem)
         If ElementTemporaire IsNot Nothing Then
             If TypeOf ElementTemporaire.Parent Is TreeViewItem Then
@@ -57,84 +55,12 @@ Public Class frmGestOrdJour
             btnEnregistrer.IsEnabled = True
         End If
     End Sub
-
-
-    Private Sub lstOdj_PreviewMouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles lstOdj.PreviewMouseLeftButtonDown
-        startPoint = e.GetPosition(Nothing)
-    End Sub
-
-    Private Sub lstOdj_MouseMove(sender As Object, e As MouseEventArgs) Handles lstOdj.MouseMove
-        Dim mousePos As Point = e.GetPosition(Nothing)
-        Dim diff As Vector = startPoint - mousePos
-
-        If e.LeftButton = MouseButtonState.Pressed AndAlso (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance OrElse Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance) Then
-            Dim treeView As TreeView = TryCast(sender, TreeView)
-            Dim treeViewItem As TreeViewItem = FindAnchestor(Of TreeViewItem)(DirectCast(e.OriginalSource, DependencyObject))
-            Dim contact As TreeViewItem
-
-            If TypeOf e.Source Is TreeViewItem Then
-                contact = e.Source
-
-                Dim dragData As New DataObject("myFormat", contact)
-                DragDrop.DoDragDrop(treeViewItem, dragData, DragDropEffects.Move)
-            End If
-        End If
-    End Sub
-
-    Private Shared Function FindAnchestor(Of T As DependencyObject)(current As DependencyObject) As T
-        While current IsNot Nothing
-            If TypeOf current Is T Then
-                Return DirectCast(current, T)
-            End If
-            current = VisualTreeHelper.GetParent(current)
-        End While
-        Return Nothing
-    End Function
-
-    Private Sub lstOdj_Drop(sender As Object, e As DragEventArgs) Handles lstOdj.Drop
-        If e.Data.GetDataPresent("myFormat") Then
-            Dim treeViewItem As TreeViewItem = FindAnchestor(Of TreeViewItem)(DirectCast(e.OriginalSource, DependencyObject))
-            Dim contact As TreeViewItem = TryCast(e.Data.GetData("myFormat"), TreeViewItem)
-            Dim treeView As TreeView = TryCast(sender, TreeView)
-            Dim MonParentArbre As TreeView
-            Dim MonParentNoeud As TreeViewItem
-            Dim i As Int16
-            NettoyerArbre()
-            If TypeOf contact.Parent Is TreeViewItem Then
-                MonParentNoeud = contact.Parent
-                i = MonParentNoeud.Items.IndexOf(treeViewItem)
-                MonParentNoeud.Items.Remove(contact)
-                If i > -1 And i = treeView.Items.Count Then
-                    MonParentNoeud.Items.Remove(contact)
-                    MonParentNoeud.Items.Add(contact)
-                ElseIf i > -1 Then
-                    MonParentNoeud.Items.Remove(contact)
-                    MonParentNoeud.Items.Insert(i, contact)
-                End If
-            Else
-                MonParentArbre = contact.Parent
-                i = MonParentArbre.Items.IndexOf(treeViewItem)
-
-                If i = treeView.Items.Count Then
-                    MonParentArbre.Items.Remove(contact)
-                    MonParentArbre.Items.Add(contact)
-                ElseIf i > -1 Then
-                    MonParentArbre.Items.Remove(contact)
-                    MonParentArbre.Items.Insert(i, contact)
-                End If
-            End If
-            NumeroterArbre()
-            btnPlanifReun.IsEnabled = False
-            btnEnregistrer.IsEnabled = True
-        End If
-    End Sub
-
-
-
     Private Sub lstOdj_KeyDown(sender As Object, e As KeyEventArgs) Handles lstOdj.KeyDown
+        'Cette fonction défini l'action produite dans le treeview suite à l'utilisation du clavier
         If lstOdj.SelectedItem IsNot Nothing Then
             Select Case e.Key
                 Case Key.Delete
+                    'Supprime l'element selectionné
                     If TypeOf lstOdj.SelectedItem.Parent Is TreeViewItem Then
                         TryCast(lstOdj.SelectedItem.Parent, TreeViewItem).Items.Remove(lstOdj.SelectedItem)
                     Else
@@ -142,6 +68,7 @@ Public Class frmGestOrdJour
                     End If
                     btnEnregistrer.IsEnabled = True
                 Case Key.Down
+                    'Navigue vers le bas
                     Dim i = 0
                     i = lstOdj.Items.IndexOf(lstOdj.SelectedItem)
                     lstOdj.SelectedItem.IsSelected = False
@@ -149,6 +76,7 @@ Public Class frmGestOrdJour
                         lstOdj.Items(i + 1).IsSelected = True
                     End If
                 Case Key.Up
+                    'Navigue vers le haut
                     Dim i = 0
                     i = lstOdj.Items.IndexOf(lstOdj.SelectedItem)
                     lstOdj.SelectedItem.IsSelected = False
@@ -161,8 +89,104 @@ Public Class frmGestOrdJour
             End Select
         End If
     End Sub
+    Private Sub btnCreerOdj_Click(sender As Object, e As RoutedEventArgs) Handles btnCreerOdj.Click
+        'Cette fonction créer un ordre du jour dans la BD avec 5 points de base et l'affiche dans le treeview
+        Dim tblOrdreDuJour As tblOrdreDuJour
+        Dim tblListePoint As tblListePoint
 
+        If txtTitreOdj.Text IsNot Nothing Then
 
+            tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
+                                                    .Notes = Nothing}
+            If (tblOrdreDuJour IsNot Nothing) Then
+                OrdreDuJour.AddOdj(tblOrdreDuJour)
+
+                lstOrdreJour.SelectedItem = OrdreDuJour.Collection.CurrentItem
+
+                tblListePoint = New tblListePoint With {.NoOrdreDuJour = CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour}
+
+                If (tblListePoint IsNot Nothing) Then
+                    OrdreDuJour.AddListe(tblListePoint)
+                End If
+            End If
+
+            OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "1.")
+            OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "2.")
+            OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "3.")
+            OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "4.")
+            OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "5.")
+
+            txtTitreOdj.Text = ""
+            lstOrdreJour.ItemsSource = OrdreDuJour.Collection
+        Else
+            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouvelle ordre du jour!")
+            Return
+        End If
+    End Sub
+    Private Sub lstOrdreJour_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstOrdreJour.SelectionChanged
+        'Cet évènement permet de recharger le treeview en fonction de l'ordre du jour sélèctioné
+        ReloadList()
+        If lstOrdreJour.SelectedIndex > -1 Then
+            btnPlanifReun.IsEnabled = True
+            btnEnregistrer.IsEnabled = False
+        Else
+            btnPlanifReun.IsEnabled = False
+            btnEnregistrer.IsEnabled = True
+        End If
+    End Sub
+    Private Function AjouterEnfant(ByVal MonPoint As tblPoints, ByVal MonObject As TreeViewItem) As Boolean
+        'Cette fonction permet d'ajouter chacun des points d'une table de points ainsi que chacun de ces enfants au TreeView
+        For Each Element As tblPoints In MonPoint.tblListePoint.tblPoints1
+            Dim cr = New TreeViewItem() With {.Header = Element.TitrePoint}
+            MonObject.Items.Add(cr)
+            If Element.ListeEnfants.HasValue() Then
+                AjouterEnfant(Element, cr)
+            End If
+        Next
+        Return True
+    End Function
+    Private Sub btnEnregistrer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnregistrer.Click
+        'Cet évènement permet l'enregistrement d'un ordre du jour, des listes de points et des points dans la base de donnée en fonction du TreeView
+        OrdreDuJour.DeleteOrdreDuJour(lstOrdreJour.SelectedItem)
+        NettoyerArbre()
+        OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
+        ReloadList()
+
+        btnPlanifReun.IsEnabled = True
+        btnEnregistrer.IsEnabled = False
+    End Sub
+    Private Sub ReloadList()
+        'Cette fonction permet de vider le treeview et de la remplir par la suite a partir de la BD
+        OrdreDuJour.Collection.MoveCurrentTo(lstOrdreJour.SelectedItem)
+        lstOdj.Items.Clear()
+        Dim ListePoint As List(Of tblPoints)
+
+        ListePoint = New List(Of tblPoints)
+        ListePoint = OrdreDuJour.RetourPointsOdj(lstOrdreJour.SelectedItem)
+        For Each Point In ListePoint
+            Dim cr = New TreeViewItem() With {.Header = Point.TitrePoint}
+            lstOdj.Items.Add(cr)
+            If Point.ListeEnfants.HasValue() Then
+                AjouterEnfant(Point, cr)
+            End If
+
+        Next
+        NumeroterArbre()
+    End Sub
+    Private Sub btnPlanifReun_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanifReun.Click
+        'Cet évènement permet d'ouvrir la fenêtre pour planifier une réunion
+        _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour, CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).TitreOrdreJour)
+        _intReu.ShowDialog()
+    End Sub
+    Private Sub btnFermer_Click(sender As Object, e As RoutedEventArgs) Handles btnFermer.Click
+        'Cet évènement permet de quitter l'interface de gestion d'ordre du jour
+        Dim DialogResult = MessageBox.Show("Êtes-vous sur de vouloir quitter?", "Attention!", MessageBoxButton.YesNo, MessageBoxImage.Warning)
+        If DialogResult = MessageBoxResult.Yes Then
+            Me.Close()
+        End If
+    End Sub
+
+    'Les 4 fonctions suivantes permettent de numeroter ou d'enlever les numeros de chacun des éléments dans le Treeview
     Private Sub NumeroterArbre()
         Dim i As Int16
         Dim MonId As String
@@ -202,107 +226,74 @@ Public Class frmGestOrdJour
         End If
     End Sub
 
-    Private Sub btnCreerOdj_Click(sender As Object, e As RoutedEventArgs) Handles btnCreerOdj.Click
-        Dim tblOrdreDuJour As tblOrdreDuJour
-        Dim tblListePoint As tblListePoint
+    'Les 4 fonctions suivantes permettent le déplacement des éléments dans le treeview par Drag And Drop
+    Private Sub lstOdj_PreviewMouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles lstOdj.PreviewMouseLeftButtonDown
+        startPoint = e.GetPosition(Nothing)
+    End Sub
+    Private Sub lstOdj_MouseMove(sender As Object, e As MouseEventArgs) Handles lstOdj.MouseMove
+        Dim mousePos As Point = e.GetPosition(Nothing)
+        Dim diff As Vector = startPoint - mousePos
 
-        If txtTitreOdj.Text IsNot Nothing Then
-           
-        tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
-                                                .Notes = Nothing}
+        If e.LeftButton = MouseButtonState.Pressed AndAlso (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance OrElse Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance) Then
+            Dim treeView As TreeView = TryCast(sender, TreeView)
+            Dim treeViewItem As TreeViewItem = FindAnchestor(Of TreeViewItem)(DirectCast(e.OriginalSource, DependencyObject))
+            Dim contact As TreeViewItem
 
-        If (tblOrdreDuJour IsNot Nothing) Then
-            OrdreDuJour.AddOdj(tblOrdreDuJour)
+            If TypeOf e.Source Is TreeViewItem Then
+                contact = e.Source
 
-                lstOrdreJour.SelectedItem = OrdreDuJour.Collection.CurrentItem
-
-                tblListePoint = New tblListePoint With {.NoOrdreDuJour = CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour}
-
-                If (tblListePoint IsNot Nothing) Then
-                    OrdreDuJour.AddListe(tblListePoint)
-                End If
+                Dim dragData As New DataObject("myFormat", contact)
+                DragDrop.DoDragDrop(treeViewItem, dragData, DragDropEffects.Move)
             End If
-
-            OrdreDuJour.AddPoint(1, "Acceptation et ouverture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "1.")
-            OrdreDuJour.AddPoint(2, "Acceptation des procès-verbaux", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "2.")
-            OrdreDuJour.AddPoint(3, "Informations", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "3.")
-            OrdreDuJour.AddPoint(4, "Divers", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "4.")
-            OrdreDuJour.AddPoint(5, "Fermeture de l'ordre du jour", OrdreDuJour.GetNoListePoint(OrdreDuJour.Collection.CurrentItem), "5.")
-
-            txtTitreOdj.Text = ""
-            lstOrdreJour.ItemsSource = OrdreDuJour.Collection
-        Else
-            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouvelle ordre du jour!")
-            Return
         End If
     End Sub
+    Private Shared Function FindAnchestor(Of T As DependencyObject)(current As DependencyObject) As T
+        While current IsNot Nothing
+            If TypeOf current Is T Then
+                Return DirectCast(current, T)
+            End If
+            current = VisualTreeHelper.GetParent(current)
+        End While
+        Return Nothing
+    End Function
+    Private Sub lstOdj_Drop(sender As Object, e As DragEventArgs) Handles lstOdj.Drop
+        If e.Data.GetDataPresent("myFormat") Then
+            Dim treeViewItem As TreeViewItem = FindAnchestor(Of TreeViewItem)(DirectCast(e.OriginalSource, DependencyObject))
+            Dim contact As TreeViewItem = TryCast(e.Data.GetData("myFormat"), TreeViewItem)
+            Dim treeView As TreeView = TryCast(sender, TreeView)
+            Dim MonParentArbre As TreeView
+            Dim MonParentNoeud As TreeViewItem
+            Dim i As Int16
+            NettoyerArbre()
+            If TypeOf contact.Parent Is TreeViewItem Then
+                MonParentNoeud = contact.Parent
+                i = MonParentNoeud.Items.IndexOf(treeViewItem)
+                MonParentNoeud.Items.Remove(contact)
+                If i > -1 And i = treeView.Items.Count Then
+                    MonParentNoeud.Items.Remove(contact)
+                    MonParentNoeud.Items.Add(contact)
+                ElseIf i > -1 Then
+                    MonParentNoeud.Items.Remove(contact)
+                    MonParentNoeud.Items.Insert(i, contact)
+                End If
+            Else
+                MonParentArbre = contact.Parent
+                i = MonParentArbre.Items.IndexOf(treeViewItem)
 
-    Private Sub lstOrdreJour_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstOrdreJour.SelectionChanged
-        ReloadList()
-        If lstOrdreJour.SelectedIndex > -1 Then
-            btnPlanifReun.IsEnabled = True
-            btnEnregistrer.IsEnabled = False
-        Else
+                If i = treeView.Items.Count Then
+                    MonParentArbre.Items.Remove(contact)
+                    MonParentArbre.Items.Add(contact)
+                ElseIf i > -1 Then
+                    MonParentArbre.Items.Remove(contact)
+                    MonParentArbre.Items.Insert(i, contact)
+                End If
+            End If
+            NumeroterArbre()
             btnPlanifReun.IsEnabled = False
             btnEnregistrer.IsEnabled = True
         End If
     End Sub
-    
-    Private Function AjouterEnfant(ByVal MonPoint As tblPoints, ByVal MonObject As TreeViewItem) As Boolean
 
-        For Each Element As tblPoints In MonPoint.tblListePoint.tblPoints1
-            Dim cr = New TreeViewItem() With {.Header = Element.TitrePoint}
-            MonObject.Items.Add(cr)
-            If Element.ListeEnfants.HasValue() Then
-                AjouterEnfant(Element, cr)
-            End If
-
-
-
-        Next
-        Return True
-    End Function
-
-    Private Sub btnEnregistrer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnregistrer.Click
-
-        OrdreDuJour.DeleteOrdreDuJour(lstOrdreJour.SelectedItem)
-        NettoyerArbre()
-        OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
-        ReloadList()
-
-        btnPlanifReun.IsEnabled = True
-        btnEnregistrer.IsEnabled = False
-    End Sub
-    Private Sub ReloadList()
-
-        OrdreDuJour.Collection.MoveCurrentTo(lstOrdreJour.SelectedItem)
-        lstOdj.Items.Clear()
-        Dim ListePoint As List(Of tblPoints)
-
-        ListePoint = New List(Of tblPoints)
-        ListePoint = OrdreDuJour.RetourPointsOdj(lstOrdreJour.SelectedItem)
-        For Each Point In ListePoint
-            Dim cr = New TreeViewItem() With {.Header = Point.TitrePoint}
-            lstOdj.Items.Add(cr)
-            If Point.ListeEnfants.HasValue() Then
-                AjouterEnfant(Point, cr)
-            End If
-
-        Next
-        NumeroterArbre()
-    End Sub
-
-    Private Sub btnPlanifReun_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanifReun.Click
-        _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour, CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).TitreOrdreJour)
-        _intReu.ShowDialog()
-    End Sub
-
-    Private Sub btnFermer_Click(sender As Object, e As RoutedEventArgs) Handles btnFermer.Click
-        Dim DialogResult = MessageBox.Show("Êtes-vous sur de vouloir quitter?", "Attention!", MessageBoxButton.YesNo, MessageBoxImage.Warning)
-        If DialogResult = MessageBoxResult.Yes Then
-            Me.Close()
-        End If
-    End Sub
 End Class
 
 Public Class GestionOdj
