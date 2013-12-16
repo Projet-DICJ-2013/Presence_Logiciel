@@ -11,6 +11,7 @@
 
         ' Ajoutez une initialisation quelconque après l'appel InitializeComponent().
         _Statut = statut
+
     End Sub
 
     Private Sub txtMembre_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles txtMembre.MouseDoubleClick
@@ -32,8 +33,6 @@
         _aPreter = New List(Of tblPretExemplaire)
 
         dtgItemPret.ItemsSource = _aPreter
-
-
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
