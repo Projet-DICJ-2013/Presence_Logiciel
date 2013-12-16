@@ -12,7 +12,7 @@ Public Class EnvoieMail
     Private _rapport As GenereRapport
     Private _idOrdre As Integer
     Private _reunion As objReunion
-
+    Private _titre As String
     'Evenement qui appelle la fonction d'envoie de courrier
     Private Sub btnEnvoyer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnvoyer.Click
 
@@ -25,14 +25,15 @@ Public Class EnvoieMail
 
     End Sub
     'Initialise certain composant a l'aide de données venant de l'interface précédente
-    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer)
+    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer, titre As String)
 
         _idOrdre = idOrdre
         InitializeComponent()
         _listeAdresse = listeinviter
         _entitiesReunion = New PresenceEntities
         _rapport = New GenereRapport
-
+        _titre = titre
+        message(titre)
     End Sub
     'Creer l'objet mail et l'envoie
     Public Sub CreerMail()
@@ -55,11 +56,8 @@ Public Class EnvoieMail
 
     End Sub
 
-    Private Sub Envoie_Loaded(sender As Object, e As RoutedEventArgs) Handles intEnvoieMail.Loaded
-        Dim ID = _reunion.GetId()
-        Dim titre = (From Odj In _entitiesReunion.tblOrdreDuJour
-                      Where Odj.NoOrdreDuJour = ID
-                      Select Odj.TitreOrdreJour)
-        txtObj.Text = titre.ToString()
+    Private Sub message(ByVal titreOdj As String)
+        txtObj.Text = titreOdj
+        rctMessage.AppendText("Bonjour à tous, si vous avez reçu ce mail, celà signifie que vous êtes convivés à une réunion concernant le " + titreOdj + ".")
     End Sub
 End Class

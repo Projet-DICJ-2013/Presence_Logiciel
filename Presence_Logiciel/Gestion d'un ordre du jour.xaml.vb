@@ -291,7 +291,7 @@ Public Class frmGestOrdJour
     End Sub
 
     Private Sub btnPlanifReun_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanifReun.Click
-        _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour)
+        _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour, CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).TitreOrdreJour)
         _intReu.ShowDialog()
     End Sub
 
