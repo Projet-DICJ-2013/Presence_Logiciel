@@ -7,25 +7,25 @@ Public Class int_CedReunion
 
     Private _noordredujour As Integer
     Private _elementidentique As Boolean
-
+    Private _titre As String
     Private _dateTom As Date
 
     'Initialisation de la fenetre de reunion.
-    Public Sub New(noordredujour As Integer)
+    Public Sub New(noordredujour As Integer, titre As String)
 
         InitializeComponent()
         _noordredujour = noordredujour
-
+        _titre = titre
     End Sub
     'Permet de ceduler et d'ouvrir l'interface d'envoie de mail.
     Private Sub btnCeduler_Click(sender As Object, e As RoutedEventArgs) Handles btnCeduler.Click
-
+        Dim _DateReunion As Date = dtpDateRenc.SelectedDate
         If ((cmbRedac.SelectionBoxItem IsNot Nothing) And (txtEndroit.Text IsNot Nothing) And (dtpDateRenc.SelectedDate IsNot Nothing) And (lstInvite.Items.Count > 0)) Then
             _objReunion.ajoutReunionBd(dtpDateRenc.SelectedDate, txtEndroit.Text, cmbLocal.SelectionBoxItem.ToString(), _noordredujour)
             _redacteur = cmbRedac.SelectedItem
             _objReunion.ajoutMembreParticipantBd(_lesInvitee, _redacteur)
             Me.Close()
-            _objReunion.OuvrirMail()
+            _objReunion.OuvrirMail(_titre, _DateReunion)
         Else
             MessageBox.Show("Veuillez remplir tous les champs.", "Attention", MessageBoxButton.OK, MessageBoxImage.Information)
         End If

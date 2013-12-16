@@ -26,11 +26,8 @@ Public Class gestEtudiant
         txtTelephoneMembre.DataContext = vu
         txtVille.DataContext = vu
         afficherTypeMembre()
-        If (txtDaEtudiant.DataContext Is Nothing) Then
-            TabTypeMembre.SelectedIndex = 0
-        Else
-            TabTypeMembre.SelectedIndex = 1
-        End If
+
+
 
 
     End Sub
@@ -53,12 +50,8 @@ Public Class gestEtudiant
         txtDaEtudiant.DataContext = CType(leprof, tblMembre).tblEtudiant
         txtDateInscription.DataContext = CType(leprof, tblMembre).tblEtudiant
 
-        If (txtDaEtudiant.DataContext Is Nothing) Then
-            tbEtudiant.Visibility = False
-            TabTypeMembre.SelectedIndex = 0
-        Else
-            TabTypeMembre.SelectedIndex = 1
-        End If
+        TabTypeMembre.IsEnabled = True
+        SelectTab()
 
 
 
@@ -124,7 +117,7 @@ Public Class gestEtudiant
         txtNoBureau.IsEnabled = True
         txtPosteTelephone.IsEnabled = True
         txtChargeTravail.IsEnabled = True
-
+        TabTypeMembre.IsEnabled = True
         txtDateInscription.IsEnabled = True
 
     End Sub
@@ -144,7 +137,7 @@ Public Class gestEtudiant
         txtPosteTelephone.IsEnabled = False
         txtChargeTravail.IsEnabled = False
         txtDateInscription.IsEnabled = False
-
+        TabTypeMembre.IsEnabled = False
 
         '        Dim myRegex1 As New Regex( _
         '"^[a-zA-Z]+$")
@@ -360,4 +353,17 @@ Public Class gestEtudiant
         End If
     End Sub
 
+    Private Sub SelectTab()
+
+
+        If txtDaEtudiant.Text <> "" Then
+            TabTypeMembre.SelectedIndex = 1
+        Else
+            TabTypeMembre.SelectedIndex = 0
+        End If
+
+        TabTypeMembre.IsEnabled = False
+    End Sub
+
+ 
 End Class
