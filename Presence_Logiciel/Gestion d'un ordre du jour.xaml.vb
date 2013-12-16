@@ -207,12 +207,12 @@ Public Class frmGestOrdJour
         Dim tblListePoint As tblListePoint
 
         If txtTitreOdj.Text IsNot Nothing Then
-           
-        tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
-                                                .Notes = Nothing}
 
-        If (tblOrdreDuJour IsNot Nothing) Then
-            OrdreDuJour.AddOdj(tblOrdreDuJour)
+            tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
+                                                    .Notes = Nothing}
+
+            If (tblOrdreDuJour IsNot Nothing) Then
+                OrdreDuJour.AddOdj(tblOrdreDuJour)
 
                 lstOrdreJour.SelectedItem = OrdreDuJour.Collection.CurrentItem
 

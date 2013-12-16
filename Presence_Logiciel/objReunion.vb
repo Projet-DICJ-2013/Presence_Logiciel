@@ -102,9 +102,9 @@
 
 
     'Ouvre l'interface d'envoie de courriers 
-    Public Sub OuvrirMail(titreOdj As String)
+    Public Sub OuvrirMail(titreOdj As String, _DateReunion As Date)
 
-        _intMail = New EnvoieMail(_invites, _idOrdre, titreOdj)
+        _intMail = New EnvoieMail(_invites, _idOrdre, titreOdj, _DateReunion)
         _intMail.ShowDialog()
 
     End Sub
