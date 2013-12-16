@@ -17,7 +17,7 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-<Assembly: EdmSchemaAttribute("d5b99d05-adbd-4438-b5d6-d6fc9c0308bb")>
+<Assembly: EdmSchemaAttribute("ae93900c-9b97-4e83-88e6-8deeb93b18bf")>
 #Region "Métadonnées de relation EDM"
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_CoursSessionGroupe", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblCoursSessionGroupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblCoursSessionGroupe), True)>
 <Assembly: EdmRelationshipAttribute("PresenceModel", "fk_Cours_StatutCoursCours", "tblCours", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(tblCours), "tblStatutCoursCours", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(tblStatutCoursCours), True)>
@@ -4791,6 +4791,31 @@ Public Partial Class tblLogin
     Private Partial Sub OnAdministrateurChanged()
     End Sub
 
+    ''' <summary>
+    ''' Aucune documentation sur les métadonnées n'est disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property EstAutorise() As Nullable(Of Global.System.Boolean)
+        Get
+            Return _EstAutorise
+        End Get
+        Set
+            OnEstAutoriseChanging(value)
+            ReportPropertyChanging("EstAutorise")
+            _EstAutorise = StructuralObject.SetValidValue(value, "EstAutorise")
+            ReportPropertyChanged("EstAutorise")
+            OnEstAutoriseChanged()
+        End Set
+    End Property
+
+    Private _EstAutorise As Nullable(Of Global.System.Boolean)
+    Private Partial Sub OnEstAutoriseChanging(value As Nullable(Of Global.System.Boolean))
+    End Sub
+
+    Private Partial Sub OnEstAutoriseChanged()
+    End Sub
+
     #End Region
 
     #Region "Propriétés de navigation"
@@ -6142,12 +6167,14 @@ Public Partial Class tblModele
     ''' <param name="marque">Valeur initiale de la propriété Marque.</param>
     ''' <param name="nbAnneeGarantie">Valeur initiale de la propriété NbAnneeGarantie.</param>
     ''' <param name="typeMachine">Valeur initiale de la propriété TypeMachine.</param>
-    Public Shared Function CreatetblModele(noModele As Global.System.String, marque As Global.System.String, nbAnneeGarantie As Global.System.Int32, typeMachine As Global.System.String) As tblModele
+    ''' <param name="prixModele">Valeur initiale de la propriété PrixModele.</param>
+    Public Shared Function CreatetblModele(noModele As Global.System.String, marque As Global.System.String, nbAnneeGarantie As Global.System.Int32, typeMachine As Global.System.String, prixModele As Global.System.Decimal) As tblModele
         Dim tblModele as tblModele = New tblModele
         tblModele.NoModele = noModele
         tblModele.Marque = marque
         tblModele.NbAnneeGarantie = nbAnneeGarantie
         tblModele.TypeMachine = typeMachine
+        tblModele.PrixModele = prixModele
         Return tblModele
     End Function
 
@@ -6310,9 +6337,9 @@ Public Partial Class tblModele
     ''' <summary>
     ''' Aucune documentation sur les métadonnées n'est disponible.
     ''' </summary>
-    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
     <DataMemberAttribute()>
-    Public Property PrixModele() As Nullable(Of Global.System.Decimal)
+    Public Property PrixModele() As Global.System.Decimal
         Get
             Return _PrixModele
         End Get
@@ -6325,8 +6352,8 @@ Public Partial Class tblModele
         End Set
     End Property
 
-    Private _PrixModele As Nullable(Of Global.System.Decimal)
-    Private Partial Sub OnPrixModeleChanging(value As Nullable(Of Global.System.Decimal))
+    Private _PrixModele As Global.System.Decimal
+    Private Partial Sub OnPrixModeleChanging(value As Global.System.Decimal)
     End Sub
 
     Private Partial Sub OnPrixModeleChanged()

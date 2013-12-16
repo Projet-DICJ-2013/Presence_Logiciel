@@ -184,6 +184,7 @@ Public Module ModRapport
                                             <NoSerie></NoSerie>
                                             <Marque></Marque>
                                             <TypeMachine></TypeMachine>
+                                            <Prix></Prix>
                                             <Commentaire></Commentaire>
                                         </Liste>
 
@@ -210,7 +211,7 @@ Public Module ModRapport
                         "Matériel prêté:  " & Pret.tblMembre.PrenomMembre _
                         & "  " & Pret.tblMembre.NomMembre), Materiel))
 
-            Materiel.Add(CreateLstMat("Date du prêt", "Numéro de série", "Marque", "Type de machine", "Commentaire", _
+            Materiel.Add(CreateLstMat("Date du prêt", "Numéro de série", "Marque", "Type de machine", "Prix", "Commentaire", _
                                       New XAttribute("id", "Mat003")))
 
             Dim PretExemp As IEnumerable(Of tblPretExemplaire) = Pret.tblPretExemplaire
@@ -221,6 +222,7 @@ Public Module ModRapport
                                 exemp.tblExemplaire.NoSerie, _
                                 exemp.tblExemplaire.tblModele.Marque, _
                                 exemp.tblExemplaire.tblModele.TypeMachine, _
+                                exemp.tblExemplaire.tblModele.PrixModele, _
                                 exemp.CommentairePretEx, _
                                  New XAttribute("id", "Mat002")))
                 'Materiel.Add(New XElement("Image", New XAttribute("id", "Mat007"), "\images\dell.jpg"))
@@ -236,13 +238,14 @@ Public Module ModRapport
         End Function
 
         Protected Function CreateLstMat(DatePret As String, NoSerie As String, Marque As String, Type As String, _
-                                         ByVal Commentaire As String, ByVal Attr As XAttribute) As XElement
+                                         ByVal Prix As String, ByVal Commentaire As String, ByVal Attr As XAttribute) As XElement
             Dim lstMat As New XElement(_ModListe)
 
             lstMat.Element("Date").Add(New XAttribute(Attr), New XText(DatePret))
             lstMat.Element("NoSerie").Add(New XAttribute(Attr), New XText(NoSerie))
             lstMat.Element("Marque").Add(New XAttribute(Attr), New XText(Marque))
             lstMat.Element("TypeMachine").Add(New XAttribute(Attr), New XText(Type))
+            lstMat.Element("Prix").Add(New XAttribute(Attr), New XText(Prix))
             If (Commentaire Is Nothing) Then
                 lstMat.Element("Commentaire").Add(New XAttribute(Attr), New XText("Aucun"))
             Else

@@ -332,18 +332,25 @@ Class MainWindow
     End Sub
 
     Private Sub frmMain_Loaded(sender As Object, e As RoutedEventArgs) Handles frmMain.Loaded
-        If (IO.File.ReadAllText("couleur.txt") = "Vert") Then
-            CouleurVert(sender, e)
+        If (IO.File.Exists("couleur.txt")) Then
 
-        End If
-        If (IO.File.ReadAllText("couleur.txt") = "Rouge") Then
-            CouleurRouge(sender, e)
-        End If
-        If (IO.File.ReadAllText("couleur.txt") = "Gris") Then
-            CouleurGris(sender, e)
-        End If
-        If (IO.File.ReadAllText("couleur.txt") = "Bleu") Then
-            CouleurBleu(sender, e)
+            If (IO.File.ReadAllText("couleur.txt") = "Vert") Then
+                CouleurVert(sender, e)
+
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Rouge") Then
+                CouleurRouge(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Gris") Then
+                CouleurGris(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Bleu") Then
+                CouleurBleu(sender, e)
+            End If
+        Else
+
+            My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+            File.SetAttributes("couleur.txt", FileAttributes.Hidden)
         End If
 
     End Sub
