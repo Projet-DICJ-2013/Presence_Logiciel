@@ -237,11 +237,9 @@ Public Class frmGestOrdJour
         ReloadList()
         If lstOrdreJour.SelectedIndex > -1 Then
             btnPlanifReun.IsEnabled = True
-
             btnEnregistrer.IsEnabled = False
         Else
             btnPlanifReun.IsEnabled = False
-
             btnEnregistrer.IsEnabled = True
         End If
     End Sub
