@@ -17,7 +17,7 @@
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>
 
             </Storyboard>
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -191,10 +191,11 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="19*"/>
                             <ColumnDefinition Width="73*"/>
-                            <ColumnDefinition Width="430*"/>
+                            <ColumnDefinition Width="64*"/>
+                            <ColumnDefinition Width="365*"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="334" Stroke="Black" VerticalAlignment="Top" Width="522" Margin="0,0,-0.4,0" Grid.ColumnSpan="3"/>
-                        <TextBox x:Name="txtDaEtudiant" Style="{StaticResource ResourceKey=textboxProg}" Margin="0,39,42.6,0" Text="{Binding DaEtudiant}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" Width="204" Grid.Column="2" HorizontalAlignment="Right">
+                        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="334" Stroke="Black" VerticalAlignment="Top" Width="522" Margin="0,0,-0.4,0" Grid.ColumnSpan="4"/>
+                        <TextBox x:Name="txtDaEtudiant" Style="{StaticResource ResourceKey=textboxProg}" Margin="0,39,42.6,0" Text="{Binding DaEtudiant}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" Width="204" Grid.Column="3" HorizontalAlignment="Right">
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                     <GradientStop Color="White"/>
@@ -202,7 +203,7 @@
                                 </LinearGradientBrush>
                             </TextBox.BorderBrush>
                         </TextBox>
-                        <TextBox x:Name="txtDateInscription" Style="{StaticResource ResourceKey=textboxProg}" Margin="183,79,0,0" Text="{Binding DateInscriptionEtudiant}" RenderTransformOrigin="0.875,0.645" Foreground="Black" Width="204" Grid.Column="2" IsEnabled="False">
+                        <TextBox x:Name="txtDateInscription" Style="{StaticResource ResourceKey=textboxProg}" Margin="118.75,79,0,0" Text="{Binding DateInscriptionEtudiant}" RenderTransformOrigin="0.875,0.645" Foreground="Black" Width="204" Grid.Column="3" IsEnabled="False">
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                     <GradientStop Color="White"/>
@@ -210,7 +211,7 @@
                                 </LinearGradientBrush>
                             </TextBox.BorderBrush>
                         </TextBox>
-                        <TextBox x:Name="txtAnnee" Style="{StaticResource ResourceKey=textboxProg}" Margin="183,123,0,0" Text="{Binding Annee}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" Width="204" Grid.Column="2">
+                        <TextBox x:Name="txtAnnee" Style="{StaticResource ResourceKey=textboxProg}" Margin="118.75,123,0,0" Text="{Binding Annee}" RenderTransformOrigin="0.875,0.645" IsEnabled="False" Foreground="Black" Width="204" Grid.Column="3">
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                                     <GradientStop Color="White"/>

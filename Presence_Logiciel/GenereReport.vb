@@ -225,7 +225,7 @@ Public Module ModRapport
                                 exemp.tblExemplaire.tblModele.PrixModele, _
                                 exemp.CommentairePretEx, _
                                  New XAttribute("id", "Mat002")))
-                'Materiel.Add(New XElement("Image", New XAttribute("id", "Mat007"), "\images\dell.jpg"))
+                Materiel.Add(New XElement("Image", New XAttribute("id", "Mat007"), "\images\dell.jpg"))
             Next
 
 
