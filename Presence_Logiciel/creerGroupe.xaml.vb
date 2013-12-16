@@ -26,14 +26,23 @@
         Else
             _vrai2 = True
         End If
+        '' ''Vérification dans la base de donnée si le groupe est déja présent.
+        ' ''If (Verifier_doublon_code(txtnogroupe.Text, txtnogroupe.Text)) Then
+        ' ''    'Aucun doublon
+        ' ''Else
+        ' ''    _vrai1 = False
+        ' ''    MessageBox.Show("Ce groupe est déja inscrit dans la base de donnée.", "Validation", MessageBoxButton.OK)
+        ' ''End If
 
         If _vrai1 And _vrai2 = True Then
             'ajout des valeurs dans la BD s'il corresponde au condition
+
             Try
                 _nouveauGroupe.IdGroupe = txtidgroupe.Text
                 _nouveauGroupe.NoGroupe = txtnogroupe.Text
 
                 Forme.tblGroupe.AddObject(_nouveauGroupe)
+
             Catch ex As Exception
                 _vrai1 = False
             End Try
@@ -65,6 +74,15 @@
         Me.Close()
 
     End Sub
+    ' ''Private Function Verifier_doublon_code(NoGroupe As String, IdGroupe As String)
+    ' ''    Dim codeV = (From verifGp In Forme.tblGroupe
+    ' ''                 Where verifGp.IdGroupe = IdGroupe Or verifGp.NoGroupe = NoGroupe
+    ' ''                 Select verifGp)
+    ' ''    If codeV.ToList.Count() > 0 Then
+    ' ''        Return False
+    ' ''    Else
+    ' ''        Return True
+    ' ''    End If
+    ' ''End Function
 
-  
 End Class

@@ -14,14 +14,7 @@ Class gestCours
     Dim CodeStatutCours As String
     Public statut As Label
     Dim StatutVisible As Boolean
-
-
-
-
-
-
-
-
+    Private StatutChoisi As String
 
     ''Ce produit lors du click sur le boutton (+)     Permet l'ajout d'un cours
     Private Sub affAjoutCours(sender As Object, e As RoutedEventArgs)
@@ -37,10 +30,6 @@ Class gestCours
         txtDescription.DataContext = vu
         txtNumCours.DataContext = vu
         txtPonderation.DataContext = vu
-
-
-
-
 
     End Sub
 
@@ -63,7 +52,22 @@ Class gestCours
 
     End Sub
 
+    Private Sub UpdContext(Optional ByVal CurPos As Integer = 0)
+        DM = New PresenceEntities
+        LesCours = (From cours In DM.tblCours Select cours)
 
+        vu = New ListCollectionView(LesCours.ToList())
+        vu.MoveCurrentToPosition(CurPos)
+        txtNomCours.DataContext = vu
+        txtAnneeCours.DataContext = vu
+        txtDescription.DataContext = vu
+        txtNumCours.DataContext = vu
+        txtPonderation.DataContext = vu
+
+
+
+        afficherStatut()
+    End Sub
 
     Private Sub AfficherSuivant(sender As Object, e As MouseButtonEventArgs) Handles btnSuivant.MouseDown
         If (vu.CurrentPosition < LesCours.Count() - 1) Then
@@ -124,7 +128,7 @@ Class gestCours
     End Sub
 
     Private Sub Enregistrer(sender As Object, e As MouseButtonEventArgs) Handles btnEnregistrer.MouseDown
-        Dim newStatut As tblStatutCoursCours
+
     Dim anim2 As Storyboard = FindResource("AnimTxtRouge")
 
         ''Vérification des données entrées
@@ -153,16 +157,6 @@ Class gestCours
             Return
         End If
 
-
-
-        newStatut = New tblStatutCoursCours With _
-       {
-           .CodeCours = txtNumCours.Text, _
-           .DateAcquisitionStatut = DateTime.Now().ToString, _
-           .NomStatutCours = lblStatutCours.Content
-       }
-
-
         Try
 
             ''Essai de modifier le cours sur la BD
@@ -174,9 +168,6 @@ Class gestCours
             CoursAmodifier.NomCours = txtNomCours.Text
             CoursAmodifier.PonderationCours = txtPonderation.Text
 
-
-
-            CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
             DM.SaveChanges()
 
             ''Si les rectangles de statut sont encore visible alors
@@ -235,16 +226,12 @@ Class gestCours
     Private Sub afficherStatut()
         Try
 
-
-
             lblDateAcquisition.DataContext = Nothing
             Dim eCours = (From l In DM.tblStatutCoursCours Where l.CodeCours = CType(vu.CurrentItem, tblCours).CodeCours Order By l.DateAcquisitionStatut Descending Select l)
             Dim leecour As tblStatutCoursCours
             leecour = eCours.FirstOrDefault
 
-            lblStatutCours.DataContext = Nothing
-            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours.FirstOrDefault
-
+            lblStatutCours.DataContext = CType(vu.CurrentItem, tblCours).tblStatutCoursCours
 
             lblDateAcquisition.DataContext = CType(leecour, tblStatutCoursCours)
         Catch ex As Exception
@@ -263,7 +250,9 @@ Class gestCours
 
     Private Sub btnO_Click(sender As Object, e As RoutedEventArgs) Handles btnO.Click
 
-
+        recActif.Visibility = Windows.Visibility.Visible
+        recAnnulé.Visibility = Windows.Visibility.Visible
+        recInactif.Visibility = Windows.Visibility.Visible
         If (recActif.Opacity = 0) Then
             Dim anim1 As Storyboard = FindResource("AnimRect1")
             Dim anim2 As Storyboard = FindResource("AnimRect2")
@@ -292,10 +281,10 @@ Class gestCours
 
     
     Private Sub recActif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recActif.MouseDown
-
-        lblStatutCours.Content = lblActif.Content
+        StatutChoisi = "Actif"
+        ModifStatut()
         CacherStatuts()
-
+        UpdContext(vu.CurrentPosition)
     End Sub
 
     Private Sub CacherStatuts()
@@ -307,20 +296,43 @@ Class gestCours
         anim2.Begin(lblActif)
         anim2.Begin(lblAnnule)
         anim2.Begin(lblInactif)
+        recActif.Visibility = Windows.Visibility.Hidden
+        recAnnulé.Visibility = Windows.Visibility.Hidden
+        recInactif.Visibility = Windows.Visibility.Hidden
         StatutVisible = False
     End Sub
 
     Private Sub recInactif_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recInactif.MouseDown
-        lblStatutCours.Content = lblInactif.Content
+        StatutChoisi = "En attente"
+        ModifStatut()
         CacherStatuts()
+        UpdContext(vu.CurrentPosition)
     End Sub
 
     Private Sub recAnnulé_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles recAnnulé.MouseDown
-        lblStatutCours.Content = lblAnnule.Content
+        StatutChoisi = "Annulé"
+        ModifStatut()
         CacherStatuts()
+        UpdContext(vu.CurrentPosition)
     End Sub
 
+    Protected Sub ModifStatut()
 
+        Dim newStatut As tblStatutCoursCours
+        newStatut = New tblStatutCoursCours With _
+       {
+           .CodeCours = txtNumCours.Text, _
+           .DateAcquisitionStatut = DateTime.Now().ToString, _
+           .NomStatutCours = StatutChoisi
+       }
+
+        CType(vu.CurrentItem, tblCours).tblStatutCoursCours.Add(newStatut)
+        Try
+            DM.SaveChanges()
+        Catch ex As Exception
+            statut.Content = "Erreur lors du changement du statut"
+        End Try
+    End Sub
 
 
     ''Vérifi si un des champ est vide

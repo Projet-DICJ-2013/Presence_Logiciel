@@ -1,5 +1,7 @@
 ﻿Imports System.Threading
+Imports System.Windows.Media.Color
 Imports System.Windows.Media.Animation
+Imports System.Windows.Media.LinearGradientBrush
 Imports System.IO
 Class MainWindow
 
@@ -184,6 +186,173 @@ Class MainWindow
     Private Sub OuvrirAPropos(sender As Object, e As RoutedEventArgs)
         Dim aPropos As New frmaPropos
         aPropos.ShowDialog()
+    End Sub
+
+
+
+
+    Private Sub CouleurBleu(sender As Object, e As RoutedEventArgs)
+        Dim couleur = New SolidColorBrush(Color.FromRgb(194, 114, 23))
+        Dim couleur2 = New SolidColorBrush(Color.FromRgb(23, 103, 194))
+        Dim couleur3 = New SolidColorBrush(Color.FromRgb(23, 103, 194))
+        Dim gradientBrush = New LinearGradientBrush(Color.FromRgb(23, 103, 194), Color.FromRgb(8, 7, 7), New Point(0.5, 0), New Point(0.5, 1))
+        Dim gradientBrush2 = New LinearGradientBrush(Color.FromRgb(8, 7, 7), Color.FromRgb(23, 103, 194), New Point(0.5, 0), New Point(0.5, 1))
+        rectMenu.Fill = couleur2
+        rectBottom.Fill = gradientBrush
+        MenuPrinc.Background = gradientBrush2
+        menuBleu.Background = couleur2
+        menuRouge.Background = couleur2
+        menuCreerExemplaire.Background = couleur2
+        menuCreerPret.Background = couleur2
+        menuGris.Background = couleur2
+        menuListeExemplaire.Background = couleur2
+        menuListePret.Background = couleur2
+        menuVert.Background = couleur2
+        lblActualite.Foreground = Brushes.White
+        lblAsso.Foreground = Brushes.White
+        lblCours.Foreground = Brushes.White
+        lblGestMembre.Foreground = Brushes.White
+        lblGestPret.Foreground = Brushes.White
+        lblOrdreJour.Foreground = Brushes.White
+        lblPdf.Foreground = Brushes.White
+        lblProgramme.Foreground = Brushes.White
+        RecCours.Fill = couleur
+        RecActualite.Fill = couleur
+        RecAsso.Fill = couleur
+        RecGroupe.Fill = couleur
+        RecPdf.Fill = couleur
+        RecOrdreJour.Fill = couleur
+        RecPret.Fill = couleur
+        RecProgramme.Fill = couleur
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+    End Sub
+
+    Private Sub CouleurGris(sender As Object, e As RoutedEventArgs)
+        rectMenu.Fill = Brushes.DimGray
+        rectBottom.Fill = Brushes.DimGray
+        MenuPrinc.Background = Brushes.DimGray
+        menuBleu.Background = Brushes.DimGray
+        menuRouge.Background = Brushes.DimGray
+        menuCreerExemplaire.Background = Brushes.DimGray
+        menuCreerPret.Background = Brushes.DimGray
+        menuGris.Background = Brushes.DimGray
+        menuListeExemplaire.Background = Brushes.DimGray
+        menuListePret.Background = Brushes.DimGray
+        menuVert.Background = Brushes.DimGray
+        lblActualite.Foreground = Brushes.White
+        lblAsso.Foreground = Brushes.White
+        lblCours.Foreground = Brushes.White
+        lblGestMembre.Foreground = Brushes.White
+        lblGestPret.Foreground = Brushes.White
+        lblOrdreJour.Foreground = Brushes.White
+        lblPdf.Foreground = Brushes.White
+        lblProgramme.Foreground = Brushes.White
+        RecCours.Fill = Brushes.Silver
+        RecActualite.Fill = Brushes.Silver
+        RecAsso.Fill = Brushes.Silver
+        RecGroupe.Fill = Brushes.Silver
+        RecPdf.Fill = Brushes.Silver
+        RecOrdreJour.Fill = Brushes.Silver
+        RecPret.Fill = Brushes.Silver
+        RecProgramme.Fill = Brushes.Silver
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Gris", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+
+    End Sub
+
+    Private Sub CouleurRouge(sender As Object, e As RoutedEventArgs)
+        rectMenu.Fill = Brushes.IndianRed
+        rectBottom.Fill = Brushes.IndianRed
+        MenuPrinc.Background = Brushes.DarkRed
+        menuBleu.Background = Brushes.DarkRed
+        menuRouge.Background = Brushes.DarkRed
+        menuCreerExemplaire.Background = Brushes.DarkRed
+        menuCreerPret.Background = Brushes.DarkRed
+        menuGris.Background = Brushes.DarkRed
+        menuListeExemplaire.Background = Brushes.DarkRed
+        menuListePret.Background = Brushes.DarkRed
+        menuVert.Background = Brushes.DarkRed
+        RecCours.Fill = Brushes.Silver
+        RecActualite.Fill = Brushes.Silver
+        RecAsso.Fill = Brushes.Silver
+        RecGroupe.Fill = Brushes.Silver
+        RecPdf.Fill = Brushes.Silver
+        RecOrdreJour.Fill = Brushes.Silver
+        RecPret.Fill = Brushes.Silver
+        RecProgramme.Fill = Brushes.Silver
+        lblActualite.Foreground = Brushes.White
+        lblAsso.Foreground = Brushes.White
+        lblCours.Foreground = Brushes.White
+        lblGestMembre.Foreground = Brushes.White
+        lblGestPret.Foreground = Brushes.White
+        lblOrdreJour.Foreground = Brushes.White
+        lblPdf.Foreground = Brushes.White
+        lblProgramme.Foreground = Brushes.White
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Rouge", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+     
+
+    End Sub
+
+    Private Sub CouleurVert(sender As Object, e As RoutedEventArgs)
+        rectMenu.Fill = Brushes.Khaki
+        rectBottom.Fill = Brushes.DarkGreen
+        MenuPrinc.Background = Brushes.DarkGreen
+        menuBleu.Background = Brushes.DarkGreen
+        menuRouge.Background = Brushes.DarkGreen
+        menuCreerExemplaire.Background = Brushes.DarkGreen
+        menuCreerPret.Background = Brushes.DarkGreen
+        menuGris.Background = Brushes.DarkGreen
+        menuListeExemplaire.Background = Brushes.DarkGreen
+        menuListePret.Background = Brushes.DarkGreen
+        menuVert.Background = Brushes.DarkGreen
+        RecCours.Fill = Brushes.DarkKhaki
+        RecActualite.Fill = Brushes.DarkKhaki
+        RecAsso.Fill = Brushes.DarkKhaki
+        RecGroupe.Fill = Brushes.DarkKhaki
+        RecPdf.Fill = Brushes.DarkKhaki
+        RecOrdreJour.Fill = Brushes.DarkKhaki
+        RecPret.Fill = Brushes.DarkKhaki
+        RecProgramme.Fill = Brushes.DarkKhaki
+        lblActualite.Foreground = Brushes.Black
+        lblAsso.Foreground = Brushes.Black
+        lblCours.Foreground = Brushes.Black
+        lblGestMembre.Foreground = Brushes.Black
+        lblGestPret.Foreground = Brushes.Black
+        lblOrdreJour.Foreground = Brushes.Black
+        lblPdf.Foreground = Brushes.Black
+        lblProgramme.Foreground = Brushes.Black
+        File.SetAttributes("couleur.txt", FileAttributes.Normal)
+        My.Computer.FileSystem.WriteAllText("couleur.txt", "Vert", False)
+        File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+    End Sub
+
+    Private Sub frmMain_Loaded(sender As Object, e As RoutedEventArgs) Handles frmMain.Loaded
+        If (IO.File.Exists("couleur.txt")) Then
+
+            If (IO.File.ReadAllText("couleur.txt") = "Vert") Then
+                CouleurVert(sender, e)
+
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Rouge") Then
+                CouleurRouge(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Gris") Then
+                CouleurGris(sender, e)
+            End If
+            If (IO.File.ReadAllText("couleur.txt") = "Bleu") Then
+                CouleurBleu(sender, e)
+            End If
+        Else
+
+            My.Computer.FileSystem.WriteAllText("couleur.txt", "Bleu", False)
+            File.SetAttributes("couleur.txt", FileAttributes.Hidden)
+        End If
+
     End Sub
 End Class
 
