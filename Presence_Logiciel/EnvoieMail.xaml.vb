@@ -55,7 +55,7 @@ Public Class EnvoieMail
         _envoieMail.EnvoiMessage()
 
     End Sub
-
+    'Genere un message préformé pour l'envoi de message.
     Private Sub message(ByVal titreOdj As String)
         txtObj.Text = titreOdj
         rctMessage.AppendText("Bonjour à tous, si vous avez reçu ce mail, celà signifie que vous êtes convivés à une réunion concernant le " + titreOdj + ".")
