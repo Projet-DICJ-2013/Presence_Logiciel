@@ -154,6 +154,12 @@ Class MainWindow
 
     End Sub
 
+    Private Sub AffLstDemande()
+        Dim fnLstDemande As New ListeDemande(lblStatut)
+        fnLstDemande.ShowDialog()
+
+    End Sub
+
     Private Sub CreerExemp()
         Dim fnExemp As New frmExemplaire(lblStatut)
         fnExemp.ShowDialog()
