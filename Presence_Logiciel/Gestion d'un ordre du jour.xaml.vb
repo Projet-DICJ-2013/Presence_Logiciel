@@ -5,7 +5,7 @@ Imports System.Data.Objects
 
 Public Class frmGestOrdJour
 
-    'Declaration des variables privés
+    'Declaration des variables privées
     Private startPoint As New Point
     Private OrdreDuJour As GestionOdj
     Private _intReu As int_CedReunion
@@ -147,7 +147,7 @@ Public Class frmGestOrdJour
     End Function
     Private Sub btnEnregistrer_Click(sender As Object, e As RoutedEventArgs) Handles btnEnregistrer.Click
         'Cet évènement permet l'enregistrement d'un ordre du jour, des listes de points et des points dans la base de donnée en fonction du TreeView
-        OrdreDuJour.DeleteOrdreDuJour(lstOrdreJour.SelectedItem)
+        OrdreDuJour.DeletePointsOrdreDuJour(lstOrdreJour.SelectedItem)
         NettoyerArbre()
         OrdreDuJour.AjouterOrdreDuJour(lstOdj, lstOrdreJour.SelectedItem)
         ReloadList()
@@ -297,7 +297,7 @@ Public Class frmGestOrdJour
 End Class
 
 Public Class GestionOdj
-
+    'Déclaration des variables privées
     Private i
     Private BD As New PresenceEntities
 
@@ -311,24 +311,15 @@ Public Class GestionOdj
     End Property
 
     Public Sub New()
-
+        'Initialise la classe en remplissant une ListCollectionView avec la liste des ordres du jour dans la BD
         Dim MonOdj = From Ex In BD.tblOrdreDuJour
                         Select Ex
 
         Collection = New ListCollectionView(MonOdj.ToList())
-
     End Sub
 
-    Public Function GetListeOdj(ByVal _OrdreJour As tblOrdreDuJour) As ICollection
-
-        Dim MaListe = From Odj In BD.tblOrdreDuJour
-        Where Odj.NoOrdreDuJour = _OrdreJour.NoOrdreDuJour
-        Select Odj.tblListePoint
-
-        Return MaListe.ToList()
-    End Function
-
     Public Function SupprimerLiaison(ByVal _Point As tblPoints) As Boolean
+        'Cette fonction supprime la liaison dans la table PointListePoint entre chacun des points passés en parametre et sa liste parent
         While _Point.tblListePoint1.Count() > 0
             _Point.tblListePoint1.Remove(_Point.tblListePoint1.FirstOrDefault())
         End While
@@ -336,6 +327,7 @@ Public Class GestionOdj
     End Function
 
     Public Function GetNoListePoint(ByVal _NoOdj As tblOrdreDuJour) As tblListePoint
+        'Cette fonction retourne la liste rattaché à un ordre du jour 
         Dim Numero = (From Liste In BD.tblListePoint
                                                      Where Liste.NoOrdreDuJour = _NoOdj.NoOrdreDuJour
                                                       Select Liste).ToList
@@ -343,7 +335,7 @@ Public Class GestionOdj
     End Function
 
     Public Function AddOdj(ByVal MonOrdreDuJour As tblOrdreDuJour) As Boolean
-
+        'Cette fonction ajoute l'ordre du jour passé en parametre dans la BD
         Dim OrdreDuJourChange As IQueryable(Of tblOrdreDuJour) = (From Odj In BD.tblOrdreDuJour
                                  Where Odj.NoOrdreDuJour = MonOrdreDuJour.NoOrdreDuJour
                                  Select Odj)
@@ -371,7 +363,7 @@ Public Class GestionOdj
     End Function
 
     Public Function AddListe(ByVal MaListe As tblListePoint) As Boolean
-
+        'Cette fonction ajoute la liste passé en paramètre dans la BD
         Dim ListeChange As IQueryable(Of tblListePoint) = (From Liste In BD.tblListePoint
                                  Where Liste.NoListePoint = MaListe.NoListePoint
                                  Select Liste)
@@ -393,14 +385,12 @@ Public Class GestionOdj
 
 
     Public Function AddPoint(ByVal NumPoint As Int32, TitrePoint As String, ByVal ListePoint As tblListePoint, ByVal _nomPoint As String) As Boolean
+        'Cette fonction ajoute un point dans la BD en fonction des informations passées en paramètre
         Dim MonPoint As tblPoints
         MonPoint = New tblPoints With {.NumeroPoint = NumPoint, .TitrePoint = TitrePoint, .ChiffrePoint = _nomPoint}
         MonPoint.tblListePoint1.Add(ListePoint)
 
         If (MonPoint IsNot Nothing) Then
-
-
-
             Try
                 BD.AddTotblPoints(MonPoint)
                 BD.SaveChanges()
@@ -412,41 +402,37 @@ Public Class GestionOdj
     End Function
 
     Public Function RetourPointsOdj(ByVal MonOrdreDuJour As tblOrdreDuJour) As List(Of tblPoints)
+        'Retourne tous les points dans la BD concernant l'ordre du jour passé en paramètre 
         Dim MesPoints = From MaListe In BD.tblListePoint
                     Where MaListe.NoOrdreDuJour = MonOrdreDuJour.NoOrdreDuJour
                     Join Point In BD.tblPoints
                     On Point.tblListePoint1.FirstOrDefault Equals MaListe
                     Select Point
-
         Return MesPoints.ToList()
     End Function
 
     
-    Public Function DeleteOrdreDuJour(ByVal OrdreDuJour As tblOrdreDuJour)
+    Public Function DeletePointsOrdreDuJour(ByVal OrdreDuJour As tblOrdreDuJour)
+        'Cette fonction cherche tous les points rattachées à un ordre du jour dans la BD et les supprime
         Dim ListePoint As List(Of tblPoints)
         ListePoint = New List(Of tblPoints)
         ListePoint = RetourPointsOdj(OrdreDuJour)
         For Each Point In ListePoint
             DeletePoints(Point)
         Next
-
-
         Return True
     End Function
     Public Function DeletePoints(ByVal Point As tblPoints) As Boolean
-
+        'Cette fonction supprime les enfants du point passé en paramètre et finalment le point lui même (dans la BD)
 
         If Point.ListeEnfants.HasValue Then
             Dim LesEnfants As List(Of tblPoints)
-
             LesEnfants = BD.RetournerEnfants(Point.IDPoint).ToList()
 
             For Each ElementEnfants In LesEnfants
-
-
                 DeletePoints(ElementEnfants)
-
             Next
+
             SupprimerLiaison(Point)
             BD.tblPoints.DeleteObject(Point)
         Else
@@ -457,11 +443,9 @@ Public Class GestionOdj
             BD.SaveChanges()
         Catch ex As Exception
         End Try
-
         Return True
     End Function
     Public Function AjouterOrdreDuJour(ByVal Arbre As TreeView, ByVal OrdreDuJour As tblOrdreDuJour)
-
 
         Dim ListePoint As List(Of tblListePoint) = (From MaListe In BD.tblListePoint
                          Where MaListe.NoOrdreDuJour = OrdreDuJour.NoOrdreDuJour
@@ -477,7 +461,7 @@ Public Class GestionOdj
     End Function
 
     Public Function AjouterPoints(ByVal MonPoint As TreeViewItem, ByVal MaListe As tblListePoint, ByVal Numero As Int32, ByVal NomPoint As String)
-
+        'Cette fonction permet d'ajouter un point du TreeView et ces enfants dans la BD
         Dim PointTemporaire As New tblPoints With {.TitrePoint = MonPoint.Header, .NumeroPoint = Numero, .ChiffrePoint = NomPoint}
         PointTemporaire.tblListePoint1.Add(MaListe)
         BD.AddTotblPoints(PointTemporaire)
