@@ -25,7 +25,7 @@ Public Class EnvoieMail
 
     End Sub
     'Initialise certain composant a l'aide de données venant de l'interface précédente
-    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer, titre As String)
+    Public Sub New(listeinviter As List(Of tblMembre), idOrdre As Integer, titre As String, _DateReunion As Date)
 
         _idOrdre = idOrdre
         InitializeComponent()
@@ -33,7 +33,7 @@ Public Class EnvoieMail
         _entitiesReunion = New PresenceEntities
         _rapport = New GenereRapport
         _titre = titre
-        message(titre)
+        message(titre, _DateReunion)
     End Sub
     'Creer l'objet mail et l'envoie
     Public Sub CreerMail()
@@ -56,8 +56,9 @@ Public Class EnvoieMail
 
     End Sub
 
-    Private Sub message(ByVal titreOdj As String)
+    Private Sub message(titreOdj As String, _DateReunion As Date)
         txtObj.Text = titreOdj
-        rctMessage.AppendText("Bonjour à tous, si vous avez reçu ce mail, celà signifie que vous êtes convivés à une réunion concernant le " + titreOdj + ".")
+        rctMessage.AppendText("Bonjour à tous, si vous avez reçu ce mail, celà signifie que vous êtes convivé à une réunion concernant " + titreOdj +
+                              ". La réunion aura lieu en date du " + _DateReunion + ". ")
     End Sub
 End Class

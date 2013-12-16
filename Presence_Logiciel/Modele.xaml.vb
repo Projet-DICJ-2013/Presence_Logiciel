@@ -1,5 +1,6 @@
 ﻿Imports System.Data.Objects
 Imports System.Windows.Media.Animation
+Imports System.Text.RegularExpressions
 
 Public Class frmModele
 
@@ -96,6 +97,15 @@ Public Class frmModele
             MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
             Return
         End If
+
+        Dim regex1 As New Regex("\d,\d")
+
+        If (regex1.IsMatch(TxtPrix.Text) = False) Then
+            MsgBox("Le prix d'un Modele doit être dans le format suivant 000,000")
+            Return
+        End If
+
+
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
                                                 .Marque = TxtMarque.Text, _
@@ -226,4 +236,18 @@ Public Class GestionModele
         Return "Les modifications ont réussies"
 
     End Function
+
+
+
+
+
+
+
+
+
+
+
+
 End Class
+
+
