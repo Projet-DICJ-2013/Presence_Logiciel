@@ -105,17 +105,21 @@ Public Class frmGestOrdJour
                 i = MonParentNoeud.Items.IndexOf(treeViewItem)
                 MonParentNoeud.Items.Remove(contact)
                 If i > -1 And i = treeView.Items.Count Then
+                    MonParentNoeud.Items.Remove(contact)
                     MonParentNoeud.Items.Add(contact)
                 ElseIf i > -1 Then
+                    MonParentNoeud.Items.Remove(contact)
                     MonParentNoeud.Items.Insert(i, contact)
                 End If
             Else
                 MonParentArbre = contact.Parent
                 i = MonParentArbre.Items.IndexOf(treeViewItem)
-                MonParentArbre.Items.Remove(contact)
+
                 If i = treeView.Items.Count Then
+                    MonParentArbre.Items.Remove(contact)
                     MonParentArbre.Items.Add(contact)
                 ElseIf i > -1 Then
+                    MonParentArbre.Items.Remove(contact)
                     MonParentArbre.Items.Insert(i, contact)
                 End If
             End If
@@ -237,11 +241,9 @@ Public Class frmGestOrdJour
         ReloadList()
         If lstOrdreJour.SelectedIndex > -1 Then
             btnPlanifReun.IsEnabled = True
-
             btnEnregistrer.IsEnabled = False
         Else
             btnPlanifReun.IsEnabled = False
-
             btnEnregistrer.IsEnabled = True
         End If
     End Sub

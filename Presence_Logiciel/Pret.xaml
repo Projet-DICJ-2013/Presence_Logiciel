@@ -94,11 +94,21 @@
     <Label Style="{StaticResource ResourceKey=ParcInfo_LabelFormulaire}" Content="Exemplaire" Grid.Row="2" Margin="50,8,0,0"/>
     <DataGrid x:Name="dtgItemPret" AutoGenerateColumns="False"  HorizontalAlignment="Left" Margin="15,52.4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="108" Width="465" >
 
+            <DataGrid.ToolTip>
+                <ToolTip x:Name="Liste">
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Clique simple</TextBlock>
+                        <TextBlock>Séléctionne une cellule pour la modifier</TextBlock>
+                        <TextBlock FontWeight="Bold">Double-Clique sur le code barre</TextBlock>
+                        <TextBlock>Ouvre la liste des exemplaires disponibles</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </DataGrid.ToolTip>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=CodeBarre}" Header="Code Barre" Width="*"/>
-            <DataGridTextColumn Binding="{Binding Path=DateDebutPretEx}"  Header="Date Debut" Width="*"/>
-            <DataGridTextColumn Binding="{Binding Path=DateFinPretEx}"  Header="Date fin" Width="*"/>
-            <DataGridTextColumn Binding="{Binding Path=CommentairePretEx}"  Header="Note" Width="2*"/>
+                <DataGridTextColumn Binding="{Binding Path=CodeBarre,ValidatesOnExceptions=False}" Header="Code Barre" Width="*" />
+                <DataGridTextColumn Binding="{Binding Path=DateDebutPretEx,ValidatesOnExceptions=False}"  Header="Date Debut" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=DateFinPretEx,ValidatesOnExceptions=False}"  Header="Date fin" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=CommentairePretEx,ValidatesOnExceptions=False}"  Header="Note" Width="2*"/>
 
         </DataGrid.Columns>
     </DataGrid>
