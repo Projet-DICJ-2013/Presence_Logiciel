@@ -92,20 +92,18 @@ Public Class frmModele
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
         Dim tblModele As tblModele
+        Dim regex1 As New Regex("^[1-9]\d*(\,\d+)?$")
 
         If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
             MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
             Return
         End If
 
-        Dim regex1 As New Regex("\d,\d")
-
         If (regex1.IsMatch(TxtPrix.Text) = False) Then
-            MsgBox("Le prix d'un Modele doit être dans le format suivant 000,000")
+            _MsgErreur = ("Le prix d'un Modele doit être dans le format suivant 000,000")
+            AffMsgErr()
             Return
         End If
-
-
 
         tblModele = New tblModele With {.NoModele = TxtModele.Text, _
                                                 .Marque = TxtMarque.Text, _
@@ -113,11 +111,25 @@ Public Class frmModele
                                                 .TypeMachine = TxtMarque.Text, _
                                                 .PrixModele = TxtPrix.Text}
 
-        If (tblModele IsNot Nothing) Then
+        If tblModele IsNot Nothing Then
             _MsgErreur = Modele.AddModele(tblModele)
             AffMsgErr()
         End If
     End Sub
+
+    Private Sub btnSup_Click(sender As Object, e As RoutedEventArgs) Handles btnSup.Click
+
+        If Modele.Collection.CurrentItem IsNot Nothing Then
+            _MsgErreur = Modele.SupModele(CType(Modele.Collection.CurrentItem, tblModele))
+            AffMsgErr()
+            SynchroControl(False)
+        End If
+
+    End Sub
+
+    Private Function IsNumber(ByVal Nombre As Object) As Boolean
+
+    End Function
 
     Private Sub OnQuit(sender As Object, e As RoutedEventArgs) Handles MyBase.Closed
         Me.Close()
@@ -162,6 +174,7 @@ Public Class frmModele
         _Statut.Content = _MsgErreur
         anim.Begin(_Statut)
     End Sub
+
 End Class
 
 Public Class GestionModele
@@ -237,16 +250,19 @@ Public Class GestionModele
 
     End Function
 
+    Public Function SupModele(ByVal MonModele As tblModele) As String
 
+        BD.DeleteObject(MonModele)
 
+        Try
+            BD.SaveChanges()
+        Catch ex As Exception
+            Return "La supression du modèle à échoué, veuillez verifier qu'aucun exemplaires ou composantes y sont rattaché"
+        End Try
 
+        Return "La supression du modèle a réussie!"
 
-
-
-
-
-
-
+    End Function
 
 End Class
 
