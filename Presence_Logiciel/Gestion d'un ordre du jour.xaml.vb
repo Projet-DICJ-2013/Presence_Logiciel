@@ -411,7 +411,7 @@ Public Class GestionOdj
         Return MesPoints.ToList()
     End Function
 
-    
+
     Public Function DeletePointsOrdreDuJour(ByVal OrdreDuJour As tblOrdreDuJour)
         'Cette fonction cherche tous les points rattachées à un ordre du jour dans la BD et les supprime
         Dim ListePoint As List(Of tblPoints)

@@ -1,7 +1,7 @@
 ﻿<Window  x:Class="MembreProf"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ajoutCour" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="images/Icons/User.png"   >
+    Title="ajoutProfesseur" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="images/Icons/User.png"   >
     <Window.Resources>
         <ResourceDictionary>
             <!--C'est ici qu'il faut construire les animations-->
