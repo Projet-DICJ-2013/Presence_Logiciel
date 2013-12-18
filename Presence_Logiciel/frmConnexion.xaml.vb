@@ -234,7 +234,12 @@ Public Class frmConnexion
 
     ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec4_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec4.MouseEnter
-        tim.Stop()
+        Try
+            tim.Stop()
+        Catch ex As Exception
+
+        End Try
+
         vu.MoveCurrentToLast()
         Dim anim As Storyboard = FindResource("AnimRecBlanc")
         Dim anim2 As Storyboard = FindResource("AnimRecBleu")
