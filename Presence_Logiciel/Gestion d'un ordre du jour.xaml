@@ -25,7 +25,7 @@
     </Window.Resources>
     <Grid Margin="0,0,-0.4,-0.4" Loaded="Grid_Loaded">
         <Label x:Name="lblTitreOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Sujet de l'ordre du jour:" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
-        <TextBox x:Name="txtTitreOdj"  Text="" Style="{StaticResource ResourceKey=textboxProg}" Margin="177,45,0,0" RenderTransformOrigin="0.875,0.645" Width="492"/>
+        <TextBox x:Name="txtTitreOdj" MaxLength="85" Text="" Style="{StaticResource ResourceKey=textboxProg}" Margin="177,45,0,0" RenderTransformOrigin="0.875,0.645" Width="492"/>
 
         <Label x:Name="lblOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Ordre du jour:" Margin="10,167,0,0" RenderTransformOrigin="0.251,0.147"/>
 
@@ -37,7 +37,7 @@
 
             <Label x:Name="lblTitrePoint" Style="{StaticResource ResourceKey=labelProg}" Content="Titre:" RenderTransformOrigin="0.251,0.147" Margin="10,28,0,0"/>
         </GroupBox>
-        <TextBox x:Name="txtTitrePoint" Style="{StaticResource ResourceKey=textboxProg}" Margin="504,261,0,0" RenderTransformOrigin="0.875,0.645" Width="374" Height="21"/>
+        <TextBox x:Name="txtTitrePoint" MaxLength="65" Style="{StaticResource ResourceKey=textboxProg}" Margin="504,261,0,0" RenderTransformOrigin="0.875,0.645" Width="374" Height="21"/>
         <Button x:Name="btnAttacher" Content="Attacher" HorizontalAlignment="Left" Margin="699,297,0,0" VerticalAlignment="Top" Width="103" Height="35" FontSize="16" FontFamily="Calibri"/>
         <Button x:Name="btnNouveauPoint" Content="Nouveau" HorizontalAlignment="Left" Margin="566,297,0,0" VerticalAlignment="Top" Width="103" Height="35" FontFamily="Calibri" FontSize="16"/>
 

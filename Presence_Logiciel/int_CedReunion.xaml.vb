@@ -95,6 +95,9 @@ Public Class int_CedReunion
     Private Sub dtpDateRenc_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles dtpDateRenc.SelectedDateChanged
         _dateTom = Date.Now
         _dateTom = _dateTom.AddDays(-1)
+        If (dtpDateRenc.Text = "") Then
+            dtpDateRenc.SelectedDate = _dateTom
+        End If
 
         If (dtpDateRenc.SelectedDate < _dateTom) Then
             MessageBox.Show("Veuillez mettre une date ultérieur à aujourd'hui", "Attention !", MessageBoxButton.OK, MessageBoxImage.Information)
@@ -152,4 +155,5 @@ Public Class int_CedReunion
         lstInvite.ItemsSource = _lesInvitee
 
     End Sub
+
 End Class
