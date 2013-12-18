@@ -37,70 +37,39 @@ Public Module ModRapport
         End Sub
 
         Public Sub CreerRapportOrd(ByVal Id As Integer, Optional ByVal _IsPDF As Boolean = False)
-
-            Dim mon_msg As String
-
             ModeleRapport = New RaportOrd(Id)
-
-            MonStyle = New ModeleStyle("OrdJour001")
-
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleRapport.GetContenuDoc, Temp, Path, False)
-
-            MonRapport.DefineStyle(MonStyle.GetStyle(), Path + MonStyle.GetModele())
-
-            MonRapport.CreerWorld()
-            mon_msg = MonRapport.IsGenere()
-
-            If _IsPDF Then
-                CreerPDF(Temp, Path)
-            Else
-                TempFilePDF = Path + Temp
-            End If
-
+            CreerRapport(ModeleRapport.GetContenuDoc, _IsPDF, "OrdJour001")
         End Sub
 
         Public Sub CreerRapportMat(ByVal Id As String, Optional ByVal _IsPDF As Boolean = False)
-
-            Dim mon_msg As String
-
             ModeleMat = New RaportModele(Id)
-
-            MonStyle = New ModeleStyle("LstMat001")
-
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleMat.GetContenuDoc, Temp, Path, False)
-
-            MonRapport.DefineStyle(MonStyle.GetStyle(), MonStyle.GetModele())
-
-            MonRapport.CreerWorld()
-            mon_msg = MonRapport.IsGenere()
-
-            If _IsPDF Then
-                CreerPDF(Temp, Path)
-            Else
-                TempFilePDF = Path + Temp
-            End If
+            CreerRapport(ModeleMat.GetContenuDoc, _IsPDF, "LstMat001")
         End Sub
 
         Public Sub CreerRapportCours(ByVal Id As String, Optional ByVal _IsPDF As Boolean = False)
+            ModeleCours = New RaportCours(Id)
+            CreerRapport(ModeleCours.GetContenuDoc, _IsPDF, "LCours001")
+        End Sub
+
+        Protected Sub CreerRapport(ByVal Contenu As XElement, ByVal IsPDF As Boolean, ByVal IdStyle As String)
 
             Dim mon_msg As String
 
-            ModeleCours = New RaportCours(Id)
+            MonStyle = New ModeleStyle(IdStyle)
 
-            MonStyle = New ModeleStyle("LCours001")
-
-            MonRapport = New P2013_CreateDoc.CreateReport(ModeleCours.GetContenuDoc, Temp, Path, False)
+            MonRapport = New P2013_CreateDoc.CreateReport(Contenu, Temp, Path, False)
 
             MonRapport.DefineStyle(MonStyle.GetStyle(), MonStyle.GetModele())
 
             MonRapport.CreerWorld()
             mon_msg = MonRapport.IsGenere()
 
-            If _IsPDF Then
+            If IsPDF Then
                 CreerPDF(Temp, Path)
             Else
                 TempFilePDF = Path + Temp
             End If
+
         End Sub
 
         Protected Sub CreerPDF(ByVal Temp As String, ByVal Path As String)
@@ -167,7 +136,7 @@ Public Module ModRapport
 
         End Sub
 
-        Public Overloads Function GetContenuDoc()
+        Public Overloads Function GetContenuDoc() As XElement
             Return _ContenuDoc
         End Function
 
@@ -233,7 +202,7 @@ Public Module ModRapport
 
         End Sub
 
-        Public Overloads Function GetContenuDoc()
+        Public Overloads Function GetContenuDoc() As XElement
             Return _ContenuDoc
         End Function
 
@@ -315,7 +284,7 @@ Public Module ModRapport
 
         End Sub
 
-        Public Overloads Function GetContenuDoc()
+        Public Overloads Function GetContenuDoc() As XElement
             Return _ContenuDoc
         End Function
 

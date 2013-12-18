@@ -52,6 +52,7 @@
                         <MenuItem x:Name="menuCreerPret" Click="CreerPret" Header="_Créer un pret" Style="{StaticResource ResourceKey=sousitemMain}"/>
                         <MenuItem x:Name="menuListeExemplaire" Click="AffLstExemp" Header="_Liste des éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
                         <MenuItem x:Name="menuCreerExemplaire" Click="CreerExemp" Header="_Créer un éxemplaire" Style="{StaticResource ResourceKey=sousitemMain}"/>
+                        <MenuItem x:Name="menuListeDemande" Click="AffLstDemande" Header="_Liste des demandes" Style="{StaticResource ResourceKey=sousitemMain}"/>
                     </MenuItem>
                     <MenuItem Header="_À Propos" Style="{StaticResource ResourceKey=itemMain}" Click="OuvrirAPropos"/>
 

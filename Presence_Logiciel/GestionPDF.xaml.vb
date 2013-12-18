@@ -120,9 +120,10 @@ Public Class GestionPDF
         End If
     End Sub
 
-    Private Sub OnQuit(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Finalize()
-        Me.Close()
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
+        txtTypeRap.Items.Add("Facture")
+        txtTypeRap.Items.Add("ListeEtudiant")
+        txtTypeRap.Items.Add("OrdreDuJour")
     End Sub
 End Class
 
