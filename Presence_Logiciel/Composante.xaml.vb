@@ -4,12 +4,15 @@ Imports System.Windows.Media.Animation
 
 Public Class frmComposante
 
-
     Private _MesCompos As GestionComposante
     Private _NoModele As String
     Private _MsgErr As String
     Private _Statut As Label
 
+
+#Region "Initialisation"
+
+    'Constructeur recevant en paramètre la barre de statut et le modèle auquelle on ajoute les composantes
     Public Sub New(ByVal NoModele As String, Statut As Label)
         InitializeComponent()
         _NoModele = NoModele
@@ -20,12 +23,18 @@ Public Class frmComposante
         BindControl()
     End Sub
 
+    'Connexion des controles aux valeurs de la BD
     Private Sub BindControl()
         _MesCompos = New GestionComposante(_NoModele)
 
         lstComposante.DataContext = _MesCompos.AllComposante
         lstCompoModele.DataContext = CType(_MesCompos.ModeleComposante.CurrentItem, tblModele).tblCompoModele
     End Sub
+
+#End Region
+
+#Region "Modifier les composantes"
+
 
     Private Sub AddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
@@ -41,12 +50,14 @@ Public Class frmComposante
 
     End Sub
 
+
     Private Sub SupCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnSupCompo.Click
 
         _MsgErr = _MesCompos.DeleteComposante(CType(lstComposante.SelectedValue, tblCompoModele))
         AffMsgErr()
         BindControl()
     End Sub
+
 
     Private Sub btnSupModele_Click(sender As Object, e As RoutedEventArgs) Handles btnSupModele.Click
 
@@ -56,24 +67,27 @@ Public Class frmComposante
 
     End Sub
 
-    Private Sub AjoutModele_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutModele.Click
+
+    Private Sub btnAjoutModele_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutModele.Click
 
         _MsgErr = _MesCompos.AddCompoToModele(CType(lstComposante.SelectedItem, tblCompoModele), _NoModele)
         AffMsgErr()
         BindControl()
     End Sub
 
+#End Region
+
+#Region "Erreur"
     Protected Sub AffMsgErr()
 
         Dim anim As Storyboard = FindResource("AnimLabel")
 
         _Statut.Content = _MsgErr
         anim.Begin(_Statut)
-    End Sub
-
-    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
 
     End Sub
+#End Region
+
 End Class
 
 
@@ -83,6 +97,7 @@ Public Class GestionComposante
     Private _CompoMod
     Private BD As New PresenceEntities
 
+    'Permet d'obtenir ou de définir la liste de toutes les composantes dans la BD
     Public Property AllComposante As ListCollectionView
         Get
             Return _Compos
@@ -92,6 +107,7 @@ Public Class GestionComposante
         End Set
     End Property
 
+    'Permet d'obtenir ou de définir la liste de toutes les composantes relié au modèle sélectionné dans la BD
     Public Property ModeleComposante As ListCollectionView
         Get
             Return _CompoMod
@@ -101,6 +117,7 @@ Public Class GestionComposante
         End Set
     End Property
 
+    'Recherche les composantes dans la BD et définit les deux propriétés 
     Public Sub New(ByVal _NoModele As String)
         Try
             Dim MesCompos = (From el In BD.GetLstCompo(_NoModele))
@@ -117,6 +134,7 @@ Public Class GestionComposante
 
     End Sub
 
+    'Ajouter un nouveau composante dans la base de données
     Public Function AddComposante(ByVal TypeCom As String) As String
 
         Dim Composante As New tblCompoModele With {.TypeCompo = TypeCom}
@@ -131,6 +149,7 @@ Public Class GestionComposante
         Return "L'ajout de la composante à réussi"
     End Function
 
+    'Supprimer une composante sélectionné dans la base de données
     Public Function DeleteComposante(ByVal TypeCom As tblCompoModele) As String
 
         Try
@@ -144,6 +163,7 @@ Public Class GestionComposante
 
     End Function
 
+    'Associer du modèle sélectionné la composante sélectionnée
     Public Function AddCompoToModele(ByVal Content As tblCompoModele, ByVal _NoModele As String) As String
 
         Dim Modele As tblModele = GetModeleByID(_NoModele)
@@ -158,7 +178,7 @@ Public Class GestionComposante
 
     End Function
 
-
+    'Dissocier du modèle sélectionné la composante sélectionnée
     Public Function DeleteCompoToModele(ByVal Content As tblCompoModele, ByVal _NoModele As String) As String
 
         Dim Modele As tblModele = GetModeleByID(_NoModele)
@@ -173,6 +193,7 @@ Public Class GestionComposante
 
     End Function
 
+    'Retourne l'entité du modèle en fonction de l'id envoyé en paramètre
     Protected Function GetModeleByID(ByVal _NoModele As String) As tblModele
         Dim Modele = (From Mode In BD.tblModele
                      Where Mode.NoModele = _NoModele
