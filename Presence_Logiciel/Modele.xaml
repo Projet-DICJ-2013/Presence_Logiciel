@@ -105,7 +105,7 @@
                 <TextBox MaxLength="10" Name="TxtModele" Text="{Binding Path=NoModele}" Grid.Row="2" Margin="26.6,0.2,0,6.6" VerticalAlignment="Stretch"  Grid.Column="1" Width="149" Height="Auto"/>
                 <TextBox MaxLength="10" Name="TxtType" Text="{Binding Path=TypeMachine}" Grid.Row="3" Margin="26.6,2.4,0,0" Width="150" Grid.Column="1" />
                 <TextBox MaxLength="2" Name="TxtGaranti" Text="{Binding Path=NbAnneeGarantie}" Grid.Column="1" Grid.Row="4" Margin="25.6,4.4,0,0"/>
-                <TextBox MaxLength="20" Name="TxtPrix" Text="{Binding Path=PrixModele}" Grid.Column="1" Grid.Row="5" Margin="25.6,4.6,0,0"/>
+                <TextBox  MaxLength="20" Name="TxtPrix" Text="{Binding Path=PrixModele}" Grid.Column="1" Grid.Row="5" Margin="25.6,4.6,0,0"/>
             </Grid>
             <Image HorizontalAlignment="left" Width="154"  Margin="413,46,0,19" Grid.ColumnSpan="2"/>
         </Grid>

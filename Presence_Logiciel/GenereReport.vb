@@ -194,7 +194,6 @@ Public Module ModRapport
                                 exemp.tblExemplaire.tblModele.PrixModele, _
                                 exemp.CommentairePretEx, _
                                  New XAttribute("id", "Mat002")))
-                'Materiel.Add(New XElement("Image", New XAttribute("id", "Mat007"), "\images\dell.jpg"))
             Next
 
 
@@ -231,6 +230,13 @@ Public Module ModRapport
         Inherits P2013_CreateDoc.ModeleInfos
 
         Private _Bd_Presence As New PresenceEntities
+        Private _ModListe As XElement = <Fiche>
+                                            <DaEtudiant></DaEtudiant>
+                                            <Prenom></Prenom>
+                                            <Nom></Nom>
+                                            <Adresse></Adresse>
+                                            <Courriel></Courriel>
+                                        </Fiche>
 
         Public Sub New(ByVal IdOrdre As String)
             MyBase.New(IdOrdre)
@@ -239,48 +245,51 @@ Public Module ModRapport
 
         Protected Overloads Sub GetData()
 
-            '_ContenuDoc = New XElement("Root",
-            '    (From Lst In _Bd_Presence.LstEtu(_IdElem)
-            '        Select New With {Lst.NomCours,
-            '                         Lst.PonderationCours,
-            '                         Lst.DescriptionCours,
-            '                         Lst.AnneeCours,
-            '                         Lst.DaEtudiant,
-            '                         Lst.PrenomMembre,
-            '                         Lst.NomMembre,
-            '                         Lst.AdresseMembre,
-            '                         Lst.CourrielMembre}).ToList.Select(
-            '              Function(x) New XElement("Cours", New XElement("Conteneur",
-            '                       New XElement("NomCours",
-            '                           New XAttribute("id", "Co001"),
-            '                           x.NomCours),
-            '                        New XElement("Ponderation",
-            '                               New XAttribute("id", "Co002"),
-            '                               x.PonderationCours),
-            '                       New XElement("DescCours",
-            '                           New XAttribute("id", "Co002"),
-            '                           x.DescriptionCours),
-            '                       New XElement("Annee",
-            '                           New XAttribute("id", "Co002"),
-            '                           x.AnneeCours),
-            '                    New XElement("Fiche", New XAttribute("id", "Co004"),
-            '                        New XElement("DaEtudiant",
-            '                               New XAttribute("id", "Co003"),
-            '                               x.DaEtudiant),
-            '                       New XElement("Prenom",
-            '                           New XAttribute("id", "Co003"),
-            '                           x.PrenomMembre),
-            '                       New XElement("NomMembre",
-            '                           New XAttribute("id", "Co003"),
-            '                           x.NomMembre),
-            '                        New XElement("Adresse",
-            '                               New XAttribute("id", "Co003"),
-            '                               x.AdresseMembre),
-            '                       New XElement("Courriel",
-            '                           New XAttribute("id", "Co003"),
-            '                           x.CourrielMembre)
-            '                       )))))
+            Dim LstEtu As New XElement(_ModListe)
+            Dim Rap As New XElement("Root", New XElement("Head", New XElement _
+            ("header", New XAttribute("id", "Co005"), "Liste des étudiants - " & Date.Today)))
 
+            Dim Cours = (From MonCours In _Bd_Presence.tblCours
+                 Where MonCours.CodeCours = _IdElem
+                    Select MonCours).First
+
+
+            LstEtu = New XElement("LstEtu", New XAttribute("id", "Co004"))
+
+            Rap.Add(New XElement("Cours",
+                        New XElement("Conteneur",
+                            New XElement("NomCours",
+                                New XAttribute("id", "Co001"),
+                                "Nom du cours: " & Cours.NomCours),
+                            New XElement("Ponderation",
+                                    New XAttribute("id", "Co002"),
+                                    "Pondération: " & Cours.PonderationCours),
+                            New XElement("DescCours",
+                                New XAttribute("id", "Co002"),
+                                "Description: " & Cours.DescriptionCours),
+                            New XElement("Annee",
+                                New XAttribute("id", "Co002"),
+                                "Année: " & Cours.AnneeCours),
+                            New XElement("Prof",
+                                New XAttribute("id", "Co002"),
+                                "Nom du professeur: " & _
+                                Cours.tblCoursSessionGroupe.First.tblGroupe.tblProfesseur.First.tblMembre.PrenomMembre & " " & _
+                                Cours.tblCoursSessionGroupe.First.tblGroupe.tblProfesseur.First.tblMembre.NomMembre), LstEtu
+                        )))
+
+            LstEtu.Add(CreateLstEtu("Numéro de DA", "Prénom de l'étudiant", "Nom de l'étudiant", "Adresse", "Courriel", _
+                                      New XAttribute("id", "Co003")))
+
+            For Each Etu In Cours.tblCoursSessionGroupe.First.tblGroupe.tblEtudiant
+                LstEtu.Add(CreateLstEtu(Etu.DaEtudiant,
+                            Etu.tblMembre.PrenomMembre,
+                            Etu.tblMembre.NomMembre,
+                            Etu.tblMembre.AdresseMembre,
+                            Etu.tblMembre.CourrielMembre,
+                            New XAttribute("id", "Co003")))
+            Next
+
+            _ContenuDoc = Rap
 
         End Sub
 
@@ -288,7 +297,19 @@ Public Module ModRapport
             Return _ContenuDoc
         End Function
 
+        Protected Function CreateLstEtu(DaEtudiant As String, Prenom As String, Nom As String, Adresse As String, _
+                                         ByVal Courriel As String, ByVal Attr As XAttribute) As XElement
+            Dim lstCours As New XElement(_ModListe)
 
+            lstCours.Element("DaEtudiant").Add(New XAttribute(Attr), New XText(DaEtudiant))
+            lstCours.Element("Prenom").Add(New XAttribute(Attr), New XText(Prenom))
+            lstCours.Element("Nom").Add(New XAttribute(Attr), New XText(Nom))
+            lstCours.Element("Adresse").Add(New XAttribute(Attr), New XText(Adresse))
+            lstCours.Element("Courriel").Add(New XAttribute(Attr), New XText(Courriel))
+
+
+            Return lstCours
+        End Function
 
     End Class
 

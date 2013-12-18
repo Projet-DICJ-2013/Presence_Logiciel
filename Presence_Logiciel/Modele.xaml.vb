@@ -1,4 +1,7 @@
-﻿Imports System.Data.Objects
+﻿'Auteur: Patrick Pearson
+'Objectif: Cette interface permet de faire la gestion des modèles dans la base de données et assure la naviguabilité dans les modèles déjà existants
+
+Imports System.Data.Objects
 Imports System.Windows.Media.Animation
 Imports System.Text.RegularExpressions
 
@@ -7,6 +10,11 @@ Public Class frmModele
     Private Modele As GestionModele
     Private _Statut As Label
     Private _MsgErreur
+
+    'Cette région  contient les procédures permettant d'afficher la fenêtre à son état innitial
+    'Le constructeur reçoit en paramètre la barre de statut pour y afficher les messages d'erreur
+
+#Region "Initialisation"
 
     Public Sub New(Statut As Label)
 
@@ -23,16 +31,34 @@ Public Class frmModele
 
     End Sub
 
+    Private Sub TxtRech_PreviewMouseDown(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
+        If TxtRech.Text = "Saisir un critère de recherche" Then
+            TxtRech.Text = ""
+        End If
+    End Sub
+
+#End Region
+
+    'Cette région contient les procédures de naviguation entres les modèles
+    'Les controles sont liés à l'ensemble des données où à un critère de recherche saisie par l'utilisateur
+
+#Region "Collection et naviguabilité"
+
     Private Sub SynchroControl(ByVal _IsCrit As Boolean, Optional ByVal CurrentPos As Integer = 0)
 
+        'L'objet gestion modèle prend un paramètre facultatif
+        'Si rien n'est précisé la collection contient tous les modèles
+        'Sinon la collection contient les modèles corespondants à un critère parmi le # du modèle, type de machine ou la marque
         If _IsCrit Then
             Modele = New GestionModele(TxtRech.Text)
         Else
             Modele = New GestionModele
         End If
 
+        'Si une position est précisé l'item courant se déplace à la valeur de celui-ci, sinon il est égal à 0
         Modele.Collection.MoveCurrentToPosition(CurrentPos)
 
+        'Lie les controles à la source de données
         Try
             TxtMarque.DataContext = Modele.Collection
             TxtModele.DataContext = Modele.Collection
@@ -68,6 +94,7 @@ Public Class frmModele
         UpdateComposante()
     End Sub
 
+    'Permet de mettre à jour la liste des composantes rattachées à un modèle
     Private Sub UpdateComposante()
 
         If Modele.Collection.CurrentItem IsNot Nothing Then
@@ -78,6 +105,30 @@ Public Class frmModele
 
     End Sub
 
+    'Récupère le critère de recherche et appel la procédure mettant à jour la collection de  modèle
+    Private Sub btnRech_Click(sender As Object, e As RoutedEventArgs) Handles btnRech.Click
+
+        If TxtRech.Text IsNot Nothing Then
+            SynchroControl(True)
+        Else
+            _MsgErreur = "Vous devez remplir le champ de recherche"
+            AffMsgErr()
+        End If
+    End Sub
+
+    'Réinitialise la collection de modèle
+    Private Sub btnReset_Click(sender As Object, e As RoutedEventArgs) Handles btnReset.Click
+        SynchroControl(False)
+    End Sub
+
+#End Region
+
+    'Cette région contient les procédures permettant de faire le transfert de données vers les fonctions d'ajouter, mettre à jour 
+    'et suppression de modèle dans la base de données
+
+#Region "Gestion des données"
+
+    'Permet d'ouvrir la fenêtre d'ajout et de suppression d'une composante à un modèle
     Private Sub btnAddCompo_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCompo.Click
 
         If Modele.Collection.CurrentItem IsNot Nothing Then
@@ -88,33 +139,26 @@ Public Class frmModele
             _MsgErreur = "Pour ajouter une composante, vous devez sélectionner un modèle"
             AffMsgErr()
         End If
+
     End Sub
 
     Private Sub btnAddNewItem_Click(sender As Object, e As RoutedEventArgs) Handles btnAddNewItem.Click
-        Dim tblModele As tblModele
-        Dim regex1 As New Regex("^[1-9]\d*(\,\d+)?$")
 
-        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
-            MsgBox("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
-            Return
+        Dim tblModele As tblModele = Nothing
+
+        If VerifSaisie() Then
+            tblModele = New tblModele With {.NoModele = TxtModele.Text, _
+                                                    .Marque = TxtMarque.Text, _
+                                                    .NbAnneeGarantie = TxtGaranti.Text, _
+                                                    .TypeMachine = TxtMarque.Text, _
+                                                    .PrixModele = TxtPrix.Text.Replace(".", ",")}
         End If
-
-        If (regex1.IsMatch(TxtPrix.Text) = False) Then
-            _MsgErreur = ("Le prix d'un Modele doit être dans le format suivant 000,000")
-            AffMsgErr()
-            Return
-        End If
-
-        tblModele = New tblModele With {.NoModele = TxtModele.Text, _
-                                                .Marque = TxtMarque.Text, _
-                                                .NbAnneeGarantie = TxtGaranti.Text, _
-                                                .TypeMachine = TxtMarque.Text, _
-                                                .PrixModele = TxtPrix.Text}
 
         If tblModele IsNot Nothing Then
             _MsgErreur = Modele.AddModele(tblModele)
             AffMsgErr()
         End If
+
     End Sub
 
     Private Sub btnSup_Click(sender As Object, e As RoutedEventArgs) Handles btnSup.Click
@@ -127,14 +171,11 @@ Public Class frmModele
 
     End Sub
 
-    Private Function IsNumber(ByVal Nombre As Object) As Boolean
+#End Region
 
-    End Function
+    'Cette région contient les procédures permettant de verifier le données saisies et d'afficher les messages d'erreur dans la barre de statut
 
-    Private Sub OnQuit(sender As Object, e As RoutedEventArgs) Handles MyBase.Closed
-        Me.Close()
-        Me.Finalize()
-    End Sub
+#Region "Validation et gestion des erreurs"
 
     Private Sub txtModele_LostFocus(sender As Object, e As RoutedEventArgs) Handles TxtModele.LostFocus
         If TxtModele.Text = "" Then
@@ -142,28 +183,6 @@ Public Class frmModele
             TxtModele.Text = "0"
         Else
             TxtModele.BorderBrush = Brushes.Green
-        End If
-    End Sub
-
-    Private Sub TxtRech_PreviewMouseDown(sender As Object, e As MouseButtonEventArgs) Handles TxtRech.PreviewMouseDown
-        If TxtRech.Text = "Saisir un critère de recherche" Then
-            TxtRech.Text = ""
-        End If
-    End Sub
-
-
-    Private Sub btnReset_Click(sender As Object, e As RoutedEventArgs) Handles btnReset.Click
-        SynchroControl(False)
-    End Sub
-
-
-    Private Sub btnRech_Click(sender As Object, e As RoutedEventArgs) Handles btnRech.Click
-
-        If TxtRech.Text IsNot Nothing Then
-            SynchroControl(True)
-        Else
-            _MsgErreur = "Vous devez remplir le champ de recherche"
-            AffMsgErr()
         End If
     End Sub
 
@@ -175,6 +194,26 @@ Public Class frmModele
         anim.Begin(_Statut)
     End Sub
 
+    Protected Function VerifSaisie() As Boolean
+        Dim regex1 As New Regex("^[1-9]\d*(\.\d+)?$")
+
+        If TxtGaranti.Text = Nothing Or TxtMarque.Text = Nothing Or TxtModele.Text = Nothing Or TxtType.Text = Nothing Then
+            _MsgErreur = ("Veuillez remplir tous les champs pour enregistrer un nouveau modèle")
+            AffMsgErr()
+            Return False
+        End If
+
+        If (regex1.IsMatch(TxtPrix.Text) = False) Then
+            _MsgErreur = ("Le prix d'un Modele doit être dans le format suivant 000,000")
+            AffMsgErr()
+            Return False
+        End If
+
+        Return True
+    End Function
+
+#End Region
+
 End Class
 
 Public Class GestionModele
@@ -182,6 +221,7 @@ Public Class GestionModele
     Private i
     Private BD As New PresenceEntities
 
+    'Permet de définir ou d'accéder à la collection de modèle
     Public Property Collection As ListCollectionView
         Get
             Return i
@@ -191,6 +231,7 @@ Public Class GestionModele
         End Set
     End Property
 
+    'Génère la liste de modèle en fonction d'un critère de recherche facultatif
     Public Sub New(Optional ByVal Critere As String = Nothing)
 
         Dim MonMode = From Ex In BD.tblModele
