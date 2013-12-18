@@ -54,7 +54,7 @@
                 <Label x:Name="lblDate" Content="Date : " HorizontalAlignment="Left" Margin="326,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.415,0.605"/>
                 <DatePicker x:Name="dtpDateRenc" HorizontalAlignment="Left" Margin="400,32,0,0" VerticalAlignment="Top" Width="205"/>
                 <Label x:Name="lblEndroit" Content="Endroit :" HorizontalAlignment="Left" Margin="17,35,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtEndroit" HorizontalAlignment="Left" Height="23" Margin="76,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178"/>
+                <TextBox x:Name="txtEndroit" HorizontalAlignment="Left" Height="23" Margin="76,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" UndoLimit="45"/>
                 <CheckBox x:Name="chkLocal" HorizontalAlignment="Left" Margin="22,84,0,0" VerticalAlignment="Top" Height="18" Width="67" Content="Local" RenderTransformOrigin="1.137,-0.507"/>
                 <ComboBox x:Name="cmbLocal" HorizontalAlignment="Left" Margin="102,110,0,0" VerticalAlignment="Top" Width="178" IsEnabled="False">
                     <ComboBoxItem Content="331.1"/>
