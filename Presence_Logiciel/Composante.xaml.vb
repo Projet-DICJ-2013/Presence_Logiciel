@@ -1,4 +1,6 @@
-﻿Imports System.Windows.Media.Animation
+﻿'Auteur: Patrick Pearson
+'Objectif: Cette interface permet de faire la gestion des composantes dans la base de données et permet d'associer des composantes au modèle sélectionné précedement
+Imports System.Windows.Media.Animation
 
 Public Class frmComposante
 
@@ -9,7 +11,6 @@ Public Class frmComposante
     Private _Statut As Label
 
     Public Sub New(ByVal NoModele As String, Statut As Label)
-
         InitializeComponent()
         _NoModele = NoModele
         _Statut = Statut

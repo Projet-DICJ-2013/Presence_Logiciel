@@ -249,6 +249,7 @@ Public Class GestionModele
 
     End Sub
 
+    'Obtient la liste des composantes
     Public Function GetComposante(ByVal _Modele As String) As ICollection
 
         Dim MesCompo = From Mode In BD.tblModele
@@ -258,23 +259,16 @@ Public Class GestionModele
         Return MesCompo.ToList()
     End Function
 
-    Public Sub SelectItemByType(ByVal Type As String)
-
-        Dim Collect = From Ex In BD.tblModele
-                      Where Ex.TypeMachine = Type
-                        Select Ex
-
-        Collection = New ListCollectionView(Collect.ToList())
-
-    End Sub
 
     Public Function AddModele(ByVal MonModele As tblModele) As String
 
+        'Permet de verifier si le modèle existe déjà
         Dim ModeleChange As IQueryable(Of tblModele) = (From Mode In BD.tblModele
                                  Where Mode.NoModele = MonModele.NoModele
                                  Select Mode)
         Dim Modele As tblModele
 
+        'Si le modèle existe le modifié, sinon en ajoiuter un nouveau
         If ModeleChange.Count Then
             Modele = ModeleChange.First
             Modele = MonModele
@@ -291,6 +285,7 @@ Public Class GestionModele
 
     End Function
 
+    'Supprime le modèle de la base de données
     Public Function SupModele(ByVal MonModele As tblModele) As String
 
         BD.DeleteObject(MonModele)
