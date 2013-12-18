@@ -64,12 +64,6 @@ Public Class int_CedReunion
     End Sub
     Private Sub btnAjoutAll_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutAll.Click
 
-        For Each Item In lstChoix.Items
-            _lesInvitee.Add(Item)
-        Next
-
-        lstInvite.ItemsSource = Nothing
-        lstInvite.ItemsSource = _lesInvitee
 
     End Sub
     'Lors de changement dans entre étudiant et enseignant un combobox des années s'active ou pas.
@@ -101,6 +95,9 @@ Public Class int_CedReunion
     Private Sub dtpDateRenc_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles dtpDateRenc.SelectedDateChanged
         _dateTom = Date.Now
         _dateTom = _dateTom.AddDays(-1)
+        If (dtpDateRenc.Text = "") Then
+            dtpDateRenc.SelectedDate = _dateTom
+        End If
 
         If (dtpDateRenc.SelectedDate < _dateTom) Then
             MessageBox.Show("Veuillez mettre une date ultérieur à aujourd'hui", "Attention !", MessageBoxButton.OK, MessageBoxImage.Information)
@@ -130,6 +127,7 @@ Public Class int_CedReunion
     Public Function AjoutInviter()
         _elementidentique = False
 
+
         For Each invites In lstInvite.Items
             If (invites Is lstChoix.SelectedItem) Then
                 _elementidentique = True
@@ -157,6 +155,5 @@ Public Class int_CedReunion
         lstInvite.ItemsSource = _lesInvitee
 
     End Sub
-
 
 End Class
