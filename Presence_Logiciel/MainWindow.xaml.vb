@@ -213,6 +213,7 @@ Class MainWindow
         menuGris.Background = couleur2
         menuListeExemplaire.Background = couleur2
         menuListePret.Background = couleur2
+        menuListeDemande.Background = couleur2
         menuVert.Background = couleur2
         lblActualite.Foreground = Brushes.White
         lblAsso.Foreground = Brushes.White
@@ -246,6 +247,7 @@ Class MainWindow
         menuGris.Background = Brushes.DimGray
         menuListeExemplaire.Background = Brushes.DimGray
         menuListePret.Background = Brushes.DimGray
+        menuListeDemande.Background = Brushes.DimGray
         menuVert.Background = Brushes.DimGray
         lblActualite.Foreground = Brushes.White
         lblAsso.Foreground = Brushes.White
@@ -280,6 +282,7 @@ Class MainWindow
         menuGris.Background = Brushes.DarkRed
         menuListeExemplaire.Background = Brushes.DarkRed
         menuListePret.Background = Brushes.DarkRed
+        menuListeDemande.Background = Brushes.DarkRed
         menuVert.Background = Brushes.DarkRed
         RecCours.Fill = Brushes.Silver
         RecActualite.Fill = Brushes.Silver
@@ -314,6 +317,7 @@ Class MainWindow
         menuCreerPret.Background = Brushes.DarkGreen
         menuGris.Background = Brushes.DarkGreen
         menuListeExemplaire.Background = Brushes.DarkGreen
+        menuListeDemande.Background = Brushes.DarkGreen
         menuListePret.Background = Brushes.DarkGreen
         menuVert.Background = Brushes.DarkGreen
         RecCours.Fill = Brushes.DarkKhaki
