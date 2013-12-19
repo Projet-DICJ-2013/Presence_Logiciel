@@ -58,7 +58,39 @@ Public Class EnvoieMail
 
     Private Sub message(titreOdj As String, _DateReunion As Date)
         txtObj.Text = titreOdj
+
         rctMessage.AppendText("Bonjour à tous, si vous avez reçu ce mail, celà signifie que vous êtes convivé à une réunion concernant " + titreOdj +
-                              ". La réunion aura lieu en date du " + _DateReunion + ". ")
+                              ". La réunion aura lieu en date du " + FormaterDate(_DateReunion) + ". ")
     End Sub
+
+    Private Function FormaterDate(DateReunion As Date)
+        Dim DateMois As String = DateReunion.Month.ToString()
+        Select Case DateMois
+            Case "1"
+                DateMois = " Janvier "
+            Case "2"
+                DateMois = " Février "
+            Case "3"
+                DateMois = " Mars "
+            Case "4"
+                DateMois = " Avril "
+            Case "5"
+                DateMois = " Mai "
+            Case "6"
+                DateMois = " Juin "
+            Case "7"
+                DateMois = " Juillet "
+            Case "8"
+                DateMois = " Août "
+            Case "9"
+                DateMois = " Septembre "
+            Case "10"
+                DateMois = " Octobre "
+            Case "11"
+                DateMois = " Novembre "
+            Case "12"
+                DateMois = " Décembre "
+        End Select
+        Return DateReunion.Day.ToString() + DateMois + DateReunion.Year.ToString()
+    End Function
 End Class

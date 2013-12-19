@@ -19,23 +19,26 @@ Class frmExemplaire
     End Sub
 
     Private Sub FormLoad(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
+        InitList()
+        BindControl()
+    End Sub
 
-        ' BindControl()
+    Private Sub InitList()
+        Dim Mon_Exemp = From Exemplaire In BD.tblExemplaire
+                        Select Exemplaire
 
+        List = New ListCollectionView(Mon_Exemp.ToList)
     End Sub
 
     Private Sub BindControl()
-        Dim Mon_Exemp = (From Exemplaire In BD.tblExemplaire
-                         Select Exemplaire).ToList
+       
 
-        List = New ListCollectionView(Mon_Exemp)
-
-        txtCodeBarre.DataContext = Mon_Exemp
-        txtNomReseau.DataContext = Mon_Exemp
-        txtNoSerie.DataContext = Mon_Exemp
-        txtModele.DataContext = Mon_Exemp
-        dtpDateAchat.DataContext = Mon_Exemp
-        txtNote.DataContext = Mon_Exemp
+        txtCodeBarre.DataContext = List.CurrentItem
+        txtNomReseau.DataContext = List.CurrentItem
+        txtNoSerie.DataContext = List.CurrentItem
+        txtModele.DataContext = List.CurrentItem
+        dtpDateAchat.DataContext = List.CurrentItem
+        txtNote.DataContext = List.CurrentItem
 
     End Sub
 
@@ -76,27 +79,40 @@ Class frmExemplaire
         fnListeModele.ShowDialog()
 
         If (fnListeModele.lstModele.SelectedItem IsNot Nothing) Then
-            txtModele.Text = CType(fnListeModele.lstModele.SelectedItem, tblModele).NoModele
+            Dim Exemp_Modele = From Ex In BD.tblExemplaire
+                               Where Ex.NoModele = CType(fnListeModele.lstModele.SelectedItem, tblModele).NoModele
+                               Select Ex
+
+            List = New ListCollectionView(Exemp_Modele.ToList)
+            BindControl()
         End If
 
     End Sub
 
     Private Sub btnFirst_Click(sender As Object, e As RoutedEventArgs) Handles btnFirst.Click
         List.MoveCurrentToFirst()
+        BindControl()
     End Sub
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
         List.MoveCurrentToLast()
+        BindControl()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As RoutedEventArgs) Handles btnNext.Click
         List.MoveCurrentToNext()
+        BindControl()
     End Sub
 
     Private Sub btnPrevious_Click(sender As Object, e As RoutedEventArgs) Handles btnPrevious.Click
         List.MoveCurrentToPrevious()
+        BindControl()
     End Sub
 
+    Private Sub btnAct_Click(sender As Object, e As RoutedEventArgs) Handles btnAct.Click
+        InitList()
+        BindControl()
+    End Sub
 
     Private Sub txtModele_LostFocus(sender As Object, e As RoutedEventArgs) Handles txtModele.LostFocus
         If txtModele.Text = "" Then
@@ -194,4 +210,6 @@ Class frmExemplaire
         End If
         Return valide
     End Function
+
+  
 End Class

@@ -94,7 +94,7 @@ Public Class frmGestOrdJour
         Dim tblOrdreDuJour As tblOrdreDuJour
         Dim tblListePoint As tblListePoint
 
-        If txtTitreOdj.Text IsNot Nothing Then
+        If txtTitreOdj.Text <> "" Then
 
             tblOrdreDuJour = New tblOrdreDuJour With {.TitreOrdreJour = txtTitreOdj.Text, _
                                                     .Notes = Nothing}

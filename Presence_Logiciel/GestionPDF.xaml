@@ -1,7 +1,7 @@
 ﻿<Window x:Class="GestionPDF"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="GestionPDF" Height="727.795" Width="1105.43" Icon="images/Icons/User.png">
+    Title="GestionPDF" Height="727.795" Width="1105.43" Icon="images/Icons/User.png" Loaded="Window_Loaded">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -18,20 +18,13 @@
     <Grid Margin="0,0,-0.2,85.4">
         <DocumentViewer HorizontalAlignment="Left" Margin="10,56,0,-38.4"
                     Name="documentViewer1" VerticalAlignment="Top" Height="665" Width="1073" />
-        <TextBox Height="29" HorizontalAlignment="Left" Margin="226,8,0,0"
+        <ComboBox IsEditable="True" Height="29" HorizontalAlignment="Left" Margin="226,8,0,0"
              Name="txtTypeRap" VerticalAlignment="Top" Width="288" Text="Saisir le type du rapport" />
-        <Button Height="30" HorizontalAlignment="Right" Margin="0,8,155.8,0"
+        <Button Height="30" HorizontalAlignment="Right" Margin="0,7,82.4,0"
             Name="BrowseButton" VerticalAlignment="Top" Width="41" Click="BrowseButton_Click">
             <Image Source="Images/Icons/Search.png" Height="29" Width="20"/>
         </Button>
-        <Button Height="30" HorizontalAlignment="Right" Margin="0,8,90.4,0"
-        	Name="AddNewReport" VerticalAlignment="Top" Width="41">
-            <Image Source="Images/Icons/Add.png" Height="29" Width="20"/>
-        </Button>
-        <Button x:Name="btnClose" Height="30" HorizontalAlignment="Right" Margin="0,8,30.4,0" VerticalAlignment="Top" Width="41">
-            <Image Source="Images/Icons/Error.png" Height="29" Width="20"/>
-        </Button>
-        <ComboBox IsEditable="True"  Height="29" HorizontalAlignment="Left" Margin="566,8,0,0"
+        <ComboBox IsEditable="True"  Height="29" HorizontalAlignment="Left" Margin="603,8,0,0"
         	x:Name="txtIdRap" VerticalAlignment="Top" Width="288" Text="Saisir l'id du rapport" ItemsSource="{Binding Path=Nom}"/>
     </Grid>
 </Window>
