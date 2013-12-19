@@ -29,7 +29,7 @@
                 <TextBox x:Name="txtNom" Style="{StaticResource ResourceKey=txtAjoutMembre}" MaxLength="50" Margin="154,50,0,0" BorderThickness="1,2"/>
                 <TextBox x:Name="txtPrenom" Style="{StaticResource ResourceKey=txtAjoutMembre}" MaxLength="50" Margin="154,85,0,0" BorderThickness="1,2"/>
                 <Label x:Name="lblNom" Style="{StaticResource ResourceKey=lblAjoutMembre}" Content="Nom" Margin="12,49,0,0"/>
-                <Label x:Name="lblPrenom" Style="{StaticResource ResourceKey=lblAjoutMembre}" Content="Prenom&#xA;" Margin="12,83,0,0"/>
+                <Label x:Name="lblPrenom" Style="{StaticResource ResourceKey=lblAjoutMembre}" Content="Prénom&#xA;" Margin="12,83,0,0"/>
                 <Label x:Name="lblNoCivique" Style="{StaticResource ResourceKey=lblAjoutMembre}" Content="NoCivique" Margin="12,196,0,0"/>
                 <Label x:Name="lblTelephone" Style="{StaticResource ResourceKey=lblAjoutMembre}" Content="Téléphone" Margin="12,125,0,0"/>
                 <TextBox x:Name="txtTelephone" Style="{StaticResource ResourceKey=txtAjoutMembre}"  MaxLength="14" Margin="154,128,0,0" BorderThickness="1,2"/>
@@ -43,7 +43,7 @@
                 <TextBox x:Name="txtAdresse" Style="{StaticResource ResourceKey=txtAjoutMembre}" MaxLength="100" Margin="154,227,0,0" BorderThickness="1,2"/>
                 <Label x:Name="lblAdresse" Content="Adresse" Style="{StaticResource ResourceKey=lblAjoutMembre}" Margin="12,227,0,0"/>
                 <Label x:Name="lblVille" Content="Ville" Style="{StaticResource ResourceKey=lblAjoutMembre}" Margin="12,258,0,0"/>
-                <ComboBox x:Name="cmbVille" HorizontalAlignment="Left" Margin="154,269,0,0" VerticalAlignment="Top" Width="200">
+                <ComboBox x:Name="cmbVille" HorizontalAlignment="Left" Margin="154,269,0,0" VerticalAlignment="Top" Width="200" SelectedIndex="0">
                     <ListBoxItem Content="Jonquière"/>
                     <ListBoxItem Content="Chicoutimi"/>
                     <ListBoxItem Content="Chibougameau"/>

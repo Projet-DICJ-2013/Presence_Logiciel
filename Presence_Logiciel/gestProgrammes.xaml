@@ -11,13 +11,13 @@
         <ResourceDictionary>
             <!-- c'est ici qu'il faut construire les animations -->
             <Storyboard  x:Key="AnimLabel">
-                <!-- Ce produit lorsqu'une erreur doit être affiché dans la barre de statut -->
+                <!--Animation de la barre de statut-->
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="0" To="1" Duration="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="1" Duration="0:0:5" BeginTime="0:0:3"/>
                 <DoubleAnimation Storyboard.TargetProperty="(Label.Opacity)" From="1" To="0" Duration="0:0:2" BeginTime="0:0:8"/>
             </Storyboard>
-            <!-- textbox devient rouge lors d'un erreur -->
             <Storyboard  x:Key="AnimTxtRouge">
+                <!--Changement de couleur des textbox lors d'une erreur-->
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:1" BeginTime="0:0:0"/>
                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gray" Duration="0:0:1" BeginTime="0:0:2"/>
 
