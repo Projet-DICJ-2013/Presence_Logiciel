@@ -115,14 +115,7 @@ Class gestCours
             anim.Begin(statut)
  
         End Try
-        LesCours = (From cours In DM.tblCours Select cours)
-        vu = New ListCollectionView(LesCours.ToList())
-        txtNomCours.DataContext = vu
-        txtAnneeCours.DataContext = vu
-        txtDescription.DataContext = vu
-        txtNumCours.DataContext = vu
-        txtPonderation.DataContext = vu
-
+        UpdContext(vu.CurrentPosition)
 
 
     End Sub
