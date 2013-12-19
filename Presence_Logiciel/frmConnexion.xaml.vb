@@ -296,7 +296,7 @@ Public Class frmConnexion
 
 
     Private Sub CouleurBleu(sender As Object, e As RoutedEventArgs)
-   
+
         Dim couleur = New SolidColorBrush(Color.FromRgb(37, 88, 179))
         Dim gradientBrush = New LinearGradientBrush(Color.FromRgb(0, 0, 0), Color.FromRgb(194, 114, 23), New Point(0.5, 0), New Point(0.5, 1))
         Dim gradientBrush2 = New LinearGradientBrush(Color.FromRgb(8, 7, 7), Color.FromRgb(23, 103, 194), New Point(0.5, 0), New Point(0.5, 1))
