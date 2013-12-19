@@ -178,13 +178,7 @@ Public Class frmGestOrdJour
         _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour, CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).TitreOrdreJour)
         _intReu.ShowDialog()
     End Sub
-    Private Sub btnFermer_Click(sender As Object, e As RoutedEventArgs) Handles Me.Closed
-        'Cet évènement permet de quitter l'interface de gestion d'ordre du jour
-        Dim DialogResult = MessageBox.Show("Êtes-vous sur de vouloir quitter?", "Attention!", MessageBoxButton.YesNo, MessageBoxImage.Warning)
-        If DialogResult = MessageBoxResult.Yes Then
-            Me.Close()
-        End If
-    End Sub
+
 
     'Les 4 fonctions suivantes permettent de numeroter ou d'enlever les numeros de chacun des éléments dans le Treeview
     Private Sub NumeroterArbre()

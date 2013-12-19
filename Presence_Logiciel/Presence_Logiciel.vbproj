@@ -103,6 +103,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Composante.xaml.vb" />
+    <Compile Include="ListeDemande.xaml.vb" />
     <Compile Include="creerGroupe.xaml.vb" />
     <Compile Include="EnvoieMail.xaml.vb">
       <DependentUpon>EnvoieMail.xaml</DependentUpon>
@@ -226,6 +227,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Composante.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListeDemande.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
