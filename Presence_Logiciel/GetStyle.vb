@@ -1,4 +1,6 @@
-﻿Public Module StyleRapport
+﻿'Auteur: Patrick Pearson
+'Objectif: Ce module permet de créer le XML relatif au Style à partir des données inscrites dans la base de données
+Public Module StyleRapport
 
     Public Class ModeleStyle
 
@@ -7,12 +9,14 @@
 
         Public Sub New(ByVal _MonId As String)
 
+            'Définit style associé le type de rapport
             IdStyle = _MonId
 
         End Sub
 
         Public Function GetStyle() As XElement
 
+            'Recherche dans la BD les attributs de style relatif au type rapport et les écrits sous forme de XML
             Dim StyleDefinition As XElement = New XElement("Root", _
                 (From TypeRapport In Bd_Gest_Film.tblTypeRapport
                     Join Elem In Bd_Gest_Film.tblElement
@@ -33,6 +37,7 @@
 
         Public Function GetModele() As String
 
+            'Fonction qui retourne le nom de fichier modèle associé au type du rapport
             Dim Modele As IQueryable(Of String) = _
             From TypeRapport In Bd_Gest_Film.tblTypeRapport
             Where TypeRapport.IdTypeRapport = IdStyle

@@ -197,7 +197,13 @@ Public Class frmConnexion
 
     ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec2_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec2.MouseEnter
-        tim.Stop()
+        Try
+
+
+            tim.Stop()
+        Catch ex As Exception
+            Dim erreur As Object = 0
+        End Try
         vu.MoveCurrentToFirst()
         vu.MoveCurrentToNext()
         Dim anim As Storyboard = FindResource("AnimRecBlanc")
@@ -228,7 +234,12 @@ Public Class frmConnexion
 
     ''Sert à changer la position de l'actualité manuellement à l'aide du rectangle
     Private Sub rec4_MouseEnter(sender As Object, e As MouseEventArgs) Handles rec4.MouseEnter
-        tim.Stop()
+        Try
+            tim.Stop()
+        Catch ex As Exception
+
+        End Try
+
         vu.MoveCurrentToLast()
         Dim anim As Storyboard = FindResource("AnimRecBlanc")
         Dim anim2 As Storyboard = FindResource("AnimRecBleu")
@@ -242,7 +253,12 @@ Public Class frmConnexion
 
     ''Redémarrage du timer lorsque la souris quitte un des rectangle
     Private Sub rec1_MouseLeave(sender As Object, e As MouseEventArgs) Handles rec1.MouseLeave, rec2.MouseLeave, rec3.MouseLeave, rec4.MouseLeave
-        tim.Start()
+        Try
+            tim.Start()
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
 

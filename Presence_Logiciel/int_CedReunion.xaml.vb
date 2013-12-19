@@ -45,7 +45,7 @@ Public Class int_CedReunion
     'Permet d'ajouter un membre dans la liste choix vers la liste des invités.
     Private Sub tblAjouter_Click(sender As Object, e As RoutedEventArgs) Handles tblAjouter.Click
 
-    AjoutInviter()
+        AjoutInviter()
 
     End Sub
     'Permet de retirer un invité de la liste.
@@ -64,6 +64,12 @@ Public Class int_CedReunion
     End Sub
     Private Sub btnAjoutAll_Click(sender As Object, e As RoutedEventArgs) Handles btnAjoutAll.Click
 
+        For Each Item In lstChoix.Items
+            _lesInvitee.Add(Item)
+        Next
+
+        lstInvite.ItemsSource = Nothing
+        lstInvite.ItemsSource = _lesInvitee
 
     End Sub
     'Lors de changement dans entre étudiant et enseignant un combobox des années s'active ou pas.
@@ -96,10 +102,11 @@ Public Class int_CedReunion
         _dateTom = Date.Now
         _dateTom = _dateTom.AddDays(-1)
 
-        If (dtpDateRenc.SelectedDate < _dateTom) Then
+        If (dtpDateRenc.SelectedDate < _dateTom Or dtpDateRenc.Text = "") Then
             MessageBox.Show("Veuillez mettre une date ultérieur à aujourd'hui", "Attention !", MessageBoxButton.OK, MessageBoxImage.Information)
-            dtpDateRenc.SelectedDate = Nothing
+            dtpDateRenc.SelectedDate = Date.Now
         End If
+
 
     End Sub
     'Load liste selon le type de redacteur
@@ -123,7 +130,6 @@ Public Class int_CedReunion
     'Permet l'ajout de membre dans la liste invité.
     Public Function AjoutInviter()
         _elementidentique = False
-
 
         For Each invites In lstInvite.Items
             If (invites Is lstChoix.SelectedItem) Then

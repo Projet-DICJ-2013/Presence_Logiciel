@@ -39,7 +39,11 @@
                 <Style BasedOn="{StaticResource ParcInfo_BoutonMenuHorizontal}" TargetType="Button" />
             </StackPanel.Resources>
 
-            <Button Name="btnFirst" Margin="100 0 20 0">
+            <Button Name="btnAct" Margin="90 0 10 0">
+                <Image Source="images/icons/Button_Sync.png"/>
+            </Button>
+            
+            <Button Name="btnFirst" Margin="10 0 20 0">
                 <Image Source="images/icons/Button_First.png"/>
             </Button>
             <Button Name="btnPrevious"  Margin="0 0 10 0">
@@ -48,12 +52,14 @@
             <Button Name="btnNext"  Margin="0 0 20 0">
                 <Image Source="images/icons/Button_Next.png"/>
             </Button>
-            <Button Margin="0 0 130 0" Click="Button_Click_1">
+            <Button Margin="0 0 100 0" Click="Button_Click_1">
                 <Image Source="images/icons/Button_Last.png"/>
             </Button>
             <Button Name="btnLast" Click="Button_Click">
                 <Image Source="images/icons/Save.png"/>
             </Button>
+
+
         </StackPanel>
 
 

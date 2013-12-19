@@ -4,7 +4,7 @@
     Title="Envoie Message" Height="348" Width="528" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Icon="images/Icons/User.png">
     <Grid Margin="0,0,-0.4,-3">
         <Label x:Name="lblMessage" Content="Sujet :" HorizontalAlignment="Left" Margin="21,77,0,0" VerticalAlignment="Top"/>
-        <RichTextBox x:Name="rctMessage" HorizontalAlignment="Left" Height="130" Margin="21,108,0,0" VerticalAlignment="Top" Width="477">
+        <RichTextBox x:Name="rctMessage"  HorizontalAlignment="Left" Height="130" Margin="21,108,0,0" VerticalAlignment="Top" Width="477" UndoLimit="150">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
@@ -13,7 +13,7 @@
         </RichTextBox>
         <Button x:Name="btnEnvoyer" Content="Envoyer" HorizontalAlignment="Left" Margin="423,268,0,0" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="lblObj" Content="Objet :" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtObj" HorizontalAlignment="Left" Height="23" Margin="21,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="477"/>
+        <TextBox x:Name="txtObj" MaxLength="55" HorizontalAlignment="Left" Height="23" Margin="21,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="477" UndoLimit="50"/>
 
     </Grid>
 </Window>

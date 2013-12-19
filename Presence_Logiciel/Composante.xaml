@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         
-    Title="Liste des composantes" Height="438.8" Width="555.7" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="images/Icons/User.png" >
+    Title="Gestion des composantes" Height="438.8" Width="555.7" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="images/Icons/User.png" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -38,24 +38,26 @@
 
         <Separator VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,2,-31.8,0" Height="2"/>
         <Separator VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="0,-78,-31.8,532.4" Height="0"/>
-        <ListBox Name="lstCompoModele" ItemsSource="{Binding}"  Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="324.4,166,0,0" VerticalAlignment="Top" Width="141">
+        <Label Content="Liste des composantes" Margin="73.4,165,319.2,264.4" Grid.Column="1"/>
+        <Label Content="Ajouter des composantes" Margin="73.4,29,307.2,400.4" Grid.Column="1"/>
+        <ListBox Name="lstCompoModele" ItemsSource="{Binding}"  Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="324.4,195,0,0" VerticalAlignment="Top" Width="141">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Path=TypeCompo}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListBox>
-        <ListBox Name="lstComposante" ItemsSource="{Binding}" Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="73.4,166,0,0" VerticalAlignment="Top" Width="141">
+        <ListBox Name="lstComposante" ItemsSource="{Binding}" Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="73.4,195,0,0" VerticalAlignment="Top" Width="141">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Path=TypeCompo}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListBox>
-        <Button Name="btnSupModele" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="245.4,194,0,0" VerticalAlignment="Top" Width="44">
+        <Button Name="btnSupModele" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="245.4,223,0,0" VerticalAlignment="Top" Width="44">
             <Image Source="/Images/icons/Button_Back.png"/>
         </Button>
-        <Button Name="btnAjoutModele"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="245.4,255,0,0" VerticalAlignment="Top" Width="44">
+        <Button Name="btnAjoutModele"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="245.4,284,0,0" VerticalAlignment="Top" Width="44">
             <Image Source="/Images/icons/Button_Next.png"/>
         </Button>
         <TextBox Name="txtCompo" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="73.4,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
@@ -65,9 +67,7 @@
         <Button Name="btnAddCompo" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="85.4,113,0,0" VerticalAlignment="Top" Width="44">
             <Image Source="Images/Icons/Button_Down.png"/>
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Left" Height="73" Margin="390.4,59,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click">
-            <Image Source="/Images/icons/Save.png" Height="63" Width="57"/>
-        </Button>
+        <Label Content="Associer au modèle" Margin="336.4,165,56.2,264.4" Grid.Column="1"/>
 
 
 

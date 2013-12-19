@@ -25,7 +25,7 @@
     </Window.Resources>
     <Grid Margin="0,0,-0.4,-0.4" Loaded="Grid_Loaded">
         <Label x:Name="lblTitreOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Sujet de l'ordre du jour:" Margin="10,39,0,0" RenderTransformOrigin="0.42,0.661"/>
-        <TextBox x:Name="txtTitreOdj"  Text="" Style="{StaticResource ResourceKey=textboxProg}" Margin="177,45,0,0" RenderTransformOrigin="0.875,0.645" Width="492"/>
+        <TextBox x:Name="txtTitreOdj" MaxLength="85" Text="" Style="{StaticResource ResourceKey=textboxProg}" Margin="177,45,0,0" RenderTransformOrigin="0.875,0.645" Width="492"/>
 
         <Label x:Name="lblOdj" Style="{StaticResource ResourceKey=labelProg}" Content="Ordre du jour:" Margin="10,167,0,0" RenderTransformOrigin="0.251,0.147"/>
 
@@ -37,27 +37,24 @@
 
             <Label x:Name="lblTitrePoint" Style="{StaticResource ResourceKey=labelProg}" Content="Titre:" RenderTransformOrigin="0.251,0.147" Margin="10,28,0,0"/>
         </GroupBox>
-        <TextBox x:Name="txtTitrePoint" Style="{StaticResource ResourceKey=textboxProg}" Margin="504,261,0,0" RenderTransformOrigin="0.875,0.645" Width="374" Height="21"/>
+        <TextBox x:Name="txtTitrePoint" MaxLength="65" Style="{StaticResource ResourceKey=textboxProg}" Margin="504,261,0,0" RenderTransformOrigin="0.875,0.645" Width="374" Height="21"/>
         <Button x:Name="btnAttacher" Content="Attacher" HorizontalAlignment="Left" Margin="699,297,0,0" VerticalAlignment="Top" Width="103" Height="35" FontSize="16" FontFamily="Calibri"/>
         <Button x:Name="btnNouveauPoint" Content="Nouveau" HorizontalAlignment="Left" Margin="566,297,0,0" VerticalAlignment="Top" Width="103" Height="35" FontFamily="Calibri" FontSize="16"/>
 
         <Button x:Name="btnSupprimerPoint" Margin="435,417,0,113.4" HorizontalAlignment="Left" Width="65">
             <Image Source="images/delete.png" Height="48" Width="55"/>
         </Button>
-        <Button x:Name="btnFermer" Margin="802,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99">
-            <Image Source="images/icons/Error_Symbol.png" Height="67" Width="89"/>
-        </Button>
-        <Button x:Name="btnEnregistrer" Margin="570,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
+        <Button x:Name="btnEnregistrer" Margin="692,544,0,44" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
             <Image Source="images/icons/Save.png" Height="67" Width="89"/>
         </Button>
         <Button x:Name="btnCreerOdj" Margin="687,45,0,508.4" HorizontalAlignment="Left" Width="65">
             <Image x:Name="CreerOdj" Source="images/icons/Add.png" Height="46" Width="58"/>
         </Button>
 
-        <Button x:Name="btnPlanifReun" Margin="687,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
+        <Button x:Name="btnPlanifReun" Margin="809,544,0,44" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
             <Image x:Name="image" Source="images/icons/Calendar.png" Height="67" Width="89" RenderTransformOrigin="0.636,0.5"/>
         </Button>
-        <ListView x:Name="lstOrdreJour" HorizontalAlignment="Left" Height="105" Margin="177,68,0,0" VerticalAlignment="Top" Width="492">
+        <ListView x:Name="lstOrdreJour" HorizontalAlignment="Left" Height="105" Margin="177,68,0,0" VerticalAlignment="Top" Width="492" SelectionMode="Single">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Path=TitreOrdreJour}"/>
