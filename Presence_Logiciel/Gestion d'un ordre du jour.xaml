@@ -44,17 +44,14 @@
         <Button x:Name="btnSupprimerPoint" Margin="435,417,0,113.4" HorizontalAlignment="Left" Width="65">
             <Image Source="images/delete.png" Height="48" Width="55"/>
         </Button>
-        <Button x:Name="btnFermer" Margin="802,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99">
-            <Image Source="images/icons/Error_Symbol.png" Height="67" Width="89"/>
-        </Button>
-        <Button x:Name="btnEnregistrer" Margin="570,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
+        <Button x:Name="btnEnregistrer" Margin="692,544,0,44" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
             <Image Source="images/icons/Save.png" Height="67" Width="89"/>
         </Button>
         <Button x:Name="btnCreerOdj" Margin="687,45,0,508.4" HorizontalAlignment="Left" Width="65">
             <Image x:Name="CreerOdj" Source="images/icons/Add.png" Height="46" Width="58"/>
         </Button>
 
-        <Button x:Name="btnPlanifReun" Margin="687,519,0,27.4" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
+        <Button x:Name="btnPlanifReun" Margin="809,544,0,44" HorizontalAlignment="Left" Height="70" Width="99" IsEnabled="False">
             <Image x:Name="image" Source="images/icons/Calendar.png" Height="67" Width="89" RenderTransformOrigin="0.636,0.5"/>
         </Button>
         <ListView x:Name="lstOrdreJour" HorizontalAlignment="Left" Height="105" Margin="177,68,0,0" VerticalAlignment="Top" Width="492" SelectionMode="Single">
