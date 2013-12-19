@@ -178,7 +178,7 @@ Public Class frmGestOrdJour
         _intReu = New int_CedReunion(CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).NoOrdreDuJour, CType(OrdreDuJour.Collection.CurrentItem, tblOrdreDuJour).TitreOrdreJour)
         _intReu.ShowDialog()
     End Sub
-   
+
 
     'Les 4 fonctions suivantes permettent de numeroter ou d'enlever les numeros de chacun des éléments dans le Treeview
     Private Sub NumeroterArbre()

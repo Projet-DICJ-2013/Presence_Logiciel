@@ -155,8 +155,8 @@ Class MainWindow
     End Sub
 
     Private Sub AffLstDemande()
-        ' Dim fnLstDemande As New ListeDemande(lblStatut)
-        'fnLstDemande.ShowDialog()
+        Dim fnLstDemande As New ListeDemande(lblStatut)
+        fnLstDemande.ShowDialog()
 
     End Sub
 
